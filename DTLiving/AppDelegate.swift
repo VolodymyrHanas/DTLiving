@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DoraemonManager.shareInstance().install()
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = CameraViewController()
+        window?.rootViewController = CameraViewController(config: MediaConfig())
         window?.makeKeyAndVisible()
         
         return true

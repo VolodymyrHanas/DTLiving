@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,7 @@
 		40B2BFC623E40D8600F677CD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B2BFC523E40D8600F677CD /* CameraViewController.swift */; };
 		40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40B2BFCA23E40D8800F677CD /* Assets.xcassets */; };
 		40B2BFCE23E40D8800F677CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40B2BFCC23E40D8800F677CD /* LaunchScreen.storyboard */; };
+		40B2BFD723E42ABB00F677CD /* CameraPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B2BFD623E42ABB00F677CD /* CameraPipeline.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		40B2BFCA23E40D8800F677CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40B2BFCD23E40D8800F677CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40B2BFCF23E40D8800F677CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40B2BFD623E42ABB00F677CD /* CameraPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPipeline.swift; sourceTree = "<group>"; };
 		726E59E52EF70D3A638C3F7B /* Pods-DTLiving.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DTLiving.debug.xcconfig"; path = "Target Support Files/Pods-DTLiving/Pods-DTLiving.debug.xcconfig"; sourceTree = "<group>"; };
 		BBBA00E3AB2A8105168A8975 /* Pods_DTLiving.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DTLiving.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5376B19CD3BE54C6BCE3A2D /* Pods-DTLiving.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DTLiving.release.xcconfig"; path = "Target Support Files/Pods-DTLiving/Pods-DTLiving.release.xcconfig"; sourceTree = "<group>"; };
@@ -44,7 +46,6 @@
 				726E59E52EF70D3A638C3F7B /* Pods-DTLiving.debug.xcconfig */,
 				E5376B19CD3BE54C6BCE3A2D /* Pods-DTLiving.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -69,13 +70,22 @@
 		40B2BFC023E40D8600F677CD /* DTLiving */ = {
 			isa = PBXGroup;
 			children = (
+				40B2BFD523E429EA00F677CD /* Capture */,
 				40B2BFC123E40D8600F677CD /* AppDelegate.swift */,
-				40B2BFC523E40D8600F677CD /* CameraViewController.swift */,
 				40B2BFCA23E40D8800F677CD /* Assets.xcassets */,
 				40B2BFCC23E40D8800F677CD /* LaunchScreen.storyboard */,
 				40B2BFCF23E40D8800F677CD /* Info.plist */,
 			);
 			path = DTLiving;
+			sourceTree = "<group>";
+		};
+		40B2BFD523E429EA00F677CD /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				40B2BFC523E40D8600F677CD /* CameraViewController.swift */,
+				40B2BFD623E42ABB00F677CD /* CameraPipeline.swift */,
+			);
+			path = Capture;
 			sourceTree = "<group>";
 		};
 		E8ED3810880F124589C2968B /* Frameworks */ = {
@@ -201,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40B2BFC623E40D8600F677CD /* CameraViewController.swift in Sources */,
+				40B2BFD723E42ABB00F677CD /* CameraPipeline.swift in Sources */,
 				40B2BFC223E40D8600F677CD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
