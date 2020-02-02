@@ -21,6 +21,10 @@ enum CameraPosition {
             return "Back"
         }
     }
+    
+    static var all: [CameraPosition] {
+        return [.front, .back]
+    }
 }
 
 enum VideoRatio {
@@ -68,6 +72,10 @@ enum VideoRatio {
         case .r3to4:
             return 4.0 / 3.0
         }
+    }
+    
+    static var all: [VideoRatio] {
+        return [.r9to16, .r16to9, .r2p39to1, .r1to1, .circle, .r4to3, .r3to4]
     }
 }
 
@@ -172,12 +180,7 @@ class CameraViewController: UIViewController {
     
     private func updatePreview() {
         previewView.snp.remakeConstraints { make in
-            make.left.right.equalToSuperview()
-            if #available(iOS 11, *) {
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            } else {
-                make.top.equalTo(self.topLayoutGuide.snp.bottom)
-            }
+            make.left.right.centerY.equalToSuperview()
             make.height.equalTo(previewView.snp.width).multipliedBy(pipeline.config.videoRatio.ratio)
         }
     }
@@ -230,13 +233,17 @@ class CameraViewController: UIViewController {
     
     @objc private func showSettings() {
         let alert = UIAlertController(title: "Settings", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Camera Position", style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Video Ratio", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Camera Position", style: .default, handler: { [weak self] _ in
+            self?.configCameraPosition()
+        }))
+        alert.addAction(UIAlertAction(title: "Video Ratio", style: .default, handler: { [weak self] _ in
+            self?.configVideoRatio()
+        }))
         alert.addAction(UIAlertAction(title: "Watermark", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "Face Beauty", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "Play Music", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     @objc private func enterForeground(_ notificaton: Notification) {
@@ -251,6 +258,51 @@ class CameraViewController: UIViewController {
             pipeline.isRenderingEnabled = false
             pipeline.stopSessionRunning()
         }
+    }
+    
+    private func configCameraPosition() {
+        let alert = UIAlertController(title: "Camera Position", message: nil, preferredStyle: .actionSheet)
+        for position in CameraPosition.all {
+            var title = position.title
+            if position == pipeline.config.cameraPosition {
+                title = "[ \(title) ]"
+            }
+            alert.addAction(UIAlertAction(title: title, style: .default, handler: { [weak self] _ in
+                guard let self = self else { return }
+                self.pipeline.isRenderingEnabled = false
+                self.pipeline.stopSessionRunning()
+                self.pipeline.config.cameraPosition = position
+                self.previewView.resetupInputAndOutputDimensions()
+                self.pipeline.reconfigure()
+                self.pipeline.startSessionRunning()
+                self.pipeline.isRenderingEnabled = true
+            }))
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func configVideoRatio() {
+        let alert = UIAlertController(title: "Video Ratio", message: nil, preferredStyle: .actionSheet)
+        for videoRatio in VideoRatio.all {
+            var title = videoRatio.title
+            if videoRatio == pipeline.config.videoRatio {
+                title = "[ \(title) ]"
+            }
+            alert.addAction(UIAlertAction(title: title, style: .default, handler: { [weak self] _ in
+                guard let self = self else { return }
+                self.pipeline.isRenderingEnabled = false
+                self.pipeline.stopSessionRunning()
+                self.pipeline.config.videoRatio = videoRatio
+                self.updatePreview()
+                self.previewView.resetupInputAndOutputDimensions()
+                self.pipeline.setEffectFilterNeedSetup()
+                self.pipeline.startSessionRunning()
+                self.pipeline.isRenderingEnabled = true
+            }))
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 
 }

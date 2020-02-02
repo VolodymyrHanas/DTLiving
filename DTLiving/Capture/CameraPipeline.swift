@@ -35,27 +35,13 @@ class CameraPipeline: NSObject {
     private let videoDataOutputQueue = DispatchQueue(label: "camera video data output queue", attributes: [], target: nil)
     private let videoDataOutput = AVCaptureVideoDataOutput()
     private var videoConnection: AVCaptureConnection?
+    private let videoProcessQueue = DispatchQueue(label: "camera video process queue", attributes: [], target: nil)
+    private let semaphore = DispatchSemaphore(value: 1)
 
     // Effect
     private var effectFilter: EffectOpenGLFilter!
     private let retainedBufferCountHint = 6
     private var videoFormatDescription: CMFormatDescription?
-
-    // Preview
-    private let previewPixelBufferQueue = DispatchQueue(label: "camera preview pixel buffer queue", attributes: [.concurrent], target: nil)
-    private var _previewPixelBuffer: CVPixelBuffer?
-    private var previewPixelBuffer: CVPixelBuffer? {
-        get {
-            previewPixelBufferQueue.sync {
-                return _previewPixelBuffer
-            }
-        }
-        set {
-            previewPixelBufferQueue.async(flags: .barrier) { [weak self] in
-                self?._previewPixelBuffer = newValue
-            }
-        }
-    }
 
     // Miscellaneous
     private let isRenderingEnabledQueue = DispatchQueue(label: "camera isRendering enabled queue", attributes: [.concurrent], target: nil)
@@ -105,6 +91,17 @@ class CameraPipeline: NSObject {
         }
     }
     
+    func reconfigure() {
+        setEffectFilterNeedSetup()
+        sessionQueue.async { [weak self] in
+            self?.configureSession()
+        }
+    }
+    
+    func setEffectFilterNeedSetup() {
+        videoFormatDescription = nil
+    }
+
     func startSessionRunning() {
         sessionQueue.async { [weak self] in
             guard let self = self else { return }
@@ -262,14 +259,8 @@ class CameraPipeline: NSObject {
     private func configVideoOrientation() {
         videoConnection?.videoOrientation = .portrait
     }
-
-}
-
-extension CameraPipeline: AVCaptureVideoDataOutputSampleBufferDelegate {
     
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard isRenderingEnabled else { return }
-        
+    private func processVideo(with sampleBuffer: CMSampleBuffer) {
         if videoFormatDescription == nil {
             if let formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer) {
                 effectFilter.setup(with: config.videoRatio, cameraPosition: config.cameraPosition,
@@ -282,12 +273,26 @@ extension CameraPipeline: AVCaptureVideoDataOutputSampleBufferDelegate {
             }
             } else if let inputPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
                 let outputPixelBuffer = effectFilter.filter(pixelBuffer: inputPixelBuffer)
-                previewPixelBuffer = outputPixelBuffer
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self, let previewPixelBuffer = self.previewPixelBuffer else { return }
-                    self.delegate?.cameraPipeline(self, display: previewPixelBuffer)
+                DispatchQueue.main.sync { [weak self] in
+                    guard let self = self else { return }
+                    self.delegate?.cameraPipeline(self, display: outputPixelBuffer)
                 }
             }
+    }
+
+}
+
+extension CameraPipeline: AVCaptureVideoDataOutputSampleBufferDelegate {
+    
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        guard isRenderingEnabled else { return }
+        
+        semaphore.wait()
+        
+        videoProcessQueue.async { [weak self] in
+            self?.processVideo(with: sampleBuffer)
+            self?.semaphore.signal()
+        }
     }
     
     func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {

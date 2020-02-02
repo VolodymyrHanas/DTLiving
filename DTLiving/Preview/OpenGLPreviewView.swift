@@ -132,6 +132,11 @@ class OpenGLPreviewView: UIView {
         }
     }
     
+    func resetupInputAndOutputDimensions() {
+        inputTexture = nil
+        setupOutputDimensions()
+    }
+    
     private func setupInput() {
         guard let context = context else { return }
         inputTexture = PixelBufferTexture(logTag: logTag, width: inputWidth, height: inputHeight)
@@ -152,12 +157,12 @@ class OpenGLPreviewView: UIView {
         self.renderDestination = renderDestination
         renderDestination.createFrameBuffer()
         renderDestination.createRenderBuffer(context: context, drawable: eaglLayer)
-        setOutputDimensions()
+        setupOutputDimensions()
         renderDestination.attachFrameBufferToRenderBuffer()
         renderDestination.checkFramebufferStatus()
     }
     
-    private func setOutputDimensions() {
+    private func setupOutputDimensions() {
         var width = GLint()
         var height = GLint()
         glGetRenderbufferParameteriv(GLenum(GL_RENDERBUFFER), GLenum(GL_RENDERBUFFER_WIDTH), &width)
