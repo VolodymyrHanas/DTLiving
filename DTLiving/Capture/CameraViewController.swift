@@ -105,9 +105,20 @@ class CameraViewController: UIViewController {
 
     private var pipeline: CameraPipeline
 
+    private let previewView = OpenGLPreviewView()
+
     private let recordButton = UIButton()
     private let liveButton = UIButton()
     private let settingsButton = UIButton()
+
+    deinit {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIApplication.willEnterForegroundNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIApplication.didEnterBackgroundNotification,
+                                                  object: nil)
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -123,10 +134,55 @@ class CameraViewController: UIViewController {
         
         view.backgroundColor = .black
         
-        setupButtons()
+        pipeline.isRenderingEnabled = UIApplication.shared.applicationState != .background
+        pipeline.delegate = self
+
+        setupPreview()
+        setupControls()
+        toggleControls(isHidden: true)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(enterForeground(_:)),
+                                               name: UIApplication.willEnterForegroundNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(enterBackground(_:)),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
+
+        pipeline.configure()
     }
     
-    private func setupButtons() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        pipeline.startSessionRunning()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        pipeline.stopSessionRunning()
+    }
+    
+    private func setupPreview() {
+        view.addSubview(previewView)
+        updatePreview()
+    }
+    
+    private func updatePreview() {
+        previewView.snp.remakeConstraints { make in
+            make.left.right.equalToSuperview()
+            if #available(iOS 11, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            } else {
+                make.top.equalTo(self.topLayoutGuide.snp.bottom)
+            }
+            make.height.equalTo(previewView.snp.width).multipliedBy(pipeline.config.videoRatio.ratio)
+        }
+    }
+    
+    private func setupControls() {
         recordButton.setTitleColor(UIColor.white, for: .normal)
         recordButton.setTitle("start recording", for: .normal)
         liveButton.setTitleColor(UIColor.white, for: .normal)
@@ -166,6 +222,12 @@ class CameraViewController: UIViewController {
         settingsButton.addTarget(self, action: #selector(showSettings), for: .touchUpInside)
     }
     
+    private func toggleControls(isHidden: Bool) {
+        recordButton.isHidden = isHidden
+        liveButton.isHidden = isHidden
+        settingsButton.isHidden = isHidden
+    }
+    
     @objc private func showSettings() {
         let alert = UIAlertController(title: "Settings", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera Position", style: .default, handler: nil))
@@ -176,6 +238,33 @@ class CameraViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    @objc private func enterForeground(_ notificaton: Notification) {
+        if isViewLoaded && view.window != nil {
+            pipeline.isRenderingEnabled = true
+            pipeline.startSessionRunning()
+        }
+    }
+    
+    @objc private func enterBackground(_ notificaton: Notification) {
+        if isViewLoaded && view.window != nil {
+            pipeline.isRenderingEnabled = false
+            pipeline.stopSessionRunning()
+        }
+    }
 
 }
 
+extension CameraViewController: CameraPipelineDelegate {
+    
+    func cameraPipelineConfigSuccess(_ pipeline: CameraPipeline) {
+        DispatchQueue.main.async { [weak self] in
+            self?.toggleControls(isHidden: false)
+        }
+    }
+    
+    func cameraPipeline(_ pipeline: CameraPipeline, display pixelBuffer: CVPixelBuffer) {
+        previewView.display(pixelBuffer: pixelBuffer)
+    }
+    
+}

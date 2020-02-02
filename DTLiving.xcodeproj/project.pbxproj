@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		02866E0866DAB03CB4425C78 /* Pods_DTLiving.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBA00E3AB2A8105168A8975 /* Pods_DTLiving.framework */; };
+		402C125523E6A33700580CD3 /* EffectOpenGLFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402C125423E6A33700580CD3 /* EffectOpenGLFilter.swift */; };
+		403DEB7F23E536E300685F6B /* OpenGLPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403DEB7E23E536E300685F6B /* OpenGLPreviewView.swift */; };
+		403DEB8223E5379400685F6B /* PixelBufferTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403DEB8123E5379400685F6B /* PixelBufferTexture.swift */; };
+		403DEB8423E539B400685F6B /* RenderDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403DEB8323E539B400685F6B /* RenderDestination.swift */; };
+		403DEB8623E53A3800685F6B /* ShaderProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403DEB8523E53A3800685F6B /* ShaderProgram.swift */; };
+		403DEB8B23E53ADD00685F6B /* DirectPassFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */; };
+		403DEB8C23E53ADD00685F6B /* FilterFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8823E53ADD00685F6B /* FilterFragment.glsl */; };
+		403DEB8D23E53ADD00685F6B /* FilterVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8923E53ADD00685F6B /* FilterVertex.glsl */; };
+		403DEB8E23E53ADD00685F6B /* DirectPassVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */; };
 		40B2BFC223E40D8600F677CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B2BFC123E40D8600F677CD /* AppDelegate.swift */; };
 		40B2BFC623E40D8600F677CD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B2BFC523E40D8600F677CD /* CameraViewController.swift */; };
 		40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40B2BFCA23E40D8800F677CD /* Assets.xcassets */; };
@@ -16,6 +25,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		402C125423E6A33700580CD3 /* EffectOpenGLFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectOpenGLFilter.swift; sourceTree = "<group>"; };
+		403DEB7E23E536E300685F6B /* OpenGLPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLPreviewView.swift; sourceTree = "<group>"; };
+		403DEB8123E5379400685F6B /* PixelBufferTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelBufferTexture.swift; sourceTree = "<group>"; };
+		403DEB8323E539B400685F6B /* RenderDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderDestination.swift; sourceTree = "<group>"; };
+		403DEB8523E53A3800685F6B /* ShaderProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderProgram.swift; sourceTree = "<group>"; };
+		403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DirectPassFragment.glsl; sourceTree = "<group>"; };
+		403DEB8823E53ADD00685F6B /* FilterFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FilterFragment.glsl; sourceTree = "<group>"; };
+		403DEB8923E53ADD00685F6B /* FilterVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FilterVertex.glsl; sourceTree = "<group>"; };
+		403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DirectPassVertex.glsl; sourceTree = "<group>"; };
 		40B2BFBE23E40D8600F677CD /* DTLiving.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTLiving.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40B2BFC123E40D8600F677CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40B2BFC523E40D8600F677CD /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +67,36 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		402C125323E6A20E00580CD3 /* Effect */ = {
+			isa = PBXGroup;
+			children = (
+				402C125423E6A33700580CD3 /* EffectOpenGLFilter.swift */,
+			);
+			path = Effect;
+			sourceTree = "<group>";
+		};
+		403DEB7D23E536C500685F6B /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				403DEB7E23E536E300685F6B /* OpenGLPreviewView.swift */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
+		403DEB8023E5377100685F6B /* OpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				403DEB8123E5379400685F6B /* PixelBufferTexture.swift */,
+				403DEB8323E539B400685F6B /* RenderDestination.swift */,
+				403DEB8523E53A3800685F6B /* ShaderProgram.swift */,
+				403DEB8923E53ADD00685F6B /* FilterVertex.glsl */,
+				403DEB8823E53ADD00685F6B /* FilterFragment.glsl */,
+				403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */,
+				403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */,
+			);
+			path = OpenGL;
+			sourceTree = "<group>";
+		};
 		40B2BFB523E40D8600F677CD = {
 			isa = PBXGroup;
 			children = (
@@ -70,7 +118,10 @@
 		40B2BFC023E40D8600F677CD /* DTLiving */ = {
 			isa = PBXGroup;
 			children = (
+				403DEB8023E5377100685F6B /* OpenGL */,
 				40B2BFD523E429EA00F677CD /* Capture */,
+				402C125323E6A20E00580CD3 /* Effect */,
+				403DEB7D23E536C500685F6B /* Preview */,
 				40B2BFC123E40D8600F677CD /* AppDelegate.swift */,
 				40B2BFCA23E40D8800F677CD /* Assets.xcassets */,
 				40B2BFCC23E40D8800F677CD /* LaunchScreen.storyboard */,
@@ -156,6 +207,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				403DEB8B23E53ADD00685F6B /* DirectPassFragment.glsl in Resources */,
+				403DEB8E23E53ADD00685F6B /* DirectPassVertex.glsl in Resources */,
+				403DEB8D23E53ADD00685F6B /* FilterVertex.glsl in Resources */,
+				403DEB8C23E53ADD00685F6B /* FilterFragment.glsl in Resources */,
 				40B2BFCE23E40D8800F677CD /* LaunchScreen.storyboard in Resources */,
 				40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */,
 			);
@@ -210,8 +265,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				403DEB7F23E536E300685F6B /* OpenGLPreviewView.swift in Sources */,
 				40B2BFC623E40D8600F677CD /* CameraViewController.swift in Sources */,
 				40B2BFD723E42ABB00F677CD /* CameraPipeline.swift in Sources */,
+				402C125523E6A33700580CD3 /* EffectOpenGLFilter.swift in Sources */,
+				403DEB8223E5379400685F6B /* PixelBufferTexture.swift in Sources */,
+				403DEB8623E53A3800685F6B /* ShaderProgram.swift in Sources */,
+				403DEB8423E539B400685F6B /* RenderDestination.swift in Sources */,
 				40B2BFC223E40D8600F677CD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
