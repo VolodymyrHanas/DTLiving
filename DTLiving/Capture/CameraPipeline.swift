@@ -271,13 +271,10 @@ class CameraPipeline: NSObject {
                     videoFormatDescription = formatDescription
                 }
             }
-            } else if let inputPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
-                let outputPixelBuffer = effectFilter.filter(pixelBuffer: inputPixelBuffer)
-                DispatchQueue.main.sync { [weak self] in
-                    guard let self = self else { return }
-                    self.delegate?.cameraPipeline(self, display: outputPixelBuffer)
-                }
-            }
+        } else if let inputPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
+            let outputPixelBuffer = effectFilter.filter(pixelBuffer: inputPixelBuffer)
+            delegate?.cameraPipeline(self, display: outputPixelBuffer)
+        }
     }
 
 }

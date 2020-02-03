@@ -73,6 +73,10 @@ class OpenGLPreviewView: UIView {
             exit(1)
         }
         self.context = context
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.setupOutput()
+        }
     }
     
     func display(pixelBuffer: CVPixelBuffer) {
@@ -90,9 +94,10 @@ class OpenGLPreviewView: UIView {
         if inputTexture == nil {
             setupInput()
         }
-        if renderDestination == nil {
+        if program == nil {
             compileShaders()
-            setupOutput()
+            setupOutputDimensions()
+            attachFrameBufferToRenderBuffer()
         }
                 
         program?.use()
@@ -133,8 +138,23 @@ class OpenGLPreviewView: UIView {
     }
     
     func resetupInputAndOutputDimensions() {
+        let oldContext = EAGLContext.current()
+        if context != oldContext {
+            if !EAGLContext.setCurrent(context) {
+                DDLogError("\(logTag) Could not set current OpenGL context with new context")
+                exit(1)
+            }
+        }
+
         inputTexture = nil
         setupOutputDimensions()
+        
+        if oldContext != context {
+            if !EAGLContext.setCurrent(oldContext) {
+                DDLogError("\(logTag) Could not set current OpenGL context with old context")
+                exit(1)
+            }
+        }
     }
     
     private func setupInput() {
@@ -152,14 +172,31 @@ class OpenGLPreviewView: UIView {
     }
     
     private func setupOutput() {
+        let oldContext = EAGLContext.current()
+        if context != oldContext {
+            if !EAGLContext.setCurrent(context) {
+                DDLogError("\(logTag) Could not set current OpenGL context with new context")
+                exit(1)
+            }
+        }
+
         guard let context = context, let eaglLayer = eaglLayer else { return }
         let renderDestination = RenderDestination(logTag: logTag)
-        self.renderDestination = renderDestination
         renderDestination.createFrameBuffer()
         renderDestination.createRenderBuffer(context: context, drawable: eaglLayer)
-        setupOutputDimensions()
-        renderDestination.attachFrameBufferToRenderBuffer()
-        renderDestination.checkFramebufferStatus()
+        self.renderDestination = renderDestination
+
+        if oldContext != context {
+            if !EAGLContext.setCurrent(oldContext) {
+                DDLogError("\(logTag) Could not set current OpenGL context with old context")
+                exit(1)
+            }
+        }
+    }
+    
+    private func attachFrameBufferToRenderBuffer() {
+        renderDestination?.attachFrameBufferToRenderBuffer()
+        renderDestination?.checkFramebufferStatus()
     }
     
     private func setupOutputDimensions() {
