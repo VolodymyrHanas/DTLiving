@@ -17,6 +17,10 @@
 		403DEB8C23E53ADD00685F6B /* FilterFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8823E53ADD00685F6B /* FilterFragment.glsl */; };
 		403DEB8D23E53ADD00685F6B /* FilterVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8923E53ADD00685F6B /* FilterVertex.glsl */; };
 		403DEB8E23E53ADD00685F6B /* DirectPassVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */; };
+		40AC66832409234700E281AC /* LiveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AC66822409234700E281AC /* LiveManager.swift */; };
+		40AC66852409239400E281AC /* VideoOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AC66842409239400E281AC /* VideoOutput.swift */; };
+		40AC6687240923B900E281AC /* VideoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AC6686240923B900E281AC /* VideoInput.swift */; };
+		40AC6689240923E100E281AC /* VideoCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AC6688240923E100E281AC /* VideoCamera.swift */; };
 		40B2BFC223E40D8600F677CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B2BFC123E40D8600F677CD /* AppDelegate.swift */; };
 		40B2BFC623E40D8600F677CD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B2BFC523E40D8600F677CD /* CameraViewController.swift */; };
 		40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40B2BFCA23E40D8800F677CD /* Assets.xcassets */; };
@@ -34,6 +38,10 @@
 		403DEB8823E53ADD00685F6B /* FilterFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FilterFragment.glsl; sourceTree = "<group>"; };
 		403DEB8923E53ADD00685F6B /* FilterVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FilterVertex.glsl; sourceTree = "<group>"; };
 		403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DirectPassVertex.glsl; sourceTree = "<group>"; };
+		40AC66822409234700E281AC /* LiveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveManager.swift; sourceTree = "<group>"; };
+		40AC66842409239400E281AC /* VideoOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOutput.swift; sourceTree = "<group>"; };
+		40AC6686240923B900E281AC /* VideoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInput.swift; sourceTree = "<group>"; };
+		40AC6688240923E100E281AC /* VideoCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCamera.swift; sourceTree = "<group>"; };
 		40B2BFBE23E40D8600F677CD /* DTLiving.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTLiving.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40B2BFC123E40D8600F677CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40B2BFC523E40D8600F677CD /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +86,7 @@
 		403DEB7D23E536C500685F6B /* Preview */ = {
 			isa = PBXGroup;
 			children = (
+				40AC6686240923B900E281AC /* VideoInput.swift */,
 				403DEB7E23E536E300685F6B /* OpenGLPreviewView.swift */,
 			);
 			path = Preview;
@@ -95,6 +104,30 @@
 				403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */,
 			);
 			path = OpenGL;
+			sourceTree = "<group>";
+		};
+		40AC667F2409211200E281AC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				40B2BFC523E40D8600F677CD /* CameraViewController.swift */,
+				40B2BFD623E42ABB00F677CD /* CameraPipeline.swift */,
+				40AC66822409234700E281AC /* LiveManager.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		40AC66802409228100E281AC /* Publish */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Publish;
+			sourceTree = "<group>";
+		};
+		40AC66812409229C00E281AC /* Encode */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Encode;
 			sourceTree = "<group>";
 		};
 		40B2BFB523E40D8600F677CD = {
@@ -118,10 +151,13 @@
 		40B2BFC023E40D8600F677CD /* DTLiving */ = {
 			isa = PBXGroup;
 			children = (
+				40AC667F2409211200E281AC /* Controller */,
 				403DEB8023E5377100685F6B /* OpenGL */,
 				40B2BFD523E429EA00F677CD /* Capture */,
 				402C125323E6A20E00580CD3 /* Effect */,
 				403DEB7D23E536C500685F6B /* Preview */,
+				40AC66812409229C00E281AC /* Encode */,
+				40AC66802409228100E281AC /* Publish */,
 				40B2BFC123E40D8600F677CD /* AppDelegate.swift */,
 				40B2BFCA23E40D8800F677CD /* Assets.xcassets */,
 				40B2BFCC23E40D8800F677CD /* LaunchScreen.storyboard */,
@@ -133,8 +169,8 @@
 		40B2BFD523E429EA00F677CD /* Capture */ = {
 			isa = PBXGroup;
 			children = (
-				40B2BFC523E40D8600F677CD /* CameraViewController.swift */,
-				40B2BFD623E42ABB00F677CD /* CameraPipeline.swift */,
+				40AC66842409239400E281AC /* VideoOutput.swift */,
+				40AC6688240923E100E281AC /* VideoCamera.swift */,
 			);
 			path = Capture;
 			sourceTree = "<group>";
@@ -265,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40AC66832409234700E281AC /* LiveManager.swift in Sources */,
 				403DEB7F23E536E300685F6B /* OpenGLPreviewView.swift in Sources */,
 				40B2BFC623E40D8600F677CD /* CameraViewController.swift in Sources */,
 				40B2BFD723E42ABB00F677CD /* CameraPipeline.swift in Sources */,
@@ -272,6 +309,9 @@
 				403DEB8223E5379400685F6B /* PixelBufferTexture.swift in Sources */,
 				403DEB8623E53A3800685F6B /* ShaderProgram.swift in Sources */,
 				403DEB8423E539B400685F6B /* RenderDestination.swift in Sources */,
+				40AC6689240923E100E281AC /* VideoCamera.swift in Sources */,
+				40AC6687240923B900E281AC /* VideoInput.swift in Sources */,
+				40AC66852409239400E281AC /* VideoOutput.swift in Sources */,
 				40B2BFC223E40D8600F677CD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
