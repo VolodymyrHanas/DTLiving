@@ -26,6 +26,7 @@
 		40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40B2BFCA23E40D8800F677CD /* Assets.xcassets */; };
 		40B2BFCE23E40D8800F677CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40B2BFCC23E40D8800F677CD /* LaunchScreen.storyboard */; };
 		40B2BFD723E42ABB00F677CD /* CameraPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B2BFD623E42ABB00F677CD /* CameraPipeline.swift */; };
+		40F1D2FD240D1B89008A8EC8 /* FrameBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F1D2FC240D1B89008A8EC8 /* FrameBuffer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		40B2BFCD23E40D8800F677CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40B2BFCF23E40D8800F677CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40B2BFD623E42ABB00F677CD /* CameraPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPipeline.swift; sourceTree = "<group>"; };
+		40F1D2FC240D1B89008A8EC8 /* FrameBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameBuffer.swift; sourceTree = "<group>"; };
 		726E59E52EF70D3A638C3F7B /* Pods-DTLiving.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DTLiving.debug.xcconfig"; path = "Target Support Files/Pods-DTLiving/Pods-DTLiving.debug.xcconfig"; sourceTree = "<group>"; };
 		BBBA00E3AB2A8105168A8975 /* Pods_DTLiving.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DTLiving.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5376B19CD3BE54C6BCE3A2D /* Pods-DTLiving.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DTLiving.release.xcconfig"; path = "Target Support Files/Pods-DTLiving/Pods-DTLiving.release.xcconfig"; sourceTree = "<group>"; };
@@ -79,6 +81,10 @@
 			isa = PBXGroup;
 			children = (
 				402C125423E6A33700580CD3 /* EffectOpenGLFilter.swift */,
+				403DEB8923E53ADD00685F6B /* FilterVertex.glsl */,
+				403DEB8823E53ADD00685F6B /* FilterFragment.glsl */,
+				403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */,
+				403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */,
 			);
 			path = Effect;
 			sourceTree = "<group>";
@@ -98,10 +104,7 @@
 				403DEB8123E5379400685F6B /* PixelBufferTexture.swift */,
 				403DEB8323E539B400685F6B /* RenderDestination.swift */,
 				403DEB8523E53A3800685F6B /* ShaderProgram.swift */,
-				403DEB8923E53ADD00685F6B /* FilterVertex.glsl */,
-				403DEB8823E53ADD00685F6B /* FilterFragment.glsl */,
-				403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */,
-				403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */,
+				40F1D2FC240D1B89008A8EC8 /* FrameBuffer.swift */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			files = (
 				40AC66832409234700E281AC /* LiveManager.swift in Sources */,
 				403DEB7F23E536E300685F6B /* OpenGLPreviewView.swift in Sources */,
+				40F1D2FD240D1B89008A8EC8 /* FrameBuffer.swift in Sources */,
 				40B2BFC623E40D8600F677CD /* CameraViewController.swift in Sources */,
 				40B2BFD723E42ABB00F677CD /* CameraPipeline.swift in Sources */,
 				402C125523E6A33700580CD3 /* EffectOpenGLFilter.swift in Sources */,

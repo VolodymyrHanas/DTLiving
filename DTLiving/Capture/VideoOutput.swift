@@ -6,7 +6,9 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-class VideoOutput {
+import Foundation
+
+class VideoOutput: NSObject {
     
     var targets: [VideoInput] = []
     var targetTextureIndices: [Int] = []

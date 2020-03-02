@@ -6,12 +6,13 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
 import CocoaLumberjack
 
 class VideoCamera: VideoOutput {
     
+    private var config: MediaConfig
+
     private enum SessionSetupResult {
         case success
         case notAuthorized
@@ -27,8 +28,23 @@ class VideoCamera: VideoOutput {
     private var videoConnection: AVCaptureConnection?
     private let videoProcessQueue = DispatchQueue(label: "camera video process queue", attributes: [], target: nil)
     private let semaphore = DispatchSemaphore(value: 1)
+    private var capturePaused = false
+    
+    private var program: ShaderProgram?
+    private var positionSlot = GLuint()
+    private var texturePositionSlot = GLuint()
+    private var textureUniform = GLint()
 
-    func startSessionRunning() {
+    init(config: MediaConfig) {
+        self.config = config
+     
+        super.init()
+        
+        authorizeCamera()
+        createShaderProgram()
+    }
+
+    func startCapture() {
         sessionQueue.async { [weak self] in
             guard let self = self else { return }
             switch self.setupResult {
@@ -42,7 +58,7 @@ class VideoCamera: VideoOutput {
         }
     }
     
-    func stopSessionRunning() {
+    func stopCaputre() {
         sessionQueue.async { [weak self] in
             guard let self = self else { return }
             if self.setupResult == .success {
@@ -51,6 +67,44 @@ class VideoCamera: VideoOutput {
         }
     }
     
+    func pauseCapture() {
+        capturePaused = true
+    }
+    
+    func resumeCapture() {
+        capturePaused = false
+    }
+    
+    private func authorizeCamera() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            break
+        case .notDetermined:
+            sessionQueue.suspend()
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+                guard let self = self else { return }
+                if !granted {
+                    self.setupResult = .notAuthorized
+                }
+                self.sessionQueue.resume()
+            }
+        default:
+            setupResult = .notAuthorized
+        }
+        
+        sessionQueue.async { [weak self] in
+            self?.configureSession()
+        }
+    }
+    
+    private func createShaderProgram() {
+        let program = ShaderProgram(vertexShaderName: "DirectPassVertex", fragmentShaderName: "DirectPassFragment")
+        positionSlot = program.attributeLocation(for: "a_position")
+        texturePositionSlot = program.attributeLocation(for: "a_texcoord")
+        textureUniform = program.uniformLocation(for: "u_texture")
+        self.program = program
+    }
+
     private func configureSession() {
         if setupResult != .success {
             return
@@ -72,8 +126,6 @@ class VideoCamera: VideoOutput {
         configVideoOrientation()
         
         session.commitConfiguration()
-        
-        delegate?.cameraPipelineConfigSuccess(self)
     }
 
     private func configVideoDevice() -> AVCaptureDevice? {
@@ -184,6 +236,32 @@ class VideoCamera: VideoOutput {
     
     private func configVideoOrientation() {
         videoConnection?.videoOrientation = .portrait
+    }
+    
+    private func processVideo(with sampleBuffer: CMSampleBuffer) {
+        // TODO: FrameBuffer, draw texture
+    }
+
+}
+
+extension VideoCamera: AVCaptureVideoDataOutputSampleBufferDelegate {
+    
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        guard session.isRunning, !capturePaused else { return }
+        
+        semaphore.wait()
+        
+        // TODO: Same Video Processing Queue in Context
+        videoProcessQueue.async { [weak self] in
+            self?.processVideo(with: sampleBuffer)
+            self?.semaphore.signal()
+        }
+    }
+    
+    func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        // The frame may be dropped because it was late (kCMSampleBufferDroppedFrameReason_FrameWasLate), typically caused by the client’s processing taking too long.
+        let reason = CMGetAttachment(sampleBuffer, key: kCMSampleBufferAttachmentKey_DroppedFrameReason, attachmentModeOut: nil)
+        DDLogWarn("Capture output did drop sampleBuffer: \(String(describing: reason))")
     }
     
 }
