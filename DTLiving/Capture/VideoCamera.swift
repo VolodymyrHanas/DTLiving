@@ -26,7 +26,6 @@ class VideoCamera: VideoOutput {
     private let videoDataOutputQueue = DispatchQueue(label: "camera video data output queue", attributes: [], target: nil)
     private let videoDataOutput = AVCaptureVideoDataOutput()
     private var videoConnection: AVCaptureConnection?
-    private let videoProcessQueue = DispatchQueue(label: "camera video process queue", attributes: [], target: nil)
     private let semaphore = DispatchSemaphore(value: 1)
     private var capturePaused = false
     
@@ -98,11 +97,13 @@ class VideoCamera: VideoOutput {
     }
     
     private func createShaderProgram() {
-        let program = ShaderProgram(vertexShaderName: "DirectPassVertex", fragmentShaderName: "DirectPassFragment")
-        positionSlot = program.attributeLocation(for: "a_position")
-        texturePositionSlot = program.attributeLocation(for: "a_texcoord")
-        textureUniform = program.uniformLocation(for: "u_texture")
-        self.program = program
+        VideoContext.sharedProcessingQueue.sync { [weak self] in
+            let program = ShaderProgram(vertexShaderName: "DirectPassVertex", fragmentShaderName: "DirectPassFragment")
+            positionSlot = program.attributeLocation(for: "a_position")
+            texturePositionSlot = program.attributeLocation(for: "a_texcoord")
+            textureUniform = program.uniformLocation(for: "u_texture")
+            self?.program = program
+        }
     }
 
     private func configureSession() {
@@ -239,7 +240,39 @@ class VideoCamera: VideoOutput {
     }
     
     private func processVideo(with sampleBuffer: CMSampleBuffer) {
-        // TODO: FrameBuffer, draw texture
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+        let bufferWidth = CVPixelBufferGetWidth(pixelBuffer)
+        let bufferHeight = CVPixelBufferGetWidth(pixelBuffer)
+        
+        VideoContext.sharedProcessingContext.useAsCurrentContext()
+        
+        var inputTexture: CVOpenGLESTexture!
+        let textureCache = VideoContext.sharedProcessingContext.coreVideoTextureCache
+        let resultCode = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
+                                                                  textureCache,
+                                                                  pixelBuffer,
+                                                                  nil,
+                                                                  GLenum(GL_TEXTURE_2D),
+                                                                  GL_RGBA,
+                                                                  GLsizei(bufferWidth),
+                                                                  GLsizei(bufferHeight),
+                                                                  GLenum(GL_BGRA),
+                                                                  GLenum(GL_UNSIGNED_BYTE),
+                                                                  0,
+                                                                  &inputTexture)
+        if resultCode != kCVReturnSuccess {
+            DDLogError("[VideoCamera] Could not create texture \(resultCode)")
+            exit(1)
+        }
+        
+        let inputTextureName = CVOpenGLESTextureGetName(inputTexture)
+        
+        glBindTexture(GLenum(GL_TEXTURE_2D), inputTextureName)
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR)
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE)
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE)
+
     }
 
 }
@@ -251,11 +284,12 @@ extension VideoCamera: AVCaptureVideoDataOutputSampleBufferDelegate {
         
         semaphore.wait()
         
-        // TODO: Same Video Processing Queue in Context
-        videoProcessQueue.async { [weak self] in
+        VideoContext.sharedProcessingQueue.async { [weak self] in
             self?.processVideo(with: sampleBuffer)
             self?.semaphore.signal()
         }
+        
+        
     }
     
     func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
