@@ -13,6 +13,8 @@ class VideoOutput: NSObject {
     var targets: [VideoInput] = []
     var targetTextureIndices: [Int] = []
     
+    var outputFrameBuffer: FrameBuffer!
+    
     func addTarget(_ target: VideoInput) {
         
     }

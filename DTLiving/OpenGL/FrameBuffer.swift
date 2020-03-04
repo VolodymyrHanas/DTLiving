@@ -79,4 +79,9 @@ class FrameBuffer {
         }
     }
     
+    func activate() {
+        glBindFramebuffer(GLenum(GL_FRAMEBUFFER), frameBuffer)
+        glViewport(0, 0, GLsizei(size.width), GLsizei(size.height))
+    }
+    
 }

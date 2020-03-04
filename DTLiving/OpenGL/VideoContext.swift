@@ -9,6 +9,17 @@
 import GLKit
 import CocoaLumberjack
 
+enum VideoRotation {
+    case noRotation
+    case rotateLeft
+    case rotateRight
+    case flipVertical
+    case flipHorizonal
+    case rotateRightFlipVertical
+    case rotateRightFlipHorizontal
+    case rotate180
+}
+
 class VideoContext {
     
     static let sharedProcessingContext = VideoContext(tag: "video processing")
@@ -54,7 +65,7 @@ class VideoContext {
         }
     }
     
-    func setShaderProgram(_ program: ShaderProgram) {
+    func setShaderProgram(_ program: ShaderProgram?) {
         useAsCurrentContext()
         if shaderProgram != program {
             shaderProgram = program

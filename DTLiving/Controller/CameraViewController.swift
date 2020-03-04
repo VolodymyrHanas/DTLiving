@@ -9,24 +9,6 @@
 import UIKit
 import SnapKit
 
-enum CameraPosition {
-    case front
-    case back
-    
-    var title: String {
-        switch self {
-        case .front:
-            return "Front"
-        case .back:
-            return "Back"
-        }
-    }
-    
-    static var all: [CameraPosition] {
-        return [.front, .back]
-    }
-}
-
 enum VideoRatio {
     case r9to16
     case r16to9

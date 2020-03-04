@@ -9,9 +9,29 @@
 import AVFoundation
 import CocoaLumberjack
 
+enum CameraPosition {
+    case front
+    case back
+    
+    var title: String {
+        switch self {
+        case .front:
+            return "Front"
+        case .back:
+            return "Back"
+        }
+    }
+    
+    static var all: [CameraPosition] {
+        return [.front, .back]
+    }
+}
+
 class VideoCamera: VideoOutput {
     
-    private var config: MediaConfig
+    private var position: CameraPosition
+    private var presets: [AVCaptureSession.Preset]
+    private var frameRate: Int
 
     private enum SessionSetupResult {
         case success
@@ -26,6 +46,7 @@ class VideoCamera: VideoOutput {
     private let videoDataOutputQueue = DispatchQueue(label: "camera video data output queue", attributes: [], target: nil)
     private let videoDataOutput = AVCaptureVideoDataOutput()
     private var videoConnection: AVCaptureConnection?
+    
     private let semaphore = DispatchSemaphore(value: 1)
     private var capturePaused = false
     
@@ -33,9 +54,17 @@ class VideoCamera: VideoOutput {
     private var positionSlot = GLuint()
     private var texturePositionSlot = GLuint()
     private var textureUniform = GLint()
+    
+    var outputImageOrientation: UIInterfaceOrientation = .portrait
+    var horizontallyMirrorRearFacingCamera: Bool = false
+    var horizontallyMirrorFrontFacingCamera: Bool = false
+    private var internalRotation: VideoRotation = .noRotation
+    private var outputRotation: VideoRotation = .noRotation
 
-    init(config: MediaConfig) {
-        self.config = config
+    init(position: CameraPosition, presets: [AVCaptureSession.Preset] = [.medium], frameRate: Int = 24) {
+        self.position = position
+        self.presets = presets
+        self.frameRate = frameRate
      
         super.init()
         
@@ -124,7 +153,6 @@ class VideoCamera: VideoOutput {
         configSessionInput(for: videoDevice)
         configSessionOutput()
         configVideoFrameRate(for: videoDevice)
-        configVideoOrientation()
         
         session.commitConfiguration()
     }
@@ -141,29 +169,25 @@ class VideoCamera: VideoOutput {
                 frontCameraDevice = cameraDevice
             }
         }
-        if config.cameraPosition == .back {
+        if position == .back {
             if let backCameraDevice = backCameraDevice {
                 defaultVideoDevice = backCameraDevice
             } else {
                 defaultVideoDevice = frontCameraDevice
-                config.cameraPosition = .front
+                position = .front
             }
         } else {
             if let frontCameraDevice = frontCameraDevice {
                 defaultVideoDevice = frontCameraDevice
             } else {
                 defaultVideoDevice = backCameraDevice
-                config.cameraPosition = .back
+                position = .back
             }
         }
         return defaultVideoDevice
     }
 
     private func configSessionPreset(for videoDevice: AVCaptureDevice) {
-        var presets: [AVCaptureSession.Preset] = []
-        presets.append(.hd1920x1080)
-        presets.append(.hd1280x720)
-        presets.append(.medium)
         for preset in presets {
             if videoDevice.supportsSessionPreset(preset),
                 session.canSetSessionPreset(preset) {
@@ -213,7 +237,7 @@ class VideoCamera: VideoOutput {
     }
     
     private func configVideoFrameRate(for videoDevice: AVCaptureDevice) {
-        let desiredFrameRate = config.videoFrameRate
+        let desiredFrameRate = frameRate
         var isFrameRateSupported = false
         for range in videoDevice.activeFormat.videoSupportedFrameRateRanges {
             if Double(desiredFrameRate) <= range.maxFrameRate,
@@ -235,8 +259,71 @@ class VideoCamera: VideoOutput {
         }
     }
     
-    private func configVideoOrientation() {
-        videoConnection?.videoOrientation = .portrait
+    private func updateOrientationSendToTargets() {
+        VideoContext.sharedProcessingQueue.sync {
+            outputRotation = .noRotation
+            if position == .back {
+                if horizontallyMirrorRearFacingCamera {
+                    switch outputImageOrientation {
+                    case .portrait:
+                        internalRotation = .rotateRightFlipVertical
+                    case .portraitUpsideDown:
+                        internalRotation = .rotate180
+                    case .landscapeLeft:
+                        internalRotation = .flipHorizonal
+                    case .landscapeRight:
+                        internalRotation = .flipVertical
+                    default:
+                        internalRotation = .noRotation
+                    }
+                } else {
+                    switch outputImageOrientation {
+                    case .portrait:
+                        internalRotation = .rotateRight
+                    case .portraitUpsideDown:
+                        internalRotation = .rotateLeft
+                    case .landscapeLeft:
+                        internalRotation = .rotate180
+                    case .landscapeRight:
+                        internalRotation = .noRotation
+                    default:
+                        internalRotation = .noRotation
+                    }
+                }
+            } else {
+                if horizontallyMirrorFrontFacingCamera {
+                    switch outputImageOrientation {
+                    case .portrait:
+                        internalRotation = .rotateRightFlipVertical
+                    case .portraitUpsideDown:
+                        internalRotation = .rotateRightFlipHorizontal
+                    case .landscapeLeft:
+                        internalRotation = .flipHorizonal
+                    case .landscapeRight:
+                        internalRotation = .flipVertical
+                    default:
+                        internalRotation = .noRotation
+                    }
+                } else {
+                    switch outputImageOrientation {
+                    case .portrait:
+                        internalRotation = .rotateRight
+                    case .portraitUpsideDown:
+                        internalRotation = .rotateLeft
+                    case .landscapeLeft:
+                        internalRotation = .noRotation
+                    case .landscapeRight:
+                        internalRotation = .rotate180
+                    default:
+                        internalRotation = .noRotation
+                    }
+                }
+            }
+        }
+        
+        for (index, target) in targets.enumerated() {
+            target.setInputRotation(outputRotation, at: targetTextureIndices[index])
+        }
     }
     
     private func processVideo(with sampleBuffer: CMSampleBuffer) {
@@ -249,17 +336,17 @@ class VideoCamera: VideoOutput {
         var inputTexture: CVOpenGLESTexture!
         let textureCache = VideoContext.sharedProcessingContext.coreVideoTextureCache
         let resultCode = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
-                                                                  textureCache,
-                                                                  pixelBuffer,
-                                                                  nil,
-                                                                  GLenum(GL_TEXTURE_2D),
-                                                                  GL_RGBA,
-                                                                  GLsizei(bufferWidth),
-                                                                  GLsizei(bufferHeight),
-                                                                  GLenum(GL_BGRA),
-                                                                  GLenum(GL_UNSIGNED_BYTE),
-                                                                  0,
-                                                                  &inputTexture)
+                                                                      textureCache,
+                                                                      pixelBuffer,
+                                                                      nil,
+                                                                      GLenum(GL_TEXTURE_2D),
+                                                                      GL_RGBA,
+                                                                      GLsizei(bufferWidth),
+                                                                      GLsizei(bufferHeight),
+                                                                      GLenum(GL_BGRA),
+                                                                      GLenum(GL_UNSIGNED_BYTE),
+                                                                      0,
+                                                                      &inputTexture)
         if resultCode != kCVReturnSuccess {
             DDLogError("[VideoCamera] Could not create texture \(resultCode)")
             exit(1)
@@ -273,6 +360,47 @@ class VideoCamera: VideoOutput {
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE)
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE)
 
+        VideoContext.sharedProcessingContext.setShaderProgram(program)
+        
+        outputFrameBuffer = FrameBuffer(tag: "VideoCamera", size: CGSize(width: bufferWidth, height: bufferHeight))
+        outputFrameBuffer.activate()
+        
+        glClearColor(0.85, 0.85, 0.85, 1.0)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        
+        glActiveTexture(GLenum(GL_TEXTURE0))
+        glBindTexture(GLenum(GL_TEXTURE_2D), inputTextureName)
+        glUniform1i(textureUniform, 0)
+        
+        var squareVertices: [GLfloat] = [
+            -1, -1, // bottom left
+            1, -1, // bottom right
+            -1, 1, // top left
+            1, 1, // top right
+        ]
+        var textureVertices: [Float] = [
+            0, 0, // bottom left
+            1, 0, // bottom right
+            0, 1, // top left
+            1, 1, // top right
+        ]
+        glEnableVertexAttribArray(positionSlot)
+        glVertexAttribPointer(positionSlot,
+                              2,
+                              GLenum(GL_FLOAT),
+                              GLboolean(UInt8(GL_FALSE)),
+                              GLsizei(0),
+                              &squareVertices)
+        
+        glEnableVertexAttribArray(texturePositionSlot)
+        glVertexAttribPointer(texturePositionSlot,
+                              2,
+                              GLenum(GL_FLOAT),
+                              GLboolean(UInt8(GL_FALSE)),
+                              GLsizei(0),
+                              &textureVertices)
+        
+        glDrawArrays(GLenum(GL_TRIANGLE_STRIP), 0, 4)
     }
 
 }
@@ -288,8 +416,6 @@ extension VideoCamera: AVCaptureVideoDataOutputSampleBufferDelegate {
             self?.processVideo(with: sampleBuffer)
             self?.semaphore.signal()
         }
-        
-        
     }
     
     func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
