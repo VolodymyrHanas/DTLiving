@@ -18,6 +18,66 @@ enum VideoRotation {
     case rotateRightFlipVertical
     case rotateRightFlipHorizontal
     case rotate180
+    
+    var needSwapWidthAndHeight: Bool {
+        switch self {
+        case .rotateLeft:
+            return true
+        case .rotateRight:
+            return true
+        case .rotateRightFlipVertical:
+            return true
+        case .rotateRightFlipHorizontal:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var textureCoordinates: [Float] {
+        switch self {
+        case .noRotation:
+            return [0, 0, // bottom left
+                    1, 0, // bottom right
+                    0, 1, // top left
+                    1, 1] // top right
+        case .rotateLeft:
+            return [1, 0,
+                    1, 1,
+                    0, 0,
+                    0, 1]
+        case .rotateRight:
+            return [0, 1,
+                    0, 0,
+                    1, 1,
+                    1, 0]
+        case .flipVertical:
+            return [0, 1,
+                    1, 1,
+                    0, 0,
+                    1, 0]
+        case .flipHorizonal:
+            return [1, 0,
+                    0, 0,
+                    1, 1,
+                    0, 1]
+        case .rotateRightFlipVertical:
+            return [0, 0,
+                    0, 1,
+                    1, 0,
+                    1, 1]
+        case .rotateRightFlipHorizontal:
+            return [1, 1,
+                    1, 0,
+                    0, 1,
+                    0, 0]
+        case .rotate180:
+            return [1, 1,
+                    0, 1,
+                    1, 0,
+                    0, 0]
+        }
+    }
 }
 
 class VideoContext {

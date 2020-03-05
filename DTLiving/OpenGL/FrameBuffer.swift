@@ -19,6 +19,10 @@ class FrameBuffer {
     private var pixelBuffer: CVPixelBuffer!
     private var texture: CVOpenGLESTexture!
     
+    deinit {
+        destroyFramebuffer()
+    }
+    
     init(tag: String, size: CGSize) {
         self.tag = "[\(tag)]"
         self.size = size
@@ -82,6 +86,17 @@ class FrameBuffer {
     func activate() {
         glBindFramebuffer(GLenum(GL_FRAMEBUFFER), frameBuffer)
         glViewport(0, 0, GLsizei(size.width), GLsizei(size.height))
+    }
+    
+    func destroyFramebuffer() {
+        VideoContext.sharedProcessingQueue.sync {
+            VideoContext.sharedProcessingContext.useAsCurrentContext()
+            
+            if frameBuffer != 0 {
+                glDeleteFramebuffers(1, &frameBuffer)
+                frameBuffer = 0
+            }
+        }
     }
     
 }

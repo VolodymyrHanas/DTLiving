@@ -55,9 +55,21 @@ class VideoCamera: VideoOutput {
     private var texturePositionSlot = GLuint()
     private var textureUniform = GLint()
     
-    var outputImageOrientation: UIInterfaceOrientation = .portrait
-    var horizontallyMirrorRearFacingCamera: Bool = false
-    var horizontallyMirrorFrontFacingCamera: Bool = false
+    var outputImageOrientation: UIInterfaceOrientation = .portrait {
+        didSet {
+            updateOrientationSendToTargets()
+        }
+    }
+    var horizontallyMirrorRearFacingCamera: Bool = false {
+        didSet {
+            updateOrientationSendToTargets()
+        }
+    }
+    var horizontallyMirrorFrontFacingCamera: Bool = false {
+        didSet {
+            updateOrientationSendToTargets()
+        }
+    }
     private var internalRotation: VideoRotation = .noRotation
     private var outputRotation: VideoRotation = .noRotation
 
@@ -72,6 +84,11 @@ class VideoCamera: VideoOutput {
         createShaderProgram()
     }
 
+    override func addTarget(_ target: VideoInput, at index: Int) {
+        super.addTarget(target, at: index)
+        target.setInputRotation(outputRotation, at: index)
+    }
+    
     func startCapture() {
         sessionQueue.async { [weak self] in
             guard let self = self else { return }
@@ -101,6 +118,36 @@ class VideoCamera: VideoOutput {
     
     func resumeCapture() {
         capturePaused = false
+    }
+    
+    func rotateCamera() {
+        if setupResult != .success {
+            return
+        }
+        
+        switch position {
+        case .front:
+            position = .back
+        case .back:
+            position = .front
+        }
+        
+        session.beginConfiguration()
+        
+        guard let videoDevice = configVideoDevice() else {
+            DDLogError("Could not find video device")
+            setupResult = .configurationFailed
+            session.commitConfiguration()
+            return
+        }
+        
+        configSessionPreset(for: videoDevice)
+        configSessionInput(for: videoDevice)
+        configVideoFrameRate(for: videoDevice)
+        
+        session.commitConfiguration()
+        
+        updateOrientationSendToTargets()
     }
     
     private func authorizeCamera() {
@@ -326,10 +373,40 @@ class VideoCamera: VideoOutput {
         }
     }
     
+    private func updateTargetsWithTexture(bufferWidth: Int, bufferHeight: Int, currentTime: CMTime) {
+        guard let outputFrameBuffer = outputFrameBuffer else { return }
+        
+        for (index, target) in targets.enumerated() {
+            if target.enabled {
+                let textureIndex = targetTextureIndices[index]
+                target.setInputRotation(outputRotation, at: textureIndex)
+                target.setInputSize(CGSize(width: bufferWidth, height: bufferHeight), at: textureIndex)
+                target.setInputFrameBuffer(outputFrameBuffer, at: textureIndex)
+            }
+        }
+        
+        self.outputFrameBuffer = nil
+        
+        for (index, target) in targets.enumerated() {
+            if target.enabled {
+                let textureIndex = targetTextureIndices[index]
+                target.newFrameReady(at: currentTime, at: textureIndex)
+            }
+        }
+    }
+    
     private func processVideo(with sampleBuffer: CMSampleBuffer) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+        
+        let currentTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
         let bufferWidth = CVPixelBufferGetWidth(pixelBuffer)
         let bufferHeight = CVPixelBufferGetWidth(pixelBuffer)
+        var rotatedBufferWidth = bufferWidth
+        var rotatedBufferHeight = bufferHeight
+        if internalRotation.needSwapWidthAndHeight {
+            rotatedBufferWidth = bufferHeight
+            rotatedBufferHeight = bufferWidth
+        }
         
         VideoContext.sharedProcessingContext.useAsCurrentContext()
         
@@ -362,8 +439,9 @@ class VideoCamera: VideoOutput {
 
         VideoContext.sharedProcessingContext.setShaderProgram(program)
         
-        outputFrameBuffer = FrameBuffer(tag: "VideoCamera", size: CGSize(width: bufferWidth, height: bufferHeight))
-        outputFrameBuffer.activate()
+        outputFrameBuffer = FrameBuffer(tag: "VideoCamera", size: CGSize(width: rotatedBufferWidth,
+                                                                         height: rotatedBufferHeight))
+        outputFrameBuffer?.activate()
         
         glClearColor(0.85, 0.85, 0.85, 1.0)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
@@ -378,12 +456,7 @@ class VideoCamera: VideoOutput {
             -1, 1, // top left
             1, 1, // top right
         ]
-        var textureVertices: [Float] = [
-            0, 0, // bottom left
-            1, 0, // bottom right
-            0, 1, // top left
-            1, 1, // top right
-        ]
+        var textureVertices = internalRotation.textureCoordinates
         glEnableVertexAttribArray(positionSlot)
         glVertexAttribPointer(positionSlot,
                               2,
@@ -401,6 +474,10 @@ class VideoCamera: VideoOutput {
                               &textureVertices)
         
         glDrawArrays(GLenum(GL_TRIANGLE_STRIP), 0, 4)
+        
+        updateTargetsWithTexture(bufferWidth: rotatedBufferWidth,
+                                 bufferHeight: rotatedBufferHeight,
+                                 currentTime: currentTime)
     }
 
 }

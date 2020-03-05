@@ -13,14 +13,34 @@ class VideoOutput: NSObject {
     var targets: [VideoInput] = []
     var targetTextureIndices: [Int] = []
     
-    var outputFrameBuffer: FrameBuffer!
+    var outputFrameBuffer: FrameBuffer?
     
     func addTarget(_ target: VideoInput) {
+        let nextIndex = target.nextAvailableTextureIndex
+        addTarget(target, at: nextIndex)
+    }
+    
+    func addTarget(_ target: VideoInput, at index: Int) {
+        if targets.contains(target) { return }
         
+        VideoContext.sharedProcessingQueue.sync {
+            target.setInputFrameBuffer(outputFrameBuffer, at: index)
+            targets.append(target)
+            targetTextureIndices.append(index)
+        }
     }
     
     func removeTarget(_ target: VideoInput) {
+        guard let indexOfTarget = targets.firstIndex(of: target) else { return }
+        let index = targetTextureIndices[indexOfTarget]
         
+        VideoContext.sharedProcessingQueue.sync {
+            target.setInputSize(.zero, at: index)
+            target.setInputRotation(.noRotation, at: index)
+            targetTextureIndices.remove(at: indexOfTarget)
+            targets.remove(at: indexOfTarget)
+            target.endProcessing()
+        }
     }
     
 }

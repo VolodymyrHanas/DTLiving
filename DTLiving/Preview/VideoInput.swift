@@ -8,12 +8,19 @@
 
 import CoreMedia
 
-protocol VideoInput {
+class VideoInput: Equatable {
     
-    var nextAvailableTextureIndex: Int { get }
-    func setInputFrameBuffer(_ inputFrameBuffer: FrameBuffer, at index: Int)
-    func setInputSize(_ size: CGSize, at index: Int)
-    func setInputRotation(_ rotation: VideoRotation, at index: Int)
-    func newFrameReady(at time: CMTime, at index: Int)
+    var nextAvailableTextureIndex: Int = 0
+    var enabled: Bool = true
     
+    func setInputFrameBuffer(_ inputFrameBuffer: FrameBuffer?, at index: Int) {}
+    func setInputSize(_ size: CGSize, at index: Int) {}
+    func setInputRotation(_ rotation: VideoRotation, at index: Int) {}
+    func newFrameReady(at time: CMTime, at index: Int) {}
+    func endProcessing() {}
+    
+    static func == (lhs: VideoInput, rhs: VideoInput) -> Bool {
+        return lhs == rhs
+    }
+
 }
