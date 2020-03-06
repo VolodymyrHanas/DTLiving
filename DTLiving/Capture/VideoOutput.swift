@@ -21,7 +21,8 @@ class VideoOutput: NSObject {
     }
     
     func addTarget(_ target: VideoInput, at index: Int) {
-        if targets.contains(target) { return }
+        let isContain = targets.contains { $0 === target }
+        if isContain { return }
         
         VideoContext.sharedProcessingQueue.sync {
             target.setInputFrameBuffer(outputFrameBuffer, at: index)
@@ -31,7 +32,8 @@ class VideoOutput: NSObject {
     }
     
     func removeTarget(_ target: VideoInput) {
-        guard let indexOfTarget = targets.firstIndex(of: target) else { return }
+        let firstIndex = targets.firstIndex { $0 === target }
+        guard let indexOfTarget = firstIndex else { return }
         let index = targetTextureIndices[indexOfTarget]
         
         VideoContext.sharedProcessingQueue.sync {

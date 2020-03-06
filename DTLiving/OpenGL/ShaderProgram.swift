@@ -9,7 +9,7 @@
 import GLKit
 import CocoaLumberjack
 
-class ShaderProgram: Equatable {
+class ShaderProgram {
     
     private var program: GLuint = 0
     
@@ -88,10 +88,6 @@ class ShaderProgram: Equatable {
             DDLogError("Could not load shader file \(name)")
             exit(1)
         }
-    }
-    
-    static func == (lhs: ShaderProgram, rhs: ShaderProgram) -> Bool {
-        return lhs.program == rhs.program
     }
 
 }

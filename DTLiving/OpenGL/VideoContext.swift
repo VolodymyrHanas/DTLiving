@@ -127,7 +127,7 @@ class VideoContext {
     
     func setShaderProgram(_ program: ShaderProgram?) {
         useAsCurrentContext()
-        if shaderProgram != program {
+        if shaderProgram !== program {
             shaderProgram = program
             shaderProgram?.use()
         }
