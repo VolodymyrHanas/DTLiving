@@ -24,7 +24,7 @@ class VideoOutput: NSObject {
         let isContain = targets.contains { $0 === target }
         if isContain { return }
         
-        VideoContext.sharedProcessingQueue.sync {
+        VideoContext.sharedProcessingContext.sync {
             target.setInputFrameBuffer(outputFrameBuffer, at: index)
             targets.append(target)
             targetTextureIndices.append(index)
@@ -36,7 +36,7 @@ class VideoOutput: NSObject {
         guard let indexOfTarget = firstIndex else { return }
         let index = targetTextureIndices[indexOfTarget]
         
-        VideoContext.sharedProcessingQueue.sync {
+        VideoContext.sharedProcessingContext.sync {
             target.setInputSize(.zero, at: index)
             target.setInputRotation(.noRotation, at: index)
             targetTextureIndices.remove(at: indexOfTarget)

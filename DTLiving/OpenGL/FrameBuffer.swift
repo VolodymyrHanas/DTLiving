@@ -11,10 +11,11 @@ import CocoaLumberjack
 
 class FrameBuffer {
     
-    private let tag: String
-    private let size: CGSize
+    var textureName: GLuint = 0
+    let size: CGSize
     
-    private var textureName: GLuint = 0
+    private let tag: String
+    private var referenceCount: Int = 0
     private var frameBuffer: GLuint = 0
     private var pixelBuffer: CVPixelBuffer!
     private var texture: CVOpenGLESTexture!
@@ -31,7 +32,7 @@ class FrameBuffer {
     }
     
     func generateFrameBuffer() {
-        VideoContext.sharedProcessingQueue.sync {
+        VideoContext.sharedProcessingContext.sync {
             VideoContext.sharedProcessingContext.useAsCurrentContext()
             
             glGenFramebuffers(1, &frameBuffer)
@@ -45,7 +46,7 @@ class FrameBuffer {
                 exit(1)
             }
             
-            let textureCache = VideoContext.sharedProcessingContext.coreVideoTextureCache
+            let textureCache = VideoContext.sharedProcessingContext.textureCache
             resultCode = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
                                                                       textureCache,
                                                                       pixelBuffer,
@@ -89,14 +90,36 @@ class FrameBuffer {
     }
     
     func destroyFramebuffer() {
-        VideoContext.sharedProcessingQueue.sync {
+        VideoContext.sharedProcessingContext.sync {
             VideoContext.sharedProcessingContext.useAsCurrentContext()
             
             if frameBuffer != 0 {
                 glDeleteFramebuffers(1, &frameBuffer)
                 frameBuffer = 0
             }
+            
+            pixelBuffer = nil
+            texture = nil
+            
+            if textureName != 0 {
+                glDeleteTextures(1, &textureName)
+            }
         }
+    }
+    
+    func lock() {
+        referenceCount += 1
+    }
+    
+    func unlock() {
+        referenceCount -= 1
+        if referenceCount < 1 {
+            VideoContext.sharedProcessingContext.frameBufferCache.returnFrameBuffer(self)
+        }
+    }
+    
+    func clearLock() {
+        referenceCount = 0
     }
     
 }

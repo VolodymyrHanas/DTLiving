@@ -9,6 +9,24 @@
 import UIKit
 import SnapKit
 
+enum CameraPosition {
+    case front
+    case back
+    
+    var title: String {
+        switch self {
+        case .front:
+            return "Front"
+        case .back:
+            return "Back"
+        }
+    }
+    
+    static var all: [CameraPosition] {
+        return [.front, .back]
+    }
+}
+
 enum VideoRatio {
     case r9to16
     case r16to9
@@ -93,9 +111,7 @@ class CameraViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool { return true }
 
-    private var pipeline: CameraPipeline
-
-    private let previewView = OpenGLPreviewView()
+    private let liveManager: LiveManager
 
     private let recordButton = UIButton()
     private let liveButton = UIButton()
@@ -115,7 +131,7 @@ class CameraViewController: UIViewController {
     }
     
     init(config: MediaConfig) {
-        pipeline = CameraPipeline(config: config)
+        liveManager = LiveManager(config: config)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -124,12 +140,8 @@ class CameraViewController: UIViewController {
         
         view.backgroundColor = .black
         
-        pipeline.isRenderingEnabled = UIApplication.shared.applicationState != .background
-        pipeline.delegate = self
-
         setupPreview()
         setupControls()
-        toggleControls(isHidden: true)
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(enterForeground(_:)),
@@ -139,31 +151,27 @@ class CameraViewController: UIViewController {
                                                selector: #selector(enterBackground(_:)),
                                                name: UIApplication.didEnterBackgroundNotification,
                                                object: nil)
-
-        pipeline.configure()
+        
+        liveManager.startCapture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        pipeline.startSessionRunning()
+        liveManager.resumeCapture()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        pipeline.stopSessionRunning()
+        liveManager.pauseCapture()
     }
     
     private func setupPreview() {
+        let previewView = liveManager.previewView
         view.addSubview(previewView)
-        updatePreview()
-    }
-    
-    private func updatePreview() {
-        previewView.snp.remakeConstraints { make in
-            make.left.right.centerY.equalToSuperview()
-            make.height.equalTo(previewView.snp.width).multipliedBy(pipeline.config.videoRatio.ratio)
+        previewView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
     
@@ -206,11 +214,17 @@ class CameraViewController: UIViewController {
         
         settingsButton.addTarget(self, action: #selector(showSettings), for: .touchUpInside)
     }
+            
+    @objc private func enterForeground(_ notificaton: Notification) {
+        if isViewLoaded && view.window != nil {
+            liveManager.resumeCapture()
+        }
+    }
     
-    private func toggleControls(isHidden: Bool) {
-        recordButton.isHidden = isHidden
-        liveButton.isHidden = isHidden
-        settingsButton.isHidden = isHidden
+    @objc private func enterBackground(_ notificaton: Notification) {
+        if isViewLoaded && view.window != nil {
+            liveManager.pauseCapture()
+        }
     }
     
     @objc private func showSettings() {
@@ -228,36 +242,17 @@ class CameraViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    @objc private func enterForeground(_ notificaton: Notification) {
-        if isViewLoaded && view.window != nil {
-            pipeline.isRenderingEnabled = true
-            pipeline.startSessionRunning()
-        }
-    }
-    
-    @objc private func enterBackground(_ notificaton: Notification) {
-        if isViewLoaded && view.window != nil {
-            pipeline.isRenderingEnabled = false
-            pipeline.stopSessionRunning()
-        }
-    }
-    
     private func configCameraPosition() {
         let alert = UIAlertController(title: "Camera Position", message: nil, preferredStyle: .actionSheet)
         for position in CameraPosition.all {
             var title = position.title
-            if position == pipeline.config.cameraPosition {
+            if position == liveManager.config.cameraPosition {
                 title = "[ \(title) ]"
             }
             alert.addAction(UIAlertAction(title: title, style: .default, handler: { [weak self] _ in
                 guard let self = self else { return }
-                self.pipeline.isRenderingEnabled = false
-                self.pipeline.stopSessionRunning()
-                self.pipeline.config.cameraPosition = position
-                self.previewView.resetupInputAndOutputDimensions()
-                self.pipeline.reconfigure()
-                self.pipeline.startSessionRunning()
-                self.pipeline.isRenderingEnabled = true
+                self.liveManager.config.cameraPosition = position
+                self.liveManager.rotateCamera()
             }))
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -268,37 +263,16 @@ class CameraViewController: UIViewController {
         let alert = UIAlertController(title: "Video Ratio", message: nil, preferredStyle: .actionSheet)
         for videoRatio in VideoRatio.all {
             var title = videoRatio.title
-            if videoRatio == pipeline.config.videoRatio {
+            if videoRatio == liveManager.config.videoRatio {
                 title = "[ \(title) ]"
             }
             alert.addAction(UIAlertAction(title: title, style: .default, handler: { [weak self] _ in
                 guard let self = self else { return }
-                self.pipeline.isRenderingEnabled = false
-                self.pipeline.stopSessionRunning()
-                self.pipeline.config.videoRatio = videoRatio
-                self.updatePreview()
-                self.previewView.resetupInputAndOutputDimensions()
-                self.pipeline.setEffectFilterNeedSetup()
-                self.pipeline.startSessionRunning()
-                self.pipeline.isRenderingEnabled = true
+                self.liveManager.config.videoRatio = videoRatio
             }))
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
 
-}
-
-extension CameraViewController: CameraPipelineDelegate {
-    
-    func cameraPipelineConfigSuccess(_ pipeline: CameraPipeline) {
-        DispatchQueue.main.async { [weak self] in
-            self?.toggleControls(isHidden: false)
-        }
-    }
-    
-    func cameraPipeline(_ pipeline: CameraPipeline, display pixelBuffer: CVPixelBuffer) {
-        previewView.display(pixelBuffer: pixelBuffer)
-    }
-    
 }

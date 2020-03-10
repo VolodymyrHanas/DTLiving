@@ -8,13 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		02866E0866DAB03CB4425C78 /* Pods_DTLiving.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBA00E3AB2A8105168A8975 /* Pods_DTLiving.framework */; };
+		40076AD22416351F0052ED90 /* DebugHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40076AD12416351F0052ED90 /* DebugHelper.swift */; };
+		40076AD5241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40076AD4241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift */; };
+		40076AD724176A710052ED90 /* FrameBufferCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40076AD624176A710052ED90 /* FrameBufferCache.swift */; };
 		401789DF240E517500B5A7B4 /* VideoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401789DE240E517500B5A7B4 /* VideoContext.swift */; };
-		402C125523E6A33700580CD3 /* EffectOpenGLFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402C125423E6A33700580CD3 /* EffectOpenGLFilter.swift */; };
 		4037C6402410DE2E006C2FC7 /* VideoFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037C63F2410DE2E006C2FC7 /* VideoFilter.swift */; };
 		4037C6422411090A006C2FC7 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037C6412411090A006C2FC7 /* VideoView.swift */; };
-		403DEB7F23E536E300685F6B /* OpenGLPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403DEB7E23E536E300685F6B /* OpenGLPreviewView.swift */; };
-		403DEB8223E5379400685F6B /* PixelBufferTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403DEB8123E5379400685F6B /* PixelBufferTexture.swift */; };
-		403DEB8423E539B400685F6B /* RenderDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403DEB8323E539B400685F6B /* RenderDestination.swift */; };
 		403DEB8623E53A3800685F6B /* ShaderProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403DEB8523E53A3800685F6B /* ShaderProgram.swift */; };
 		403DEB8B23E53ADD00685F6B /* DirectPassFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */; };
 		403DEB8C23E53ADD00685F6B /* FilterFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8823E53ADD00685F6B /* FilterFragment.glsl */; };
@@ -28,18 +27,16 @@
 		40B2BFC623E40D8600F677CD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B2BFC523E40D8600F677CD /* CameraViewController.swift */; };
 		40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40B2BFCA23E40D8800F677CD /* Assets.xcassets */; };
 		40B2BFCE23E40D8800F677CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40B2BFCC23E40D8800F677CD /* LaunchScreen.storyboard */; };
-		40B2BFD723E42ABB00F677CD /* CameraPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B2BFD623E42ABB00F677CD /* CameraPipeline.swift */; };
 		40F1D2FD240D1B89008A8EC8 /* FrameBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F1D2FC240D1B89008A8EC8 /* FrameBuffer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		40076AD12416351F0052ED90 /* DebugHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugHelper.swift; sourceTree = "<group>"; };
+		40076AD4241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FourCharCode+StringLiteralConvertible.swift"; sourceTree = "<group>"; };
+		40076AD624176A710052ED90 /* FrameBufferCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameBufferCache.swift; sourceTree = "<group>"; };
 		401789DE240E517500B5A7B4 /* VideoContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContext.swift; sourceTree = "<group>"; };
-		402C125423E6A33700580CD3 /* EffectOpenGLFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectOpenGLFilter.swift; sourceTree = "<group>"; };
 		4037C63F2410DE2E006C2FC7 /* VideoFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFilter.swift; sourceTree = "<group>"; };
 		4037C6412411090A006C2FC7 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
-		403DEB7E23E536E300685F6B /* OpenGLPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLPreviewView.swift; sourceTree = "<group>"; };
-		403DEB8123E5379400685F6B /* PixelBufferTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelBufferTexture.swift; sourceTree = "<group>"; };
-		403DEB8323E539B400685F6B /* RenderDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderDestination.swift; sourceTree = "<group>"; };
 		403DEB8523E53A3800685F6B /* ShaderProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderProgram.swift; sourceTree = "<group>"; };
 		403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DirectPassFragment.glsl; sourceTree = "<group>"; };
 		403DEB8823E53ADD00685F6B /* FilterFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FilterFragment.glsl; sourceTree = "<group>"; };
@@ -55,7 +52,6 @@
 		40B2BFCA23E40D8800F677CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40B2BFCD23E40D8800F677CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40B2BFCF23E40D8800F677CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40B2BFD623E42ABB00F677CD /* CameraPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPipeline.swift; sourceTree = "<group>"; };
 		40F1D2FC240D1B89008A8EC8 /* FrameBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameBuffer.swift; sourceTree = "<group>"; };
 		726E59E52EF70D3A638C3F7B /* Pods-DTLiving.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DTLiving.debug.xcconfig"; path = "Target Support Files/Pods-DTLiving/Pods-DTLiving.debug.xcconfig"; sourceTree = "<group>"; };
 		BBBA00E3AB2A8105168A8975 /* Pods_DTLiving.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DTLiving.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,10 +79,25 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		40076AD02416351F0052ED90 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				40076AD12416351F0052ED90 /* DebugHelper.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		40076AD3241635970052ED90 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				40076AD4241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		402C125323E6A20E00580CD3 /* Effect */ = {
 			isa = PBXGroup;
 			children = (
-				402C125423E6A33700580CD3 /* EffectOpenGLFilter.swift */,
 				403DEB8923E53ADD00685F6B /* FilterVertex.glsl */,
 				403DEB8823E53ADD00685F6B /* FilterFragment.glsl */,
 				403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */,
@@ -99,7 +110,6 @@
 		403DEB7D23E536C500685F6B /* Preview */ = {
 			isa = PBXGroup;
 			children = (
-				403DEB7E23E536E300685F6B /* OpenGLPreviewView.swift */,
 				40AC6686240923B900E281AC /* VideoInput.swift */,
 				4037C6412411090A006C2FC7 /* VideoView.swift */,
 			);
@@ -109,11 +119,10 @@
 		403DEB8023E5377100685F6B /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				403DEB8123E5379400685F6B /* PixelBufferTexture.swift */,
-				403DEB8323E539B400685F6B /* RenderDestination.swift */,
 				401789DE240E517500B5A7B4 /* VideoContext.swift */,
 				403DEB8523E53A3800685F6B /* ShaderProgram.swift */,
 				40F1D2FC240D1B89008A8EC8 /* FrameBuffer.swift */,
+				40076AD624176A710052ED90 /* FrameBufferCache.swift */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -122,7 +131,6 @@
 			isa = PBXGroup;
 			children = (
 				40B2BFC523E40D8600F677CD /* CameraViewController.swift */,
-				40B2BFD623E42ABB00F677CD /* CameraPipeline.swift */,
 				40AC66822409234700E281AC /* LiveManager.swift */,
 			);
 			path = Controller;
@@ -170,6 +178,8 @@
 				403DEB7D23E536C500685F6B /* Preview */,
 				40AC66812409229C00E281AC /* Encode */,
 				40AC66802409228100E281AC /* Publish */,
+				40076AD3241635970052ED90 /* Extension */,
+				40076AD02416351F0052ED90 /* Utils */,
 				40B2BFC123E40D8600F677CD /* AppDelegate.swift */,
 				40B2BFCA23E40D8800F677CD /* Assets.xcassets */,
 				40B2BFCC23E40D8800F677CD /* LaunchScreen.storyboard */,
@@ -315,20 +325,18 @@
 			files = (
 				40AC66832409234700E281AC /* LiveManager.swift in Sources */,
 				401789DF240E517500B5A7B4 /* VideoContext.swift in Sources */,
-				403DEB7F23E536E300685F6B /* OpenGLPreviewView.swift in Sources */,
+				40076AD724176A710052ED90 /* FrameBufferCache.swift in Sources */,
 				40F1D2FD240D1B89008A8EC8 /* FrameBuffer.swift in Sources */,
 				40B2BFC623E40D8600F677CD /* CameraViewController.swift in Sources */,
-				40B2BFD723E42ABB00F677CD /* CameraPipeline.swift in Sources */,
-				402C125523E6A33700580CD3 /* EffectOpenGLFilter.swift in Sources */,
-				403DEB8223E5379400685F6B /* PixelBufferTexture.swift in Sources */,
 				403DEB8623E53A3800685F6B /* ShaderProgram.swift in Sources */,
-				403DEB8423E539B400685F6B /* RenderDestination.swift in Sources */,
 				40AC6689240923E100E281AC /* VideoCamera.swift in Sources */,
 				40AC6687240923B900E281AC /* VideoInput.swift in Sources */,
 				4037C6422411090A006C2FC7 /* VideoView.swift in Sources */,
+				40076AD5241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift in Sources */,
 				40AC66852409239400E281AC /* VideoOutput.swift in Sources */,
 				4037C6402410DE2E006C2FC7 /* VideoFilter.swift in Sources */,
 				40B2BFC223E40D8600F677CD /* AppDelegate.swift in Sources */,
+				40076AD22416351F0052ED90 /* DebugHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

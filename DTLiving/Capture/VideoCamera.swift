@@ -9,27 +9,27 @@
 import AVFoundation
 import CocoaLumberjack
 
-enum CameraPosition {
-    case front
-    case back
-    
-    var title: String {
-        switch self {
-        case .front:
-            return "Front"
-        case .back:
-            return "Back"
-        }
-    }
-    
-    static var all: [CameraPosition] {
-        return [.front, .back]
-    }
-}
-
 class VideoCamera: VideoOutput {
     
-    private var position: CameraPosition
+    enum Position {
+        case front
+        case back
+        
+        var title: String {
+            switch self {
+            case .front:
+                return "Front"
+            case .back:
+                return "Back"
+            }
+        }
+        
+        static var all: [Position] {
+            return [.front, .back]
+        }
+    }
+
+    private var position: Position
     private var presets: [AVCaptureSession.Preset]
     private var frameRate: Int
 
@@ -45,7 +45,6 @@ class VideoCamera: VideoOutput {
     private var videoDeviceInput: AVCaptureDeviceInput?
     private let videoDataOutputQueue = DispatchQueue(label: "camera video data output queue", attributes: [], target: nil)
     private let videoDataOutput = AVCaptureVideoDataOutput()
-    private var videoConnection: AVCaptureConnection?
     
     private let semaphore = DispatchSemaphore(value: 1)
     private var capturePaused = false
@@ -70,10 +69,12 @@ class VideoCamera: VideoOutput {
             updateOrientationSendToTargets()
         }
     }
+    // rotate byself
     private var internalRotation: VideoRotation = .noRotation
+    // rotate by next target
     private var outputRotation: VideoRotation = .noRotation
 
-    init(position: CameraPosition, presets: [AVCaptureSession.Preset] = [.medium], frameRate: Int = 24) {
+    init(position: Position, presets: [AVCaptureSession.Preset] = [.low], frameRate: Int = 24) {
         self.position = position
         self.presets = presets
         self.frameRate = frameRate
@@ -82,6 +83,7 @@ class VideoCamera: VideoOutput {
         
         authorizeCamera()
         createShaderProgram()
+        updateOrientationSendToTargets()
     }
 
     override func addTarget(_ target: VideoInput, at index: Int) {
@@ -173,12 +175,12 @@ class VideoCamera: VideoOutput {
     }
     
     private func createShaderProgram() {
-        VideoContext.sharedProcessingQueue.sync { [weak self] in
+        VideoContext.sharedProcessingContext.sync {
             let program = ShaderProgram(vertexShaderName: "DirectPassVertex", fragmentShaderName: "DirectPassFragment")
             positionSlot = program.attributeLocation(for: "a_position")
             texturePositionSlot = program.attributeLocation(for: "a_texcoord")
             textureUniform = program.uniformLocation(for: "u_texture")
-            self?.program = program
+            self.program = program
         }
     }
 
@@ -280,7 +282,6 @@ class VideoCamera: VideoOutput {
             session.commitConfiguration()
             return
         }
-        videoConnection = videoDataOutput.connection(with: .video)
     }
     
     private func configVideoFrameRate(for videoDevice: AVCaptureDevice) {
@@ -307,7 +308,7 @@ class VideoCamera: VideoOutput {
     }
     
     private func updateOrientationSendToTargets() {
-        VideoContext.sharedProcessingQueue.sync {
+        VideoContext.sharedProcessingContext.sync {
             outputRotation = .noRotation
             if position == .back {
                 if horizontallyMirrorRearFacingCamera {
@@ -385,6 +386,7 @@ class VideoCamera: VideoOutput {
             }
         }
         
+        outputFrameBuffer.unlock()
         self.outputFrameBuffer = nil
         
         for (index, target) in targets.enumerated() {
@@ -400,7 +402,7 @@ class VideoCamera: VideoOutput {
         
         let currentTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
         let bufferWidth = CVPixelBufferGetWidth(pixelBuffer)
-        let bufferHeight = CVPixelBufferGetWidth(pixelBuffer)
+        let bufferHeight = CVPixelBufferGetHeight(pixelBuffer)
         var rotatedBufferWidth = bufferWidth
         var rotatedBufferHeight = bufferHeight
         if internalRotation.needSwapWidthAndHeight {
@@ -411,7 +413,7 @@ class VideoCamera: VideoOutput {
         VideoContext.sharedProcessingContext.useAsCurrentContext()
         
         var inputTexture: CVOpenGLESTexture!
-        let textureCache = VideoContext.sharedProcessingContext.coreVideoTextureCache
+        let textureCache = VideoContext.sharedProcessingContext.textureCache
         let resultCode = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
                                                                       textureCache,
                                                                       pixelBuffer,
@@ -439,8 +441,10 @@ class VideoCamera: VideoOutput {
 
         VideoContext.sharedProcessingContext.setShaderProgram(program)
         
-        outputFrameBuffer = FrameBuffer(tag: "VideoCamera", size: CGSize(width: rotatedBufferWidth,
-                                                                         height: rotatedBufferHeight))
+        outputFrameBuffer = VideoContext.sharedProcessingContext.frameBufferCache
+            .fetchFrameBuffer(tag: "VideoCamera",
+                              for: CGSize(width: rotatedBufferWidth,
+                                          height: rotatedBufferHeight))
         outputFrameBuffer?.activate()
         
         glClearColor(0.85, 0.85, 0.85, 1.0)
@@ -489,7 +493,7 @@ extension VideoCamera: AVCaptureVideoDataOutputSampleBufferDelegate {
         
         semaphore.wait()
         
-        VideoContext.sharedProcessingQueue.async { [weak self] in
+        VideoContext.sharedProcessingContext.async { [weak self] in
             self?.processVideo(with: sampleBuffer)
             self?.semaphore.signal()
         }
@@ -498,7 +502,9 @@ extension VideoCamera: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         // The frame may be dropped because it was late (kCMSampleBufferDroppedFrameReason_FrameWasLate), typically caused by the client’s processing taking too long.
         let reason = CMGetAttachment(sampleBuffer, key: kCMSampleBufferAttachmentKey_DroppedFrameReason, attachmentModeOut: nil)
-        DDLogWarn("Capture output did drop sampleBuffer: \(String(describing: reason))")
+        if let reason = reason {
+            DDLogWarn("Capture output did drop sampleBuffer: \(String(describing: reason))")
+        }
     }
     
 }

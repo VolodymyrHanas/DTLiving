@@ -83,15 +83,17 @@ enum VideoRotation {
 class VideoContext {
     
     static let sharedProcessingContext = VideoContext(tag: "video processing")
-    
-    static var sharedProcessingQueue: DispatchQueue {
-        return sharedProcessingContext.contextQueue
-    }
-    
+        
+    static let queueKey = DispatchSpecificKey<Int>()
+
+    let context: EAGLContext
+
     private let tag: String
-    private let context: EAGLContext
     private let contextQueue: DispatchQueue
+    private lazy var queueContext = unsafeBitCast(self, to: Int.self)
     private var shaderProgram: ShaderProgram?
+    private var _textureCache: CVOpenGLESTextureCache?
+    private var _frameBufferCache: FrameBufferCache?
     
     init(tag: String) {
         self.tag = "[\(tag)]"
@@ -100,20 +102,52 @@ class VideoContext {
             exit(1)
         }
         self.context = context
-        self.contextQueue = DispatchQueue(label: "\(tag) context queue", attributes: [], target: nil)
+        contextQueue = DispatchQueue(label: "\(tag) context queue", attributes: [], target: nil)
+        contextQueue.setSpecific(key: VideoContext.queueKey, value: queueContext)
         
         EAGLContext.setCurrent(context)
         glDisable(GLenum(GL_DEPTH_TEST))
     }
     
-    var coreVideoTextureCache: CVOpenGLESTextureCache {
-        var textureCache: CVOpenGLESTextureCache!
-        let resultCode = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, nil, context, nil, &textureCache)
-        if resultCode != kCVReturnSuccess {
-            DDLogError("\(tag) Could not create texture cache \(resultCode)")
-            exit(1)
+    func sync(closure: () -> Void) {
+        if DispatchQueue.getSpecific(key: VideoContext.queueKey) != queueContext {
+            contextQueue.sync(execute: closure)
+        } else {
+            closure()
         }
-        return textureCache
+    }
+    
+    func async(closure: @escaping () -> Void) {
+        if DispatchQueue.getSpecific(key: VideoContext.queueKey) != queueContext {
+            contextQueue.async(execute: closure)
+        } else {
+            closure()
+        }
+    }
+    
+    var textureCache: CVOpenGLESTextureCache {
+        if let textureCache = _textureCache {
+            return textureCache
+        } else {
+            var textureCache: CVOpenGLESTextureCache!
+            let resultCode = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, nil, context, nil, &textureCache)
+            if resultCode != kCVReturnSuccess {
+                DDLogError("\(tag) Could not create texture cache \(resultCode)")
+                exit(1)
+            }
+            self._textureCache = textureCache
+            return textureCache
+        }
+    }
+    
+    var frameBufferCache: FrameBufferCache {
+        if let frameBufferCache = _frameBufferCache {
+            return frameBufferCache
+        } else {
+            let frameBufferCache = FrameBufferCache()
+            _frameBufferCache = frameBufferCache
+            return frameBufferCache
+        }
     }
     
     func useAsCurrentContext() {
@@ -131,6 +165,10 @@ class VideoContext {
             shaderProgram = program
             shaderProgram?.use()
         }
+    }
+    
+    func presentBufferForDisplay() {
+        context.presentRenderbuffer(Int(GL_RENDERBUFFER))
     }
     
 }
