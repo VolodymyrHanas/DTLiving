@@ -9,15 +9,17 @@
 #ifndef video_effect_h
 #define video_effect_h
 
+#include "shader_program.h"
+
 class VideoEffect {
 private:
-    // shader program
+    ShaderProgram *program;
     // input texture
     // output texture
     // params
     
 public:
-    VideoEffect(char *vertexShader, char *fragmentShader);
+    VideoEffect(const char *vertexShaderFile, const char *fragmentShaderFile);
 };
 
 #endif /* video_effect_h */

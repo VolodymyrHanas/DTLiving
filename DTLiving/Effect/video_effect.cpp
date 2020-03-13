@@ -8,8 +8,6 @@
 
 #include "video_effect.h"
 
-VideoEffect::VideoEffect(char *vertexShader, char *fragmentShader) {
-    
-    
-    
+VideoEffect::VideoEffect(const char *vertexShaderFile, const char *fragmentShaderFile) {
+    program = new ShaderProgram(vertexShaderFile, fragmentShaderFile);
 }
