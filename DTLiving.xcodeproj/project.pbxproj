@@ -19,6 +19,9 @@
 		403DEB8C23E53ADD00685F6B /* FilterFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8823E53ADD00685F6B /* FilterFragment.glsl */; };
 		403DEB8D23E53ADD00685F6B /* FilterVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8923E53ADD00685F6B /* FilterVertex.glsl */; };
 		403DEB8E23E53ADD00685F6B /* DirectPassVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */; };
+		40831441241A2EEE00DC2BE9 /* video_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4083143F241A2EEE00DC2BE9 /* video_effect.cpp */; };
+		40831444241A2F1300DC2BE9 /* shader_program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40831442241A2F1300DC2BE9 /* shader_program.cpp */; };
+		40831449241A384C00DC2BE9 /* VideoEffectProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 40831448241A384C00DC2BE9 /* VideoEffectProcessor.m */; };
 		40AC66832409234700E281AC /* LiveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AC66822409234700E281AC /* LiveManager.swift */; };
 		40AC66852409239400E281AC /* VideoOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AC66842409239400E281AC /* VideoOutput.swift */; };
 		40AC6687240923B900E281AC /* VideoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AC6686240923B900E281AC /* VideoInput.swift */; };
@@ -42,6 +45,13 @@
 		403DEB8823E53ADD00685F6B /* FilterFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FilterFragment.glsl; sourceTree = "<group>"; };
 		403DEB8923E53ADD00685F6B /* FilterVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FilterVertex.glsl; sourceTree = "<group>"; };
 		403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DirectPassVertex.glsl; sourceTree = "<group>"; };
+		4083143B241A2D9C00DC2BE9 /* DTLiving-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DTLiving-Bridging-Header.h"; sourceTree = "<group>"; };
+		4083143F241A2EEE00DC2BE9 /* video_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_effect.cpp; sourceTree = "<group>"; };
+		40831440241A2EEE00DC2BE9 /* video_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_effect.h; sourceTree = "<group>"; };
+		40831442241A2F1300DC2BE9 /* shader_program.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader_program.cpp; sourceTree = "<group>"; };
+		40831443241A2F1300DC2BE9 /* shader_program.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_program.h; sourceTree = "<group>"; };
+		40831447241A384C00DC2BE9 /* VideoEffectProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoEffectProcessor.h; sourceTree = "<group>"; };
+		40831448241A384C00DC2BE9 /* VideoEffectProcessor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoEffectProcessor.m; sourceTree = "<group>"; };
 		40AC66822409234700E281AC /* LiveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveManager.swift; sourceTree = "<group>"; };
 		40AC66842409239400E281AC /* VideoOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOutput.swift; sourceTree = "<group>"; };
 		40AC6686240923B900E281AC /* VideoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInput.swift; sourceTree = "<group>"; };
@@ -103,6 +113,10 @@
 				403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */,
 				403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */,
 				4037C63F2410DE2E006C2FC7 /* VideoFilter.swift */,
+				40831447241A384C00DC2BE9 /* VideoEffectProcessor.h */,
+				40831448241A384C00DC2BE9 /* VideoEffectProcessor.m */,
+				40831440241A2EEE00DC2BE9 /* video_effect.h */,
+				4083143F241A2EEE00DC2BE9 /* video_effect.cpp */,
 			);
 			path = Effect;
 			sourceTree = "<group>";
@@ -123,6 +137,8 @@
 				403DEB8523E53A3800685F6B /* ShaderProgram.swift */,
 				40F1D2FC240D1B89008A8EC8 /* FrameBuffer.swift */,
 				40076AD624176A710052ED90 /* FrameBufferCache.swift */,
+				40831443241A2F1300DC2BE9 /* shader_program.h */,
+				40831442241A2F1300DC2BE9 /* shader_program.cpp */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -180,6 +196,7 @@
 				40AC66802409228100E281AC /* Publish */,
 				40076AD3241635970052ED90 /* Extension */,
 				40076AD02416351F0052ED90 /* Utils */,
+				4083143B241A2D9C00DC2BE9 /* DTLiving-Bridging-Header.h */,
 				40B2BFC123E40D8600F677CD /* AppDelegate.swift */,
 				40B2BFCA23E40D8800F677CD /* Assets.xcassets */,
 				40B2BFCC23E40D8800F677CD /* LaunchScreen.storyboard */,
@@ -239,6 +256,7 @@
 				TargetAttributes = {
 					40B2BFBD23E40D8600F677CD = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -324,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40AC66832409234700E281AC /* LiveManager.swift in Sources */,
+				40831444241A2F1300DC2BE9 /* shader_program.cpp in Sources */,
 				401789DF240E517500B5A7B4 /* VideoContext.swift in Sources */,
 				40076AD724176A710052ED90 /* FrameBufferCache.swift in Sources */,
 				40F1D2FD240D1B89008A8EC8 /* FrameBuffer.swift in Sources */,
@@ -336,7 +355,9 @@
 				40AC66852409239400E281AC /* VideoOutput.swift in Sources */,
 				4037C6402410DE2E006C2FC7 /* VideoFilter.swift in Sources */,
 				40B2BFC223E40D8600F677CD /* AppDelegate.swift in Sources */,
+				40831449241A384C00DC2BE9 /* VideoEffectProcessor.m in Sources */,
 				40076AD22416351F0052ED90 /* DebugHelper.swift in Sources */,
+				40831441241A2EEE00DC2BE9 /* video_effect.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +494,7 @@
 			baseConfigurationReference = 726E59E52EF70D3A638C3F7B /* Pods-DTLiving.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SLM6SZ8JH3;
 				INFOPLIST_FILE = DTLiving/Info.plist;
@@ -482,6 +504,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dathought.DTLiving;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DTLiving/DTLiving-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -492,6 +516,7 @@
 			baseConfigurationReference = E5376B19CD3BE54C6BCE3A2D /* Pods-DTLiving.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SLM6SZ8JH3;
 				INFOPLIST_FILE = DTLiving/Info.plist;
@@ -501,6 +526,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dathought.DTLiving;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DTLiving/DTLiving-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
