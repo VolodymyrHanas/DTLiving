@@ -49,7 +49,7 @@ class VideoCamera: VideoOutput {
     private let semaphore = DispatchSemaphore(value: 1)
     private var capturePaused = false
     
-    private var program: ShaderProgram?
+    private var program: ShaderProgramObject?
     private var positionSlot = GLuint()
     private var texturePositionSlot = GLuint()
     private var textureUniform = GLint()
@@ -176,10 +176,10 @@ class VideoCamera: VideoOutput {
     
     private func createShaderProgram() {
         VideoContext.sharedProcessingContext.sync {
-            let program = ShaderProgram(vertexShaderName: "DirectPassVertex", fragmentShaderName: "DirectPassFragment")
-            positionSlot = program.attributeLocation(for: "a_position")
-            texturePositionSlot = program.attributeLocation(for: "a_texcoord")
-            textureUniform = program.uniformLocation(for: "u_texture")
+            let program = ShaderProgramObject(vertexShader: "DirectPassVertex", fragmentShader: "DirectPassFragment")
+            positionSlot = program.attributeLocation("a_position")
+            texturePositionSlot = program.attributeLocation("a_texcoord")
+            textureUniform = GLint(program.uniformLocation("u_texture"))
             self.program = program
         }
     }

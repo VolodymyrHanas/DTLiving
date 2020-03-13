@@ -8,9 +8,27 @@
 
 #include "shader_program.h"
 
-ShaderProgram::ShaderProgram(char *vertexShaderSource, char *fragmentShaderSource) {
-    GLuint vertexShader = compileShader(vertexShaderSource, GL_VERTEX_SHADER);
-    GLuint fragmentShader = compileShader(vertexShaderSource, GL_FRAGMENT_SHADER);
+ShaderProgram::ShaderProgram(const char *vertexShaderFile, const char *fragmentShaderFile) {
+    std::ifstream vertexShaderHandle(vertexShaderFile);
+    std::string vertexShaderSource;
+    while (vertexShaderHandle) {
+        std::string line;
+        std::getline(vertexShaderHandle, line);
+        vertexShaderSource += line;
+    }
+    vertexShaderHandle.close();
+    
+    std::ifstream fragmentShaderHandle(fragmentShaderFile);
+    std::string fragmentShaderSource;
+    while (fragmentShaderHandle) {
+        std::string line;
+        std::getline(fragmentShaderHandle, line);
+        fragmentShaderSource += line;
+    }
+    fragmentShaderHandle.close();
+
+    GLuint vertexShader = compileShader(vertexShaderSource.c_str(), GL_VERTEX_SHADER);
+    GLuint fragmentShader = compileShader(fragmentShaderSource.c_str(), GL_FRAGMENT_SHADER);
     
     GLuint program = glCreateProgram();
     glAttachShader(program, vertexShader);
@@ -47,11 +65,11 @@ void ShaderProgram::deleteProgram() {
     }
 }
 
-GLuint ShaderProgram::attributeLocation(char *name) {
+GLuint ShaderProgram::attributeLocation(const char *name) {
     return glGetAttribLocation(program, name);
 }
 
-GLuint ShaderProgram::uniformLocation(char *name) {
+GLint ShaderProgram::uniformLocation(const char *name) {
     return glGetUniformLocation(program, name);
 }
 

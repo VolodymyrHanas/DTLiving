@@ -91,7 +91,7 @@ class VideoContext {
     private let tag: String
     private let contextQueue: DispatchQueue
     private lazy var queueContext = unsafeBitCast(self, to: Int.self)
-    private var shaderProgram: ShaderProgram?
+    private var shaderProgram: ShaderProgramObject?
     private var _textureCache: CVOpenGLESTextureCache?
     private var _frameBufferCache: FrameBufferCache?
     
@@ -159,11 +159,11 @@ class VideoContext {
         }
     }
     
-    func setShaderProgram(_ program: ShaderProgram?) {
+    func setShaderProgram(_ program: ShaderProgramObject?) {
         useAsCurrentContext()
         if shaderProgram !== program {
             shaderProgram = program
-            shaderProgram?.use()
+            shaderProgram?.useProgram()
         }
     }
     

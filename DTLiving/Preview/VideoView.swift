@@ -38,7 +38,7 @@ class VideoView: UIView, VideoInput {
         -1, 1, // top left
         1, 1, // top right
     ]
-    private var program: ShaderProgram?
+    private var program: ShaderProgramObject?
     private var positionSlot = GLuint()
     private var texturePositionSlot = GLuint()
     private var textureUniform = GLint()
@@ -179,10 +179,10 @@ class VideoView: UIView, VideoInput {
     
     private func createShaderProgram() {
         VideoContext.sharedProcessingContext.sync {
-            let program = ShaderProgram(vertexShaderName: "DirectPassVertex", fragmentShaderName: "DirectPassFragment")
-            positionSlot = program.attributeLocation(for: "a_position")
-            texturePositionSlot = program.attributeLocation(for: "a_texcoord")
-            textureUniform = program.uniformLocation(for: "u_texture")
+            let program = ShaderProgramObject(vertexShader: "DirectPassVertex", fragmentShader: "DirectPassFragment")
+            positionSlot = program.attributeLocation("a_position")
+            texturePositionSlot = program.attributeLocation("a_texcoord")
+            textureUniform = program.uniformLocation("u_texture")
             self.program = program
         }
     }

@@ -14,7 +14,6 @@
 		401789DF240E517500B5A7B4 /* VideoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401789DE240E517500B5A7B4 /* VideoContext.swift */; };
 		4037C6402410DE2E006C2FC7 /* VideoFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037C63F2410DE2E006C2FC7 /* VideoFilter.swift */; };
 		4037C6422411090A006C2FC7 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037C6412411090A006C2FC7 /* VideoView.swift */; };
-		403DEB8623E53A3800685F6B /* ShaderProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403DEB8523E53A3800685F6B /* ShaderProgram.swift */; };
 		403DEB8B23E53ADD00685F6B /* DirectPassFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */; };
 		403DEB8C23E53ADD00685F6B /* FilterFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8823E53ADD00685F6B /* FilterFragment.glsl */; };
 		403DEB8D23E53ADD00685F6B /* FilterVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8923E53ADD00685F6B /* FilterVertex.glsl */; };
@@ -31,6 +30,7 @@
 		40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40B2BFCA23E40D8800F677CD /* Assets.xcassets */; };
 		40B2BFCE23E40D8800F677CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40B2BFCC23E40D8800F677CD /* LaunchScreen.storyboard */; };
 		40F1D2FD240D1B89008A8EC8 /* FrameBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F1D2FC240D1B89008A8EC8 /* FrameBuffer.swift */; };
+		40F29732241B7E4C00DD4FE8 /* ShaderProgramObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 40F29731241B7E4C00DD4FE8 /* ShaderProgramObject.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,6 @@
 		401789DE240E517500B5A7B4 /* VideoContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContext.swift; sourceTree = "<group>"; };
 		4037C63F2410DE2E006C2FC7 /* VideoFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFilter.swift; sourceTree = "<group>"; };
 		4037C6412411090A006C2FC7 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
-		403DEB8523E53A3800685F6B /* ShaderProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderProgram.swift; sourceTree = "<group>"; };
 		403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DirectPassFragment.glsl; sourceTree = "<group>"; };
 		403DEB8823E53ADD00685F6B /* FilterFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FilterFragment.glsl; sourceTree = "<group>"; };
 		403DEB8923E53ADD00685F6B /* FilterVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FilterVertex.glsl; sourceTree = "<group>"; };
@@ -63,6 +62,8 @@
 		40B2BFCD23E40D8800F677CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40B2BFCF23E40D8800F677CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40F1D2FC240D1B89008A8EC8 /* FrameBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameBuffer.swift; sourceTree = "<group>"; };
+		40F29730241B7E4C00DD4FE8 /* ShaderProgramObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderProgramObject.h; sourceTree = "<group>"; };
+		40F29731241B7E4C00DD4FE8 /* ShaderProgramObject.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ShaderProgramObject.mm; sourceTree = "<group>"; };
 		726E59E52EF70D3A638C3F7B /* Pods-DTLiving.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DTLiving.debug.xcconfig"; path = "Target Support Files/Pods-DTLiving/Pods-DTLiving.debug.xcconfig"; sourceTree = "<group>"; };
 		BBBA00E3AB2A8105168A8975 /* Pods_DTLiving.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DTLiving.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5376B19CD3BE54C6BCE3A2D /* Pods-DTLiving.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DTLiving.release.xcconfig"; path = "Target Support Files/Pods-DTLiving/Pods-DTLiving.release.xcconfig"; sourceTree = "<group>"; };
@@ -134,9 +135,10 @@
 			isa = PBXGroup;
 			children = (
 				401789DE240E517500B5A7B4 /* VideoContext.swift */,
-				403DEB8523E53A3800685F6B /* ShaderProgram.swift */,
 				40F1D2FC240D1B89008A8EC8 /* FrameBuffer.swift */,
 				40076AD624176A710052ED90 /* FrameBufferCache.swift */,
+				40F29730241B7E4C00DD4FE8 /* ShaderProgramObject.h */,
+				40F29731241B7E4C00DD4FE8 /* ShaderProgramObject.mm */,
 				40831443241A2F1300DC2BE9 /* shader_program.h */,
 				40831442241A2F1300DC2BE9 /* shader_program.cpp */,
 			);
@@ -346,8 +348,8 @@
 				401789DF240E517500B5A7B4 /* VideoContext.swift in Sources */,
 				40076AD724176A710052ED90 /* FrameBufferCache.swift in Sources */,
 				40F1D2FD240D1B89008A8EC8 /* FrameBuffer.swift in Sources */,
+				40F29732241B7E4C00DD4FE8 /* ShaderProgramObject.mm in Sources */,
 				40B2BFC623E40D8600F677CD /* CameraViewController.swift in Sources */,
-				403DEB8623E53A3800685F6B /* ShaderProgram.swift in Sources */,
 				40AC6689240923E100E281AC /* VideoCamera.swift in Sources */,
 				40AC6687240923B900E281AC /* VideoInput.swift in Sources */,
 				4037C6422411090A006C2FC7 /* VideoView.swift in Sources */,
