@@ -2,36 +2,15 @@
 //  VideoFilter.swift
 //  DTLiving
 //
-//  Created by Dan Jiang on 2020/3/5.
+//  Created by Dan Jiang on 2020/3/15.
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-import CoreMedia
+import Foundation
 
-class VideoFilter: VideoOutput, VideoInput {
+// TODO: 储效果器的参数和作用时间, one VideoFilter one VideoEffect
+struct VideoFilter {
     
-    var nextAvailableTextureIndex: Int {
-        return 0
-    }
+    let name: String
     
-    var enabled: Bool {
-        return true
-    }
-    
-    func setInputFrameBuffer(_ inputFrameBuffer: FrameBuffer?, at index: Int) {
-        
-    }
-    
-    func setInputSize(_ size: CGSize, at index: Int) {
-    }
-    
-    func setInputRotation(_ rotation: VideoRotation, at index: Int) {
-    }
-    
-    func newFrameReady(at time: CMTime, at index: Int) {
-    }
-    
-    func endProcessing() {
-    }
-
 }

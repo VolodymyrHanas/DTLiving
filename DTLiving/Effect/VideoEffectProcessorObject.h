@@ -1,5 +1,5 @@
 //
-//  VideoEffectProcessor.h
+//  VideoEffectProcessorObject.h
 //  DTLiving
 //
 //  Created by Dan Jiang on 2020/3/12.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VideoEffectProcessor : NSObject
+@interface VideoEffectProcessorObject : NSObject
 
 @end
 

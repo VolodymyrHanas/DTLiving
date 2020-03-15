@@ -31,6 +31,8 @@ class FrameBuffer {
         generateFrameBuffer()
     }
     
+    // TODO: create with only texture
+    
     func generateFrameBuffer() {
         VideoContext.sharedProcessingContext.sync {
             VideoContext.sharedProcessingContext.useAsCurrentContext()
