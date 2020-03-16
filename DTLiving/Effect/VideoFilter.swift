@@ -9,8 +9,7 @@
 import Foundation
 
 // TODO: 储效果器的参数和作用时间, one VideoFilter one VideoEffect
-struct VideoFilter {
-    
+struct VideoFilter {    
     let name: String
-    
+    let params: [String: AnyObject]
 }

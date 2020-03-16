@@ -12,11 +12,14 @@
 		40076AD5241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40076AD4241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift */; };
 		40076AD724176A710052ED90 /* FrameBufferCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40076AD624176A710052ED90 /* FrameBufferCache.swift */; };
 		401789DF240E517500B5A7B4 /* VideoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401789DE240E517500B5A7B4 /* VideoContext.swift */; };
+		40186223241F74550003AF6F /* video_brightness_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40186221241F74550003AF6F /* video_brightness_effect.cpp */; };
+		40186225241F763A0003AF6F /* EffectBrightnessFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 40186224241F763A0003AF6F /* EffectBrightnessFragment.glsl */; };
+		40186228241F797B0003AF6F /* video_rgb_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40186226241F797B0003AF6F /* video_rgb_effect.cpp */; };
+		4018622A241F79AD0003AF6F /* EffectRGBFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 40186229241F79AD0003AF6F /* EffectRGBFragment.glsl */; };
 		4037C6402410DE2E006C2FC7 /* VideoFilterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037C63F2410DE2E006C2FC7 /* VideoFilterProcessor.swift */; };
 		4037C6422411090A006C2FC7 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037C6412411090A006C2FC7 /* VideoView.swift */; };
 		403DEB8B23E53ADD00685F6B /* DirectPassFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */; };
-		403DEB8C23E53ADD00685F6B /* FilterFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8823E53ADD00685F6B /* FilterFragment.glsl */; };
-		403DEB8D23E53ADD00685F6B /* FilterVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8923E53ADD00685F6B /* FilterVertex.glsl */; };
+		403DEB8D23E53ADD00685F6B /* EffectVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8923E53ADD00685F6B /* EffectVertex.glsl */; };
 		403DEB8E23E53ADD00685F6B /* DirectPassVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */; };
 		40831441241A2EEE00DC2BE9 /* video_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4083143F241A2EEE00DC2BE9 /* video_effect.cpp */; };
 		40831444241A2F1300DC2BE9 /* shader_program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40831442241A2F1300DC2BE9 /* shader_program.cpp */; };
@@ -40,11 +43,16 @@
 		40076AD4241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FourCharCode+StringLiteralConvertible.swift"; sourceTree = "<group>"; };
 		40076AD624176A710052ED90 /* FrameBufferCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameBufferCache.swift; sourceTree = "<group>"; };
 		401789DE240E517500B5A7B4 /* VideoContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContext.swift; sourceTree = "<group>"; };
+		40186221241F74550003AF6F /* video_brightness_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_brightness_effect.cpp; sourceTree = "<group>"; };
+		40186222241F74550003AF6F /* video_brightness_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_brightness_effect.h; sourceTree = "<group>"; };
+		40186224241F763A0003AF6F /* EffectBrightnessFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EffectBrightnessFragment.glsl; sourceTree = "<group>"; };
+		40186226241F797B0003AF6F /* video_rgb_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_rgb_effect.cpp; sourceTree = "<group>"; };
+		40186227241F797B0003AF6F /* video_rgb_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_rgb_effect.h; sourceTree = "<group>"; };
+		40186229241F79AD0003AF6F /* EffectRGBFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EffectRGBFragment.glsl; sourceTree = "<group>"; };
 		4037C63F2410DE2E006C2FC7 /* VideoFilterProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFilterProcessor.swift; sourceTree = "<group>"; };
 		4037C6412411090A006C2FC7 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DirectPassFragment.glsl; sourceTree = "<group>"; };
-		403DEB8823E53ADD00685F6B /* FilterFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FilterFragment.glsl; sourceTree = "<group>"; };
-		403DEB8923E53ADD00685F6B /* FilterVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FilterVertex.glsl; sourceTree = "<group>"; };
+		403DEB8923E53ADD00685F6B /* EffectVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EffectVertex.glsl; sourceTree = "<group>"; };
 		403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DirectPassVertex.glsl; sourceTree = "<group>"; };
 		4083143B241A2D9C00DC2BE9 /* DTLiving-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DTLiving-Bridging-Header.h"; sourceTree = "<group>"; };
 		4083143F241A2EEE00DC2BE9 /* video_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_effect.cpp; sourceTree = "<group>"; };
@@ -111,21 +119,42 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		40186220241F73FB0003AF6F /* ColorProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				40186222241F74550003AF6F /* video_brightness_effect.h */,
+				40186221241F74550003AF6F /* video_brightness_effect.cpp */,
+				40186224241F763A0003AF6F /* EffectBrightnessFragment.glsl */,
+				40186227241F797B0003AF6F /* video_rgb_effect.h */,
+				40186226241F797B0003AF6F /* video_rgb_effect.cpp */,
+				40186229241F79AD0003AF6F /* EffectRGBFragment.glsl */,
+			);
+			path = ColorProcessing;
+			sourceTree = "<group>";
+		};
+		4018622B241F80990003AF6F /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				40BDE3A2241E32EC0063DF25 /* video_effect_processor.h */,
+				40BDE3A1241E32EC0063DF25 /* video_effect_processor.cpp */,
+				40831440241A2EEE00DC2BE9 /* video_effect.h */,
+				4083143F241A2EEE00DC2BE9 /* video_effect.cpp */,
+				403DEB8923E53ADD00685F6B /* EffectVertex.glsl */,
+				40186220241F73FB0003AF6F /* ColorProcessing */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		402C125323E6A20E00580CD3 /* Effect */ = {
 			isa = PBXGroup;
 			children = (
-				403DEB8923E53ADD00685F6B /* FilterVertex.glsl */,
-				403DEB8823E53ADD00685F6B /* FilterFragment.glsl */,
 				403DEB8A23E53ADD00685F6B /* DirectPassVertex.glsl */,
 				403DEB8723E53ADD00685F6B /* DirectPassFragment.glsl */,
 				4037C63F2410DE2E006C2FC7 /* VideoFilterProcessor.swift */,
 				40BDE39F241E315C0063DF25 /* VideoFilter.swift */,
 				40831447241A384C00DC2BE9 /* VideoEffectProcessorObject.h */,
 				40831448241A384C00DC2BE9 /* VideoEffectProcessorObject.m */,
-				40BDE3A2241E32EC0063DF25 /* video_effect_processor.h */,
-				40BDE3A1241E32EC0063DF25 /* video_effect_processor.cpp */,
-				40831440241A2EEE00DC2BE9 /* video_effect.h */,
-				4083143F241A2EEE00DC2BE9 /* video_effect.cpp */,
+				4018622B241F80990003AF6F /* Core */,
 			);
 			path = Effect;
 			sourceTree = "<group>";
@@ -294,10 +323,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				403DEB8B23E53ADD00685F6B /* DirectPassFragment.glsl in Resources */,
+				40186225241F763A0003AF6F /* EffectBrightnessFragment.glsl in Resources */,
 				403DEB8E23E53ADD00685F6B /* DirectPassVertex.glsl in Resources */,
-				403DEB8D23E53ADD00685F6B /* FilterVertex.glsl in Resources */,
-				403DEB8C23E53ADD00685F6B /* FilterFragment.glsl in Resources */,
+				403DEB8D23E53ADD00685F6B /* EffectVertex.glsl in Resources */,
 				40B2BFCE23E40D8800F677CD /* LaunchScreen.storyboard in Resources */,
+				4018622A241F79AD0003AF6F /* EffectRGBFragment.glsl in Resources */,
 				40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,12 +390,14 @@
 				40B2BFC623E40D8600F677CD /* CameraViewController.swift in Sources */,
 				40BDE3A0241E315C0063DF25 /* VideoFilter.swift in Sources */,
 				40AC6689240923E100E281AC /* VideoCamera.swift in Sources */,
+				40186228241F797B0003AF6F /* video_rgb_effect.cpp in Sources */,
 				40AC6687240923B900E281AC /* VideoInput.swift in Sources */,
 				4037C6422411090A006C2FC7 /* VideoView.swift in Sources */,
 				40076AD5241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift in Sources */,
 				40AC66852409239400E281AC /* VideoOutput.swift in Sources */,
 				4037C6402410DE2E006C2FC7 /* VideoFilterProcessor.swift in Sources */,
 				40BDE3A3241E32EC0063DF25 /* video_effect_processor.cpp in Sources */,
+				40186223241F74550003AF6F /* video_brightness_effect.cpp in Sources */,
 				40B2BFC223E40D8600F677CD /* AppDelegate.swift in Sources */,
 				40831449241A384C00DC2BE9 /* VideoEffectProcessorObject.m in Sources */,
 				40076AD22416351F0052ED90 /* DebugHelper.swift in Sources */,

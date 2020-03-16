@@ -1,7 +1,7 @@
 attribute vec4 a_position;
-attribute mediump vec4 a_texcoord;
+attribute vec4 a_texcoord;
 
-varying mediump vec2 v_texcoord;
+varying vec2 v_texcoord;
 
 void main(void) {
     v_texcoord = a_texcoord.xy;

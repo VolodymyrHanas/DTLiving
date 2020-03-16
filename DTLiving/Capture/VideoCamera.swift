@@ -179,7 +179,7 @@ class VideoCamera: VideoOutput {
             let program = ShaderProgramObject(vertexShader: "DirectPassVertex", fragmentShader: "DirectPassFragment")
             positionSlot = program.attributeLocation("a_position")
             texturePositionSlot = program.attributeLocation("a_texcoord")
-            textureUniform = GLint(program.uniformLocation("u_texture"))
+            textureUniform = program.uniformLocation("u_texture")
             self.program = program
         }
     }

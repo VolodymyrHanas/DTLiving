@@ -13,15 +13,28 @@
 
 class VideoEffect {
 private:
+    const char *vertexShaderFile;
+    const char *fragmentShaderFile;
+    
     ShaderProgram *program;
-    // TODO: input texture name
+    GLuint positionSlot;
+    GLuint texturePositionSlot;
+    GLint textureUniform;
+    
     // TODO: params from VideoFilter
-    // TODO: Render
     // TODO: which frame buffer bind which texture name, 频繁绑定FBO与解绑定FBO的效率远不如使用同一个FBO在不同的纹理ID上进行切换（Attach）
     // TODO: effect with two shader programs
+    // TODO: effect with time
     
 public:
-    VideoEffect(const char *vertexShaderFile, const char *fragmentShaderFile);
+    VideoEffect(const char *vertexShaderFile, const char *fragmentShaderFile) {
+        this->vertexShaderFile = vertexShaderFile;
+        this->fragmentShaderFile = fragmentShaderFile;
+    }
+
+    void init();
+    void render(GLuint inputTexture, GLfloat *squareVertices, GLfloat *textureVertices);
+    void setUniformFloat(const char *name, GLfloat value);
 };
 
 #endif /* video_effect_h */
