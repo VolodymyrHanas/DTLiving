@@ -11,7 +11,7 @@
 
 @interface ShaderProgramObject ()
 
-@property (nonatomic, assign) std::shared_ptr<ShaderProgram> program;
+@property (nonatomic, assign) std::shared_ptr<dtliving::opengl::ShaderProgram> program;
 
 @end
 
@@ -22,25 +22,25 @@
     if (self) {
         NSString *vertexShaderFile = [NSBundle.mainBundle pathForResource:vertexShader ofType:@"glsl"];
         NSString *fragmentShaderFile = [NSBundle.mainBundle pathForResource:fragmentShader ofType:@"glsl"];
-        self.program = std::make_shared<ShaderProgram>([vertexShaderFile UTF8String], [fragmentShaderFile UTF8String]);
+        self.program = std::make_shared<dtliving::opengl::ShaderProgram>([vertexShaderFile UTF8String], [fragmentShaderFile UTF8String]);
     }
     return self;
 }
 
 - (void)useProgram {
-    self.program->useProgram();
+    self.program->Use();
 }
 
 - (void)deleteProgram {
-    self.program->deleteProgram();
+    self.program->Delete();
 }
 
 - (GLuint)attributeLocation:(NSString *)name {
-    return self.program->attributeLocation([name UTF8String]);
+    return self.program->AttributeLocation([name UTF8String]);
 }
 
 - (GLint)uniformLocation:(NSString *)name {
-    return self.program->uniformLocation([name UTF8String]);
+    return self.program->UniformLocation([name UTF8String]);
 }
 
 @end

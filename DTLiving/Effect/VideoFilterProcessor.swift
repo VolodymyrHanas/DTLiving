@@ -10,6 +10,8 @@ import CoreMedia
 
 class VideoFilterProcessor: VideoOutput, VideoInput {
     
+    private let processor = VideoEffectProcessorObject()
+    
     var nextAvailableTextureIndex: Int {
         return 0
     }
@@ -32,6 +34,10 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
     }
     
     func endProcessing() {
+    }
+    
+    func addFilter() {
+        
     }
 
 }
