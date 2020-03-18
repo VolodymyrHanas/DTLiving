@@ -43,7 +43,7 @@ void VideoEffect::SetUniformFloat(const char *name, GLfloat value) {
     glUniform1f(location, value);
 }
 
-void VideoEffect::Render(GLuint input_texture, GLfloat *square_vertices, GLfloat *texture_vertices) {
+void VideoEffect::Render(GLuint input_texture, GLfloat *positions, GLfloat *texture_coordinates) {
     glBindTexture(GL_TEXTURE_2D, input_texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -65,7 +65,7 @@ void VideoEffect::Render(GLuint input_texture, GLfloat *square_vertices, GLfloat
                           GL_FLOAT,
                           GL_FALSE,
                           0,
-                          square_vertices);
+                          positions);
     
     glEnableVertexAttribArray(a_texcoord_);
     glVertexAttribPointer(a_texcoord_,
@@ -73,7 +73,7 @@ void VideoEffect::Render(GLuint input_texture, GLfloat *square_vertices, GLfloat
                           GL_FLOAT,
                           GL_FALSE,
                           0,
-                          texture_vertices);
+                          texture_coordinates);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }

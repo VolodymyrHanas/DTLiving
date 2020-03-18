@@ -29,7 +29,7 @@ public:
     
     void Init();
     void SetUniformFloat(const char *name, GLfloat value);
-    void Render(GLuint input_texture, GLfloat *square_vertices, GLfloat *texture_vertices);
+    void Render(GLuint input_texture, GLfloat *positions, GLfloat *texture_coordinates);
     
     const char* get_name();
     

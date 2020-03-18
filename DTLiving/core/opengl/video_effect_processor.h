@@ -21,12 +21,15 @@ public:
     VideoEffectProcessor();
     ~VideoEffectProcessor();
     
+    void Init();
     void AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
     void SetEffectParamFloat(const char *name, const char *param, GLfloat value);
-    void Render();
+    // TODO: Delegate All Methods in VideoInput
+    void Process(GLuint input_texture, GLuint output_texture);
     // TODO: switch effect
 private:
     std::vector<VideoEffect *> effects_ {};
+    GLuint frameBuffer = 0;
 };
 
 }

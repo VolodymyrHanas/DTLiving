@@ -4,3 +4,5 @@
 
 #import "ShaderProgramObject.h"
 #import "VideoEffectProcessorObject.h"
+#import "VideoFilter.h"
+#import "VideoBrightnessFilter.h"

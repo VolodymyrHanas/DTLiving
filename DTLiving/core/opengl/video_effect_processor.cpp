@@ -17,6 +17,10 @@ VideoEffectProcessor::VideoEffectProcessor() {
 VideoEffectProcessor::~VideoEffectProcessor() {
 }
 
+void VideoEffectProcessor::Init() {
+    glGenFramebuffers(1, &frameBuffer);
+}
+
 void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file) {
     VideoEffect *effect = new VideoEffect(name, vertex_shader_file, fragment_shader_file);
     effects_.push_back(effect);
@@ -30,9 +34,20 @@ void VideoEffectProcessor::SetEffectParamFloat(const char *name, const char *par
     }
 }
 
-void VideoEffectProcessor::Render() {
+void VideoEffectProcessor::Process(GLuint input_texture, GLuint output_texture) {
+    if (effects_.empty()) {
+        // TODO: Direct Pass
+    } else {
+    }
+    int count = 0;
+    GLuint current_texture = 0;
     for(VideoEffect *effect : effects_) {
-//        effect->Render()
+        current_texture = output_texture;
+        if (count < effects_.size() - 1) {
+            // TODO: Get From Cache
+        }
+//        effect->Render(input_texture, <#GLfloat *positions#>, <#GLfloat *texture_coordinates#>)
+        count++;
     }
 }
 

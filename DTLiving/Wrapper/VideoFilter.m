@@ -10,8 +10,6 @@
 
 @interface VideoFilter ()
 
-@property (nonatomic, copy) NSString *name;
-
 @end
 
 @implementation VideoFilter
@@ -22,6 +20,14 @@
         self.name = name;
     }
     return self;
+}
+
+- (NSString *)vertexShaderFile {
+    return @"effect_vertex";
+}
+
+- (NSString *)fragmentShaderFile {
+    return [NSString stringWithFormat:@"%@_fragment", self.name];
 }
 
 @end

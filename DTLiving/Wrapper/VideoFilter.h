@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoFilter : NSObject
 
+@property (nonatomic, copy) NSString *name;
+
 - (instancetype)initWithName:(NSString *)name;
 - (NSString *)vertexShaderFile;
 - (NSString *)fragmentShaderFile;

@@ -26,6 +26,13 @@
 }
 
 - (void)addFilter:(VideoFilter *)filter {
+    self.processor->AddEffect([filter.name UTF8String],
+                              [[filter vertexShaderFile] UTF8String],
+                              [[filter fragmentShaderFile] UTF8String]);
+}
+
+- (void)processs:(GLuint)inputTexture outputTexture:(GLuint)outputTexture {
+    self.processor->Process(inputTexture, outputTexture);
 }
 
 @end

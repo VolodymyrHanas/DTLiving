@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init;
 - (void)addFilter:(VideoFilter *)filter;
+- (void)processs:(GLuint)inputTexture outputTexture:(GLuint)outputTexture;
 
 @end
 
