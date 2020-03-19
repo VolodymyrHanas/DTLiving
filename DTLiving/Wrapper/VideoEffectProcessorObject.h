@@ -6,7 +6,7 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "VideoFilter.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init;
 - (void)addFilter:(VideoFilter *)filter;
-- (void)processs:(GLuint)inputTexture outputTexture:(GLuint)outputTexture;
+- (void)updateFilter:(VideoFilter *)filter;
+- (void)processs:(GLuint)inputTexture outputTexture:(GLuint)outputTexture size:(CGSize)size;
 
 @end
 

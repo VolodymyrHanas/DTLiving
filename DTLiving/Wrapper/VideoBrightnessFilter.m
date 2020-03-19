@@ -11,10 +11,16 @@
 @implementation VideoBrightnessFilter
 
 - (instancetype)init {
-    self = [super initWithName:@"effect_brightness"];
+    self = [super initWithName:[NSString stringWithCString:kVideoBrightnessEffect encoding:NSUTF8StringEncoding]];
     if (self) {
     }
     return self;
+}
+
+- (NSDictionary *)params {
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    dict[[NSString stringWithCString:kVideoBrightnessEffectBrightness encoding:NSUTF8StringEncoding]] = @(self.brightness);
+    return dict;
 }
 
 @end

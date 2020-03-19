@@ -9,13 +9,30 @@
 #ifndef DTLIVING_OPENGL_VIDEO_TEXTURE_CACHE_H_
 #define DTLIVING_OPENGL_VIDEO_TEXTURE_CACHE_H_
 
+#include "video_texture.h"
+#include <map>
+#include <list>
+#include <string>
+
 namespace dtliving {
 namespace opengl {
 
 class VideoTextureCache {
 public:
-    VideoTextureCache();
+    static VideoTextureCache* GetInstance();
     ~VideoTextureCache();
+    
+    VideoTexture* FetchTexture(GLsizei width, GLsizei height);
+    void ReturnTexture(VideoTexture *texture);
+
+private:
+    VideoTextureCache();
+    
+    static VideoTextureCache *instance_;
+    
+    std::string Hash(GLsizei width, GLsizei height);
+    
+    std::map<std::string, std::list<VideoTexture *>> texture_cache_;
 };
 
 }

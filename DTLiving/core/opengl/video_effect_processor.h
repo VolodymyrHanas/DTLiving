@@ -11,6 +11,7 @@
 
 #include <vector>
 
+#include "video_frame.h"
 #include "video_effect.h"
 
 namespace dtliving {
@@ -24,12 +25,11 @@ public:
     void Init();
     void AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
     void SetEffectParamFloat(const char *name, const char *param, GLfloat value);
-    // TODO: Delegate All Methods in VideoInput
-    void Process(GLuint input_texture, GLuint output_texture);
+    void Process(VideoFrame input_frame, VideoFrame output_frame);
     // TODO: switch effect
 private:
     std::vector<VideoEffect *> effects_ {};
-    GLuint frameBuffer = 0;
+    GLuint frame_buffer_ = 0;
 };
 
 }

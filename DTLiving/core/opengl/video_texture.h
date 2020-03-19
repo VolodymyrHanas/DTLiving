@@ -19,10 +19,20 @@ class VideoTexture {
 public:
     VideoTexture(GLsizei width, GLsizei height);
     ~VideoTexture();
+    
+    GLsizei get_width();
+    GLsizei get_height();
+    GLuint get_texture_name();
+
+    void Lock();
+    void UnLock();
+    void ClearLock();
+
 private:
-    GLsizei width;
-    GLsizei height;
-    GLuint textureName;
+    GLsizei width_;
+    GLsizei height_;
+    int reference_count_;
+    GLuint texture_name_;
 };
 
 }

@@ -30,4 +30,8 @@
     return [NSString stringWithFormat:@"%@_fragment", self.name];
 }
 
+- (NSDictionary *)params {
+    return [NSDictionary new];
+}
+
 @end

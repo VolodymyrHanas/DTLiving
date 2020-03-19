@@ -10,15 +10,18 @@
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 
+#include "constants.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoFilter : NSObject
 
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy, readonly) NSString *vertexShaderFile;
+@property (nonatomic, copy, readonly) NSString *fragmentShaderFile;
+@property (nonatomic, copy, readonly) NSDictionary *params;
 
 - (instancetype)initWithName:(NSString *)name;
-- (NSString *)vertexShaderFile;
-- (NSString *)fragmentShaderFile;
 
 @end
 

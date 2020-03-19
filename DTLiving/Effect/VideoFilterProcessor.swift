@@ -56,7 +56,7 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
         guard let inputTexture = inputFrameBuffer?.textureName,
             let outputTexture = outputFrameBuffer?.textureName else { return }
         
-        processor.processs(inputTexture, outputTexture: outputTexture)
+        processor.processs(inputTexture, outputTexture: outputTexture, size: inputSize)
         
         // TODO: tell targets
         
@@ -66,8 +66,12 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
     func endProcessing() {
     }
     
-    func addFilter() {
-        
+    func addFilter(_ filter: VideoFilter) {
+        processor.add(filter)
+    }
+    
+    func updateFilter(_ filter: VideoFilter) {
+        processor.update(filter)
     }
 
 }

@@ -31,8 +31,19 @@
                               [[filter fragmentShaderFile] UTF8String]);
 }
 
-- (void)processs:(GLuint)inputTexture outputTexture:(GLuint)outputTexture {
-    self.processor->Process(inputTexture, outputTexture);
+- (void)updateFilter:(VideoFilter *)filter {
+    for (NSString *key in filter.params) {
+        NSNumber *value = filter.params[key];
+        self.processor->SetEffectParamFloat([filter.name UTF8String],
+                                            [key UTF8String],
+                                            value.floatValue);
+    }
+}
+
+- (void)processs:(GLuint)inputTexture outputTexture:(GLuint)outputTexture size:(CGSize)size {
+    dtliving::opengl::VideoFrame inputFrame { inputTexture, GLsizei(size.width), GLsizei(size.height) };
+    dtliving::opengl::VideoFrame outputFrame { outputTexture, GLsizei(size.width), GLsizei(size.height) };
+    self.processor->Process(inputFrame, outputFrame);
 }
 
 @end
