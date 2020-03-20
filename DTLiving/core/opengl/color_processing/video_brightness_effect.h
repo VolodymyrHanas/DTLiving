@@ -16,7 +16,9 @@ namespace opengl {
 namespace color_processing {
 
 class VideoBrightnessEffect: public VideoEffect {
-public:    
+public:
+    VideoBrightnessEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
+
     void BeforeDrawArrays();
 };
 

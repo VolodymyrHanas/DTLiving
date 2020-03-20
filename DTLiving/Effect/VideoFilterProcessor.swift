@@ -57,10 +57,10 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
             let outputTexture = outputFrameBuffer?.textureName else { return }
         
         processor.processs(inputTexture, outputTexture: outputTexture, size: inputSize)
-        
-        // TODO: tell targets
-        
+                
         inputFrameBuffer?.unlock()
+        
+        updateTargetsWithTexture(currentTime: time)
     }
     
     func endProcessing() {
@@ -72,6 +72,28 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
     
     func updateFilter(_ filter: VideoFilter) {
         processor.update(filter)
+    }
+    
+    private func updateTargetsWithTexture(currentTime: CMTime) {
+        guard let outputFrameBuffer = outputFrameBuffer else { return }
+        
+        for (index, target) in targets.enumerated() {
+            if target.enabled {
+                let textureIndex = targetTextureIndices[index]
+                target.setInputFrameBuffer(outputFrameBuffer, at: textureIndex)
+                target.setInputSize(inputSize, at: textureIndex)
+            }
+        }
+        
+        outputFrameBuffer.unlock()
+        self.outputFrameBuffer = nil
+        
+        for (index, target) in targets.enumerated() {
+            if target.enabled {
+                let textureIndex = targetTextureIndices[index]
+                target.newFrameReady(at: currentTime, at: textureIndex)
+            }
+        }
     }
 
 }

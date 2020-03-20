@@ -380,9 +380,9 @@ class VideoCamera: VideoOutput {
         for (index, target) in targets.enumerated() {
             if target.enabled {
                 let textureIndex = targetTextureIndices[index]
+                target.setInputFrameBuffer(outputFrameBuffer, at: textureIndex)
                 target.setInputRotation(outputRotation, at: textureIndex)
                 target.setInputSize(CGSize(width: bufferWidth, height: bufferHeight), at: textureIndex)
-                target.setInputFrameBuffer(outputFrameBuffer, at: textureIndex)
             }
         }
         

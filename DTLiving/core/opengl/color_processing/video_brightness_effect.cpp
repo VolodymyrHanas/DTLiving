@@ -6,12 +6,16 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#include "video_brightness_effect.h"
 #include "constants.h"
+#include "video_brightness_effect.h"
 
 namespace dtliving {
 namespace opengl {
 namespace color_processing {
+
+VideoBrightnessEffect::VideoBrightnessEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
+: VideoEffect(name, vertex_shader_file, fragment_shader_file) {
+}
 
 void VideoBrightnessEffect::BeforeDrawArrays() {
     GLint location = program_->UniformLocation(kVideoBrightnessEffectBrightness);

@@ -6,12 +6,16 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#include "video_rgb_effect.h"
 #include "constants.h"
+#include "video_rgb_effect.h"
 
 namespace dtliving {
 namespace opengl {
 namespace color_processing {
+
+VideoRGBEffect::VideoRGBEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
+: VideoEffect(name, vertex_shader_file, fragment_shader_file) {
+}
 
 void VideoRGBEffect::BeforeDrawArrays() {
     GLint red_location = program_->UniformLocation(kVideoRGBEffectRed);

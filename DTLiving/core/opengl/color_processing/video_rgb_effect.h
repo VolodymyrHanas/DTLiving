@@ -17,6 +17,8 @@ namespace color_processing {
 
 class VideoRGBEffect: public VideoEffect {
 public:
+    VideoRGBEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
+
     void BeforeDrawArrays();
 };
 

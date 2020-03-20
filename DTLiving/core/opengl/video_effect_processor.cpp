@@ -6,10 +6,13 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
+#include <cstring>
+
+#include "constants.h"
 #include "video_effect_processor.h"
 #include "video_texture_cache.h"
-#include "constants.h"
 #include "video_brightness_effect.h"
+#include "video_rgb_effect.h"
 
 namespace dtliving {
 namespace opengl {
@@ -26,11 +29,14 @@ void VideoEffectProcessor::Init() {
 
 void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file) {
     VideoEffect *effect;
-    if (name == kVideoBrightnessEffect) {
-        // TODO: new class base on name
-//        effect = new color_processing::VideoBrightnessEffect(name, vertex_shader_file, fragment_shader_file);
+    if (std::strcmp(name, kVideoBrightnessEffect) == 0) {
+        effect = new color_processing::VideoBrightnessEffect(name, vertex_shader_file, fragment_shader_file);
+    } else if (std::strcmp(name, kVideoRGBEffect) == 0) {
+        effect = new color_processing::VideoRGBEffect(name, vertex_shader_file, fragment_shader_file);
+    } else {
+        effect = new VideoEffect(name, vertex_shader_file, fragment_shader_file);
     }
-    
+    effect->Init();
     effects_.push_back(effect);
 }
 

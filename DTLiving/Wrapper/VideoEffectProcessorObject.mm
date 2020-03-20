@@ -25,10 +25,12 @@
     return self;
 }
 
-- (void)addFilter:(VideoFilter *)filter {
+- (void)addFilter:(VideoFilter *)filter {    
+    NSString *vertexShaderFile = [NSBundle.mainBundle pathForResource:[filter vertexShaderFile] ofType:@"glsl"];
+    NSString *fragmentShaderFile = [NSBundle.mainBundle pathForResource:[filter fragmentShaderFile] ofType:@"glsl"];
     self.processor->AddEffect([filter.name UTF8String],
-                              [[filter vertexShaderFile] UTF8String],
-                              [[filter fragmentShaderFile] UTF8String]);
+                              [vertexShaderFile UTF8String],
+                              [fragmentShaderFile UTF8String]);
 }
 
 - (void)updateFilter:(VideoFilter *)filter {

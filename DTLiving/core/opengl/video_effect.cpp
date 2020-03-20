@@ -23,6 +23,7 @@ VideoEffect::~VideoEffect() {
 
 void VideoEffect::Init() {
     program_ = new ShaderProgram(vertex_shader_file_, fragment_shader_file_);
+    program_->Load();
     
     a_position_ = program_->AttributeLocation("a_position");
     a_texcoord_ = program_->AttributeLocation("a_texcoord");
