@@ -280,8 +280,8 @@ class VideoView: UIView, VideoInput {
                 widthScaling = GLfloat(insetRect.size.width / currentViewSize.width)
                 heightScaling = GLfloat(insetRect.size.height / currentViewSize.height)
             case .aspectFill:
-                widthScaling = GLfloat(currentViewSize.width / insetRect.size.width)
-                heightScaling = GLfloat(currentViewSize.height / insetRect.size.height)
+                widthScaling = GLfloat(currentViewSize.height / insetRect.size.height)
+                heightScaling = GLfloat(currentViewSize.width / insetRect.size.width)
             }
             
             squareVertices[0] = -widthScaling
