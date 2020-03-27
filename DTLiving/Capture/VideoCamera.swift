@@ -123,35 +123,11 @@ class VideoCamera: VideoOutput {
     }
     
     func rotateCamera() {
-        if setupResult != .success {
-            return
+        sessionQueue.async { [weak self] in
+            self?.reconfigureSession()
         }
-        
-        switch position {
-        case .front:
-            position = .back
-        case .back:
-            position = .front
-        }
-        
-        session.beginConfiguration()
-        
-        guard let videoDevice = configVideoDevice() else {
-            DDLogError("Could not find video device")
-            setupResult = .configurationFailed
-            session.commitConfiguration()
-            return
-        }
-        
-        configSessionPreset(for: videoDevice)
-        configSessionInput(for: videoDevice)
-        configVideoFrameRate(for: videoDevice)
-        
-        session.commitConfiguration()
-        
-        updateOrientationSendToTargets()
     }
-    
+        
     private func authorizeCamera() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
@@ -182,6 +158,36 @@ class VideoCamera: VideoOutput {
             textureUniform = program.uniformLocation("u_texture")
             self.program = program
         }
+    }
+    
+    private func reconfigureSession() {
+        if setupResult != .success {
+            return
+        }
+        
+        switch position {
+        case .front:
+            position = .back
+        case .back:
+            position = .front
+        }
+        
+        session.beginConfiguration()
+        
+        guard let videoDevice = configVideoDevice() else {
+            DDLogError("Could not find video device")
+            setupResult = .configurationFailed
+            session.commitConfiguration()
+            return
+        }
+        
+        configSessionPreset(for: videoDevice)
+        configSessionInput(for: videoDevice)
+        configVideoFrameRate(for: videoDevice)
+        
+        session.commitConfiguration()
+        
+        updateOrientationSendToTargets()
     }
 
     private func configureSession() {
