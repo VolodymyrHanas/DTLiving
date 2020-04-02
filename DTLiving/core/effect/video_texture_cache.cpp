@@ -10,7 +10,7 @@
 #include <sstream>
 
 namespace dtliving {
-namespace opengl {
+namespace effect {
 
 VideoTextureCache::VideoTextureCache() {
 }

@@ -11,7 +11,7 @@
 
 @interface VideoEffectProcessorObject ()
 
-@property (nonatomic, assign) std::shared_ptr<dtliving::opengl::VideoEffectProcessor> processor;
+@property (nonatomic, assign) std::shared_ptr<dtliving::effect::VideoEffectProcessor> processor;
 
 @end
 
@@ -20,7 +20,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.processor = std::make_shared<dtliving::opengl::VideoEffectProcessor>();
+        self.processor = std::make_shared<dtliving::effect::VideoEffectProcessor>();
     }
     return self;
 }
@@ -43,8 +43,8 @@
 }
 
 - (void)processs:(GLuint)inputTexture outputTexture:(GLuint)outputTexture size:(CGSize)size {
-    dtliving::opengl::VideoFrame inputFrame { inputTexture, GLsizei(size.width), GLsizei(size.height) };
-    dtliving::opengl::VideoFrame outputFrame { outputTexture, GLsizei(size.width), GLsizei(size.height) };
+    dtliving::effect::VideoFrame inputFrame { inputTexture, GLsizei(size.width), GLsizei(size.height) };
+    dtliving::effect::VideoFrame outputFrame { outputTexture, GLsizei(size.width), GLsizei(size.height) };
     self.processor->Process(inputFrame, outputFrame);
 }
 

@@ -6,8 +6,8 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#ifndef DTLIVING_OPENGL_VIDEO_EFFECT_H_
-#define DTLIVING_OPENGL_VIDEO_EFFECT_H_
+#ifndef DTLIVING_EFFECT_VIDEO_EFFECT_H_
+#define DTLIVING_EFFECT_VIDEO_EFFECT_H_
 
 #include <map>
 
@@ -16,7 +16,7 @@
 #include "video_effect_uniform.h"
 
 namespace dtliving {
-namespace opengl {
+namespace effect {
 
 class VideoEffect {    
 public:

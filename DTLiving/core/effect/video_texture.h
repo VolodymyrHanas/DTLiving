@@ -6,14 +6,14 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#ifndef DTLIVING_OPENGL_VIDEO_TEXTURE_H_
-#define DTLIVING_OPENGL_VIDEO_TEXTURE_H_
+#ifndef DTLIVING_EFFECT_VIDEO_TEXTURE_H_
+#define DTLIVING_EFFECT_VIDEO_TEXTURE_H_
 
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 
 namespace dtliving {
-namespace opengl {
+namespace effect {
 
 class VideoTexture {
 public:

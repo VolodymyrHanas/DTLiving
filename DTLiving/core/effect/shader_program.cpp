@@ -9,11 +9,12 @@
 #include "shader_program.h"
 
 namespace dtliving {
-namespace opengl {
+namespace effect {
 
 ShaderProgram::ShaderProgram(const char *vertex_shader_file, const char *fragment_shader_file)
 : vertex_shader_file_(vertex_shader_file)
 , fragment_shader_file_(fragment_shader_file) {
+    Load();
 }
 
 ShaderProgram::~ShaderProgram() {

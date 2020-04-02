@@ -6,13 +6,13 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#ifndef DTLIVING_OPENGL_COLOR_PROCESSING_VIDEO_BRIGHTNESS_EFFECT_H_
-#define DTLIVING_OPENGL_COLOR_PROCESSING_VIDEO_BRIGHTNESS_EFFECT_H_
+#ifndef DTLIVING_EFFECT_COLOR_PROCESSING_VIDEO_BRIGHTNESS_EFFECT_H_
+#define DTLIVING_EFFECT_COLOR_PROCESSING_VIDEO_BRIGHTNESS_EFFECT_H_
 
 #include "video_effect.h"
 
 namespace dtliving {
-namespace opengl {
+namespace effect {
 namespace color_processing {
 
 class VideoBrightnessEffect: public VideoEffect {

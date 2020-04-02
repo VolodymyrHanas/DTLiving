@@ -6,8 +6,8 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#ifndef DTLIVING_OPENGL_SHADER_PROGRAM_H_
-#define DTLIVING_OPENGL_SHADER_PROGRAM_H_
+#ifndef DTLIVING_EFFECT_SHADER_PROGRAM_H_
+#define DTLIVING_EFFECT_SHADER_PROGRAM_H_
 
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
@@ -17,20 +17,20 @@
 #include <string>
 
 namespace dtliving {
-namespace opengl {
+namespace effect {
 
 class ShaderProgram {
 public:
     ShaderProgram(const char *vertex_shader_file, const char *fragment_shader_file);
     ~ShaderProgram();
     
-    void Load();
     void Use();
     void Delete();
     GLuint AttributeLocation(const char *name);
     GLint UniformLocation(const char *name);
     
 private:
+    void Load();
     GLuint CompileShader(const char *source, GLenum type);
     
     const char *vertex_shader_file_;

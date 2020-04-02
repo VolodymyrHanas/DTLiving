@@ -15,7 +15,7 @@
 #include "video_rgb_effect.h"
 
 namespace dtliving {
-namespace opengl {
+namespace effect {
 
 VideoEffectProcessor::VideoEffectProcessor() {
 }

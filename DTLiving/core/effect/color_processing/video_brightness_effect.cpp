@@ -10,7 +10,7 @@
 #include "video_brightness_effect.h"
 
 namespace dtliving {
-namespace opengl {
+namespace effect {
 namespace color_processing {
 
 VideoBrightnessEffect::VideoBrightnessEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)

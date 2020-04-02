@@ -6,8 +6,8 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#ifndef DTLIVING_OPENGL_VIDEO_TEXTURE_CACHE_H_
-#define DTLIVING_OPENGL_VIDEO_TEXTURE_CACHE_H_
+#ifndef DTLIVING_EFFECT_VIDEO_TEXTURE_CACHE_H_
+#define DTLIVING_EFFECT_VIDEO_TEXTURE_CACHE_H_
 
 #include "video_texture.h"
 #include <map>
@@ -15,7 +15,7 @@
 #include <string>
 
 namespace dtliving {
-namespace opengl {
+namespace effect {
 
 class VideoTextureCache {
 public:

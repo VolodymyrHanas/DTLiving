@@ -10,7 +10,7 @@
 #include "video_texture_cache.h"
 
 namespace dtliving {
-namespace opengl {
+namespace effect {
 
 VideoTexture::VideoTexture(GLsizei width, GLsizei height)
 : width_(width)

@@ -9,7 +9,7 @@
 #include "video_effect.h"
 
 namespace dtliving {
-namespace opengl {
+namespace effect {
 
 VideoEffect::VideoEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
 : name_(name)
@@ -23,7 +23,6 @@ VideoEffect::~VideoEffect() {
 
 void VideoEffect::Init() {
     program_ = new ShaderProgram(vertex_shader_file_, fragment_shader_file_);
-    program_->Load();
     
     a_position_ = program_->AttributeLocation("a_position");
     a_texcoord_ = program_->AttributeLocation("a_texcoord");

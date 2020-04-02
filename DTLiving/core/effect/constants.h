@@ -6,8 +6,8 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#ifndef DTLIVING_OPENGL_CONSTANTS_H_
-#define DTLIVING_OPENGL_CONSTANTS_H_
+#ifndef DTLIVING_EFFECT_CONSTANTS_H_
+#define DTLIVING_EFFECT_CONSTANTS_H_
 
 static const char *kVideoBrightnessEffect = "effect_brightness";
 static const char *kVideoBrightnessEffectBrightness = "u_brightness";

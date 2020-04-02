@@ -151,12 +151,12 @@
 		4018622B241F80990003AF6F /* core */ = {
 			isa = PBXGroup;
 			children = (
-				4018622D2420AA6A0003AF6F /* opengl */,
+				4018622D2420AA6A0003AF6F /* effect */,
 			);
 			path = core;
 			sourceTree = "<group>";
 		};
-		4018622C2420A3A10003AF6F /* Wrapper */ = {
+		4018622C2420A3A10003AF6F /* Bridge */ = {
 			isa = PBXGroup;
 			children = (
 				40F29730241B7E4C00DD4FE8 /* ShaderProgramObject.h */,
@@ -170,10 +170,10 @@
 				4018623E2423644F0003AF6F /* VideoRGBFilter.h */,
 				4018623F2423644F0003AF6F /* VideoRGBFilter.m */,
 			);
-			path = Wrapper;
+			path = Bridge;
 			sourceTree = "<group>";
 		};
-		4018622D2420AA6A0003AF6F /* opengl */ = {
+		4018622D2420AA6A0003AF6F /* effect */ = {
 			isa = PBXGroup;
 			children = (
 				40831443241A2F1300DC2BE9 /* shader_program.h */,
@@ -192,7 +192,7 @@
 				403DEB8923E53ADD00685F6B /* effect_vertex.glsl */,
 				40186220241F73FB0003AF6F /* color_processing */,
 			);
-			path = opengl;
+			path = effect;
 			sourceTree = "<group>";
 		};
 		402C125323E6A20E00580CD3 /* Effect */ = {
@@ -277,7 +277,7 @@
 				40AC66802409228100E281AC /* Publish */,
 				40076AD3241635970052ED90 /* Extension */,
 				40076AD02416351F0052ED90 /* Utils */,
-				4018622C2420A3A10003AF6F /* Wrapper */,
+				4018622C2420A3A10003AF6F /* Bridge */,
 				4018622B241F80990003AF6F /* core */,
 				4083143B241A2D9C00DC2BE9 /* DTLiving-Bridging-Header.h */,
 				40B2BFC123E40D8600F677CD /* AppDelegate.swift */,

@@ -6,8 +6,8 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#ifndef DTLIVING_OPENGL_VIDEO_EFFECT_PROCESSOR_H_
-#define DTLIVING_OPENGL_VIDEO_EFFECT_PROCESSOR_H_
+#ifndef DTLIVING_EFFECT_VIDEO_EFFECT_PROCESSOR_H_
+#define DTLIVING_EFFECT_VIDEO_EFFECT_PROCESSOR_H_
 
 #include <vector>
 
@@ -15,7 +15,7 @@
 #include "video_effect.h"
 
 namespace dtliving {
-namespace opengl {
+namespace effect {
 
 class VideoEffectProcessor {
 public:
