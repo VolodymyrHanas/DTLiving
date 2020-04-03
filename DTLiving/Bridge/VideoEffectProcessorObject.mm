@@ -21,6 +21,9 @@
     self = [super init];
     if (self) {
         self.processor = std::make_shared<dtliving::effect::VideoEffectProcessor>();
+        NSString *vertexShaderFile = [NSBundle.mainBundle pathForResource:@"effect_vertex" ofType:@"glsl"];
+        NSString *fragmentShaderFile = [NSBundle.mainBundle pathForResource:@"effect_fragment" ofType:@"glsl"];
+        self.processor->Init([vertexShaderFile UTF8String], [fragmentShaderFile UTF8String]);
     }
     return self;
 }
@@ -31,6 +34,7 @@
     self.processor->AddEffect([filter.name UTF8String],
                               [vertexShaderFile UTF8String],
                               [fragmentShaderFile UTF8String]);
+    [self updateFilter:filter];
 }
 
 - (void)updateFilter:(VideoFilter *)filter {

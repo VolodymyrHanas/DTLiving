@@ -22,14 +22,14 @@ public:
     VideoEffectProcessor();
     ~VideoEffectProcessor();
     
-    void Init();
+    void Init(const char *vertex_shader_file, const char *fragment_shader_file);
     void AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
     void SetEffectParamFloat(const char *name, const char *param, GLfloat value);
     void Process(VideoFrame input_frame, VideoFrame output_frame);
     // TODO: switch effect
 private:
+    VideoEffect *no_effect_;
     std::vector<VideoEffect *> effects_ {};
-    GLuint frame_buffer_ = 0;
 };
 
 }

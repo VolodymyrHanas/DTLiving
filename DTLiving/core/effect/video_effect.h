@@ -28,16 +28,16 @@ public:
     void Render(VideoFrame input_frame, VideoFrame output_frame);
     void Render(VideoFrame input_frame, VideoFrame output_frame, GLfloat *positions, GLfloat *texture_coordinates);
 
-    const char* get_name();
+    std::string get_name();
 
 protected:
     virtual void BeforeDrawArrays();
     
     ShaderProgram *program_;
-    std::map<const char*, VideoEffectUniform> uniforms_;
+    std::map<std::string, VideoEffectUniform> uniforms_;
 
 private:
-    const char *name_;
+    std::string name_;
     const char *vertex_shader_file_;
     const char *fragment_shader_file_;
     GLuint a_position_;

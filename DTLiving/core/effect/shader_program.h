@@ -30,11 +30,8 @@ public:
     GLint UniformLocation(const char *name);
     
 private:
-    void Load();
     GLuint CompileShader(const char *source, GLenum type);
-    
-    const char *vertex_shader_file_;
-    const char *fragment_shader_file_;
+
     GLuint program_ = 0;
 };
 

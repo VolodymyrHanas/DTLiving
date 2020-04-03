@@ -32,16 +32,14 @@ class LiveManager {
         camera = VideoCamera(position: .back, presets: [.hd1920x1080])
         
         filterProcessor = VideoFilterProcessor()
-//        let brightness = VideoBrightnessFilter()
-//        brightness.brightness = 0.5
-//        filterProcessor.addFilter(brightness)
+        let brightness = VideoBrightnessFilter()
+        brightness.brightness = 0
+        filterProcessor.addFilter(brightness)
         let rgb = VideoRGBFilter()
-        rgb.red = 1
         rgb.green = 0
-        rgb.blue = 1
         filterProcessor.addFilter(rgb)
         
-        preview = VideoView(frame: .init(x: 0, y: 0, width: 100, height: 100))
+        preview = VideoView()
         
         camera.addTarget(filterProcessor)
         filterProcessor.addTarget(preview)
@@ -65,6 +63,10 @@ class LiveManager {
     
     func rotateCamera() {
         camera.rotateCamera()
+    }
+    
+    func updateFilter(_ filter: VideoFilter) {
+        filterProcessor.updateFilter(filter)
     }
 
 }

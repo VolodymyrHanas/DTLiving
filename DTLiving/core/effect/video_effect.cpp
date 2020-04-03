@@ -12,7 +12,7 @@ namespace dtliving {
 namespace effect {
 
 VideoEffect::VideoEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
-: name_(name)
+: name_(std::string(name))
 , vertex_shader_file_(vertex_shader_file)
 , fragment_shader_file_(fragment_shader_file) {
 }
@@ -30,7 +30,7 @@ void VideoEffect::Init() {
 }
 
 void VideoEffect::SetUniform(const char *name, VideoEffectUniform uniform) {
-    uniforms_[name] = uniform;
+    uniforms_[std::string(name)] = uniform;
 }
 
 void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame) {
@@ -86,7 +86,7 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, GLfloa
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-const char* VideoEffect::get_name() {
+std::string VideoEffect::get_name() {
     return name_;
 }
 

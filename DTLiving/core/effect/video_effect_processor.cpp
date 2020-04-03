@@ -23,8 +23,9 @@ VideoEffectProcessor::VideoEffectProcessor() {
 VideoEffectProcessor::~VideoEffectProcessor() {
 }
 
-void VideoEffectProcessor::Init() {
-    glGenFramebuffers(1, &frame_buffer_);
+void VideoEffectProcessor::Init(const char *vertex_shader_file, const char *fragment_shader_file) {
+    no_effect_ = new VideoEffect("no_effect", vertex_shader_file, fragment_shader_file);
+    no_effect_->Init();
 }
 
 void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file) {
@@ -42,17 +43,18 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
 
 void VideoEffectProcessor::SetEffectParamFloat(const char *name, const char *param, GLfloat value) {
     for(VideoEffect *effect : effects_) {
-        if (effect->get_name() == name) {
+        if (effect->get_name() == std::string(name)) {
             VideoEffectUniform uniform;
             uniform.u_float = value;
-            effect->SetUniform(name, uniform);
+            effect->SetUniform(param, uniform);
         }
     }
 }
 
 void VideoEffectProcessor::Process(VideoFrame input_frame, VideoFrame output_frame) {
     if (effects_.empty()) {
-        // TODO: Direct Pass
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, output_frame.texture_name, 0);
+        no_effect_->Render(input_frame, output_frame);
     } else {
         int count = 0;
         VideoFrame previous_frame = input_frame;
@@ -75,7 +77,7 @@ void VideoEffectProcessor::Process(VideoFrame input_frame, VideoFrame output_fra
             effect->Render(previous_frame, current_frame);
             previous_frame = current_frame;
             if (previous_texture != nullptr) {
-                previous_texture->Lock();
+                previous_texture->UnLock();
             }
             previous_texture = current_texture;
             count++;

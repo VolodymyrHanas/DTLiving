@@ -9,6 +9,8 @@
 #ifndef DTLIVING_EFFECT_CONSTANTS_H_
 #define DTLIVING_EFFECT_CONSTANTS_H_
 
+// TODO: Protocol Buffers to auto generate
+
 static const char *kVideoBrightnessEffect = "effect_brightness";
 static const char *kVideoBrightnessEffectBrightness = "u_brightness";
 

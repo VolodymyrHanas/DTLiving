@@ -45,9 +45,7 @@ class VideoView: UIView, VideoInput {
 
     private var displayRenderBuffer: GLuint = 0
     private var displayFrameBuffer: GLuint = 0
-    private var sizeInPixels: CGSize = .zero
-    
-    private var boundsSizeAtFrameBufferEpoch: CGSize = .zero
+    private var outputSize: CGSize = .zero
 
     override class var layerClass: AnyClass {
         return CAEAGLLayer.self
@@ -81,10 +79,6 @@ class VideoView: UIView, VideoInput {
             VideoContext.sharedProcessingContext.useAsCurrentContext()
             
             createShaderProgram()
-            
-            VideoContext.sharedProcessingContext.setShaderProgram(program)
-    
-            createDisplayFrameBuffer()
         }
     }
     
@@ -92,13 +86,12 @@ class VideoView: UIView, VideoInput {
         super.layoutSubviews()
 
         if bounds.size != .zero {
-            if bounds.size != boundsSizeAtFrameBufferEpoch {
+            if bounds.size != outputSize {
                 VideoContext.sharedProcessingContext.sync {
                     destroyDisplayFrameBuffer()
                     createDisplayFrameBuffer()
                 }
             }
-            recalculateViewGeometry()
         }
     }
     
@@ -170,6 +163,7 @@ class VideoView: UIView, VideoInput {
             glDrawArrays(GLenum(GL_TRIANGLE_STRIP), 0, 4)
             
             presentDisplayFrameBuffer()
+            
             self.inputFrameBuffer?.unlock()
             self.inputFrameBuffer = nil
         }
@@ -179,7 +173,7 @@ class VideoView: UIView, VideoInput {
     
     private func createShaderProgram() {
         VideoContext.sharedProcessingContext.sync {
-            let program = ShaderProgramObject(vertexShader: "DirectPassVertex", fragmentShader: "DirectPassFragment")
+            let program = ShaderProgramObject(vertexShader: "effect_vertex", fragmentShader: "effect_fragment")
             positionSlot = program.attributeLocation("a_position")
             texturePositionSlot = program.attributeLocation("a_texcoord")
             textureUniform = program.uniformLocation("u_texture")
@@ -213,8 +207,8 @@ class VideoView: UIView, VideoInput {
             return
         }
         
-        sizeInPixels.width = CGFloat(backingWidth)
-        sizeInPixels.height = CGFloat(backingHeight)
+        outputSize.width = CGFloat(backingWidth)
+        outputSize.height = CGFloat(backingHeight)
         
         glFramebufferRenderbuffer(GLenum(GL_FRAMEBUFFER),
                                   GLenum(GL_COLOR_ATTACHMENT0),
@@ -225,9 +219,7 @@ class VideoView: UIView, VideoInput {
             DDLogError("[VideoView] Could not generate frame buffer")
             exit(1)
         }
-        
-        boundsSizeAtFrameBufferEpoch = bounds.size
-        
+                
         recalculateViewGeometry()
     }
     
@@ -246,13 +238,9 @@ class VideoView: UIView, VideoInput {
     }
     
     private func setDisplayFrameBuffer() {
-        if displayRenderBuffer == 0 {
-            createDisplayFrameBuffer()
-        }
-        
         glBindFramebuffer(GLenum(GL_FRAMEBUFFER), displayFrameBuffer)
         
-        glViewport(0, 0, GLsizei(sizeInPixels.width), GLsizei(sizeInPixels.height))
+        glViewport(0, 0, GLsizei(outputSize.width), GLsizei(outputSize.height))
     }
     
     private func presentDisplayFrameBuffer() {
@@ -264,24 +252,22 @@ class VideoView: UIView, VideoInput {
         VideoContext.sharedProcessingContext.sync {
             var widthScaling: GLfloat = 0
             var heightScaling: GLfloat = 0
-            
-            let currentViewSize = boundsSizeAtFrameBufferEpoch
-            
+                        
             let insetRect = AVMakeRect(aspectRatio: inputSize,
                                        insideRect: .init(x: 0, y: 0,
-                                                         width: boundsSizeAtFrameBufferEpoch.width,
-                                                         height: boundsSizeAtFrameBufferEpoch.height))
+                                                         width: outputSize.width,
+                                                         height: outputSize.height))
             
             switch fillMode {
             case .stretch:
                 widthScaling = 1.0
                 heightScaling = 1.0
             case .aspectFit:
-                widthScaling = GLfloat(insetRect.size.width / currentViewSize.width)
-                heightScaling = GLfloat(insetRect.size.height / currentViewSize.height)
+                widthScaling = GLfloat(insetRect.size.width / outputSize.width)
+                heightScaling = GLfloat(insetRect.size.height / outputSize.height)
             case .aspectFill:
-                widthScaling = GLfloat(currentViewSize.height / insetRect.size.height)
-                heightScaling = GLfloat(currentViewSize.width / insetRect.size.width)
+                widthScaling = GLfloat(outputSize.height / insetRect.size.height)
+                heightScaling = GLfloat(outputSize.width / insetRect.size.width)
             }
             
             squareVertices[0] = -widthScaling

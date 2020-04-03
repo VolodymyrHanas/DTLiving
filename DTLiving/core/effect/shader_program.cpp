@@ -11,17 +11,8 @@
 namespace dtliving {
 namespace effect {
 
-ShaderProgram::ShaderProgram(const char *vertex_shader_file, const char *fragment_shader_file)
-: vertex_shader_file_(vertex_shader_file)
-, fragment_shader_file_(fragment_shader_file) {
-    Load();
-}
-
-ShaderProgram::~ShaderProgram() {
-}
-
-void ShaderProgram::Load() {
-    std::ifstream vertex_shader_handle(vertex_shader_file_);
+ShaderProgram::ShaderProgram(const char *vertex_shader_file, const char *fragment_shader_file) {
+    std::ifstream vertex_shader_handle(vertex_shader_file);
     std::string vertex_shader_source;
     while (vertex_shader_handle) {
         std::string line;
@@ -30,7 +21,7 @@ void ShaderProgram::Load() {
     }
     vertex_shader_handle.close();
     
-    std::ifstream fragment_shader_handle(fragment_shader_file_);
+    std::ifstream fragment_shader_handle(fragment_shader_file);
     std::string fragment_shader_source;
     while (fragment_shader_handle) {
         std::string line;
@@ -64,6 +55,9 @@ void ShaderProgram::Load() {
     }
     
     this->program_ = program;
+}
+
+ShaderProgram::~ShaderProgram() {
 }
 
 void ShaderProgram::Use() {

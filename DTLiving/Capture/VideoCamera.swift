@@ -152,7 +152,7 @@ class VideoCamera: VideoOutput {
     
     private func createShaderProgram() {
         VideoContext.sharedProcessingContext.sync {
-            let program = ShaderProgramObject(vertexShader: "DirectPassVertex", fragmentShader: "DirectPassFragment")
+            let program = ShaderProgramObject(vertexShader: "effect_vertex", fragmentShader: "effect_fragment")
             positionSlot = program.attributeLocation("a_position")
             texturePositionSlot = program.attributeLocation("a_texcoord")
             textureUniform = program.uniformLocation("u_texture")

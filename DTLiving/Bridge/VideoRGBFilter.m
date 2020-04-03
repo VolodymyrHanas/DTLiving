@@ -13,6 +13,9 @@
 - (instancetype)init {
     self = [super initWithName:[NSString stringWithCString:kVideoRGBEffect encoding:NSUTF8StringEncoding]];
     if (self) {
+        self.red = 1.0;
+        self.green = 1.0;
+        self.blue = 1.0;
     }
     return self;
 }

@@ -51,7 +51,7 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
             .fetchFrameBuffer(tag: "VideoFilterProcessor",
                               for: CGSize(width: inputSize.width,
                                           height: inputSize.height))
-        outputFrameBuffer?.activate() // TODO: if neeed?
+        outputFrameBuffer?.activate()
 
         guard let inputTexture = inputFrameBuffer?.textureName,
             let outputTexture = outputFrameBuffer?.textureName else { return }

@@ -116,6 +116,7 @@ class CameraViewController: UIViewController {
     private let recordButton = UIButton()
     private let liveButton = UIButton()
     private let settingsButton = UIButton()
+    private let slider = UISlider()
 
     deinit {
         NotificationCenter.default.removeObserver(self,
@@ -186,24 +187,10 @@ class CameraViewController: UIViewController {
         view.addSubview(recordButton)
         view.addSubview(liveButton)
         view.addSubview(settingsButton)
+        view.addSubview(slider)
 
-        recordButton.snp.makeConstraints { make in
+        slider.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(10)
-            if #available(iOS 11, *) {
-                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10)
-            } else {
-                make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(-10)
-            }
-        }
-        liveButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            if #available(iOS 11, *) {
-                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10)
-            } else {
-                make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(-10)
-            }
-        }
-        settingsButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-10)
             if #available(iOS 11, *) {
                 make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10)
@@ -211,7 +198,20 @@ class CameraViewController: UIViewController {
                 make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(-10)
             }
         }
+        recordButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(10)
+            make.bottom.equalTo(slider.snp.top).offset(-10)
+        }
+        liveButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(slider.snp.top).offset(-10)
+        }
+        settingsButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-10)
+            make.bottom.equalTo(slider.snp.top).offset(-10)
+        }
         
+        slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
         settingsButton.addTarget(self, action: #selector(showSettings), for: .touchUpInside)
     }
             
@@ -225,6 +225,14 @@ class CameraViewController: UIViewController {
         if isViewLoaded && view.window != nil {
             liveManager.pauseCapture()
         }
+    }
+    
+    @objc private func sliderValueChanged(_ slider: UISlider) {
+        let filter = VideoRGBFilter()
+        filter.green = slider.value
+//        let filter = VideoBrightnessFilter()
+//        filter.brightness = slider.value
+        liveManager.updateFilter(filter)
     }
     
     @objc private func showSettings() {
