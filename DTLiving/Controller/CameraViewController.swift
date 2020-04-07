@@ -183,6 +183,8 @@ class CameraViewController: UIViewController {
         liveButton.setTitle("start living", for: .normal)
         settingsButton.setTitleColor(UIColor.white, for: .normal)
         settingsButton.setTitle("config settings", for: .normal)
+        slider.minimumValue = 0
+        slider.maximumValue = 3.0
         
         view.addSubview(recordButton)
         view.addSubview(liveButton)
@@ -228,10 +230,8 @@ class CameraViewController: UIViewController {
     }
     
     @objc private func sliderValueChanged(_ slider: UISlider) {
-        let filter = VideoRGBFilter()
-        filter.green = slider.value
-//        let filter = VideoBrightnessFilter()
-//        filter.brightness = slider.value
+        let filter = VideoGammaFilter()
+        filter.gamma = slider.value
         liveManager.updateFilter(filter)
     }
     

@@ -12,6 +12,10 @@
 #include "video_effect_processor.h"
 #include "video_texture_cache.h"
 #include "video_brightness_effect.h"
+#include "video_exposure_effect.h"
+#include "video_contrast_effect.h"
+#include "video_saturation_effect.h"
+#include "video_gamma_effect.h"
 #include "video_rgb_effect.h"
 
 namespace dtliving {
@@ -32,6 +36,14 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
     VideoEffect *effect;
     if (std::strcmp(name, kVideoBrightnessEffect) == 0) {
         effect = new color_processing::VideoBrightnessEffect(name, vertex_shader_file, fragment_shader_file);
+    } else if (std::strcmp(name, kVideoExposureEffect) == 0) {
+        effect = new color_processing::VideoExposureEffect(name, vertex_shader_file, fragment_shader_file);
+    } else if (std::strcmp(name, kVideoContrastEffect) == 0) {
+        effect = new color_processing::VideoContrastEffect(name, vertex_shader_file, fragment_shader_file);
+    } else if (std::strcmp(name, kVideoSaturationEffect) == 0) {
+        effect = new color_processing::VideoSaturationEffect(name, vertex_shader_file, fragment_shader_file);
+    } else if (std::strcmp(name, kVideoGammaEffect) == 0) {
+        effect = new color_processing::VideoGammaEffect(name, vertex_shader_file, fragment_shader_file);
     } else if (std::strcmp(name, kVideoRGBEffect) == 0) {
         effect = new color_processing::VideoRGBEffect(name, vertex_shader_file, fragment_shader_file);
     } else {
@@ -42,7 +54,7 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
 }
 
 void VideoEffectProcessor::SetEffectParamFloat(const char *name, const char *param, GLfloat value) {
-    for(VideoEffect *effect : effects_) {
+    for(VideoEffect *effect : effects_) { // TODO: Optimize with Map
         if (effect->get_name() == std::string(name)) {
             VideoEffectUniform uniform;
             uniform.u_float = value;

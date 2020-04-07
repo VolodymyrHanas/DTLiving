@@ -1,5 +1,5 @@
 //
-//  video_rgb_effect.hpp
+//  video_rgb_effect.h
 //  DTLiving
 //
 //  Created by Dan Jiang on 2020/3/19.
@@ -26,4 +26,4 @@ public:
 }
 }
 
-#endif /* video_rgb_effect_hpp */
+#endif /* video_rgb_effect_h */

@@ -6,4 +6,8 @@
 #import "VideoEffectProcessorObject.h"
 #import "VideoFilter.h"
 #import "VideoBrightnessFilter.h"
+#import "VideoExposureFilter.h"
+#import "VideoContrastFilter.h"
+#import "VideoSaturationFilter.h"
+#import "VideoGammaFilter.h"
 #import "VideoRGBFilter.h"

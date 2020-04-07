@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init;
 
-@property (nonatomic, assign) float red;
-@property (nonatomic, assign) float green;
-@property (nonatomic, assign) float blue;
+@property (nonatomic, assign) float red; // 0.0 ~ 1.0
+@property (nonatomic, assign) float green; // 0.0 ~ 1.0
+@property (nonatomic, assign) float blue; // 0.0 ~ 1.0
 
 @end
 

@@ -13,7 +13,7 @@
 - (instancetype)init {
     self = [super initWithName:[NSString stringWithCString:kVideoBrightnessEffect encoding:NSUTF8StringEncoding]];
     if (self) {
-        self.brightness = 1.0;
+        self.brightness = 0.0;
     }
     return self;
 }
