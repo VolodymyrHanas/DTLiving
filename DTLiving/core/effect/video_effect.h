@@ -45,6 +45,7 @@ private:
     GLint u_texture_;
 
     // TODO: effect with two shader programs
+    // TODO: effect with two textures as input
     // TODO: effect with time
     
 };

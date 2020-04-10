@@ -40,6 +40,8 @@
 		40B1DF0924400D48009B68C7 /* effect_hue_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 40B1DF0824400D48009B68C7 /* effect_hue_fragment.glsl */; };
 		40B1DF0C2440127D009B68C7 /* video_hue_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B1DF0A2440127D009B68C7 /* video_hue_effect.cpp */; };
 		40B1DF0F244015B2009B68C7 /* VideoHueFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 40B1DF0E244015B2009B68C7 /* VideoHueFilter.m */; };
+		40B1DF13244067AD009B68C7 /* effect_gray_scale_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 40B1DF12244067AD009B68C7 /* effect_gray_scale_fragment.glsl */; };
+		40B1DF1624406A32009B68C7 /* VideoGrayScaleFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 40B1DF1524406A32009B68C7 /* VideoGrayScaleFilter.m */; };
 		40B2BFC223E40D8600F677CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B2BFC123E40D8600F677CD /* AppDelegate.swift */; };
 		40B2BFC623E40D8600F677CD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B2BFC523E40D8600F677CD /* CameraViewController.swift */; };
 		40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40B2BFCA23E40D8800F677CD /* Assets.xcassets */; };
@@ -115,6 +117,9 @@
 		40B1DF0B2440127D009B68C7 /* video_hue_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_hue_effect.h; sourceTree = "<group>"; };
 		40B1DF0D244015B2009B68C7 /* VideoHueFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoHueFilter.h; sourceTree = "<group>"; };
 		40B1DF0E244015B2009B68C7 /* VideoHueFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoHueFilter.m; sourceTree = "<group>"; };
+		40B1DF12244067AD009B68C7 /* effect_gray_scale_fragment.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = effect_gray_scale_fragment.glsl; sourceTree = "<group>"; };
+		40B1DF1424406A32009B68C7 /* VideoGrayScaleFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoGrayScaleFilter.h; sourceTree = "<group>"; };
+		40B1DF1524406A32009B68C7 /* VideoGrayScaleFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoGrayScaleFilter.m; sourceTree = "<group>"; };
 		40B2BFBE23E40D8600F677CD /* DTLiving.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTLiving.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40B2BFC123E40D8600F677CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40B2BFC523E40D8600F677CD /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +227,7 @@
 				40B1DF0824400D48009B68C7 /* effect_hue_fragment.glsl */,
 				40B1DF0B2440127D009B68C7 /* video_hue_effect.h */,
 				40B1DF0A2440127D009B68C7 /* video_hue_effect.cpp */,
+				40B1DF12244067AD009B68C7 /* effect_gray_scale_fragment.glsl */,
 			);
 			path = color_processing;
 			sourceTree = "<group>";
@@ -344,6 +350,8 @@
 				4018623F2423644F0003AF6F /* VideoRGBFilter.m */,
 				40B1DF0D244015B2009B68C7 /* VideoHueFilter.h */,
 				40B1DF0E244015B2009B68C7 /* VideoHueFilter.m */,
+				40B1DF1424406A32009B68C7 /* VideoGrayScaleFilter.h */,
+				40B1DF1524406A32009B68C7 /* VideoGrayScaleFilter.m */,
 			);
 			path = ColorProcessing;
 			sourceTree = "<group>";
@@ -474,6 +482,7 @@
 				40F30575243C797E0022B263 /* effect_saturation_fragment.glsl in Resources */,
 				40F3057D243C82040022B263 /* effect_gamma_fragment.glsl in Resources */,
 				403DEB8D23E53ADD00685F6B /* effect_vertex.glsl in Resources */,
+				40B1DF13244067AD009B68C7 /* effect_gray_scale_fragment.glsl in Resources */,
 				40F30585243C90600022B263 /* effect_levels_fragment.glsl in Resources */,
 				40B2BFCE23E40D8800F677CD /* LaunchScreen.storyboard in Resources */,
 				40F30565243C2A5C0022B263 /* effect_exposure_fragment.glsl in Resources */,
@@ -561,6 +570,7 @@
 				40BDE3A3241E32EC0063DF25 /* video_effect_processor.cpp in Sources */,
 				40F30568243C2CC10022B263 /* video_exposure_effect.cpp in Sources */,
 				401862302420DB810003AF6F /* VideoFilter.m in Sources */,
+				40B1DF1624406A32009B68C7 /* VideoGrayScaleFilter.m in Sources */,
 				40F30578243C7A560022B263 /* video_saturation_effect.cpp in Sources */,
 				40B2BFC223E40D8600F677CD /* AppDelegate.swift in Sources */,
 				40831449241A384C00DC2BE9 /* VideoEffectProcessorObject.mm in Sources */,

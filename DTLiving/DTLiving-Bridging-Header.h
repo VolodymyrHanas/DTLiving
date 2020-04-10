@@ -14,3 +14,4 @@
 #import "VideoRGBFilter.h"
 #import "VideoSepiaFilter.h"
 #import "VideoHueFilter.h"
+#import "VideoGrayScaleFilter.h"
