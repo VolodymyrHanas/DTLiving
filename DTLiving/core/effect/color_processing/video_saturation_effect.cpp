@@ -19,8 +19,8 @@ VideoSaturationEffect::VideoSaturationEffect(const char *name, const char *verte
 
 void VideoSaturationEffect::BeforeDrawArrays() {
     GLint location = program_->UniformLocation(kVideoSaturationEffectSaturation);
-    auto saturation = uniforms_[std::string(kVideoSaturationEffectSaturation)];
-    glUniform1f(location, saturation.u_float);
+    auto uniform = uniforms_[std::string(kVideoSaturationEffectSaturation)];
+    glUniform1fv(location, 1, uniform.u_float);
 }
 
 }

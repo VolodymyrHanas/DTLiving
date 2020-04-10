@@ -32,7 +32,7 @@ class LiveManager {
         camera = VideoCamera(position: .back, presets: [.hd1920x1080])
         
         filterProcessor = VideoFilterProcessor()
-        let filter = VideoGammaFilter()
+        let filter = VideoHueFilter()
         filterProcessor.addFilter(filter)
         
         preview = VideoView()

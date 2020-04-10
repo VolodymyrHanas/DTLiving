@@ -38,11 +38,29 @@
 }
 
 - (void)updateFilter:(VideoFilter *)filter {
-    for (NSString *key in filter.params) {
-        NSNumber *value = filter.params[key];
+    for (NSString *key in filter.intParams) {
+        NSArray<NSNumber*> *values = filter.intParams[key];
+        int count = int(values.count);
+        GLint ints[count];
+        for (int i = 0; i < count; i++) {
+            NSNumber *value = values[i];
+            ints[i] = value.intValue;
+        }
+        self.processor->SetEffectParamInt([filter.name UTF8String],
+                                          [key UTF8String],
+                                          ints, count);
+    }
+    for (NSString *key in filter.floatParams) {
+        NSArray<NSNumber*> *values = filter.floatParams[key];
+        int count = int(values.count);
+        GLfloat *floats = new GLfloat[count];
+        for (int i = 0; i < count; i++) {
+            NSNumber *value = values[i];
+            floats[i] = value.floatValue;
+        }
         self.processor->SetEffectParamFloat([filter.name UTF8String],
                                             [key UTF8String],
-                                            value.floatValue);
+                                            floats);
     }
 }
 

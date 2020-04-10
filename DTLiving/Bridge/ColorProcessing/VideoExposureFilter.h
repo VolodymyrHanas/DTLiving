@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoExposureFilter : VideoFilter
 
-- (instancetype)init;
-
 @property (nonatomic, assign) float exposure;
+
+- (instancetype)init;
 
 @end
 

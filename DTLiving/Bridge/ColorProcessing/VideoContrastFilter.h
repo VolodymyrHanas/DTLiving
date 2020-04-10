@@ -1,5 +1,5 @@
 //
-//  VideoGammaFilter.h
+//  VideoContrastFilter.h
 //  DTLiving
 //
 //  Created by Dan Jiang on 2020/4/7.
@@ -8,13 +8,14 @@
 
 #import "VideoFilter.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VideoGammaFilter : VideoFilter
+@interface VideoContrastFilter : VideoFilter
+
+@property (nonatomic, assign) float contrast;
 
 - (instancetype)init;
-
-@property (nonatomic, assign) float gamma;
 
 @end
 

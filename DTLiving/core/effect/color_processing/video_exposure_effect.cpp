@@ -19,8 +19,8 @@ VideoExposureEffect::VideoExposureEffect(const char *name, const char *vertex_sh
 
 void VideoExposureEffect::BeforeDrawArrays() {
     GLint location = program_->UniformLocation(kVideoExposureEffectExposure);
-    auto exposure = uniforms_[std::string(kVideoExposureEffectExposure)];
-    glUniform1f(location, exposure.u_float);
+    auto uniform = uniforms_[std::string(kVideoExposureEffectExposure)];
+    glUniform1fv(location, 1, uniform.u_float);
 }
 
 }

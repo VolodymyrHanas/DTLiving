@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoBrightnessFilter : VideoFilter
 
-- (instancetype)init;
-
 @property (nonatomic, assign) float brightness;
+
+- (instancetype)init;
 
 @end
 

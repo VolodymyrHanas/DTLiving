@@ -30,7 +30,17 @@ void VideoEffect::Init() {
 }
 
 void VideoEffect::SetUniform(const char *name, VideoEffectUniform uniform) {
-    uniforms_[std::string(name)] = uniform;
+    std::string key = std::string(name);
+    auto search = uniforms_.find(key);
+    if (search != uniforms_.end()) {
+        if (search->second.u_int != nullptr) {
+            delete[] search->second.u_int;
+        }
+        if (search->second.u_float != nullptr) {
+            delete[] search->second.u_float;
+        }
+    }
+    uniforms_[key] = uniform;
 }
 
 void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame) {

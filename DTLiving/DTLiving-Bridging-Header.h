@@ -10,4 +10,7 @@
 #import "VideoContrastFilter.h"
 #import "VideoSaturationFilter.h"
 #import "VideoGammaFilter.h"
+#import "VideoLevelsFilter.h"
 #import "VideoRGBFilter.h"
+#import "VideoSepiaFilter.h"
+#import "VideoHueFilter.h"

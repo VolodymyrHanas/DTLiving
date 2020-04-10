@@ -26,9 +26,23 @@ static const char *kVideoSaturationEffectSaturation = "u_saturation"; // 0.0 ~ 2
 static const char *kVideoGammaEffect = "effect_gamma";
 static const char *kVideoGammaEffectGamma = "u_gamma"; // 0.0 ~ 3.0
 
+static const char *kVideoLevelsEffect = "effect_levels";
+static const char *kVideoLevelsEffectLevelMinimum = "u_levelMinimum"; // 0.0 ~ 1.0
+static const char *kVideoLevelsEffectLevelMiddle = "u_levelMiddle"; // 0.0 ~ 1.0
+static const char *kVideoLevelsEffectLevelMaximum = "u_levelMaximum"; // 0.0 ~ 1.0
+static const char *kVideoLevelsEffectMinOutput = "u_minOutput"; // 0.0 ~ 1.0
+static const char *kVideoLevelsEffectMaxOutput = "u_maxOutput"; // 0.0 ~ 1.0
+
+static const char *kVideoColorMatrixEffect = "effect_color_matrix";
+static const char *kVideoColorMatrixEffectColorMatrix = "u_colorMatrix"; // 4x4
+static const char *kVideoColorMatrixEffectIntensity = "u_intensity"; // 0.0 ~ 1.0
+
 static const char *kVideoRGBEffect = "effect_rgb";
-static const char *kVideoRGBEffectRed = "u_redAdjustment";
-static const char *kVideoRGBEffectGreen = "u_greenAdjustment";
-static const char *kVideoRGBEffectBlue = "u_blueAdjustment";
+static const char *kVideoRGBEffectRed = "u_redAdjustment"; // 0.0 ~ 1.0
+static const char *kVideoRGBEffectGreen = "u_greenAdjustment"; // 0.0 ~ 1.0
+static const char *kVideoRGBEffectBlue = "u_blueAdjustment"; // 0.0 ~ 1.0
+
+static const char *kVideoHueEffect = "effect_hue";
+static const char *kVideoHueEffectHue = "u_hueAdjust"; // 0.0 ~ 3.0
 
 #endif /* constants_h */

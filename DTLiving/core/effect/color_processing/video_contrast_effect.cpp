@@ -19,8 +19,8 @@ VideoContrastEffect::VideoContrastEffect(const char *name, const char *vertex_sh
 
 void VideoContrastEffect::BeforeDrawArrays() {
     GLint location = program_->UniformLocation(kVideoContrastEffectContrast);
-    auto contrast = uniforms_[std::string(kVideoContrastEffectContrast)];
-    glUniform1f(location, contrast.u_float);
+    auto uniform = uniforms_[std::string(kVideoContrastEffectContrast)];
+    glUniform1fv(location, 1, uniform.u_float);
 }
 
 }

@@ -1,5 +1,5 @@
 //
-//  VideoSaturationFilter.h
+//  VideoGammaFilter.h
 //  DTLiving
 //
 //  Created by Dan Jiang on 2020/4/7.
@@ -10,11 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VideoSaturationFilter : VideoFilter
+@interface VideoGammaFilter : VideoFilter
+
+@property (nonatomic, assign) float gamma;
 
 - (instancetype)init;
-
-@property (nonatomic, assign) float saturation;
 
 @end
 

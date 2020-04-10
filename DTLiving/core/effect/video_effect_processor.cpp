@@ -16,7 +16,10 @@
 #include "video_contrast_effect.h"
 #include "video_saturation_effect.h"
 #include "video_gamma_effect.h"
+#include "video_levels_effect.h"
+#include "video_color_matrix_effect.h"
 #include "video_rgb_effect.h"
+#include "video_hue_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -44,8 +47,14 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
         effect = new color_processing::VideoSaturationEffect(name, vertex_shader_file, fragment_shader_file);
     } else if (std::strcmp(name, kVideoGammaEffect) == 0) {
         effect = new color_processing::VideoGammaEffect(name, vertex_shader_file, fragment_shader_file);
+    } else if (std::strcmp(name, kVideoLevelsEffect) == 0) {
+        effect = new color_processing::VideoLevelsEffect(name, vertex_shader_file, fragment_shader_file);
+    } else if (std::strcmp(name, kVideoColorMatrixEffect) == 0) {
+        effect = new color_processing::VideoColorMatrixEffect(name, vertex_shader_file, fragment_shader_file);
     } else if (std::strcmp(name, kVideoRGBEffect) == 0) {
         effect = new color_processing::VideoRGBEffect(name, vertex_shader_file, fragment_shader_file);
+    } else if (std::strcmp(name, kVideoHueEffect) == 0) {
+        effect = new color_processing::VideoHueEffect(name, vertex_shader_file, fragment_shader_file);
     } else {
         effect = new VideoEffect(name, vertex_shader_file, fragment_shader_file);
     }
@@ -53,8 +62,22 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
     effects_.push_back(effect);
 }
 
-void VideoEffectProcessor::SetEffectParamFloat(const char *name, const char *param, GLfloat value) {
-    for(VideoEffect *effect : effects_) { // TODO: Optimize with Map
+void VideoEffectProcessor::SetEffectParamInt(const char *name, const char *param, GLint value[], int count) {
+    for(VideoEffect *effect : effects_) {
+        if (effect->get_name() == std::string(name)) {
+            VideoEffectUniform uniform;
+            GLint ints[count];
+            for (int i = 0; i < count; i++) {
+                ints[i] = value[i];
+            }
+            uniform.u_int = ints;
+            effect->SetUniform(param, uniform);
+        }
+    }
+}
+
+void VideoEffectProcessor::SetEffectParamFloat(const char *name, const char *param, GLfloat *value) {
+    for(VideoEffect *effect : effects_) {
         if (effect->get_name() == std::string(name)) {
             VideoEffectUniform uniform;
             uniform.u_float = value;

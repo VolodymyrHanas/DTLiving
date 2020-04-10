@@ -16,7 +16,8 @@ namespace dtliving {
 namespace effect {
 
 struct VideoEffectUniform {
-    GLfloat u_float;
+    GLint *u_int = nullptr;
+    GLfloat *u_float = nullptr;
 };
 
 }

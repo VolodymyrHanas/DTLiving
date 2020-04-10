@@ -1,5 +1,5 @@
 //
-//  VideoContrastFilter.h
+//  VideoSaturationFilter.h
 //  DTLiving
 //
 //  Created by Dan Jiang on 2020/4/7.
@@ -8,14 +8,13 @@
 
 #import "VideoFilter.h"
 
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VideoContrastFilter : VideoFilter
+@interface VideoSaturationFilter : VideoFilter
+
+@property (nonatomic, assign) float saturation;
 
 - (instancetype)init;
-
-@property (nonatomic, assign) float contrast;
 
 @end
 

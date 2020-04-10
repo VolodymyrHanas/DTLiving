@@ -24,7 +24,8 @@ public:
     
     void Init(const char *vertex_shader_file, const char *fragment_shader_file);
     void AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
-    void SetEffectParamFloat(const char *name, const char *param, GLfloat value);
+    void SetEffectParamInt(const char *name, const char *param, GLint value[], int count);
+    void SetEffectParamFloat(const char *name, const char *param, GLfloat *value);
     void Process(VideoFrame input_frame, VideoFrame output_frame);
     // TODO: switch effect
 private:

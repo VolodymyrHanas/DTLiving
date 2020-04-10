@@ -19,8 +19,8 @@ VideoGammaEffect::VideoGammaEffect(const char *name, const char *vertex_shader_f
 
 void VideoGammaEffect::BeforeDrawArrays() {
     GLint location = program_->UniformLocation(kVideoGammaEffectGamma);
-    auto saturation = uniforms_[std::string(kVideoGammaEffectGamma)];
-    glUniform1f(location, saturation.u_float);
+    auto uniform = uniforms_[std::string(kVideoGammaEffectGamma)];
+    glUniform1fv(location, 1, uniform.u_float);
 }
 
 }

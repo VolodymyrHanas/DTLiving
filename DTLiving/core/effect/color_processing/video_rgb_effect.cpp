@@ -18,17 +18,17 @@ VideoRGBEffect::VideoRGBEffect(const char *name, const char *vertex_shader_file,
 }
 
 void VideoRGBEffect::BeforeDrawArrays() {
-    GLint red_location = program_->UniformLocation(kVideoRGBEffectRed);
-    auto red = uniforms_[std::string(kVideoRGBEffectRed)];
-    glUniform1f(red_location, red.u_float);
+    GLint location = program_->UniformLocation(kVideoRGBEffectRed);
+    auto uniform = uniforms_[std::string(kVideoRGBEffectRed)];
+    glUniform1fv(location, 1, uniform.u_float);
 
-    GLint green_location = program_->UniformLocation(kVideoRGBEffectGreen);
-    auto green = uniforms_[std::string(kVideoRGBEffectGreen)];
-    glUniform1f(green_location, green.u_float);
+    location = program_->UniformLocation(kVideoRGBEffectGreen);
+    uniform = uniforms_[std::string(kVideoRGBEffectGreen)];
+    glUniform1fv(location, 1, uniform.u_float);
 
-    GLint blue_location = program_->UniformLocation(kVideoRGBEffectBlue);
-    auto blue = uniforms_[std::string(kVideoRGBEffectBlue)];
-    glUniform1f(blue_location, blue.u_float);
+    location = program_->UniformLocation(kVideoRGBEffectBlue);
+    uniform = uniforms_[std::string(kVideoRGBEffectBlue)];
+    glUniform1fv(location, 1, uniform.u_float);
 }
 
 }
