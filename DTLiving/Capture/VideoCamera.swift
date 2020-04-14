@@ -28,6 +28,11 @@ class VideoCamera: VideoOutput {
             return [.front, .back]
         }
     }
+    
+    var backgroundColorRed: CGFloat = 0.0
+    var backgroundColorGreen: CGFloat = 0.0
+    var backgroundColorBlue: CGFloat = 0.0
+    var backgroundColorAlpha: CGFloat = 1.0
 
     private var position: Position
     private var presets: [AVCaptureSession.Preset]
@@ -453,7 +458,10 @@ class VideoCamera: VideoOutput {
                                           height: rotatedBufferHeight))
         outputFrameBuffer?.activate()
         
-        glClearColor(0.85, 0.85, 0.85, 1.0)
+        glClearColor(GLclampf(backgroundColorRed),
+                     GLclampf(backgroundColorGreen),
+                     GLclampf(backgroundColorBlue),
+                     GLclampf(backgroundColorAlpha))
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
         
         glActiveTexture(GLenum(GL_TEXTURE0))

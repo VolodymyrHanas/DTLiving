@@ -47,4 +47,7 @@ static const char *kVideoHueEffectHue = "u_hueAdjust"; // 0.0 ~ 3.0
 
 static const char *kVideoGrayScaleEffect = "effect_gray_scale";
 
+static const char *kVideoTransformEffect = "effect_transform";
+static const char *kVideoTransformEffectTransformMatrix = "u_transformMatrix";
+
 #endif /* constants_h */

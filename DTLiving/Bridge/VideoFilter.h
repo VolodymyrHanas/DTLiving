@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
+
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 
@@ -50,6 +52,11 @@ VideoMat4 VideoMat4Make(VideoVec4 x, VideoVec4 y, VideoVec4 z, VideoVec4 w);
 @property (nonatomic, copy, readonly) NSString *fragmentShaderFile;
 @property (nonatomic, copy, readonly) NSDictionary<NSString*, NSArray<NSNumber*>*> *intParams;
 @property (nonatomic, copy, readonly) NSDictionary<NSString*, NSArray<NSNumber*>*> *floatParams;
+@property (nonatomic, assign) BOOL ignoreAspectRatio;
+@property (nonatomic, assign) CGFloat backgroundColorRed;
+@property (nonatomic, assign) CGFloat backgroundColorGreen;
+@property (nonatomic, assign) CGFloat backgroundColorBlue;
+@property (nonatomic, assign) CGFloat backgroundColorAlpha;
 
 - (instancetype)initWithName:(const char *)name;
 

@@ -29,10 +29,18 @@ class LiveManager {
     init(config: MediaConfig) {
         self.config = config
         
-        camera = VideoCamera(position: .back, presets: [.hd1920x1080])
+        camera = VideoCamera(position: .back, presets: [.hd1280x720])
         
         filterProcessor = VideoFilterProcessor()
-        let filter = VideoHueFilter()
+        filterProcessor.addFilter(VideoSepiaFilter())
+        let filter = VideoTransformFilter()
+        filter.backgroundColorRed = 1;
+        var perspective: CATransform3D = CATransform3DIdentity
+        perspective.m34 = 0.4
+        perspective.m33 = 0.4
+        perspective = CATransform3DScale(perspective, 0.75, 0.75, 0.75)
+        perspective = CATransform3DRotate(perspective, 0.75, 0.0, 1.0, 0.0)
+        filter.transform3D = perspective
         filterProcessor.addFilter(filter)
         
         preview = VideoView()

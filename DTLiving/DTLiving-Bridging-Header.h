@@ -15,3 +15,4 @@
 #import "VideoSepiaFilter.h"
 #import "VideoHueFilter.h"
 #import "VideoGrayScaleFilter.h"
+#import "VideoTransformFilter.h"

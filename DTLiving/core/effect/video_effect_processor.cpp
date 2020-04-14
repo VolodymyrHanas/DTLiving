@@ -20,6 +20,7 @@
 #include "video_color_matrix_effect.h"
 #include "video_rgb_effect.h"
 #include "video_hue_effect.h"
+#include "video_transform_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -55,6 +56,8 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
         effect = new color_processing::VideoRGBEffect(name, vertex_shader_file, fragment_shader_file);
     } else if (std::strcmp(name, kVideoHueEffect) == 0) {
         effect = new color_processing::VideoHueEffect(name, vertex_shader_file, fragment_shader_file);
+    } else if (std::strcmp(name, kVideoTransformEffect) == 0) {
+        effect = new image_processing::VideoTransformEffect(name, vertex_shader_file, fragment_shader_file);
     } else {
         effect = new VideoEffect(name, vertex_shader_file, fragment_shader_file);
     }
@@ -62,15 +65,27 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
     effects_.push_back(effect);
 }
 
-void VideoEffectProcessor::SetEffectParamInt(const char *name, const char *param, GLint value[], int count) {
+void VideoEffectProcessor::SetClearColor(const char *name, GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
+    for(VideoEffect *effect : effects_) {
+        if (effect->get_name() == std::string(name)) {
+            effect->set_clear_color(red, green, blue, alpha);
+        }
+    }
+}
+
+void VideoEffectProcessor::SetIgnoreAspectRatio(const char *name, bool ignore_aspect_ratio) {
+    for(VideoEffect *effect : effects_) {
+        if (effect->get_name() == std::string(name)) {
+            effect->set_ignore_aspect_ratio(ignore_aspect_ratio);
+        }
+    }
+}
+
+void VideoEffectProcessor::SetEffectParamInt(const char *name, const char *param, GLint *value) {
     for(VideoEffect *effect : effects_) {
         if (effect->get_name() == std::string(name)) {
             VideoEffectUniform uniform;
-            GLint ints[count];
-            for (int i = 0; i < count; i++) {
-                ints[i] = value[i];
-            }
-            uniform.u_int = ints;
+            uniform.u_int = value;
             effect->SetUniform(param, uniform);
         }
     }

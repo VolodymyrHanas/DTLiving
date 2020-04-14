@@ -184,7 +184,8 @@ class CameraViewController: UIViewController {
         settingsButton.setTitleColor(UIColor.white, for: .normal)
         settingsButton.setTitle("config settings", for: .normal)
         slider.minimumValue = 0.0
-        slider.maximumValue = 360.0
+        slider.maximumValue = 6.28
+        slider.value = 0.75
         
         view.addSubview(recordButton)
         view.addSubview(liveButton)
@@ -230,8 +231,13 @@ class CameraViewController: UIViewController {
     }
     
     @objc private func sliderValueChanged(_ slider: UISlider) {
-        let filter = VideoHueFilter()
-        filter.hue = slider.value
+        let filter = VideoTransformFilter()
+        var perspective: CATransform3D = CATransform3DIdentity
+        perspective.m34 = 0.4
+        perspective.m33 = 0.4
+        perspective = CATransform3DScale(perspective, 0.75, 0.75, 0.75)
+        perspective = CATransform3DRotate(perspective, CGFloat(slider.value), 0.0, 1.0, 0.0)
+        filter.transform3D = perspective
         liveManager.updateFilter(filter)
     }
     

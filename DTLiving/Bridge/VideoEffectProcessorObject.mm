@@ -34,6 +34,13 @@
     self.processor->AddEffect([filter.name UTF8String],
                               [vertexShaderFile UTF8String],
                               [fragmentShaderFile UTF8String]);
+    self.processor->SetClearColor([filter.name UTF8String],
+                                  filter.backgroundColorRed,
+                                  filter.backgroundColorGreen,
+                                  filter.backgroundColorBlue,
+                                  filter.backgroundColorAlpha);
+    self.processor->SetIgnoreAspectRatio([filter.name UTF8String],
+                                         filter.ignoreAspectRatio);
     [self updateFilter:filter];
 }
 
@@ -48,7 +55,7 @@
         }
         self.processor->SetEffectParamInt([filter.name UTF8String],
                                           [key UTF8String],
-                                          ints, count);
+                                          ints);
     }
     for (NSString *key in filter.floatParams) {
         NSArray<NSNumber*> *values = filter.floatParams[key];
