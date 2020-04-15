@@ -45,29 +45,55 @@
 }
 
 - (void)updateFilter:(VideoFilter *)filter {
-    for (NSString *key in filter.intParams) {
-        NSArray<NSNumber*> *values = filter.intParams[key];
-        int count = int(values.count);
-        GLint ints[count];
-        for (int i = 0; i < count; i++) {
-            NSNumber *value = values[i];
-            ints[i] = value.intValue;
+    NSDictionary<NSString*, NSArray<NSNumber*>*> *intParams = filter.intParams;
+    if (intParams) {
+        for (NSString *key in intParams) {
+            NSArray<NSNumber*> *values = intParams[key];
+            int count = int(values.count);
+            GLint ints[count];
+            for (int i = 0; i < count; i++) {
+                NSNumber *value = values[i];
+                ints[i] = value.intValue;
+            }
+            self.processor->SetEffectParamInt([filter.name UTF8String],
+                                              [key UTF8String],
+                                              ints);
         }
-        self.processor->SetEffectParamInt([filter.name UTF8String],
-                                          [key UTF8String],
-                                          ints);
     }
-    for (NSString *key in filter.floatParams) {
-        NSArray<NSNumber*> *values = filter.floatParams[key];
-        int count = int(values.count);
+    NSDictionary<NSString*, NSArray<NSNumber*>*> *floatParams = filter.floatParams;
+    if (floatParams) {
+        for (NSString *key in floatParams) {
+            NSArray<NSNumber*> *values = floatParams[key];
+            int count = int(values.count);
+            GLfloat *floats = new GLfloat[count];
+            for (int i = 0; i < count; i++) {
+                NSNumber *value = values[i];
+                floats[i] = value.floatValue;
+            }
+            self.processor->SetEffectParamFloat([filter.name UTF8String],
+                                                [key UTF8String],
+                                                floats);
+        }
+    }
+    NSArray<NSNumber*> *positions = filter.positions;
+    if (positions) {
+        int count = int(positions.count);
         GLfloat *floats = new GLfloat[count];
         for (int i = 0; i < count; i++) {
-            NSNumber *value = values[i];
+            NSNumber *value = positions[i];
             floats[i] = value.floatValue;
         }
-        self.processor->SetEffectParamFloat([filter.name UTF8String],
-                                            [key UTF8String],
-                                            floats);
+        self.processor->SetPositions([filter.name UTF8String], floats);
+    }
+    NSArray<NSNumber*> *textureCoordinates = filter.textureCoordinates;
+    if (textureCoordinates) {
+        int count = int(textureCoordinates.count);
+        GLfloat *floats = new GLfloat[count];
+        for (int i = 0; i < count; i++) {
+            NSNumber *value = textureCoordinates[i];
+            floats[i] = value.floatValue;
+        }
+        self.processor->SetTextureCoordinates([filter.name UTF8String], floats);
     }
 }
 

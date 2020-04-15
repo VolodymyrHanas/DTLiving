@@ -183,9 +183,9 @@ class CameraViewController: UIViewController {
         liveButton.setTitle("start living", for: .normal)
         settingsButton.setTitleColor(UIColor.white, for: .normal)
         settingsButton.setTitle("config settings", for: .normal)
-        slider.minimumValue = 0.0
-        slider.maximumValue = 6.28
-        slider.value = 0.75
+        slider.minimumValue = 0.2
+        slider.maximumValue = 1.0
+        slider.value = 0.5
         
         view.addSubview(recordButton)
         view.addSubview(liveButton)
@@ -231,13 +231,9 @@ class CameraViewController: UIViewController {
     }
     
     @objc private func sliderValueChanged(_ slider: UISlider) {
-        let filter = VideoTransformFilter()
-        var perspective: CATransform3D = CATransform3DIdentity
-        perspective.m34 = 0.4
-        perspective.m33 = 0.4
-        perspective = CATransform3DScale(perspective, 0.75, 0.75, 0.75)
-        perspective = CATransform3DRotate(perspective, CGFloat(slider.value), 0.0, 1.0, 0.0)
-        filter.transform3D = perspective
+        let filter = VideoCropFilter()
+        let height = CGFloat(slider.value)
+        filter.cropRegion = .init(x: 0, y: (1 - height) / 2, width: 1, height: height)
         liveManager.updateFilter(filter)
     }
     

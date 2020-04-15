@@ -115,7 +115,7 @@ class VideoView: UIView, VideoInput {
     func setInputSize(_ size: CGSize, at index: Int) {
         VideoContext.sharedProcessingContext.sync {
             var rotatedSize = size
-            if inputRotation.needSwapWidthAndHeight {
+            if VideoRotationNeedSwapWidthAndHeight(inputRotation) {
                 rotatedSize.width = size.height
                 rotatedSize.height = size.width
             }
@@ -281,7 +281,7 @@ class VideoView: UIView, VideoInput {
         }
     }
     
-    func textureCoordinates(for rotation: VideoRotation) -> [Float] {
+    private func textureCoordinates(for rotation: VideoRotation) -> [Float] {
         // vertical flip
         switch rotation {
         case .noRotation:
@@ -324,8 +324,12 @@ class VideoView: UIView, VideoInput {
                     0, 0,
                     1, 1,
                     0, 1]
+        default:
+            return [0, 1,
+                    1, 1,
+                    0, 0,
+                    1, 0]
         }
-
     }
 
 }

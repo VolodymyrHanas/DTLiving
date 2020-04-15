@@ -24,6 +24,8 @@ public:
     ~VideoEffect();
     
     void Init();
+    void SetPositions(GLfloat *positions);
+    void SetTextureCoordinates(GLfloat *texture_coordinates);
     void SetUniform(const char *name, VideoEffectUniform uniform);
     void Render(VideoFrame input_frame, VideoFrame output_frame);
     void Render(VideoFrame input_frame, VideoFrame output_frame, GLfloat *positions, GLfloat *texture_coordinates);
@@ -58,16 +60,23 @@ private:
     std::string name_;
     const char *vertex_shader_file_;
     const char *fragment_shader_file_;
-    GLuint a_position_;
-    GLuint a_texcoord_;
-    GLint u_texture_;
-    GLint u_orthographic_matrix_;
-    bool is_orthographic_;
-    bool ignore_aspect_ratio_;
+    
     GLfloat clear_color_red_;
     GLfloat clear_color_green_;
     GLfloat clear_color_blue_;
     GLfloat clear_color_alpha_;
+
+    GLuint a_position_;
+    GLfloat *positions_ = nullptr;
+    
+    GLuint a_texcoord_;
+    GLfloat *texture_coordinates_ = nullptr;
+    
+    GLint u_texture_;
+    
+    GLint u_orthographic_matrix_;
+    bool is_orthographic_;
+    bool ignore_aspect_ratio_;
 
     // TODO: effect with two shader programs
     // TODO: effect with two textures as input

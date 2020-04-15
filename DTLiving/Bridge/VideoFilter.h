@@ -45,11 +45,26 @@ typedef struct VideoMat4 VideoMat4;
 
 VideoMat4 VideoMat4Make(VideoVec4 x, VideoVec4 y, VideoVec4 z, VideoVec4 w);
 
+typedef NS_ENUM(NSInteger, VideoRotation) {
+    VideoRotationNoRotation = 0,
+    VideoRotationRotateLeft = 1,
+    VideoRotationRotateRight = 2,
+    VideoRotationFlipVertical = 3,
+    VideoRotationFlipHorizonal = 4,
+    VideoRotationRotateRightFlipVertical = 5,
+    VideoRotationRotateRightFlipHorizontal = 6,
+    VideoRotationRotate180 = 7,
+};
+
+BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation);
+
 @interface VideoFilter : NSObject
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy, readonly) NSString *vertexShaderFile;
 @property (nonatomic, copy, readonly) NSString *fragmentShaderFile;
+@property (nonatomic, copy, readonly) NSArray<NSNumber*> *positions;
+@property (nonatomic, copy, readonly) NSArray<NSNumber*> *textureCoordinates;
 @property (nonatomic, copy, readonly) NSDictionary<NSString*, NSArray<NSNumber*>*> *intParams;
 @property (nonatomic, copy, readonly) NSDictionary<NSString*, NSArray<NSNumber*>*> *floatParams;
 @property (nonatomic, assign) BOOL ignoreAspectRatio;
@@ -57,6 +72,7 @@ VideoMat4 VideoMat4Make(VideoVec4 x, VideoVec4 y, VideoVec4 z, VideoVec4 w);
 @property (nonatomic, assign) CGFloat backgroundColorGreen;
 @property (nonatomic, assign) CGFloat backgroundColorBlue;
 @property (nonatomic, assign) CGFloat backgroundColorAlpha;
+@property (nonatomic, assign) VideoRotation rotation;
 
 - (instancetype)initWithName:(const char *)name;
 

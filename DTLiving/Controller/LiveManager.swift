@@ -33,14 +33,10 @@ class LiveManager {
         
         filterProcessor = VideoFilterProcessor()
         filterProcessor.addFilter(VideoSepiaFilter())
-        let filter = VideoTransformFilter()
+        let filter = VideoCropFilter()
+        let height = 0.25
+        filter.cropRegion = .init(x: 0, y: (1 - height) / 2, width: 1, height: height)
         filter.backgroundColorRed = 1;
-        var perspective: CATransform3D = CATransform3DIdentity
-        perspective.m34 = 0.4
-        perspective.m33 = 0.4
-        perspective = CATransform3DScale(perspective, 0.75, 0.75, 0.75)
-        perspective = CATransform3DRotate(perspective, 0.75, 0.0, 1.0, 0.0)
-        filter.transform3D = perspective
         filterProcessor.addFilter(filter)
         
         preview = VideoView()

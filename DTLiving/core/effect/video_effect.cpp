@@ -32,6 +32,20 @@ void VideoEffect::Init() {
     }
 }
 
+void VideoEffect::SetPositions(GLfloat *positions) {
+    if (positions_ != nullptr) {
+        delete[] positions_;
+    }
+    positions_ = positions;
+}
+
+void VideoEffect::SetTextureCoordinates(GLfloat *texture_coordinates) {
+    if (texture_coordinates_ != nullptr) {
+        delete[] texture_coordinates_;
+    }
+    texture_coordinates_ = texture_coordinates;
+}
+
 void VideoEffect::SetUniform(const char *name, VideoEffectUniform uniform) {
     std::string key = std::string(name);
     auto search = uniforms_.find(key);
@@ -47,26 +61,32 @@ void VideoEffect::SetUniform(const char *name, VideoEffectUniform uniform) {
 }
 
 void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame) {
-    GLfloat positions[] = {
-        -1.0f, -1.0f,
-        1.0f, -1.0f,
-        -1.0f, 1.0f,
-        1.0f, 1.0f
-    };
-    if (is_orthographic_) {
-        // for right now, input frame size == output frame size == view port
-        GLfloat normalizedHeight = GLfloat(output_frame.height) / GLfloat(output_frame.width);
-        positions[1] = -normalizedHeight;
-        positions[3] = -normalizedHeight;
-        positions[5] = normalizedHeight;
-        positions[7] = normalizedHeight;
+    GLfloat *positions = nullptr;
+    if (positions_ != nullptr) {
+        positions = positions_;
+    } else {
+        GLfloat default_positions[] = {
+            -1.0f, -1.0f,
+            1.0f, -1.0f,
+            -1.0f, 1.0f,
+            1.0f, 1.0f
+        };
+        positions = default_positions;
     }
-    GLfloat texture_coordinates[] = {
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-        0.0f, 1.0f,
-        1.0f, 1.0f
-    };
+    
+    GLfloat *texture_coordinates = nullptr;
+    if (texture_coordinates_ != nullptr) {
+        texture_coordinates = texture_coordinates_;
+    } else {
+        GLfloat default_texture_coordinates[] = {
+            0.0f, 0.0f,
+            1.0f, 0.0f,
+            0.0f, 1.0f,
+            1.0f, 1.0f
+        };
+        texture_coordinates = default_texture_coordinates;
+    }
+    
     Render(input_frame, output_frame, positions, texture_coordinates);
 }
 
@@ -80,9 +100,17 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, GLfloa
     program_->Use();
     
     if (is_orthographic_) {
+        // for right now, input frame size == output frame size == view port
+        GLfloat normalizedHeight = GLfloat(output_frame.height) / GLfloat(output_frame.width);
+        *(positions + 1) = -normalizedHeight;
+        *(positions + 3) = -normalizedHeight;
+        *(positions + 5) = normalizedHeight;
+        *(positions + 7) = normalizedHeight;
+        
         caculateOrthographicMatrix(GLfloat(output_frame.width),
                                    GLfloat(output_frame.height));
     }
+    
     BeforeDrawArrays();
     
     glClearColor(clear_color_red_, clear_color_green_, clear_color_blue_, clear_color_alpha_);

@@ -81,6 +81,22 @@ void VideoEffectProcessor::SetIgnoreAspectRatio(const char *name, bool ignore_as
     }
 }
 
+void VideoEffectProcessor::SetPositions(const char *name, GLfloat *positions) {
+    for(VideoEffect *effect : effects_) {
+        if (effect->get_name() == std::string(name)) {
+            effect->SetPositions(positions);
+        }
+    }
+}
+
+void VideoEffectProcessor::SetTextureCoordinates(const char *name, GLfloat *texture_coordinates) {
+    for(VideoEffect *effect : effects_) {
+        if (effect->get_name() == std::string(name)) {
+            effect->SetTextureCoordinates(texture_coordinates);
+        }
+    }
+}
+
 void VideoEffectProcessor::SetEffectParamInt(const char *name, const char *param, GLint *value) {
     for(VideoEffect *effect : effects_) {
         if (effect->get_name() == std::string(name)) {

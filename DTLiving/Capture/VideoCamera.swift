@@ -416,7 +416,7 @@ class VideoCamera: VideoOutput {
         let bufferHeight = CVPixelBufferGetHeight(pixelBuffer)
         var rotatedBufferWidth = bufferWidth
         var rotatedBufferHeight = bufferHeight
-        if internalRotation.needSwapWidthAndHeight {
+        if VideoRotationNeedSwapWidthAndHeight(internalRotation) {
             rotatedBufferWidth = bufferHeight
             rotatedBufferHeight = bufferWidth
         }
@@ -474,7 +474,7 @@ class VideoCamera: VideoOutput {
             -1, 1, // top left
             1, 1, // top right
         ]
-        var textureVertices = internalRotation.textureCoordinates
+        var textureVertices = textureCoordinates(for: internalRotation)
         glEnableVertexAttribArray(positionSlot)
         glVertexAttribPointer(positionSlot,
                               2,
@@ -496,6 +496,56 @@ class VideoCamera: VideoOutput {
         updateTargetsWithTexture(bufferWidth: rotatedBufferWidth,
                                  bufferHeight: rotatedBufferHeight,
                                  currentTime: currentTime)
+    }
+
+    private func textureCoordinates(for rotation: VideoRotation) -> [Float] {
+        switch rotation {
+        case .noRotation:
+            return [0, 0, // bottom left
+                1, 0, // bottom right
+                0, 1, // top left
+                1, 1] // top right
+        case .rotateLeft:
+            return [1, 0,
+                    1, 1,
+                    0, 0,
+                    0, 1]
+        case .rotateRight:
+            return [0, 1,
+                    0, 0,
+                    1, 1,
+                    1, 0]
+        case .flipVertical:
+            return [0, 1,
+                    1, 1,
+                    0, 0,
+                    1, 0]
+        case .flipHorizonal:
+            return [1, 0,
+                    0, 0,
+                    1, 1,
+                    0, 1]
+        case .rotateRightFlipVertical:
+            return [0, 0,
+                    0, 1,
+                    1, 0,
+                    1, 1]
+        case .rotateRightFlipHorizontal:
+            return [1, 1,
+                    1, 0,
+                    0, 1,
+                    0, 0]
+        case .rotate180:
+            return [1, 1,
+                    0, 1,
+                    1, 0,
+                    0, 0]
+        default:
+            return [0, 1,
+                    1, 1,
+                    0, 0,
+                    1, 0]
+        }
     }
 
 }

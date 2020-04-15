@@ -36,7 +36,7 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
     func setInputSize(_ size: CGSize, at index: Int) {
         VideoContext.sharedProcessingContext.sync {
             var rotatedSize = size
-            if inputRotation.needSwapWidthAndHeight {
+            if VideoRotationNeedSwapWidthAndHeight(inputRotation) {
                 rotatedSize.width = size.height
                 rotatedSize.height = size.width
             }
@@ -67,11 +67,17 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
     }
     
     func addFilter(_ filter: VideoFilter) {
-        processor.add(filter)
+        VideoContext.sharedProcessingContext.sync {
+            filter.rotation = inputRotation
+            processor.add(filter)
+        }
     }
     
     func updateFilter(_ filter: VideoFilter) {
-        processor.update(filter)
+        VideoContext.sharedProcessingContext.sync {
+            filter.rotation = inputRotation
+            processor.update(filter)
+        }
     }
     
     private func updateTargetsWithTexture(currentTime: CMTime) {

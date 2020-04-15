@@ -23,6 +23,21 @@ VideoMat4 VideoMat4Make(VideoVec4 x, VideoVec4 y, VideoVec4 z, VideoVec4 w) {
     return mat;
 }
 
+BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation) {
+    switch (rotation) {
+        case VideoRotationRotateLeft:
+            return YES;
+        case VideoRotationRotateRight:
+            return YES;
+        case VideoRotationFlipVertical:
+            return YES;
+        case VideoRotationFlipHorizonal:
+            return YES;
+        default:
+            return NO;
+    }
+}
+
 @interface VideoFilter ()
 
 @end
@@ -45,12 +60,20 @@ VideoMat4 VideoMat4Make(VideoVec4 x, VideoVec4 y, VideoVec4 z, VideoVec4 w) {
     return [NSString stringWithFormat:@"%@_fragment", self.name];
 }
 
+- (NSArray<NSNumber*> *)positions {
+    return nil;
+}
+
+- (NSArray<NSNumber*> *)textureCoordinates {
+    return nil;
+}
+
 - (NSDictionary<NSString*, NSArray<NSNumber*>*> *)intParams {
-    return [NSDictionary new];
+    return nil;
 }
 
 - (NSDictionary<NSString*, NSArray<NSNumber*>*> *)floatParams {
-    return [NSDictionary new];
+    return nil;
 }
 
 - (NSArray<NSNumber*> *)vec3ToArray:(VideoVec3)vec {

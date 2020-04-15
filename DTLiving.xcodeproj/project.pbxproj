@@ -28,6 +28,8 @@
 		4037C6422411090A006C2FC7 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037C6412411090A006C2FC7 /* VideoView.swift */; };
 		403DEB8B23E53ADD00685F6B /* effect_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8723E53ADD00685F6B /* effect_fragment.glsl */; };
 		403DEB8D23E53ADD00685F6B /* effect_vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8923E53ADD00685F6B /* effect_vertex.glsl */; };
+		40501A152445C5BC009DDBF6 /* constants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40501A142445C5BC009DDBF6 /* constants.cpp */; };
+		40501A182446DE64009DDBF6 /* VideoCropFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 40501A172446DE64009DDBF6 /* VideoCropFilter.m */; };
 		40831441241A2EEE00DC2BE9 /* video_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4083143F241A2EEE00DC2BE9 /* video_effect.cpp */; };
 		40831444241A2F1300DC2BE9 /* shader_program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40831442241A2F1300DC2BE9 /* shader_program.cpp */; };
 		40831449241A384C00DC2BE9 /* VideoEffectProcessorObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 40831448241A384C00DC2BE9 /* VideoEffectProcessorObject.mm */; };
@@ -100,6 +102,9 @@
 		4037C6412411090A006C2FC7 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		403DEB8723E53ADD00685F6B /* effect_fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = effect_fragment.glsl; sourceTree = "<group>"; };
 		403DEB8923E53ADD00685F6B /* effect_vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = effect_vertex.glsl; sourceTree = "<group>"; };
+		40501A142445C5BC009DDBF6 /* constants.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = constants.cpp; sourceTree = "<group>"; };
+		40501A162446DE64009DDBF6 /* VideoCropFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCropFilter.h; sourceTree = "<group>"; };
+		40501A172446DE64009DDBF6 /* VideoCropFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCropFilter.m; sourceTree = "<group>"; };
 		4083143B241A2D9C00DC2BE9 /* DTLiving-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DTLiving-Bridging-Header.h"; sourceTree = "<group>"; };
 		4083143F241A2EEE00DC2BE9 /* video_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_effect.cpp; sourceTree = "<group>"; };
 		40831440241A2EEE00DC2BE9 /* video_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_effect.h; sourceTree = "<group>"; };
@@ -267,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				40EFA3042437244800834400 /* constants.h */,
+				40501A142445C5BC009DDBF6 /* constants.cpp */,
 				40831443241A2F1300DC2BE9 /* shader_program.h */,
 				40831442241A2F1300DC2BE9 /* shader_program.cpp */,
 				40BDE3A2241E32EC0063DF25 /* video_effect_processor.h */,
@@ -310,6 +316,8 @@
 			children = (
 				40361D692444081E00DC254F /* VideoTransformFilter.h */,
 				40361D6A2444081E00DC254F /* VideoTransformFilter.m */,
+				40501A162446DE64009DDBF6 /* VideoCropFilter.h */,
+				40501A172446DE64009DDBF6 /* VideoCropFilter.m */,
 			);
 			path = ImageProcessing;
 			sourceTree = "<group>";
@@ -590,6 +598,7 @@
 				40F30588243DCBA00022B263 /* video_levels_effect.cpp in Sources */,
 				40F30580243C82650022B263 /* video_gamma_effect.cpp in Sources */,
 				40B1DF01243F1A07009B68C7 /* video_color_matrix_effect.cpp in Sources */,
+				40501A182446DE64009DDBF6 /* VideoCropFilter.m in Sources */,
 				401862332420DD5A0003AF6F /* VideoBrightnessFilter.m in Sources */,
 				40AC6687240923B900E281AC /* VideoInput.swift in Sources */,
 				4037C6422411090A006C2FC7 /* VideoView.swift in Sources */,
@@ -606,6 +615,7 @@
 				40B2BFC223E40D8600F677CD /* AppDelegate.swift in Sources */,
 				40831449241A384C00DC2BE9 /* VideoEffectProcessorObject.mm in Sources */,
 				40B1DF04243F1CCE009B68C7 /* VideoColorMatrixFilter.m in Sources */,
+				40501A152445C5BC009DDBF6 /* constants.cpp in Sources */,
 				40076AD22416351F0052ED90 /* DebugHelper.swift in Sources */,
 				4018623924222E800003AF6F /* video_texture_cache.cpp in Sources */,
 				40831441241A2EEE00DC2BE9 /* video_effect.cpp in Sources */,
