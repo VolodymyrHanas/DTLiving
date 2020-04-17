@@ -23,7 +23,7 @@ public:
     VideoEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
     ~VideoEffect();
     
-    void Init();
+    virtual void Init();
     void SetPositions(GLfloat *positions);
     void SetTextureCoordinates(GLfloat *texture_coordinates);
     void SetUniform(const char *name, VideoEffectUniform uniform);
@@ -77,11 +77,6 @@ private:
     GLint u_orthographic_matrix_;
     bool is_orthographic_;
     bool ignore_aspect_ratio_;
-
-    // TODO: effect with two shader programs
-    // TODO: effect with two textures as input
-    // TODO: effect with time
-    
 };
 
 }
