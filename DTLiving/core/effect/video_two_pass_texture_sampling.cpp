@@ -11,17 +11,29 @@
 namespace dtliving {
 namespace effect {
 
-VideoTwoPassTextureSamplingEffect::VideoTwoPassTextureSamplingEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file,
-                                                                     const char *vertex_shader_file2, const char *fragment_shader_file2)
-: VideoTwoPassEffect(name, vertex_shader_file, fragment_shader_file,
-                     vertex_shader_file2, fragment_shader_file2) {
+VideoTwoPassTextureSamplingEffect::VideoTwoPassTextureSamplingEffect(std::string name)
+: VideoTwoPassEffect(name)
+, vertical_texel_spacing_(1)
+, horizontal_texel_spacing_(1) {
 }
 
-void VideoTwoPassTextureSamplingEffect::Init() {
-    Init();
+void VideoTwoPassTextureSamplingEffect::LoadUniform() {
+    VideoTwoPassEffect::LoadUniform();
+    
+    u_vertical_texelWidthOffset_ = program_->UniformLocation("u_texelWidthOffset");
+    u_vertical_texelHeightOffset_ = program_->UniformLocation("u_texelHeightOffset");
+    u_horizontal_texelWidthOffset_ = program2_->UniformLocation("u_texelWidthOffset");
+    u_horizontal_texelHeightOffset_ = program2_->UniformLocation("u_texelHeightOffset");
 }
 
-void VideoTwoPassTextureSamplingEffect::BeforeDrawArrays() {
+void VideoTwoPassTextureSamplingEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
+    if (program_index == 0) {
+        glUniform1f(u_vertical_texelWidthOffset_, 0);
+        glUniform1f(u_vertical_texelHeightOffset_, vertical_texel_spacing_ / height);
+    } else {
+        glUniform1f(u_horizontal_texelWidthOffset_, horizontal_texel_spacing_ / width);
+        glUniform1f(u_horizontal_texelHeightOffset_, 0);
+    }
 }
 
 }

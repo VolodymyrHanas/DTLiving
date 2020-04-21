@@ -48,3 +48,6 @@ const char *kVideoTransformEffect = "effect_transform";
 const char *kVideoTransformEffectTransformMatrix = "u_transformMatrix";
 
 const char *kVideoCropEffect = "effect_crop";
+
+const char *kVideoGaussianBlurEffect = "effect_gaussian_blur";
+const char *kVideoGaussianBlurEffectBlurRadiusInPixels = "blur_radius_in_pixels_";

@@ -13,11 +13,11 @@ namespace dtliving {
 namespace effect {
 namespace color_processing {
 
-VideoRGBEffect::VideoRGBEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
-: VideoEffect(name, vertex_shader_file, fragment_shader_file) {
+VideoRGBEffect::VideoRGBEffect(std::string name)
+: VideoEffect(name) {
 }
 
-void VideoRGBEffect::BeforeDrawArrays() {
+void VideoRGBEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoRGBEffectRed);
     auto uniform = uniforms_[std::string(kVideoRGBEffectRed)];
     glUniform1fv(location, 1, uniform.u_float);

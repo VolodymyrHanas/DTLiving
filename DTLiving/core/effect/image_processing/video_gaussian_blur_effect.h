@@ -20,17 +20,20 @@ namespace image_processing {
 
 class VideoGaussianBlurEffect: public VideoTwoPassTextureSamplingEffect {
 public:
-    VideoGaussianBlurEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file,
-                            const char *vertex_shader_file2, const char *fragment_shader_file2);
-
-    virtual void Init();
+    VideoGaussianBlurEffect(std::string name);
     
+    void LoadShaderSource();
+
 protected:
-    virtual void BeforeDrawArrays();
+    virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
 
 private:
     static std::string VertexShaderOptimized(int blur_radius, float sigma);
     static std::string FragmentShaderOptimized(int blur_radius, float sigma);
+    
+    GLfloat blur_radius_in_pixels_;
+    int blur_radius_;
+    float sigma_;
 };
 
 }

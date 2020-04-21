@@ -183,9 +183,9 @@ class CameraViewController: UIViewController {
         liveButton.setTitle("start living", for: .normal)
         settingsButton.setTitleColor(UIColor.white, for: .normal)
         settingsButton.setTitle("config settings", for: .normal)
-        slider.minimumValue = 0.2
-        slider.maximumValue = 1.0
-        slider.value = 0.5
+        slider.minimumValue = 0.0
+        slider.maximumValue = 24.0
+        slider.value = 2.0
         
         view.addSubview(recordButton)
         view.addSubview(liveButton)
@@ -231,9 +231,8 @@ class CameraViewController: UIViewController {
     }
     
     @objc private func sliderValueChanged(_ slider: UISlider) {
-        let filter = VideoCropFilter()
-        let height = CGFloat(slider.value)
-        filter.cropRegion = .init(x: 0, y: (1 - height) / 2, width: 1, height: height)
+        let filter = VideoGaussianBlurFilter()
+        filter.blurRadiusInPixels = CGFloat(slider.value)
         liveManager.updateFilter(filter)
     }
     

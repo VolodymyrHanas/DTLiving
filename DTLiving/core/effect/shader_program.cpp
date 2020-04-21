@@ -11,7 +11,13 @@
 namespace dtliving {
 namespace effect {
 
-ShaderProgram::ShaderProgram(const char *vertex_shader_file, const char *fragment_shader_file) {
+ShaderProgram::ShaderProgram() {
+}
+
+ShaderProgram::~ShaderProgram() {
+}
+
+void ShaderProgram::CompileFile(const char *vertex_shader_file, const char *fragment_shader_file) {
     std::ifstream vertex_shader_handle(vertex_shader_file);
     std::string vertex_shader_source;
     while (vertex_shader_handle) {
@@ -29,9 +35,13 @@ ShaderProgram::ShaderProgram(const char *vertex_shader_file, const char *fragmen
         fragment_shader_source += line;
     }
     fragment_shader_handle.close();
-    
-    GLuint vertex_shader = CompileShader(vertex_shader_source.c_str(), GL_VERTEX_SHADER);
-    GLuint fragment_shader = CompileShader(fragment_shader_source.c_str(), GL_FRAGMENT_SHADER);
+
+    CompileSource(vertex_shader_source.c_str(), fragment_shader_source.c_str());
+}
+
+void ShaderProgram::CompileSource(const char *vertex_shader_source, const char *fragment_shader_source) {
+    GLuint vertex_shader = CompileShader(vertex_shader_source, GL_VERTEX_SHADER);
+    GLuint fragment_shader = CompileShader(fragment_shader_source, GL_FRAGMENT_SHADER);
     
     GLuint program = glCreateProgram();
     glAttachShader(program, vertex_shader);
@@ -55,9 +65,6 @@ ShaderProgram::ShaderProgram(const char *vertex_shader_file, const char *fragmen
     }
     
     this->program_ = program;
-}
-
-ShaderProgram::~ShaderProgram() {
 }
 
 void ShaderProgram::Use() {

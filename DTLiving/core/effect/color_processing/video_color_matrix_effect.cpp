@@ -13,11 +13,11 @@ namespace dtliving {
 namespace effect {
 namespace color_processing {
 
-VideoColorMatrixEffect::VideoColorMatrixEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
-: VideoEffect(name, vertex_shader_file, fragment_shader_file) {
+VideoColorMatrixEffect::VideoColorMatrixEffect(std::string name)
+: VideoEffect(name) {
 }
 
-void VideoColorMatrixEffect::BeforeDrawArrays() {
+void VideoColorMatrixEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoColorMatrixEffectColorMatrix);
     auto uniform = uniforms_[std::string(kVideoColorMatrixEffectColorMatrix)];
     glUniformMatrix4fv(location, 1, false, uniform.u_float);

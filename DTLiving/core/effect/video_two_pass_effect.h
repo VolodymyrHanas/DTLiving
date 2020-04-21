@@ -16,23 +16,18 @@ namespace effect {
 
 class VideoTwoPassEffect: public VideoEffect {
 public:
-    VideoTwoPassEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file,
-                       const char *vertex_shader_file2, const char *fragment_shader_file2);
+    VideoTwoPassEffect(std::string name);
 
-    virtual void Init();
+    void LoadShaderSource2(std::string vertex_shader_source1, std::string fragment_shader_source1,
+                           std::string vertex_shader_source2, std::string fragment_shader_source2);
+    virtual void LoadUniform();
+    virtual void Render(VideoFrame input_frame, VideoFrame output_frame, GLfloat *positions, GLfloat *texture_coordinates);
 
-protected:
-    virtual void BeforeDrawArrays();
-    
+protected:    
     ShaderProgram *program2_;
-
-private:
-    const char *vertex_shader_file2_;
-    const char *fragment_shader_file2_;
-
     GLuint a_position2_;
-    
     GLuint a_texcoord2_;
+    GLint u_texture2_;
 };
 
 }

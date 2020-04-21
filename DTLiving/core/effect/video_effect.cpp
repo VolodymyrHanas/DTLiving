@@ -7,23 +7,56 @@
 //
 
 #include "video_effect.h"
+#include <sstream>
 
 namespace dtliving {
 namespace effect {
 
-VideoEffect::VideoEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
-: name_(std::string(name))
-, vertex_shader_file_(vertex_shader_file)
-, fragment_shader_file_(fragment_shader_file) {
+std::string VideoEffect::VertexShader() {
+    std::stringstream os;
+    os << "attribute vec4 a_position;\n";
+    os << "attribute vec4 a_texcoord;\n";
+    os << "\n";
+    os << "varying vec2 v_texcoord;\n";
+    os << "\n";
+    os << "void main() {\n";
+    os << "v_texcoord = a_texcoord.xy;\n";
+    os << "gl_Position = a_position;\n";
+    os << "}\n";
+    return os.str();
+}
+
+std::string VideoEffect::FragmentShader() {
+    std::stringstream os;
+    os << "varying highp vec2 v_texcoord;\n";
+    os << "\n";
+    os << "uniform sampler2D u_texture;\n";
+    os << "\n";
+    os << "void main() {\n";
+    os << "gl_FragColor = texture2D(u_texture, v_texcoord);\n";
+    os << "}\n";
+    return os.str();
+}
+
+VideoEffect::VideoEffect(std::string name)
+: name_(name) {
 }
 
 VideoEffect::~VideoEffect() {
     delete program_;
 }
 
-void VideoEffect::Init() {
-    program_ = new ShaderProgram(vertex_shader_file_, fragment_shader_file_);
-    
+void VideoEffect::LoadShaderFile(std::string vertex_shader_file, std::string fragment_shader_file) {
+    program_ = new ShaderProgram();
+    program_->CompileFile(vertex_shader_file.c_str(), fragment_shader_file.c_str());
+}
+
+void VideoEffect::LoadShaderSource(std::string vertex_shader_source, std::string fragment_shader_source) {
+    program_ = new ShaderProgram();
+    program_->CompileSource(vertex_shader_source.c_str(), fragment_shader_source.c_str());
+}
+
+void VideoEffect::LoadUniform() {
     a_position_ = program_->AttributeLocation("a_position");
     a_texcoord_ = program_->AttributeLocation("a_texcoord");
     u_texture_ = program_->UniformLocation("u_texture");
@@ -97,6 +130,8 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, GLfloa
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, output_frame.texture_name, 0);
+
     program_->Use();
     
     if (is_orthographic_) {
@@ -106,12 +141,9 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, GLfloa
         *(positions + 3) = -normalizedHeight;
         *(positions + 5) = normalizedHeight;
         *(positions + 7) = normalizedHeight;
-        
-        caculateOrthographicMatrix(GLfloat(output_frame.width),
-                                   GLfloat(output_frame.height));
     }
     
-    BeforeDrawArrays();
+    BeforeDrawArrays(output_frame.height, output_frame.width, 0);
     
     glClearColor(clear_color_red_, clear_color_green_, clear_color_blue_, clear_color_alpha_);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -137,6 +169,12 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, GLfloa
                           texture_coordinates);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+}
+
+void VideoEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
+    if (is_orthographic_) {
+        caculateOrthographicMatrix(width, height);
+    }
 }
 
 void VideoEffect::caculateOrthographicMatrix(GLfloat width, GLfloat height) {
@@ -169,8 +207,6 @@ void VideoEffect::caculateOrthographicMatrix(GLfloat width, GLfloat height) {
     
     glUniformMatrix4fv(u_orthographic_matrix_, 1, false, matrix);
 }
-
-void VideoEffect::BeforeDrawArrays() {}
 
 }
 }

@@ -13,11 +13,11 @@ namespace dtliving {
 namespace effect {
 namespace color_processing {
 
-VideoExposureEffect::VideoExposureEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
-: VideoEffect(name, vertex_shader_file, fragment_shader_file) {
+VideoExposureEffect::VideoExposureEffect(std::string name)
+: VideoEffect(name) {
 }
 
-void VideoExposureEffect::BeforeDrawArrays() {
+void VideoExposureEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoExposureEffectExposure);
     auto uniform = uniforms_[std::string(kVideoExposureEffectExposure)];
     glUniform1fv(location, 1, uniform.u_float);

@@ -22,7 +22,8 @@
     if (self) {
         NSString *vertexShaderFile = [NSBundle.mainBundle pathForResource:vertexShader ofType:@"glsl"];
         NSString *fragmentShaderFile = [NSBundle.mainBundle pathForResource:fragmentShader ofType:@"glsl"];
-        self.program = std::make_shared<dtliving::effect::ShaderProgram>([vertexShaderFile UTF8String], [fragmentShaderFile UTF8String]);
+        self.program = std::make_shared<dtliving::effect::ShaderProgram>();
+        self.program->CompileFile([vertexShaderFile UTF8String], [fragmentShaderFile UTF8String]);
     }
     return self;
 }

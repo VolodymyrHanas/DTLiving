@@ -21,9 +21,10 @@ namespace color_processing {
 
 class VideoGammaEffect: public VideoEffect {
 public:
-    VideoGammaEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
+    VideoGammaEffect(std::string name);
 
-    void BeforeDrawArrays();
+protected:
+    void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
 };
 
 }

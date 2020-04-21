@@ -16,13 +16,21 @@ namespace effect {
 
 class VideoTwoPassTextureSamplingEffect: public VideoTwoPassEffect {
 public:
-    VideoTwoPassTextureSamplingEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file,
-                                      const char *vertex_shader_file2, const char *fragment_shader_file2);
+    VideoTwoPassTextureSamplingEffect(std::string name);
 
-    virtual void Init();
+    virtual void LoadUniform();
 
 protected:
-    virtual void BeforeDrawArrays();
+    virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
+
+private:
+    GLint u_vertical_texelWidthOffset_;
+    GLint u_vertical_texelHeightOffset_;
+    GLint u_horizontal_texelWidthOffset_;
+    GLint u_horizontal_texelHeightOffset_;
+    
+    GLfloat vertical_texel_spacing_;
+    GLfloat horizontal_texel_spacing_;
 };
 
 }

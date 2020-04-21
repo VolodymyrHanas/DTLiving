@@ -17,3 +17,4 @@
 #import "VideoGrayScaleFilter.h"
 #import "VideoTransformFilter.h"
 #import "VideoCropFilter.h"
+#import "VideoGaussianBlurFilter.h"

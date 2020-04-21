@@ -13,11 +13,11 @@ namespace dtliving {
 namespace effect {
 namespace color_processing {
 
-VideoHueEffect::VideoHueEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
-: VideoEffect(name, vertex_shader_file, fragment_shader_file) {
+VideoHueEffect::VideoHueEffect(std::string name)
+: VideoEffect(name) {
 }
 
-void VideoHueEffect::BeforeDrawArrays() {
+void VideoHueEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoHueEffectHue);
     auto uniform = uniforms_[std::string(kVideoHueEffectHue)];
     glUniform1fv(location, 1, uniform.u_float);

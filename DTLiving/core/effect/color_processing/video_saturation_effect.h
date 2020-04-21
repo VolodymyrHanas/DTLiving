@@ -22,9 +22,10 @@ namespace color_processing {
 
 class VideoSaturationEffect: public VideoEffect {
 public:
-    VideoSaturationEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
+    VideoSaturationEffect(std::string name);
 
-    void BeforeDrawArrays();
+protected:
+    void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
 };
 
 }

@@ -33,11 +33,12 @@ class LiveManager {
         
         filterProcessor = VideoFilterProcessor()
         filterProcessor.addFilter(VideoSepiaFilter())
-        let filter = VideoCropFilter()
-        let height = 0.25
-        filter.cropRegion = .init(x: 0, y: (1 - height) / 2, width: 1, height: height)
-        filter.backgroundColorRed = 1;
-        filterProcessor.addFilter(filter)
+//        let filter = VideoCropFilter()
+//        let height = 0.25
+//        filter.cropRegion = .init(x: 0, y: (1 - height) / 2, width: 1, height: height)
+//        filter.backgroundColorRed = 1;
+//        filterProcessor.addFilter(filter)
+        filterProcessor.addFilter(VideoGaussianBlurFilter())
         
         preview = VideoView()
         

@@ -52,4 +52,7 @@ extern const char *kVideoTransformEffectTransformMatrix;
 
 extern const char *kVideoCropEffect;
 
+extern const char *kVideoGaussianBlurEffect;
+extern const char *kVideoGaussianBlurEffectBlurRadiusInPixels;
+
 #endif /* constants_h */

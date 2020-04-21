@@ -21,9 +21,11 @@ namespace effect {
 
 class ShaderProgram {
 public:
-    ShaderProgram(const char *vertex_shader_file, const char *fragment_shader_file);
+    ShaderProgram();
     ~ShaderProgram();
     
+    void CompileFile(const char *vertex_shader_file, const char *fragment_shader_file);
+    void CompileSource(const char *vertex_shader_source, const char *fragment_shader_source);
     void Use();
     void Delete();
     GLuint AttributeLocation(const char *name);

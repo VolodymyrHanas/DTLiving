@@ -13,11 +13,11 @@ namespace dtliving {
 namespace effect {
 namespace color_processing {
 
-VideoSaturationEffect::VideoSaturationEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
-: VideoEffect(name, vertex_shader_file, fragment_shader_file) {
+VideoSaturationEffect::VideoSaturationEffect(std::string name)
+: VideoEffect(name) {
 }
 
-void VideoSaturationEffect::BeforeDrawArrays() {
+void VideoSaturationEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoSaturationEffectSaturation);
     auto uniform = uniforms_[std::string(kVideoSaturationEffectSaturation)];
     glUniform1fv(location, 1, uniform.u_float);

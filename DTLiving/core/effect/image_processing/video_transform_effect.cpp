@@ -13,12 +13,12 @@ namespace dtliving {
 namespace effect {
 namespace image_processing {
 
-VideoTransformEffect::VideoTransformEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
-: VideoEffect(name, vertex_shader_file, fragment_shader_file) {
+VideoTransformEffect::VideoTransformEffect(std::string name)
+: VideoEffect(name) {
     set_is_orthographic(true);
 }
 
-void VideoTransformEffect::BeforeDrawArrays() {
+void VideoTransformEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoTransformEffectTransformMatrix);
     auto uniform = uniforms_[std::string(kVideoTransformEffectTransformMatrix)];
     glUniformMatrix4fv(location, 1, false, uniform.u_float);

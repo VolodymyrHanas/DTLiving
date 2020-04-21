@@ -15,22 +15,52 @@ namespace dtliving {
 namespace effect {
 namespace image_processing {
 
-VideoGaussianBlurEffect::VideoGaussianBlurEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file,
-                                                 const char *vertex_shader_file2, const char *fragment_shader_file2)
-: VideoTwoPassTextureSamplingEffect(name, vertex_shader_file, fragment_shader_file,
-                                    vertex_shader_file2, fragment_shader_file2) {
-    auto gaussian_blur_vertex = VertexShaderOptimized(1.0, 1.0);
-    auto gaussian_blur_fragment = FragmentShaderOptimized(1.0, 1.0);
+VideoGaussianBlurEffect::VideoGaussianBlurEffect(std::string name)
+: VideoTwoPassTextureSamplingEffect(name)
+, blur_radius_in_pixels_(2.0)
+, blur_radius_(4)
+, sigma_(2.0) {
 }
 
-void VideoGaussianBlurEffect::Init() {
-    Init();
+void VideoGaussianBlurEffect::LoadShaderSource() {
+    auto gaussian_blur_vertex = VertexShaderOptimized(blur_radius_, sigma_);
+    auto gaussian_blur_fragment = FragmentShaderOptimized(blur_radius_, sigma_);
+//    std::cout << gaussian_blur_vertex << std::endl;
+//    std::cout << gaussian_blur_fragment << std::endl;
+    LoadShaderSource2(gaussian_blur_vertex, gaussian_blur_fragment,
+                      gaussian_blur_vertex, gaussian_blur_fragment);
 }
 
-void VideoGaussianBlurEffect::BeforeDrawArrays() {
+void VideoGaussianBlurEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
+    auto uniform = uniforms_[std::string(kVideoGaussianBlurEffectBlurRadiusInPixels)];
+    GLfloat blur_radius_in_pixels = *(uniform.u_float);
+    if (std::round(blur_radius_in_pixels) != blur_radius_in_pixels_) {
+        blur_radius_in_pixels_ = std::round(blur_radius_in_pixels);
+        
+        int blur_radius = 0;
+        if (blur_radius_in_pixels_ >= 1) // Avoid a divide-by-zero error here
+        {
+            // Calculate the number of pixels to sample from by setting a bottom limit for the contribution of the outermost pixel
+            GLfloat minimum_weight_to_find_edge_of_sampling_area = 1.0 / 256.0;
+            blur_radius = std::floor(std::sqrt(-2.0 * std::pow(blur_radius_in_pixels_, 2.0) * std::log(minimum_weight_to_find_edge_of_sampling_area * std::sqrt(2.0 * M_PI * std::pow(blur_radius_in_pixels_, 2.0)))));
+            blur_radius += blur_radius % 2; // There's nothing to gain from handling odd radius sizes, due to the optimizations I use
+        }
+        
+        blur_radius_ = blur_radius;
+        sigma_ = blur_radius_in_pixels_;
+        
+        LoadShaderSource();
+        LoadUniform();
+    }
+
+    VideoTwoPassTextureSamplingEffect::BeforeDrawArrays(width, height, program_index);
 }
 
 std::string VideoGaussianBlurEffect::VertexShaderOptimized(int blur_radius, float sigma) {
+    if (blur_radius < 1) {
+        return VideoEffect::VertexShader();
+    }
+    
     // First, generate the normal Gaussian weights for a given sigma
     GLfloat *standard_gaussian_weights = new GLfloat[blur_radius + 1];
     GLfloat sum_of_weights = 0.0;
@@ -82,6 +112,10 @@ std::string VideoGaussianBlurEffect::VertexShaderOptimized(int blur_radius, floa
 }
 
 std::string VideoGaussianBlurEffect::FragmentShaderOptimized(int blur_radius, float sigma) {
+    if (blur_radius < 1) {
+        return VideoEffect::FragmentShader();
+    }
+    
     // First, generate the normal Gaussian weights for a given sigma
     GLfloat *standard_gaussian_weights = new GLfloat[blur_radius + 1];
     GLfloat sum_of_weights = 0.0;
@@ -104,7 +138,7 @@ std::string VideoGaussianBlurEffect::FragmentShaderOptimized(int blur_radius, fl
     int true_number_of_optimized_offsets = blur_radius / 2 + (blur_radius % 2);
 
     std::stringstream os;
-    os << "varying vec2 v_blurCoordinates[" << (1 + number_of_optimized_offsets * 2) << "];\n";
+    os << "varying highp vec2 v_blurCoordinates[" << (1 + number_of_optimized_offsets * 2) << "];\n";
     os << "\n";
     os << "uniform sampler2D u_texture;\n";
     os << "uniform highp float u_texelWidthOffset;\n";

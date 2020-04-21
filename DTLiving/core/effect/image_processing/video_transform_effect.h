@@ -18,12 +18,10 @@ namespace image_processing {
 
 class VideoTransformEffect: public VideoEffect {
 public:
-    VideoTransformEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
-
-    void Render(VideoFrame input_frame, VideoFrame output_frame);
+    VideoTransformEffect(std::string name);
 
 protected:
-    void BeforeDrawArrays();
+    void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
 };
 
 }

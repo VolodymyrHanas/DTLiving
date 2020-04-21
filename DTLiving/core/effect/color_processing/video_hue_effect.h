@@ -21,9 +21,10 @@ namespace color_processing {
 
 class VideoHueEffect: public VideoEffect {
 public:
-    VideoHueEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
+    VideoHueEffect(std::string name);
 
-    void BeforeDrawArrays();
+protected:
+    void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
 };
 
 }

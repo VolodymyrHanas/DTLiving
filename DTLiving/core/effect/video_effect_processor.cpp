@@ -21,6 +21,7 @@
 #include "video_rgb_effect.h"
 #include "video_hue_effect.h"
 #include "video_transform_effect.h"
+#include "video_gaussian_blur_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -32,36 +33,45 @@ VideoEffectProcessor::~VideoEffectProcessor() {
 }
 
 void VideoEffectProcessor::Init(const char *vertex_shader_file, const char *fragment_shader_file) {
-    no_effect_ = new VideoEffect("no_effect", vertex_shader_file, fragment_shader_file);
-    no_effect_->Init();
+    no_effect_ = new VideoEffect("no_effect");
+    no_effect_->LoadShaderFile(vertex_shader_file, fragment_shader_file);
 }
 
 void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file) {
     VideoEffect *effect;
+    bool isLoad = false;
     if (std::strcmp(name, kVideoBrightnessEffect) == 0) {
-        effect = new color_processing::VideoBrightnessEffect(name, vertex_shader_file, fragment_shader_file);
+        effect = new color_processing::VideoBrightnessEffect(name);
     } else if (std::strcmp(name, kVideoExposureEffect) == 0) {
-        effect = new color_processing::VideoExposureEffect(name, vertex_shader_file, fragment_shader_file);
+        effect = new color_processing::VideoExposureEffect(name);
     } else if (std::strcmp(name, kVideoContrastEffect) == 0) {
-        effect = new color_processing::VideoContrastEffect(name, vertex_shader_file, fragment_shader_file);
+        effect = new color_processing::VideoContrastEffect(name);
     } else if (std::strcmp(name, kVideoSaturationEffect) == 0) {
-        effect = new color_processing::VideoSaturationEffect(name, vertex_shader_file, fragment_shader_file);
+        effect = new color_processing::VideoSaturationEffect(name);
     } else if (std::strcmp(name, kVideoGammaEffect) == 0) {
-        effect = new color_processing::VideoGammaEffect(name, vertex_shader_file, fragment_shader_file);
+        effect = new color_processing::VideoGammaEffect(name);
     } else if (std::strcmp(name, kVideoLevelsEffect) == 0) {
-        effect = new color_processing::VideoLevelsEffect(name, vertex_shader_file, fragment_shader_file);
+        effect = new color_processing::VideoLevelsEffect(name);
     } else if (std::strcmp(name, kVideoColorMatrixEffect) == 0) {
-        effect = new color_processing::VideoColorMatrixEffect(name, vertex_shader_file, fragment_shader_file);
+        effect = new color_processing::VideoColorMatrixEffect(name);
     } else if (std::strcmp(name, kVideoRGBEffect) == 0) {
-        effect = new color_processing::VideoRGBEffect(name, vertex_shader_file, fragment_shader_file);
+        effect = new color_processing::VideoRGBEffect(name);
     } else if (std::strcmp(name, kVideoHueEffect) == 0) {
-        effect = new color_processing::VideoHueEffect(name, vertex_shader_file, fragment_shader_file);
+        effect = new color_processing::VideoHueEffect(name);
     } else if (std::strcmp(name, kVideoTransformEffect) == 0) {
-        effect = new image_processing::VideoTransformEffect(name, vertex_shader_file, fragment_shader_file);
+        effect = new image_processing::VideoTransformEffect(name);
+    } else if (std::strcmp(name, kVideoGaussianBlurEffect) == 0) {
+        auto blurEffect = new image_processing::VideoGaussianBlurEffect(name);
+        blurEffect->LoadShaderSource();
+        effect = blurEffect;
+        isLoad = true;
     } else {
-        effect = new VideoEffect(name, vertex_shader_file, fragment_shader_file);
+        effect = new VideoEffect(name);
     }
-    effect->Init();
+    if (!isLoad) {
+        effect->LoadShaderFile(std::string(vertex_shader_file), std::string(fragment_shader_file));
+    }
+    effect->LoadUniform();
     effects_.push_back(effect);
 }
 
@@ -119,7 +129,6 @@ void VideoEffectProcessor::SetEffectParamFloat(const char *name, const char *par
 
 void VideoEffectProcessor::Process(VideoFrame input_frame, VideoFrame output_frame) {
     if (effects_.empty()) {
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, output_frame.texture_name, 0);
         no_effect_->Render(input_frame, output_frame);
     } else {
         int count = 0;
@@ -139,7 +148,6 @@ void VideoEffectProcessor::Process(VideoFrame input_frame, VideoFrame output_fra
                     current_texture->get_height()
                 };
             }
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, current_frame.texture_name, 0);
             effect->Render(previous_frame, current_frame);
             previous_frame = current_frame;
             if (previous_texture != nullptr) {

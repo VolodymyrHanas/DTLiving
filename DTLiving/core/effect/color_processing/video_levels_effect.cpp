@@ -13,11 +13,11 @@ namespace dtliving {
 namespace effect {
 namespace color_processing {
 
-VideoLevelsEffect::VideoLevelsEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
-: VideoEffect(name, vertex_shader_file, fragment_shader_file) {
+VideoLevelsEffect::VideoLevelsEffect(std::string name)
+: VideoEffect(name) {
 }
 
-void VideoLevelsEffect::BeforeDrawArrays() {
+void VideoLevelsEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoLevelsEffectLevelMaximum);
     auto uniform = uniforms_[std::string(kVideoLevelsEffectLevelMaximum)];
     glUniform3fv(location, 1, uniform.u_float);

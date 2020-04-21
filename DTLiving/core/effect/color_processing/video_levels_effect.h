@@ -18,9 +18,10 @@ namespace color_processing {
 
 class VideoLevelsEffect: public VideoEffect {
 public:
-    VideoLevelsEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
+    VideoLevelsEffect(std::string name);
 
-    void BeforeDrawArrays();
+protected:
+    void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
 };
 
 }

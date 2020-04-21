@@ -31,6 +31,7 @@
 		40501A152445C5BC009DDBF6 /* constants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40501A142445C5BC009DDBF6 /* constants.cpp */; };
 		40501A182446DE64009DDBF6 /* VideoCropFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 40501A172446DE64009DDBF6 /* VideoCropFilter.m */; };
 		40501A1B24472F75009DDBF6 /* video_two_pass_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40501A1924472F75009DDBF6 /* video_two_pass_effect.cpp */; };
+		40664219244DA0DB005C75EE /* VideoGaussianBlurFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 40664218244DA0DB005C75EE /* VideoGaussianBlurFilter.m */; };
 		40831441241A2EEE00DC2BE9 /* video_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4083143F241A2EEE00DC2BE9 /* video_effect.cpp */; };
 		40831444241A2F1300DC2BE9 /* shader_program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40831442241A2F1300DC2BE9 /* shader_program.cpp */; };
 		40831449241A384C00DC2BE9 /* VideoEffectProcessorObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 40831448241A384C00DC2BE9 /* VideoEffectProcessorObject.mm */; };
@@ -110,6 +111,8 @@
 		40501A172446DE64009DDBF6 /* VideoCropFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCropFilter.m; sourceTree = "<group>"; };
 		40501A1924472F75009DDBF6 /* video_two_pass_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_two_pass_effect.cpp; sourceTree = "<group>"; };
 		40501A1A24472F75009DDBF6 /* video_two_pass_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_two_pass_effect.h; sourceTree = "<group>"; };
+		40664217244DA0DB005C75EE /* VideoGaussianBlurFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoGaussianBlurFilter.h; sourceTree = "<group>"; };
+		40664218244DA0DB005C75EE /* VideoGaussianBlurFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoGaussianBlurFilter.m; sourceTree = "<group>"; };
 		4083143B241A2D9C00DC2BE9 /* DTLiving-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DTLiving-Bridging-Header.h"; sourceTree = "<group>"; };
 		4083143F241A2EEE00DC2BE9 /* video_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_effect.cpp; sourceTree = "<group>"; };
 		40831440241A2EEE00DC2BE9 /* video_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_effect.h; sourceTree = "<group>"; };
@@ -333,6 +336,8 @@
 				40361D6A2444081E00DC254F /* VideoTransformFilter.m */,
 				40501A162446DE64009DDBF6 /* VideoCropFilter.h */,
 				40501A172446DE64009DDBF6 /* VideoCropFilter.m */,
+				40664217244DA0DB005C75EE /* VideoGaussianBlurFilter.h */,
+				40664218244DA0DB005C75EE /* VideoGaussianBlurFilter.m */,
 			);
 			path = ImageProcessing;
 			sourceTree = "<group>";
@@ -618,6 +623,7 @@
 				40B1DF01243F1A07009B68C7 /* video_color_matrix_effect.cpp in Sources */,
 				40501A182446DE64009DDBF6 /* VideoCropFilter.m in Sources */,
 				401862332420DD5A0003AF6F /* VideoBrightnessFilter.m in Sources */,
+				40664219244DA0DB005C75EE /* VideoGaussianBlurFilter.m in Sources */,
 				40AC6687240923B900E281AC /* VideoInput.swift in Sources */,
 				4037C6422411090A006C2FC7 /* VideoView.swift in Sources */,
 				40F30573243C6DA00022B263 /* VideoContrastFilter.m in Sources */,

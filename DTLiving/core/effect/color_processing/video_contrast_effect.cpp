@@ -13,11 +13,11 @@ namespace dtliving {
 namespace effect {
 namespace color_processing {
 
-VideoContrastEffect::VideoContrastEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
-: VideoEffect(name, vertex_shader_file, fragment_shader_file) {
+VideoContrastEffect::VideoContrastEffect(std::string name)
+: VideoEffect(name) {
 }
 
-void VideoContrastEffect::BeforeDrawArrays() {
+void VideoContrastEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoContrastEffectContrast);
     auto uniform = uniforms_[std::string(kVideoContrastEffectContrast)];
     glUniform1fv(location, 1, uniform.u_float);

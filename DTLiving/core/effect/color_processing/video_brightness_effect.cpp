@@ -13,11 +13,11 @@ namespace dtliving {
 namespace effect {
 namespace color_processing {
 
-VideoBrightnessEffect::VideoBrightnessEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file)
-: VideoEffect(name, vertex_shader_file, fragment_shader_file) {
+VideoBrightnessEffect::VideoBrightnessEffect(std::string name)
+: VideoEffect(name) {
 }
 
-void VideoBrightnessEffect::BeforeDrawArrays() {
+void VideoBrightnessEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoBrightnessEffectBrightness);
     auto uniform = uniforms_[std::string(kVideoBrightnessEffectBrightness)];
     glUniform1fv(location, 1, uniform.u_float);        
