@@ -55,4 +55,7 @@ extern const char *kVideoCropEffect;
 extern const char *kVideoGaussianBlurEffect;
 extern const char *kVideoGaussianBlurEffectBlurRadiusInPixels;
 
+extern const char *kVideoBoxBlurEffect;
+extern const char *kVideoBoxBlurEffectBlurRadiusInPixels;
+
 #endif /* constants_h */

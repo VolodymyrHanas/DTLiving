@@ -32,13 +32,14 @@ class LiveManager {
         camera = VideoCamera(position: .back, presets: [.hd1280x720])
         
         filterProcessor = VideoFilterProcessor()
-        filterProcessor.addFilter(VideoSepiaFilter())
+        filterProcessor.addFilter(VideoGrayScaleFilter())
 //        let filter = VideoCropFilter()
 //        let height = 0.25
 //        filter.cropRegion = .init(x: 0, y: (1 - height) / 2, width: 1, height: height)
 //        filter.backgroundColorRed = 1;
 //        filterProcessor.addFilter(filter)
-        filterProcessor.addFilter(VideoGaussianBlurFilter())
+        let filter = VideoBoxBlurFilter()        
+        filterProcessor.addFilter(filter)
         
         preview = VideoView()
         

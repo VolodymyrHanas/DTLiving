@@ -23,12 +23,10 @@ VideoGaussianBlurEffect::VideoGaussianBlurEffect(std::string name)
 }
 
 void VideoGaussianBlurEffect::LoadShaderSource() {
-    auto gaussian_blur_vertex = VertexShaderOptimized(blur_radius_, sigma_);
-    auto gaussian_blur_fragment = FragmentShaderOptimized(blur_radius_, sigma_);
-//    std::cout << gaussian_blur_vertex << std::endl;
-//    std::cout << gaussian_blur_fragment << std::endl;
-    LoadShaderSource2(gaussian_blur_vertex, gaussian_blur_fragment,
-                      gaussian_blur_vertex, gaussian_blur_fragment);
+    auto blur_vertex = VertexShaderOptimized(blur_radius_, sigma_);
+    auto blur_fragment = FragmentShaderOptimized(blur_radius_, sigma_);
+    LoadShaderSource2(blur_vertex, blur_fragment,
+                      blur_vertex, blur_fragment);
 }
 
 void VideoGaussianBlurEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {

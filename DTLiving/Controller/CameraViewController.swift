@@ -231,7 +231,7 @@ class CameraViewController: UIViewController {
     }
     
     @objc private func sliderValueChanged(_ slider: UISlider) {
-        let filter = VideoGaussianBlurFilter()
+        let filter = VideoBoxBlurFilter()
         filter.blurRadiusInPixels = CGFloat(slider.value)
         liveManager.updateFilter(filter)
     }

@@ -22,6 +22,7 @@
 #include "video_hue_effect.h"
 #include "video_transform_effect.h"
 #include "video_gaussian_blur_effect.h"
+#include "video_box_blur_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -62,6 +63,11 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
         effect = new image_processing::VideoTransformEffect(name);
     } else if (std::strcmp(name, kVideoGaussianBlurEffect) == 0) {
         auto blurEffect = new image_processing::VideoGaussianBlurEffect(name);
+        blurEffect->LoadShaderSource();
+        effect = blurEffect;
+        isLoad = true;
+    } else if (std::strcmp(name, kVideoBoxBlurEffect) == 0) {
+        auto blurEffect = new image_processing::VideoBoxBlurEffect(name);
         blurEffect->LoadShaderSource();
         effect = blurEffect;
         isLoad = true;

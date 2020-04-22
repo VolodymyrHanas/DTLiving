@@ -51,3 +51,6 @@ const char *kVideoCropEffect = "effect_crop";
 
 const char *kVideoGaussianBlurEffect = "effect_gaussian_blur";
 const char *kVideoGaussianBlurEffectBlurRadiusInPixels = "blur_radius_in_pixels_";
+
+const char *kVideoBoxBlurEffect = "effect_box_blur";
+const char *kVideoBoxBlurEffectBlurRadiusInPixels = "blur_radius_in_pixels_";
