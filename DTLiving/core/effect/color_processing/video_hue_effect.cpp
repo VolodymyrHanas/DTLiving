@@ -20,7 +20,7 @@ VideoHueEffect::VideoHueEffect(std::string name)
 void VideoHueEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoHueEffectHue);
     auto uniform = uniforms_[std::string(kVideoHueEffectHue)];
-    glUniform1fv(location, 1, uniform.u_float);
+    glUniform1fv(location, 1, uniform.u_float.data());
 }
 
 }

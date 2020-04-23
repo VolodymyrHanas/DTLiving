@@ -20,7 +20,7 @@ VideoBrightnessEffect::VideoBrightnessEffect(std::string name)
 void VideoBrightnessEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoBrightnessEffectBrightness);
     auto uniform = uniforms_[std::string(kVideoBrightnessEffectBrightness)];
-    glUniform1fv(location, 1, uniform.u_float);        
+    glUniform1fv(location, 1, uniform.u_float.data());        
 }
 
 }

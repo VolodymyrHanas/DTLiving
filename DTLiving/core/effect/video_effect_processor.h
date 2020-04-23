@@ -28,8 +28,8 @@ public:
     void SetIgnoreAspectRatio(const char *name, bool ignore_aspect_ratio);
     void SetPositions(const char *name, GLfloat *positions);
     void SetTextureCoordinates(const char *name, GLfloat *texture_coordinates);
-    void SetEffectParamInt(const char *name, const char *param, GLint *value);
-    void SetEffectParamFloat(const char *name, const char *param, GLfloat *value);
+    void SetEffectParamInt(const char *name, const char *param, GLint *value, int size);
+    void SetEffectParamFloat(const char *name, const char *param, GLfloat *value, int size);
     void Process(VideoFrame input_frame, VideoFrame output_frame);
     // TODO: switch effect
 private:

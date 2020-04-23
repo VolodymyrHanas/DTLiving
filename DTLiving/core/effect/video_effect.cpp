@@ -39,7 +39,11 @@ std::string VideoEffect::FragmentShader() {
 }
 
 VideoEffect::VideoEffect(std::string name)
-: name_(name) {
+: name_(name)
+, positions_({ -1, -1, 1, -1, -1, 1, 1, 1 })
+, texture_coordinates_({ 0, 0, 1, 0, 0, 1, 1, 1 })
+, is_orthographic_(false)
+, ignore_aspect_ratio_(false) {
 }
 
 VideoEffect::~VideoEffect() {
@@ -65,65 +69,23 @@ void VideoEffect::LoadUniform() {
     }
 }
 
-void VideoEffect::SetPositions(GLfloat *positions) {
-    if (positions_ != nullptr) {
-        delete[] positions_;
-    }
+void VideoEffect::SetPositions(std::vector<GLfloat> positions) {
     positions_ = positions;
 }
 
-void VideoEffect::SetTextureCoordinates(GLfloat *texture_coordinates) {
-    if (texture_coordinates_ != nullptr) {
-        delete[] texture_coordinates_;
-    }
+void VideoEffect::SetTextureCoordinates(std::vector<GLfloat> texture_coordinates) {
     texture_coordinates_ = texture_coordinates;
 }
 
-void VideoEffect::SetUniform(const char *name, VideoEffectUniform uniform) {
-    std::string key = std::string(name);
-    auto search = uniforms_.find(key);
-    if (search != uniforms_.end()) {
-        if (search->second.u_int != nullptr) {
-            delete[] search->second.u_int;
-        }
-        if (search->second.u_float != nullptr) {
-            delete[] search->second.u_float;
-        }
-    }
-    uniforms_[key] = uniform;
+void VideoEffect::SetUniform(std::string name, VideoEffectUniform uniform) {
+    uniforms_[name] = uniform;
 }
 
 void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame) {
-    GLfloat *positions = nullptr;
-    if (positions_ != nullptr) {
-        positions = positions_;
-    } else {
-        GLfloat default_positions[] = {
-            -1.0f, -1.0f,
-            1.0f, -1.0f,
-            -1.0f, 1.0f,
-            1.0f, 1.0f
-        };
-        positions = default_positions;
-    }
-    
-    GLfloat *texture_coordinates = nullptr;
-    if (texture_coordinates_ != nullptr) {
-        texture_coordinates = texture_coordinates_;
-    } else {
-        GLfloat default_texture_coordinates[] = {
-            0.0f, 0.0f,
-            1.0f, 0.0f,
-            0.0f, 1.0f,
-            1.0f, 1.0f
-        };
-        texture_coordinates = default_texture_coordinates;
-    }
-    
-    Render(input_frame, output_frame, positions, texture_coordinates);
+    Render(input_frame, output_frame, positions_, texture_coordinates_);
 }
 
-void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, GLfloat *positions, GLfloat *texture_coordinates) {
+void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, std::vector<GLfloat> positions, std::vector<GLfloat> texture_coordinates) {
     glBindTexture(GL_TEXTURE_2D, input_frame.texture_name);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -137,10 +99,10 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, GLfloa
     if (is_orthographic_) {
         // for right now, input frame size == output frame size == view port
         GLfloat normalizedHeight = GLfloat(output_frame.height) / GLfloat(output_frame.width);
-        *(positions + 1) = -normalizedHeight;
-        *(positions + 3) = -normalizedHeight;
-        *(positions + 5) = normalizedHeight;
-        *(positions + 7) = normalizedHeight;
+        positions[1] = -normalizedHeight;
+        positions[3] = -normalizedHeight;
+        positions[5] = normalizedHeight;
+        positions[7] = normalizedHeight;
     }
     
     BeforeDrawArrays(output_frame.height, output_frame.width, 0);
@@ -158,7 +120,7 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, GLfloa
                           GL_FLOAT,
                           GL_FALSE,
                           0,
-                          positions);
+                          positions.data());
     
     glEnableVertexAttribArray(a_texcoord_);
     glVertexAttribPointer(a_texcoord_,
@@ -166,7 +128,7 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, GLfloa
                           GL_FLOAT,
                           GL_FALSE,
                           0,
-                          texture_coordinates);
+                          texture_coordinates.data());
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }

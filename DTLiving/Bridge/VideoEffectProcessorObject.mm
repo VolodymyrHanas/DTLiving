@@ -57,7 +57,8 @@
             }
             self.processor->SetEffectParamInt([filter.name UTF8String],
                                               [key UTF8String],
-                                              ints);
+                                              ints,
+                                              count);
         }
     }
     NSDictionary<NSString*, NSArray<NSNumber*>*> *floatParams = filter.floatParams;
@@ -65,14 +66,15 @@
         for (NSString *key in floatParams) {
             NSArray<NSNumber*> *values = floatParams[key];
             int count = int(values.count);
-            GLfloat *floats = new GLfloat[count];
+            GLfloat floats[count];
             for (int i = 0; i < count; i++) {
                 NSNumber *value = values[i];
                 floats[i] = value.floatValue;
             }
             self.processor->SetEffectParamFloat([filter.name UTF8String],
                                                 [key UTF8String],
-                                                floats);
+                                                floats,
+                                                count);
         }
     }
     NSArray<NSNumber*> *positions = filter.positions;

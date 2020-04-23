@@ -31,7 +31,7 @@ void VideoGaussianBlurEffect::LoadShaderSource() {
 
 void VideoGaussianBlurEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     auto uniform = uniforms_[std::string(kVideoGaussianBlurEffectBlurRadiusInPixels)];
-    GLfloat blur_radius_in_pixels = *(uniform.u_float);
+    GLfloat blur_radius_in_pixels = uniform.u_float.front();
     if (std::round(blur_radius_in_pixels) != blur_radius_in_pixels_) {
         blur_radius_in_pixels_ = std::round(blur_radius_in_pixels);
         

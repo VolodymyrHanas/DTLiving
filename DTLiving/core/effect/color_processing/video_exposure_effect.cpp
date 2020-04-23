@@ -20,7 +20,7 @@ VideoExposureEffect::VideoExposureEffect(std::string name)
 void VideoExposureEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoExposureEffectExposure);
     auto uniform = uniforms_[std::string(kVideoExposureEffectExposure)];
-    glUniform1fv(location, 1, uniform.u_float);
+    glUniform1fv(location, 1, uniform.u_float.data());
 }
 
 }

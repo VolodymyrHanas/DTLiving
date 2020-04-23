@@ -20,7 +20,7 @@ VideoContrastEffect::VideoContrastEffect(std::string name)
 void VideoContrastEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoContrastEffectContrast);
     auto uniform = uniforms_[std::string(kVideoContrastEffectContrast)];
-    glUniform1fv(location, 1, uniform.u_float);
+    glUniform1fv(location, 1, uniform.u_float.data());
 }
 
 }

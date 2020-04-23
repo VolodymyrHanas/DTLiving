@@ -11,13 +11,14 @@
 
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
+#include <vector>
 
 namespace dtliving {
 namespace effect {
 
 struct VideoEffectUniform {
-    GLint *u_int = nullptr;
-    GLfloat *u_float = nullptr;
+    std::vector<GLint> u_int;
+    std::vector<GLfloat> u_float;
 };
 
 }

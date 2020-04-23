@@ -100,7 +100,7 @@ void VideoEffectProcessor::SetIgnoreAspectRatio(const char *name, bool ignore_as
 void VideoEffectProcessor::SetPositions(const char *name, GLfloat *positions) {
     for(VideoEffect *effect : effects_) {
         if (effect->get_name() == std::string(name)) {
-            effect->SetPositions(positions);
+            effect->SetPositions(std::vector<GLfloat>(positions, positions + 8));
         }
     }
 }
@@ -108,27 +108,27 @@ void VideoEffectProcessor::SetPositions(const char *name, GLfloat *positions) {
 void VideoEffectProcessor::SetTextureCoordinates(const char *name, GLfloat *texture_coordinates) {
     for(VideoEffect *effect : effects_) {
         if (effect->get_name() == std::string(name)) {
-            effect->SetTextureCoordinates(texture_coordinates);
+            effect->SetTextureCoordinates(std::vector<GLfloat>(texture_coordinates, texture_coordinates + 8));
         }
     }
 }
 
-void VideoEffectProcessor::SetEffectParamInt(const char *name, const char *param, GLint *value) {
+void VideoEffectProcessor::SetEffectParamInt(const char *name, const char *param, GLint *value, int size) {
     for(VideoEffect *effect : effects_) {
         if (effect->get_name() == std::string(name)) {
             VideoEffectUniform uniform;
-            uniform.u_int = value;
-            effect->SetUniform(param, uniform);
+            uniform.u_int = std::vector<GLint>(value, value + size);
+            effect->SetUniform(std::string(param), uniform);
         }
     }
 }
 
-void VideoEffectProcessor::SetEffectParamFloat(const char *name, const char *param, GLfloat *value) {
+void VideoEffectProcessor::SetEffectParamFloat(const char *name, const char *param, GLfloat *value, int size) {
     for(VideoEffect *effect : effects_) {
         if (effect->get_name() == std::string(name)) {
             VideoEffectUniform uniform;
-            uniform.u_float = value;
-            effect->SetUniform(param, uniform);
+            uniform.u_float = std::vector<GLfloat>(value, value + size);
+            effect->SetUniform(std::string(param), uniform);
         }
     }
 }

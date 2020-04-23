@@ -20,7 +20,7 @@ VideoGammaEffect::VideoGammaEffect(std::string name)
 void VideoGammaEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoGammaEffectGamma);
     auto uniform = uniforms_[std::string(kVideoGammaEffectGamma)];
-    glUniform1fv(location, 1, uniform.u_float);
+    glUniform1fv(location, 1, uniform.u_float.data());
 }
 
 }

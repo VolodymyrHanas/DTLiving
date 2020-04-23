@@ -20,11 +20,11 @@ VideoColorMatrixEffect::VideoColorMatrixEffect(std::string name)
 void VideoColorMatrixEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoColorMatrixEffectColorMatrix);
     auto uniform = uniforms_[std::string(kVideoColorMatrixEffectColorMatrix)];
-    glUniformMatrix4fv(location, 1, false, uniform.u_float);
+    glUniformMatrix4fv(location, 1, false, uniform.u_float.data());
     
     location = program_->UniformLocation(kVideoColorMatrixEffectIntensity);
     uniform = uniforms_[std::string(kVideoColorMatrixEffectIntensity)];
-    glUniform1fv(location, 1, uniform.u_float);
+    glUniform1fv(location, 1, uniform.u_float.data());
 }
 
 }

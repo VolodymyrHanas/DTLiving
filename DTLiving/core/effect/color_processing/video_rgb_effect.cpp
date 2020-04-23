@@ -20,15 +20,15 @@ VideoRGBEffect::VideoRGBEffect(std::string name)
 void VideoRGBEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoRGBEffectRed);
     auto uniform = uniforms_[std::string(kVideoRGBEffectRed)];
-    glUniform1fv(location, 1, uniform.u_float);
+    glUniform1fv(location, 1, uniform.u_float.data());
 
     location = program_->UniformLocation(kVideoRGBEffectGreen);
     uniform = uniforms_[std::string(kVideoRGBEffectGreen)];
-    glUniform1fv(location, 1, uniform.u_float);
+    glUniform1fv(location, 1, uniform.u_float.data());
 
     location = program_->UniformLocation(kVideoRGBEffectBlue);
     uniform = uniforms_[std::string(kVideoRGBEffectBlue)];
-    glUniform1fv(location, 1, uniform.u_float);
+    glUniform1fv(location, 1, uniform.u_float.data());
 }
 
 }

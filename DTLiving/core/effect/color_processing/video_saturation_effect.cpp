@@ -20,7 +20,7 @@ VideoSaturationEffect::VideoSaturationEffect(std::string name)
 void VideoSaturationEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     GLint location = program_->UniformLocation(kVideoSaturationEffectSaturation);
     auto uniform = uniforms_[std::string(kVideoSaturationEffectSaturation)];
-    glUniform1fv(location, 1, uniform.u_float);
+    glUniform1fv(location, 1, uniform.u_float.data());
 }
 
 }

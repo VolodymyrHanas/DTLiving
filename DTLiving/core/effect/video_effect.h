@@ -29,11 +29,11 @@ public:
     void LoadShaderFile(std::string vertex_shader_file, std::string fragment_shader_file);
     void LoadShaderSource(std::string vertex_shader_source, std::string fragment_shader_source);
     virtual void LoadUniform();
-    void SetPositions(GLfloat *positions);
-    void SetTextureCoordinates(GLfloat *texture_coordinates);
-    void SetUniform(const char *name, VideoEffectUniform uniform);
+    void SetPositions(std::vector<GLfloat> positions);
+    void SetTextureCoordinates(std::vector<GLfloat> texture_coordinates);
+    void SetUniform(std::string name, VideoEffectUniform uniform);
     void Render(VideoFrame input_frame, VideoFrame output_frame);
-    virtual void Render(VideoFrame input_frame, VideoFrame output_frame, GLfloat *positions, GLfloat *texture_coordinates);
+    virtual void Render(VideoFrame input_frame, VideoFrame output_frame, std::vector<GLfloat> positions, std::vector<GLfloat> texture_coordinates);
 
     std::string get_name() { return name_; }
     bool get_is_orthographic() { return is_orthographic_; }
@@ -73,8 +73,8 @@ private:
     
     std::string name_;
     
-    GLfloat *positions_ = nullptr;
-    GLfloat *texture_coordinates_ = nullptr;
+    std::vector<GLfloat> positions_;
+    std::vector<GLfloat> texture_coordinates_;
             
     GLint u_orthographic_matrix_;
     bool is_orthographic_;

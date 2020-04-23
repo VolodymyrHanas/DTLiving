@@ -32,7 +32,7 @@ void VideoTwoPassEffect::LoadUniform() {
     u_texture2_ = program2_->UniformLocation("u_texture");
 }
 
-void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame, GLfloat *positions, GLfloat *texture_coordinates) {
+void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame, std::vector<GLfloat> positions, std::vector<GLfloat> texture_coordinates) {
     // first pass
     
     glBindTexture(GL_TEXTURE_2D, input_frame.texture_name);
@@ -64,7 +64,7 @@ void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame,
                           GL_FLOAT,
                           GL_FALSE,
                           0,
-                          positions);
+                          positions.data());
     
     glEnableVertexAttribArray(a_texcoord_);
     glVertexAttribPointer(a_texcoord_,
@@ -72,7 +72,7 @@ void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame,
                           GL_FLOAT,
                           GL_FALSE,
                           0,
-                          texture_coordinates);
+                          texture_coordinates.data());
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
@@ -103,7 +103,7 @@ void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame,
                           GL_FLOAT,
                           GL_FALSE,
                           0,
-                          positions);
+                          positions.data());
     
     glEnableVertexAttribArray(a_texcoord2_);
     glVertexAttribPointer(a_texcoord2_,
@@ -111,7 +111,7 @@ void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame,
                           GL_FLOAT,
                           GL_FALSE,
                           0,
-                          texture_coordinates);
+                          texture_coordinates.data());
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
