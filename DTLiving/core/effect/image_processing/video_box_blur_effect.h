@@ -9,7 +9,7 @@
 #ifndef DTLIVING_EFFECT_IMAGE_PROCESSING_VIDEO_BOX_BLUR_EFFECT_H_
 #define DTLIVING_EFFECT_IMAGE_PROCESSING_VIDEO_BOX_BLUR_EFFECT_H_
 
-#include "video_gaussian_blur_effect.h"
+#include "video_two_pass_texture_sampling_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -17,6 +17,9 @@ namespace image_processing {
 
 class VideoBoxBlurEffect: public VideoTwoPassTextureSamplingEffect {
 public:
+    static std::string VertexShader(int blur_radius);
+    static std::string FragmentShader(int blur_radius);
+
     VideoBoxBlurEffect(std::string name);
     
     void LoadShaderSource();
@@ -25,9 +28,6 @@ protected:
     virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
 
 private:
-    static std::string VertexShaderOptimized(int blur_radius);
-    static std::string FragmentShaderOptimized(int blur_radius);
-    
     int blur_radius_;
 };
 

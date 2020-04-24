@@ -15,33 +15,7 @@ namespace dtliving {
 namespace effect {
 namespace image_processing {
 
-VideoBoxBlurEffect::VideoBoxBlurEffect(std::string name)
-: VideoTwoPassTextureSamplingEffect(name)
-, blur_radius_(4) {
-}
-
-void VideoBoxBlurEffect::LoadShaderSource() {
-    auto blur_vertex = VertexShaderOptimized(blur_radius_);
-    auto blur_fragment = FragmentShaderOptimized(blur_radius_);
-    LoadShaderSource2(blur_vertex, blur_fragment,
-                      blur_vertex, blur_fragment);
-}
-
-void VideoBoxBlurEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
-    auto uniform = uniforms_[std::string(kVideoBoxBlurEffectBlurRadiusInPixels)];
-    GLfloat new_value = uniform.u_float.front();
-    int blur_radius = (int)std::round(std::round(new_value / 2.0) * 2.0); // For now, only do even radii
-    if (blur_radius_ != blur_radius) {
-        blur_radius_ = blur_radius;
-        
-        LoadShaderSource();
-        LoadUniform();
-    }
-
-    VideoTwoPassTextureSamplingEffect::BeforeDrawArrays(width, height, program_index);
-}
-
-std::string VideoBoxBlurEffect::VertexShaderOptimized(int blur_radius) {
+std::string VideoBoxBlurEffect::VertexShader(int blur_radius) {
     if (blur_radius < 1) {
         return VideoEffect::VertexShader();
     }
@@ -73,7 +47,7 @@ std::string VideoBoxBlurEffect::VertexShaderOptimized(int blur_radius) {
     return os.str();
 }
 
-std::string VideoBoxBlurEffect::FragmentShaderOptimized(int blur_radius) {
+std::string VideoBoxBlurEffect::FragmentShader(int blur_radius) {
     if (blur_radius < 1) {
         return VideoEffect::FragmentShader();
     }
@@ -111,6 +85,32 @@ std::string VideoBoxBlurEffect::FragmentShaderOptimized(int blur_radius) {
     os << "}\n";
 
     return os.str();
+}
+
+VideoBoxBlurEffect::VideoBoxBlurEffect(std::string name)
+: VideoTwoPassTextureSamplingEffect(name)
+, blur_radius_(4) {
+}
+
+void VideoBoxBlurEffect::LoadShaderSource() {
+    auto blur_vertex = VideoBoxBlurEffect::VertexShader(blur_radius_);
+    auto blur_fragment = VideoBoxBlurEffect::FragmentShader(blur_radius_);
+    LoadShaderSource2(blur_vertex, blur_fragment,
+                      blur_vertex, blur_fragment);
+}
+
+void VideoBoxBlurEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
+    auto uniform = uniforms_[std::string(kVideoBoxBlurEffectBlurRadiusInPixels)];
+    GLfloat new_value = uniform.u_float.front();
+    int blur_radius = (int)std::round(std::round(new_value / 2.0) * 2.0); // For now, only do even radii
+    if (blur_radius_ != blur_radius) {
+        blur_radius_ = blur_radius;
+        
+        LoadShaderSource();
+        LoadUniform();
+    }
+
+    VideoTwoPassTextureSamplingEffect::BeforeDrawArrays(width, height, program_index);
 }
 
 }

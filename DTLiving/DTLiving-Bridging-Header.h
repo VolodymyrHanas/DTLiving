@@ -19,3 +19,4 @@
 #import "VideoCropFilter.h"
 #import "VideoGaussianBlurFilter.h"
 #import "VideoBoxBlurFilter.h"
+#import "VideoSobelEdgeDetectionFilter.h"

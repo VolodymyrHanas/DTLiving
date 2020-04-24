@@ -15,46 +15,7 @@ namespace dtliving {
 namespace effect {
 namespace image_processing {
 
-VideoGaussianBlurEffect::VideoGaussianBlurEffect(std::string name)
-: VideoTwoPassTextureSamplingEffect(name)
-, blur_radius_in_pixels_(2.0)
-, blur_radius_(4)
-, sigma_(2.0) {
-}
-
-void VideoGaussianBlurEffect::LoadShaderSource() {
-    auto blur_vertex = VertexShaderOptimized(blur_radius_, sigma_);
-    auto blur_fragment = FragmentShaderOptimized(blur_radius_, sigma_);
-    LoadShaderSource2(blur_vertex, blur_fragment,
-                      blur_vertex, blur_fragment);
-}
-
-void VideoGaussianBlurEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
-    auto uniform = uniforms_[std::string(kVideoGaussianBlurEffectBlurRadiusInPixels)];
-    GLfloat blur_radius_in_pixels = uniform.u_float.front();
-    if (std::round(blur_radius_in_pixels) != blur_radius_in_pixels_) {
-        blur_radius_in_pixels_ = std::round(blur_radius_in_pixels);
-        
-        int blur_radius = 0;
-        if (blur_radius_in_pixels_ >= 1) // Avoid a divide-by-zero error here
-        {
-            // Calculate the number of pixels to sample from by setting a bottom limit for the contribution of the outermost pixel
-            GLfloat minimum_weight_to_find_edge_of_sampling_area = 1.0 / 256.0;
-            blur_radius = std::floor(std::sqrt(-2.0 * std::pow(blur_radius_in_pixels_, 2.0) * std::log(minimum_weight_to_find_edge_of_sampling_area * std::sqrt(2.0 * M_PI * std::pow(blur_radius_in_pixels_, 2.0)))));
-            blur_radius += blur_radius % 2; // There's nothing to gain from handling odd radius sizes, due to the optimizations I use
-        }
-        
-        blur_radius_ = blur_radius;
-        sigma_ = blur_radius_in_pixels_;
-        
-        LoadShaderSource();
-        LoadUniform();
-    }
-
-    VideoTwoPassTextureSamplingEffect::BeforeDrawArrays(width, height, program_index);
-}
-
-std::string VideoGaussianBlurEffect::VertexShaderOptimized(int blur_radius, float sigma) {
+std::string VideoGaussianBlurEffect::VertexShader(int blur_radius, float sigma) {
     if (blur_radius < 1) {
         return VideoEffect::VertexShader();
     }
@@ -109,7 +70,7 @@ std::string VideoGaussianBlurEffect::VertexShaderOptimized(int blur_radius, floa
     return os.str();
 }
 
-std::string VideoGaussianBlurEffect::FragmentShaderOptimized(int blur_radius, float sigma) {
+std::string VideoGaussianBlurEffect::FragmentShader(int blur_radius, float sigma) {
     if (blur_radius < 1) {
         return VideoEffect::FragmentShader();
     }
@@ -168,6 +129,45 @@ std::string VideoGaussianBlurEffect::FragmentShaderOptimized(int blur_radius, fl
     os << "}\n";
 
     return os.str();
+}
+
+VideoGaussianBlurEffect::VideoGaussianBlurEffect(std::string name)
+: VideoTwoPassTextureSamplingEffect(name)
+, blur_radius_in_pixels_(2.0)
+, blur_radius_(4)
+, sigma_(2.0) {
+}
+
+void VideoGaussianBlurEffect::LoadShaderSource() {
+    auto blur_vertex = VideoGaussianBlurEffect::VertexShader(blur_radius_, sigma_);
+    auto blur_fragment = VideoGaussianBlurEffect::FragmentShader(blur_radius_, sigma_);
+    LoadShaderSource2(blur_vertex, blur_fragment,
+                      blur_vertex, blur_fragment);
+}
+
+void VideoGaussianBlurEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
+    auto uniform = uniforms_[std::string(kVideoGaussianBlurEffectBlurRadiusInPixels)];
+    GLfloat blur_radius_in_pixels = uniform.u_float.front();
+    if (std::round(blur_radius_in_pixels) != blur_radius_in_pixels_) {
+        blur_radius_in_pixels_ = std::round(blur_radius_in_pixels);
+        
+        int blur_radius = 0;
+        if (blur_radius_in_pixels_ >= 1) // Avoid a divide-by-zero error here
+        {
+            // Calculate the number of pixels to sample from by setting a bottom limit for the contribution of the outermost pixel
+            GLfloat minimum_weight_to_find_edge_of_sampling_area = 1.0 / 256.0;
+            blur_radius = std::floor(std::sqrt(-2.0 * std::pow(blur_radius_in_pixels_, 2.0) * std::log(minimum_weight_to_find_edge_of_sampling_area * std::sqrt(2.0 * M_PI * std::pow(blur_radius_in_pixels_, 2.0)))));
+            blur_radius += blur_radius % 2; // There's nothing to gain from handling odd radius sizes, due to the optimizations I use
+        }
+        
+        blur_radius_ = blur_radius;
+        sigma_ = blur_radius_in_pixels_;
+        
+        LoadShaderSource();
+        LoadUniform();
+    }
+
+    VideoTwoPassTextureSamplingEffect::BeforeDrawArrays(width, height, program_index);
 }
 
 }

@@ -23,6 +23,7 @@
 #include "video_transform_effect.h"
 #include "video_gaussian_blur_effect.h"
 #include "video_box_blur_effect.h"
+#include "video_sobel_edge_detection_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -70,6 +71,11 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
         auto blurEffect = new image_processing::VideoBoxBlurEffect(name);
         blurEffect->LoadShaderSource();
         effect = blurEffect;
+        isLoad = true;
+    } else if (std::strcmp(name, kVideoSobelEdgeDetectionEffect) == 0) {
+        auto edgeDetectionEffect = new image_processing::VideoSobelEdgeDetectionEffect(name);
+        edgeDetectionEffect->LoadShaderSource();
+        effect = edgeDetectionEffect;
         isLoad = true;
     } else {
         effect = new VideoEffect(name);

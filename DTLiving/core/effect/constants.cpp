@@ -54,3 +54,6 @@ const char *kVideoGaussianBlurEffectBlurRadiusInPixels = "blur_radius_in_pixels_
 
 const char *kVideoBoxBlurEffect = "effect_box_blur";
 const char *kVideoBoxBlurEffectBlurRadiusInPixels = "blur_radius_in_pixels_";
+
+const char *kVideoSobelEdgeDetectionEffect = "effect_sobel_edge_detection";
+const char *kVideoSobelEdgeDetectionEffectEdgeStrength = "u_edgeStrength";

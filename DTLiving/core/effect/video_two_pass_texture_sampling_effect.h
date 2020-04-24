@@ -1,5 +1,5 @@
 //
-//  video_two_pass_texture_sampling.h
+//  video_two_pass_texture_sampling_effect.h
 //  DTLiving
 //
 //  Created by Dan Jiang on 2020/4/17.

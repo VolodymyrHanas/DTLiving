@@ -22,6 +22,7 @@ class VideoEffect {
 public:
     static std::string VertexShader();
     static std::string FragmentShader();
+    static std::string GrayScaleFragmentShader();
 
     VideoEffect(std::string name);
     ~VideoEffect();

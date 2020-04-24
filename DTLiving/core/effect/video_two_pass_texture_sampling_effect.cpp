@@ -1,12 +1,12 @@
 //
-//  video_two_pass_texture_sampling.cpp
+//  video_two_pass_texture_sampling_effect.cpp
 //  DTLiving
 //
 //  Created by Dan Jiang on 2020/4/17.
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#include "video_two_pass_texture_sampling.h"
+#include "video_two_pass_texture_sampling_effect.h"
 
 namespace dtliving {
 namespace effect {
