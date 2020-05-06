@@ -61,4 +61,6 @@ extern const char *kVideoBoxBlurEffectBlurRadiusInPixels;
 extern const char *kVideoSobelEdgeDetectionEffect;
 extern const char *kVideoSobelEdgeDetectionEffectEdgeStrength;
 
+extern const char *kVideoAddBlendEffect;
+
 #endif /* constants_h */

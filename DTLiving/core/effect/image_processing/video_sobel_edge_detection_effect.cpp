@@ -62,8 +62,8 @@ void VideoSobelEdgeDetectionEffect::LoadShaderSource() {
     auto gray_scale_fragment = VideoEffect::GrayScaleFragmentShader();
     auto texture_sampling_vertex = Video3x3TextureSamplingEffect::VertexShader();
     auto sobel_edge_detection_fragment = VideoSobelEdgeDetectionEffect::FragmentShader();
-    LoadShaderSource2(vertex, gray_scale_fragment,
-                      texture_sampling_vertex, sobel_edge_detection_fragment);
+    VideoTwoPassEffect::LoadShaderSource(vertex, gray_scale_fragment,
+                                         texture_sampling_vertex, sobel_edge_detection_fragment);
 }
 
 void VideoSobelEdgeDetectionEffect::LoadUniform() {

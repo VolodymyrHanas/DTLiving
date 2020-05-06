@@ -23,7 +23,7 @@ public:
 
     VideoSobelEdgeDetectionEffect(std::string name);
     
-    void LoadShaderSource();
+    virtual void LoadShaderSource();
     virtual void LoadUniform();
 
 protected:

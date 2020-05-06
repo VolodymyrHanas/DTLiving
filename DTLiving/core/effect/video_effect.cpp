@@ -59,7 +59,8 @@ VideoEffect::VideoEffect(std::string name)
 , positions_({ -1, -1, 1, -1, -1, 1, 1, 1 })
 , texture_coordinates_({ 0, 0, 1, 0, 0, 1, 1, 1 })
 , is_orthographic_(false)
-, ignore_aspect_ratio_(false) {
+, ignore_aspect_ratio_(false)
+, png_decoder_(new decoder::image::PngDecoder()) {
 }
 
 VideoEffect::~VideoEffect() {
@@ -69,6 +70,9 @@ VideoEffect::~VideoEffect() {
 void VideoEffect::LoadShaderFile(std::string vertex_shader_file, std::string fragment_shader_file) {
     program_ = new ShaderProgram();
     program_->CompileFile(vertex_shader_file.c_str(), fragment_shader_file.c_str());
+}
+
+void VideoEffect::LoadShaderSource() {
 }
 
 void VideoEffect::LoadShaderSource(std::string vertex_shader_source, std::string fragment_shader_source) {
@@ -83,6 +87,9 @@ void VideoEffect::LoadUniform() {
     if (is_orthographic_) {
         u_orthographic_matrix_ = program_->UniformLocation("u_orthographicMatrix");
     }
+}
+
+void VideoEffect::LoadResources(std::vector<std::string> resources) {    
 }
 
 void VideoEffect::SetPositions(std::vector<GLfloat> positions) {
@@ -120,9 +127,7 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, std::v
         positions[5] = normalizedHeight;
         positions[7] = normalizedHeight;
     }
-    
-    BeforeDrawArrays(output_frame.height, output_frame.width, 0);
-    
+        
     glClearColor(clear_color_red_, clear_color_green_, clear_color_blue_, clear_color_alpha_);
     glClear(GL_COLOR_BUFFER_BIT);
     
@@ -146,6 +151,8 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, std::v
                           0,
                           texture_coordinates.data());
     
+    BeforeDrawArrays(output_frame.height, output_frame.width, 0);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 

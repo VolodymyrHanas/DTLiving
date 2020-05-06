@@ -6,10 +6,11 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
+#include "video_effect_processor.h"
+
 #include <cstring>
 
 #include "constants.h"
-#include "video_effect_processor.h"
 #include "video_texture_cache.h"
 #include "video_brightness_effect.h"
 #include "video_exposure_effect.h"
@@ -24,6 +25,7 @@
 #include "video_gaussian_blur_effect.h"
 #include "video_box_blur_effect.h"
 #include "video_sobel_edge_detection_effect.h"
+#include "video_two_input_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -41,7 +43,7 @@ void VideoEffectProcessor::Init(const char *vertex_shader_file, const char *frag
 
 void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file) {
     VideoEffect *effect;
-    bool isLoad = false;
+    bool isShaderFile = true;
     if (std::strcmp(name, kVideoBrightnessEffect) == 0) {
         effect = new color_processing::VideoBrightnessEffect(name);
     } else if (std::strcmp(name, kVideoExposureEffect) == 0) {
@@ -63,25 +65,23 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
     } else if (std::strcmp(name, kVideoTransformEffect) == 0) {
         effect = new image_processing::VideoTransformEffect(name);
     } else if (std::strcmp(name, kVideoGaussianBlurEffect) == 0) {
-        auto blurEffect = new image_processing::VideoGaussianBlurEffect(name);
-        blurEffect->LoadShaderSource();
-        effect = blurEffect;
-        isLoad = true;
+        effect = new image_processing::VideoGaussianBlurEffect(name);
+        isShaderFile = false;
     } else if (std::strcmp(name, kVideoBoxBlurEffect) == 0) {
-        auto blurEffect = new image_processing::VideoBoxBlurEffect(name);
-        blurEffect->LoadShaderSource();
-        effect = blurEffect;
-        isLoad = true;
+        effect = new image_processing::VideoBoxBlurEffect(name);
+        isShaderFile = false;
     } else if (std::strcmp(name, kVideoSobelEdgeDetectionEffect) == 0) {
-        auto edgeDetectionEffect = new image_processing::VideoSobelEdgeDetectionEffect(name);
-        edgeDetectionEffect->LoadShaderSource();
-        effect = edgeDetectionEffect;
-        isLoad = true;
+        effect = new image_processing::VideoSobelEdgeDetectionEffect(name);
+        isShaderFile = false;
+    } else if (std::strcmp(name, kVideoAddBlendEffect) == 0) {
+        effect = new VideoTwoInputEffect(name);
     } else {
         effect = new VideoEffect(name);
     }
-    if (!isLoad) {
+    if (isShaderFile) {
         effect->LoadShaderFile(std::string(vertex_shader_file), std::string(fragment_shader_file));
+    } else {
+        effect->LoadShaderSource();
     }
     effect->LoadUniform();
     effects_.push_back(effect);
@@ -99,6 +99,14 @@ void VideoEffectProcessor::SetIgnoreAspectRatio(const char *name, bool ignore_as
     for(VideoEffect *effect : effects_) {
         if (effect->get_name() == std::string(name)) {
             effect->set_ignore_aspect_ratio(ignore_aspect_ratio);
+        }
+    }
+}
+
+void VideoEffectProcessor::LoadResources(const char *name, std::vector<std::string> resources) {
+    for(VideoEffect *effect : effects_) {
+        if (effect->get_name() == std::string(name)) {
+            effect->LoadResources(resources);
         }
     }
 }

@@ -18,8 +18,8 @@ class VideoTwoPassEffect: public VideoEffect {
 public:
     VideoTwoPassEffect(std::string name);
 
-    void LoadShaderSource2(std::string vertex_shader_source1, std::string fragment_shader_source1,
-                           std::string vertex_shader_source2, std::string fragment_shader_source2);
+    void LoadShaderSource(std::string vertex_shader_source1, std::string fragment_shader_source1,
+                          std::string vertex_shader_source2, std::string fragment_shader_source2);
     virtual void LoadUniform();
     virtual void Render(VideoFrame input_frame, VideoFrame output_frame, std::vector<GLfloat> positions, std::vector<GLfloat> texture_coordinates);
 

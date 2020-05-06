@@ -67,6 +67,7 @@ BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation);
 @property (nonatomic, copy, readonly) NSArray<NSNumber*> *textureCoordinates;
 @property (nonatomic, copy, readonly) NSDictionary<NSString*, NSArray<NSNumber*>*> *intParams;
 @property (nonatomic, copy, readonly) NSDictionary<NSString*, NSArray<NSNumber*>*> *floatParams;
+@property (nonatomic, copy, readonly) NSArray<NSString*> *resources;
 @property (nonatomic, assign) BOOL ignoreAspectRatio;
 @property (nonatomic, assign) CGFloat backgroundColorRed;
 @property (nonatomic, assign) CGFloat backgroundColorGreen;

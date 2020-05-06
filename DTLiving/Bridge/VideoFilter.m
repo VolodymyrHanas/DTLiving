@@ -76,6 +76,10 @@ BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation) {
     return nil;
 }
 
+- (NSArray<NSString*> *)resources {
+    return nil;
+}
+
 - (NSArray<NSNumber*> *)vec3ToArray:(VideoVec3)vec {
     return @[@(vec.x), @(vec.y), @(vec.z)];
 }

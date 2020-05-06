@@ -14,6 +14,7 @@
 #include "shader_program.h"
 #include "video_frame.h"
 #include "video_effect_uniform.h"
+#include "png_decoder.h"
 
 namespace dtliving {
 namespace effect {
@@ -28,11 +29,14 @@ public:
     ~VideoEffect();
     
     void LoadShaderFile(std::string vertex_shader_file, std::string fragment_shader_file);
-    void LoadShaderSource(std::string vertex_shader_source, std::string fragment_shader_source);
+    virtual void LoadShaderSource();
     virtual void LoadUniform();
+    virtual void LoadResources(std::vector<std::string> resources);
+    
     void SetPositions(std::vector<GLfloat> positions);
     void SetTextureCoordinates(std::vector<GLfloat> texture_coordinates);
     void SetUniform(std::string name, VideoEffectUniform uniform);
+    
     void Render(VideoFrame input_frame, VideoFrame output_frame);
     virtual void Render(VideoFrame input_frame, VideoFrame output_frame, std::vector<GLfloat> positions, std::vector<GLfloat> texture_coordinates);
 
@@ -55,6 +59,7 @@ public:
     }
     
 protected:
+    void LoadShaderSource(std::string vertex_shader_source, std::string fragment_shader_source);
     virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
     
     GLfloat clear_color_red_;
@@ -68,6 +73,8 @@ protected:
     GLint u_texture_;
     
     std::map<std::string, VideoEffectUniform> uniforms_;
+    
+    decoder::image::PngDecoder *png_decoder_;
 
 private:
     void caculateOrthographicMatrix(GLfloat width, GLfloat height);

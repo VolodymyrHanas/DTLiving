@@ -22,7 +22,7 @@ public:
 
     VideoBoxBlurEffect(std::string name);
     
-    void LoadShaderSource();
+    virtual void LoadShaderSource();
 
 protected:
     virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);

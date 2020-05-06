@@ -141,8 +141,8 @@ VideoGaussianBlurEffect::VideoGaussianBlurEffect(std::string name)
 void VideoGaussianBlurEffect::LoadShaderSource() {
     auto blur_vertex = VideoGaussianBlurEffect::VertexShader(blur_radius_, sigma_);
     auto blur_fragment = VideoGaussianBlurEffect::FragmentShader(blur_radius_, sigma_);
-    LoadShaderSource2(blur_vertex, blur_fragment,
-                      blur_vertex, blur_fragment);
+    VideoTwoPassEffect::LoadShaderSource(blur_vertex, blur_fragment,
+                                         blur_vertex, blur_fragment);
 }
 
 void VideoGaussianBlurEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {

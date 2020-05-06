@@ -8,6 +8,9 @@
 
 #include "shader_program.h"
 
+#include <iostream>
+#include <fstream>
+
 namespace dtliving {
 namespace effect {
 

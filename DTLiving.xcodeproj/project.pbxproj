@@ -21,6 +21,47 @@
 		401862402423644F0003AF6F /* VideoRGBFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4018623F2423644F0003AF6F /* VideoRGBFilter.m */; };
 		40186244242370770003AF6F /* video_brightness_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40186242242370770003AF6F /* video_brightness_effect.cpp */; };
 		40186248242382E80003AF6F /* video_rgb_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40186246242382E80003AF6F /* video_rgb_effect.cpp */; };
+		402BEB5F2462603D001CE0FA /* lighthouse.png in Resources */ = {isa = PBXBuildFile; fileRef = 402BEB5E2462603C001CE0FA /* lighthouse.png */; };
+		402E20792456E6DD00951804 /* video_two_input_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 402E20772456E6DD00951804 /* video_two_input_effect.cpp */; };
+		402E24E024595C6C00951804 /* libpng-config.in in Resources */ = {isa = PBXBuildFile; fileRef = 402E24B824595C6C00951804 /* libpng-config.in */; };
+		402E24E124595C6C00951804 /* pngrio.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24B924595C6C00951804 /* pngrio.c */; };
+		402E24E224595C6C00951804 /* pngerror.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24BA24595C6C00951804 /* pngerror.c */; };
+		402E24E324595C6C00951804 /* INSTALL in Resources */ = {isa = PBXBuildFile; fileRef = 402E24BB24595C6C00951804 /* INSTALL */; };
+		402E24E424595C6C00951804 /* ANNOUNCE in Resources */ = {isa = PBXBuildFile; fileRef = 402E24BC24595C6C00951804 /* ANNOUNCE */; };
+		402E24E524595C6C00951804 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 402E24BD24595C6C00951804 /* CMakeLists.txt */; };
+		402E24E624595C6C00951804 /* pngwio.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24BE24595C6C00951804 /* pngwio.c */; };
+		402E24E724595C6C00951804 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 402E24C024595C6C00951804 /* LICENSE */; };
+		402E24E824595C6C00951804 /* libpng.pc.in in Resources */ = {isa = PBXBuildFile; fileRef = 402E24C124595C6C00951804 /* libpng.pc.in */; };
+		402E24E924595C6C00951804 /* pngtrans.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24C224595C6C00951804 /* pngtrans.c */; };
+		402E24EA24595C6C00951804 /* configure in Resources */ = {isa = PBXBuildFile; fileRef = 402E24C324595C6C00951804 /* configure */; };
+		402E24EB24595C6C00951804 /* pngnow.png in Resources */ = {isa = PBXBuildFile; fileRef = 402E24C524595C6C00951804 /* pngnow.png */; };
+		402E24EC24595C6C00951804 /* CHANGES in Resources */ = {isa = PBXBuildFile; fileRef = 402E24C624595C6C00951804 /* CHANGES */; };
+		402E24ED24595C6C00951804 /* pngbar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 402E24C724595C6C00951804 /* pngbar.jpg */; };
+		402E24EE24595C6C00951804 /* pngbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 402E24C824595C6C00951804 /* pngbar.png */; };
+		402E24EF24595C6C00951804 /* pngwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24C924595C6C00951804 /* pngwrite.c */; };
+		402E24F024595C6C00951804 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 402E24CB24595C6C00951804 /* README */; };
+		402E24F124595C6C00951804 /* pngwutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24CC24595C6C00951804 /* pngwutil.c */; };
+		402E24F224595C6C00951804 /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 402E24CD24595C6C00951804 /* TODO */; };
+		402E24F324595C6C00951804 /* pngwtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24CE24595C6C00951804 /* pngwtran.c */; };
+		402E24F424595C6C00951804 /* example.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24CF24595C6C00951804 /* example.c */; };
+		402E24F524595C6C00951804 /* pngpread.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24D224595C6C00951804 /* pngpread.c */; };
+		402E24F624595C6C00951804 /* pngread.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24D424595C6C00951804 /* pngread.c */; };
+		402E24F724595C6C00951804 /* libpng.3 in Resources */ = {isa = PBXBuildFile; fileRef = 402E24D524595C6C00951804 /* libpng.3 */; };
+		402E24F824595C6C00951804 /* libpngpf.3 in Resources */ = {isa = PBXBuildFile; fileRef = 402E24D624595C6C00951804 /* libpngpf.3 */; };
+		402E24F924595C6C00951804 /* pngtest.png in Resources */ = {isa = PBXBuildFile; fileRef = 402E24D724595C6C00951804 /* pngtest.png */; };
+		402E24FA24595C6C00951804 /* pngmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24D824595C6C00951804 /* pngmem.c */; };
+		402E24FB24595C6C00951804 /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24D924595C6C00951804 /* pngget.c */; };
+		402E24FC24595C6C00951804 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24DA24595C6C00951804 /* png.c */; };
+		402E24FD24595C6C00951804 /* pngrtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24DB24595C6C00951804 /* pngrtran.c */; };
+		402E24FE24595C6C00951804 /* pngrutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24DC24595C6C00951804 /* pngrutil.c */; };
+		402E24FF24595C6C00951804 /* libpng-manual.txt in Resources */ = {isa = PBXBuildFile; fileRef = 402E24DD24595C6C00951804 /* libpng-manual.txt */; };
+		402E250024595C6C00951804 /* pngset.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24DE24595C6C00951804 /* pngset.c */; };
+		402E250124595C6C00951804 /* png.5 in Resources */ = {isa = PBXBuildFile; fileRef = 402E24DF24595C6C00951804 /* png.5 */; };
+		402E250624595F0F00951804 /* png_decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 402E250424595F0F00951804 /* png_decoder.cpp */; };
+		402F209F2459835E006B221C /* effect_add_blend_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 402F209E2459835E006B221C /* effect_add_blend_fragment.glsl */; };
+		402F20A1245983F0006B221C /* effect_two_input_vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 402F20A0245983F0006B221C /* effect_two_input_vertex.glsl */; };
+		402F20A524598536006B221C /* VideoAddBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F20A424598536006B221C /* VideoAddBlendFilter.m */; };
+		402F20AA24598AEF006B221C /* WID-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 402F20A924598AEF006B221C /* WID-small.png */; };
 		40361D642444054D00DC254F /* effect_transform_vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 40361D632444054D00DC254F /* effect_transform_vertex.glsl */; };
 		40361D672444062B00DC254F /* video_transform_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40361D652444062B00DC254F /* video_transform_effect.cpp */; };
 		40361D6B2444081E00DC254F /* VideoTransformFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 40361D6A2444081E00DC254F /* VideoTransformFilter.m */; };
@@ -102,6 +143,57 @@
 		40186243242370770003AF6F /* video_brightness_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_brightness_effect.h; sourceTree = "<group>"; };
 		40186246242382E80003AF6F /* video_rgb_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_rgb_effect.cpp; sourceTree = "<group>"; };
 		40186247242382E80003AF6F /* video_rgb_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_rgb_effect.h; sourceTree = "<group>"; };
+		402BEB5E2462603C001CE0FA /* lighthouse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lighthouse.png; sourceTree = "<group>"; };
+		402E20772456E6DD00951804 /* video_two_input_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_two_input_effect.cpp; sourceTree = "<group>"; };
+		402E20782456E6DD00951804 /* video_two_input_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_two_input_effect.h; sourceTree = "<group>"; };
+		402E24B724595C6C00951804 /* pnginfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pnginfo.h; sourceTree = "<group>"; };
+		402E24B824595C6C00951804 /* libpng-config.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "libpng-config.in"; sourceTree = "<group>"; };
+		402E24B924595C6C00951804 /* pngrio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrio.c; sourceTree = "<group>"; };
+		402E24BA24595C6C00951804 /* pngerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngerror.c; sourceTree = "<group>"; };
+		402E24BB24595C6C00951804 /* INSTALL */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = INSTALL; sourceTree = "<group>"; };
+		402E24BC24595C6C00951804 /* ANNOUNCE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ANNOUNCE; sourceTree = "<group>"; };
+		402E24BD24595C6C00951804 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		402E24BE24595C6C00951804 /* pngwio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwio.c; sourceTree = "<group>"; };
+		402E24BF24595C6C00951804 /* pngstruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngstruct.h; sourceTree = "<group>"; };
+		402E24C024595C6C00951804 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		402E24C124595C6C00951804 /* libpng.pc.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libpng.pc.in; sourceTree = "<group>"; };
+		402E24C224595C6C00951804 /* pngtrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngtrans.c; sourceTree = "<group>"; };
+		402E24C324595C6C00951804 /* configure */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = configure; sourceTree = "<group>"; };
+		402E24C424595C6C00951804 /* pngpriv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngpriv.h; sourceTree = "<group>"; };
+		402E24C524595C6C00951804 /* pngnow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pngnow.png; sourceTree = "<group>"; };
+		402E24C624595C6C00951804 /* CHANGES */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES; sourceTree = "<group>"; };
+		402E24C724595C6C00951804 /* pngbar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pngbar.jpg; sourceTree = "<group>"; };
+		402E24C824595C6C00951804 /* pngbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pngbar.png; sourceTree = "<group>"; };
+		402E24C924595C6C00951804 /* pngwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwrite.c; sourceTree = "<group>"; };
+		402E24CA24595C6C00951804 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
+		402E24CB24595C6C00951804 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		402E24CC24595C6C00951804 /* pngwutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwutil.c; sourceTree = "<group>"; };
+		402E24CD24595C6C00951804 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
+		402E24CE24595C6C00951804 /* pngwtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwtran.c; sourceTree = "<group>"; };
+		402E24CF24595C6C00951804 /* example.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = example.c; sourceTree = "<group>"; };
+		402E24D024595C6C00951804 /* pnglibconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pnglibconf.h; sourceTree = "<group>"; };
+		402E24D124595C6C00951804 /* pngconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngconf.h; sourceTree = "<group>"; };
+		402E24D224595C6C00951804 /* pngpread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngpread.c; sourceTree = "<group>"; };
+		402E24D324595C6C00951804 /* pngdebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngdebug.h; sourceTree = "<group>"; };
+		402E24D424595C6C00951804 /* pngread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngread.c; sourceTree = "<group>"; };
+		402E24D524595C6C00951804 /* libpng.3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libpng.3; sourceTree = "<group>"; };
+		402E24D624595C6C00951804 /* libpngpf.3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libpngpf.3; sourceTree = "<group>"; };
+		402E24D724595C6C00951804 /* pngtest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pngtest.png; sourceTree = "<group>"; };
+		402E24D824595C6C00951804 /* pngmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngmem.c; sourceTree = "<group>"; };
+		402E24D924595C6C00951804 /* pngget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngget.c; sourceTree = "<group>"; };
+		402E24DA24595C6C00951804 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = png.c; sourceTree = "<group>"; };
+		402E24DB24595C6C00951804 /* pngrtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrtran.c; sourceTree = "<group>"; };
+		402E24DC24595C6C00951804 /* pngrutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrutil.c; sourceTree = "<group>"; };
+		402E24DD24595C6C00951804 /* libpng-manual.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "libpng-manual.txt"; sourceTree = "<group>"; };
+		402E24DE24595C6C00951804 /* pngset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngset.c; sourceTree = "<group>"; };
+		402E24DF24595C6C00951804 /* png.5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = png.5; sourceTree = "<group>"; };
+		402E250424595F0F00951804 /* png_decoder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = png_decoder.cpp; sourceTree = "<group>"; };
+		402E250524595F0F00951804 /* png_decoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = png_decoder.h; sourceTree = "<group>"; };
+		402F209E2459835E006B221C /* effect_add_blend_fragment.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = effect_add_blend_fragment.glsl; sourceTree = "<group>"; };
+		402F20A0245983F0006B221C /* effect_two_input_vertex.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = effect_two_input_vertex.glsl; sourceTree = "<group>"; };
+		402F20A324598536006B221C /* VideoAddBlendFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoAddBlendFilter.h; sourceTree = "<group>"; };
+		402F20A424598536006B221C /* VideoAddBlendFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoAddBlendFilter.m; sourceTree = "<group>"; };
+		402F20A924598AEF006B221C /* WID-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WID-small.png"; sourceTree = "<group>"; };
 		40361D632444054D00DC254F /* effect_transform_vertex.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = effect_transform_vertex.glsl; sourceTree = "<group>"; };
 		40361D652444062B00DC254F /* video_transform_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_transform_effect.cpp; sourceTree = "<group>"; };
 		40361D662444062B00DC254F /* video_transform_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_transform_effect.h; sourceTree = "<group>"; };
@@ -275,6 +367,8 @@
 		4018622B241F80990003AF6F /* core */ = {
 			isa = PBXGroup;
 			children = (
+				402E207A24582EF500951804 /* 3rdparty */,
+				402E250224595E8F00951804 /* decoder */,
 				4018622D2420AA6A0003AF6F /* effect */,
 			);
 			path = core;
@@ -291,6 +385,7 @@
 				4018622F2420DB810003AF6F /* VideoFilter.m */,
 				40B1DF1024401767009B68C7 /* ColorProcessing */,
 				40361D68244407FE00DC254F /* ImageProcessing */,
+				402F20A224598519006B221C /* Blend */,
 			);
 			path = Bridge;
 			sourceTree = "<group>";
@@ -318,10 +413,14 @@
 				40FCF56924499D3A00A0A354 /* video_two_pass_texture_sampling_effect.cpp */,
 				4066424724519D75005C75EE /* video_3x3_texture_sampling_effect.h */,
 				4066424624519D75005C75EE /* video_3x3_texture_sampling_effect.cpp */,
+				402E20782456E6DD00951804 /* video_two_input_effect.h */,
+				402E20772456E6DD00951804 /* video_two_input_effect.cpp */,
 				403DEB8923E53ADD00685F6B /* effect_vertex.glsl */,
 				403DEB8723E53ADD00685F6B /* effect_fragment.glsl */,
+				402F20A0245983F0006B221C /* effect_two_input_vertex.glsl */,
 				40186220241F73FB0003AF6F /* color_processing */,
 				40361D62244404FD00DC254F /* image_processing */,
+				402E2508245981FC00951804 /* blend */,
 			);
 			path = effect;
 			sourceTree = "<group>";
@@ -332,6 +431,105 @@
 				4037C63F2410DE2E006C2FC7 /* VideoFilterProcessor.swift */,
 			);
 			path = Effect;
+			sourceTree = "<group>";
+		};
+		402E207A24582EF500951804 /* 3rdparty */ = {
+			isa = PBXGroup;
+			children = (
+				402E24B624595C6C00951804 /* libpng */,
+			);
+			path = 3rdparty;
+			sourceTree = "<group>";
+		};
+		402E24B624595C6C00951804 /* libpng */ = {
+			isa = PBXGroup;
+			children = (
+				402E24B724595C6C00951804 /* pnginfo.h */,
+				402E24B824595C6C00951804 /* libpng-config.in */,
+				402E24B924595C6C00951804 /* pngrio.c */,
+				402E24BA24595C6C00951804 /* pngerror.c */,
+				402E24BB24595C6C00951804 /* INSTALL */,
+				402E24BC24595C6C00951804 /* ANNOUNCE */,
+				402E24BD24595C6C00951804 /* CMakeLists.txt */,
+				402E24BE24595C6C00951804 /* pngwio.c */,
+				402E24BF24595C6C00951804 /* pngstruct.h */,
+				402E24C024595C6C00951804 /* LICENSE */,
+				402E24C124595C6C00951804 /* libpng.pc.in */,
+				402E24C224595C6C00951804 /* pngtrans.c */,
+				402E24C324595C6C00951804 /* configure */,
+				402E24C424595C6C00951804 /* pngpriv.h */,
+				402E24C524595C6C00951804 /* pngnow.png */,
+				402E24C624595C6C00951804 /* CHANGES */,
+				402E24C724595C6C00951804 /* pngbar.jpg */,
+				402E24C824595C6C00951804 /* pngbar.png */,
+				402E24C924595C6C00951804 /* pngwrite.c */,
+				402E24CA24595C6C00951804 /* png.h */,
+				402E24CB24595C6C00951804 /* README */,
+				402E24CC24595C6C00951804 /* pngwutil.c */,
+				402E24CD24595C6C00951804 /* TODO */,
+				402E24CE24595C6C00951804 /* pngwtran.c */,
+				402E24CF24595C6C00951804 /* example.c */,
+				402E24D024595C6C00951804 /* pnglibconf.h */,
+				402E24D124595C6C00951804 /* pngconf.h */,
+				402E24D224595C6C00951804 /* pngpread.c */,
+				402E24D324595C6C00951804 /* pngdebug.h */,
+				402E24D424595C6C00951804 /* pngread.c */,
+				402E24D524595C6C00951804 /* libpng.3 */,
+				402E24D624595C6C00951804 /* libpngpf.3 */,
+				402E24D724595C6C00951804 /* pngtest.png */,
+				402E24D824595C6C00951804 /* pngmem.c */,
+				402E24D924595C6C00951804 /* pngget.c */,
+				402E24DA24595C6C00951804 /* png.c */,
+				402E24DB24595C6C00951804 /* pngrtran.c */,
+				402E24DC24595C6C00951804 /* pngrutil.c */,
+				402E24DD24595C6C00951804 /* libpng-manual.txt */,
+				402E24DE24595C6C00951804 /* pngset.c */,
+				402E24DF24595C6C00951804 /* png.5 */,
+			);
+			path = libpng;
+			sourceTree = "<group>";
+		};
+		402E250224595E8F00951804 /* decoder */ = {
+			isa = PBXGroup;
+			children = (
+				402E250324595EEB00951804 /* image */,
+			);
+			path = decoder;
+			sourceTree = "<group>";
+		};
+		402E250324595EEB00951804 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				402E250524595F0F00951804 /* png_decoder.h */,
+				402E250424595F0F00951804 /* png_decoder.cpp */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+		402E2508245981FC00951804 /* blend */ = {
+			isa = PBXGroup;
+			children = (
+				402F209E2459835E006B221C /* effect_add_blend_fragment.glsl */,
+			);
+			path = blend;
+			sourceTree = "<group>";
+		};
+		402F20A224598519006B221C /* Blend */ = {
+			isa = PBXGroup;
+			children = (
+				402F20A324598536006B221C /* VideoAddBlendFilter.h */,
+				402F20A424598536006B221C /* VideoAddBlendFilter.m */,
+			);
+			path = Blend;
+			sourceTree = "<group>";
+		};
+		402F20A624598A26006B221C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				402BEB5E2462603C001CE0FA /* lighthouse.png */,
+				402F20A924598AEF006B221C /* WID-small.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		40361D62244404FD00DC254F /* image_processing */ = {
@@ -459,6 +657,7 @@
 		40B2BFC023E40D8600F677CD /* DTLiving */ = {
 			isa = PBXGroup;
 			children = (
+				402F20A624598A26006B221C /* Resources */,
 				40AC667F2409211200E281AC /* Controller */,
 				403DEB8023E5377100685F6B /* OpenGL */,
 				40B2BFD523E429EA00F677CD /* Capture */,
@@ -557,21 +756,43 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				402E250124595C6C00951804 /* png.5 in Resources */,
+				402E24F724595C6C00951804 /* libpng.3 in Resources */,
+				402E24EC24595C6C00951804 /* CHANGES in Resources */,
+				402E24F924595C6C00951804 /* pngtest.png in Resources */,
 				403DEB8B23E53ADD00685F6B /* effect_fragment.glsl in Resources */,
 				40186225241F763A0003AF6F /* effect_brightness_fragment.glsl in Resources */,
+				402E24E824595C6C00951804 /* libpng.pc.in in Resources */,
+				402E24FF24595C6C00951804 /* libpng-manual.txt in Resources */,
+				402E24E324595C6C00951804 /* INSTALL in Resources */,
 				40B1DF0924400D48009B68C7 /* effect_hue_fragment.glsl in Resources */,
+				402BEB5F2462603D001CE0FA /* lighthouse.png in Resources */,
+				402E24EA24595C6C00951804 /* configure in Resources */,
+				402E24EB24595C6C00951804 /* pngnow.png in Resources */,
 				40F3056D243C6AF10022B263 /* effect_contrast_fragment.glsl in Resources */,
+				402E24F024595C6C00951804 /* README in Resources */,
+				402E24E024595C6C00951804 /* libpng-config.in in Resources */,
 				40F30575243C797E0022B263 /* effect_saturation_fragment.glsl in Resources */,
+				402E24EE24595C6C00951804 /* pngbar.png in Resources */,
+				402E24E424595C6C00951804 /* ANNOUNCE in Resources */,
+				402F209F2459835E006B221C /* effect_add_blend_fragment.glsl in Resources */,
 				40F3057D243C82040022B263 /* effect_gamma_fragment.glsl in Resources */,
 				403DEB8D23E53ADD00685F6B /* effect_vertex.glsl in Resources */,
 				40B1DF13244067AD009B68C7 /* effect_gray_scale_fragment.glsl in Resources */,
 				40F30585243C90600022B263 /* effect_levels_fragment.glsl in Resources */,
+				402E24F224595C6C00951804 /* TODO in Resources */,
+				402E24E524595C6C00951804 /* CMakeLists.txt in Resources */,
+				402E24F824595C6C00951804 /* libpngpf.3 in Resources */,
 				40B2BFCE23E40D8800F677CD /* LaunchScreen.storyboard in Resources */,
+				402E24ED24595C6C00951804 /* pngbar.jpg in Resources */,
+				402E24E724595C6C00951804 /* LICENSE in Resources */,
 				40F30565243C2A5C0022B263 /* effect_exposure_fragment.glsl in Resources */,
+				402F20AA24598AEF006B221C /* WID-small.png in Resources */,
 				40B1DEFB243F1839009B68C7 /* effect_color_matrix_fragment.glsl in Resources */,
 				40361D642444054D00DC254F /* effect_transform_vertex.glsl in Resources */,
 				4018622A241F79AD0003AF6F /* effect_rgb_fragment.glsl in Resources */,
 				40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */,
+				402F20A1245983F0006B221C /* effect_two_input_vertex.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,21 +846,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				40AC66832409234700E281AC /* LiveManager.swift in Sources */,
+				402E24F624595C6C00951804 /* pngread.c in Sources */,
 				40F3057B243C7B320022B263 /* VideoSaturationFilter.m in Sources */,
 				40B1DF0F244015B2009B68C7 /* VideoHueFilter.m in Sources */,
+				402E24EF24595C6C00951804 /* pngwrite.c in Sources */,
 				40831444241A2F1300DC2BE9 /* shader_program.cpp in Sources */,
 				40501A1B24472F75009DDBF6 /* video_two_pass_effect.cpp in Sources */,
+				402E24F324595C6C00951804 /* pngwtran.c in Sources */,
 				401789DF240E517500B5A7B4 /* VideoContext.swift in Sources */,
 				40076AD724176A710052ED90 /* FrameBufferCache.swift in Sources */,
+				402E250624595F0F00951804 /* png_decoder.cpp in Sources */,
 				40F1D2FD240D1B89008A8EC8 /* FrameBuffer.swift in Sources */,
 				40B1DF0C2440127D009B68C7 /* video_hue_effect.cpp in Sources */,
+				402E24FB24595C6C00951804 /* pngget.c in Sources */,
 				40F29732241B7E4C00DD4FE8 /* ShaderProgramObject.mm in Sources */,
 				40664235245049C8005C75EE /* VideoBoxBlurFilter.m in Sources */,
 				40F30570243C6C660022B263 /* video_contrast_effect.cpp in Sources */,
 				40361D6B2444081E00DC254F /* VideoTransformFilter.m in Sources */,
 				40F30583243C84160022B263 /* VideoGammaFilter.m in Sources */,
+				402E24FE24595C6C00951804 /* pngrutil.c in Sources */,
+				402E24F124595C6C00951804 /* pngwutil.c in Sources */,
 				40B2BFC623E40D8600F677CD /* CameraViewController.swift in Sources */,
 				40FCF56824498F2600A0A354 /* video_gaussian_blur_effect.cpp in Sources */,
+				402E24E124595C6C00951804 /* pngrio.c in Sources */,
+				402E24FD24595C6C00951804 /* pngrtran.c in Sources */,
 				401862402423644F0003AF6F /* VideoRGBFilter.m in Sources */,
 				40F3056B243C2DE60022B263 /* VideoExposureFilter.m in Sources */,
 				40AC6689240923E100E281AC /* VideoCamera.swift in Sources */,
@@ -654,23 +884,33 @@
 				4037C6422411090A006C2FC7 /* VideoView.swift in Sources */,
 				40F30573243C6DA00022B263 /* VideoContrastFilter.m in Sources */,
 				40076AD5241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift in Sources */,
+				402E24F424595C6C00951804 /* example.c in Sources */,
 				4018623624222E080003AF6F /* video_texture.cpp in Sources */,
 				40AC66852409239400E281AC /* VideoOutput.swift in Sources */,
+				402E24E624595C6C00951804 /* pngwio.c in Sources */,
+				402E24E224595C6C00951804 /* pngerror.c in Sources */,
+				402E20792456E6DD00951804 /* video_two_input_effect.cpp in Sources */,
 				4037C6402410DE2E006C2FC7 /* VideoFilterProcessor.swift in Sources */,
+				402E24FC24595C6C00951804 /* png.c in Sources */,
 				40BDE3A3241E32EC0063DF25 /* video_effect_processor.cpp in Sources */,
 				40F30568243C2CC10022B263 /* video_exposure_effect.cpp in Sources */,
 				40664245245199BF005C75EE /* video_sobel_edge_detection_effect.cpp in Sources */,
+				402E24F524595C6C00951804 /* pngpread.c in Sources */,
 				401862302420DB810003AF6F /* VideoFilter.m in Sources */,
 				40B1DF1624406A32009B68C7 /* VideoGrayScaleFilter.m in Sources */,
 				40F30578243C7A560022B263 /* video_saturation_effect.cpp in Sources */,
 				40664220244EFE09005C75EE /* video_box_blur_effect.cpp in Sources */,
 				40B2BFC223E40D8600F677CD /* AppDelegate.swift in Sources */,
+				402E24FA24595C6C00951804 /* pngmem.c in Sources */,
 				40831449241A384C00DC2BE9 /* VideoEffectProcessorObject.mm in Sources */,
 				40B1DF04243F1CCE009B68C7 /* VideoColorMatrixFilter.m in Sources */,
 				4066424824519D75005C75EE /* video_3x3_texture_sampling_effect.cpp in Sources */,
 				40501A152445C5BC009DDBF6 /* constants.cpp in Sources */,
 				40076AD22416351F0052ED90 /* DebugHelper.swift in Sources */,
+				402F20A524598536006B221C /* VideoAddBlendFilter.m in Sources */,
 				4066424B245289CB005C75EE /* VideoSobelEdgeDetectionFilter.m in Sources */,
+				402E250024595C6C00951804 /* pngset.c in Sources */,
+				402E24E924595C6C00951804 /* pngtrans.c in Sources */,
 				4018623924222E800003AF6F /* video_texture_cache.cpp in Sources */,
 				40831441241A2EEE00DC2BE9 /* video_effect.cpp in Sources */,
 				40361D672444062B00DC254F /* video_transform_effect.cpp in Sources */,
@@ -816,6 +1056,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = SLM6SZ8JH3;
 				INFOPLIST_FILE = DTLiving/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -824,6 +1065,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dathought.DTLiving;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_PNG_TEXT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "DTLiving/DTLiving-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -838,6 +1080,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = SLM6SZ8JH3;
 				INFOPLIST_FILE = DTLiving/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -846,6 +1089,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dathought.DTLiving;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_PNG_TEXT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "DTLiving/DTLiving-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

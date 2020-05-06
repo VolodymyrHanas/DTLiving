@@ -32,8 +32,8 @@ class LiveManager {
         camera = VideoCamera(position: .back, presets: [.hd1280x720])
         
         filterProcessor = VideoFilterProcessor()
-        let filter = VideoSobelEdgeDetectionFilter()
-        filter.edgeStrength = 0.25
+        let filter = VideoAddBlendFilter()
+        filter.imageFile = "WID-small.png"
         filterProcessor.addFilter(filter)
         
         preview = VideoView()

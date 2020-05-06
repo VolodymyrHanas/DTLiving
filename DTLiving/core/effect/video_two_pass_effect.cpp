@@ -16,9 +16,9 @@ VideoTwoPassEffect::VideoTwoPassEffect(std::string name)
 : VideoEffect(name) {
 }
 
-void VideoTwoPassEffect::LoadShaderSource2(std::string vertex_shader_source1, std::string fragment_shader_source1,
+void VideoTwoPassEffect::LoadShaderSource(std::string vertex_shader_source1, std::string fragment_shader_source1,
                                           std::string vertex_shader_source2, std::string fragment_shader_source2) {
-    LoadShaderSource(vertex_shader_source1, fragment_shader_source1);
+    VideoEffect::LoadShaderSource(vertex_shader_source1, fragment_shader_source1);
     
     program2_ = new ShaderProgram();
     program2_->CompileSource(vertex_shader_source2.c_str(), fragment_shader_source2.c_str());

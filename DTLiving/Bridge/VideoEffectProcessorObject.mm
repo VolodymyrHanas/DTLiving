@@ -41,6 +41,14 @@
                                   filter.backgroundColorAlpha);
     self.processor->SetIgnoreAspectRatio([filter.name UTF8String],
                                          filter.ignoreAspectRatio);
+    if (filter.resources) {
+        std::vector<std::string> resources;
+        for (NSString *resource in filter.resources) {
+            NSString *imageFile = [NSBundle.mainBundle pathForResource:resource ofType:nil];
+            resources.push_back([imageFile UTF8String]);
+        }
+        self.processor->LoadResources([filter.name UTF8String], resources);
+    }
     [self updateFilter:filter];
 }
 
