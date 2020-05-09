@@ -12,7 +12,8 @@ namespace dtliving {
 namespace effect {
 
 VideoTwoInputEffect::VideoTwoInputEffect(std::string name)
-: VideoEffect(name) {
+: VideoEffect(name)
+, texture_coordinates2_({ 0, 0, 1, 0, 0, 1, 1, 1 }) {
 }
 
 void VideoTwoInputEffect::LoadUniform() {
@@ -41,8 +42,6 @@ void VideoTwoInputEffect::LoadResources(std::vector<std::string> resources) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_data.width, image_data.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data.data);
     
     glBindTexture(GL_TEXTURE_2D, 0);
-    
-    png_decoder_->DeleteImage();
 }
 
 void VideoTwoInputEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
@@ -50,15 +49,13 @@ void VideoTwoInputEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int pr
     glBindTexture(GL_TEXTURE_2D, input_frame2_.texture_name);
     glUniform1i(u_texture2_, 1);
     
-    std::vector<GLfloat> texture_coordinates = { 0, 0, 1, 0, 0, 1, 1, 1 };
-    
     glEnableVertexAttribArray(a_texcoord2_);
     glVertexAttribPointer(a_texcoord2_,
                           2,
                           GL_FLOAT,
                           GL_FALSE,
                           0,
-                          texture_coordinates.data()); // TODO: caculate texture coordinates
+                          texture_coordinates2_.data());
 }
 
 }

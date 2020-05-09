@@ -32,8 +32,8 @@ class LiveManager {
         camera = VideoCamera(position: .back, presets: [.hd1280x720])
         
         filterProcessor = VideoFilterProcessor()
-        let filter = VideoAddBlendFilter()
-        filter.imageFile = "WID-small.png"
+        let filter = VideoMaskFilter()
+        filter.imageFile = "star.png"
         filterProcessor.addFilter(filter)
         
         preview = VideoView()

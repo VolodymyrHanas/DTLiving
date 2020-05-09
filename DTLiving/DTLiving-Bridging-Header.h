@@ -21,3 +21,5 @@
 #import "VideoBoxBlurFilter.h"
 #import "VideoSobelEdgeDetectionFilter.h"
 #import "VideoAddBlendFilter.h"
+#import "VideoAlphaBlendFilter.h"
+#import "VideoMaskFilter.h"

@@ -63,4 +63,10 @@ extern const char *kVideoSobelEdgeDetectionEffectEdgeStrength;
 
 extern const char *kVideoAddBlendEffect;
 
+extern const char *kVideoAlphaBlendEffect;
+extern const char *kVideoAlphaBlendEffectMixturePercent;
+
+extern const char *kVideoMaskEffect;
+extern const char *kVideoMaskEffectColor;
+
 #endif /* constants_h */

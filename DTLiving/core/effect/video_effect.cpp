@@ -121,11 +121,11 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, std::v
     
     if (is_orthographic_) {
         // for right now, input frame size == output frame size == view port
-        GLfloat normalizedHeight = GLfloat(output_frame.height) / GLfloat(output_frame.width);
-        positions[1] = -normalizedHeight;
-        positions[3] = -normalizedHeight;
-        positions[5] = normalizedHeight;
-        positions[7] = normalizedHeight;
+        GLfloat normalized_height = GLfloat(output_frame.height) / GLfloat(output_frame.width);
+        positions[1] = -normalized_height;
+        positions[3] = -normalized_height;
+        positions[5] = normalized_height;
+        positions[7] = normalized_height;
     }
         
     glClearColor(clear_color_red_, clear_color_green_, clear_color_blue_, clear_color_alpha_);
@@ -151,7 +151,7 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, std::v
                           0,
                           texture_coordinates.data());
     
-    BeforeDrawArrays(output_frame.height, output_frame.width, 0);
+    BeforeDrawArrays(output_frame.width, output_frame.height, 0);
 
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }

@@ -58,7 +58,19 @@ class VideoCamera: VideoOutput {
     private var positionSlot = GLuint()
     private var texturePositionSlot = GLuint()
     private var textureUniform = GLint()
-    
+    private var squareVertices: [GLfloat] = [
+        -1, -1,
+        1, -1,
+        -1, 1,
+        1, 1
+    ]
+    private var textureVertices: [GLfloat] = [
+        0, 0,
+        1, 0,
+        0, 1,
+        1, 1
+    ]
+
     var outputImageOrientation: UIInterfaceOrientation = .portrait {
         didSet {
             updateOrientationSendToTargets()
@@ -75,7 +87,11 @@ class VideoCamera: VideoOutput {
         }
     }
     // rotate byself
-    private var internalRotation: VideoRotation = .noRotation
+    private var internalRotation: VideoRotation = .noRotation {
+        didSet {
+            textureVertices = textureCoordinates(for: internalRotation)
+        }
+    }
     // rotate by next target
     private var outputRotation: VideoRotation = .noRotation
 
@@ -468,13 +484,6 @@ class VideoCamera: VideoOutput {
         glBindTexture(GLenum(GL_TEXTURE_2D), inputTextureName)
         glUniform1i(textureUniform, 0)
         
-        var squareVertices: [GLfloat] = [
-            -1, -1, // bottom left
-            1, -1, // bottom right
-            -1, 1, // top left
-            1, 1, // top right
-        ]
-        var textureVertices = textureCoordinates(for: internalRotation)
         glEnableVertexAttribArray(positionSlot)
         glVertexAttribPointer(positionSlot,
                               2,
@@ -498,13 +507,13 @@ class VideoCamera: VideoOutput {
                                  currentTime: currentTime)
     }
 
-    private func textureCoordinates(for rotation: VideoRotation) -> [Float] {
+    private func textureCoordinates(for rotation: VideoRotation) -> [GLfloat] {
         switch rotation {
         case .noRotation:
-            return [0, 0, // bottom left
-                1, 0, // bottom right
-                0, 1, // top left
-                1, 1] // top right
+            return [0, 0,
+                    1, 0,
+                    0, 1,
+                    1, 1]
         case .rotateLeft:
             return [1, 0,
                     1, 1,

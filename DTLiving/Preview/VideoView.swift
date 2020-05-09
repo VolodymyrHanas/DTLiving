@@ -29,19 +29,29 @@ class VideoView: UIView, VideoInput {
     var backgroundColorAlpha: CGFloat = 1.0
 
     private var inputFrameBuffer: FrameBuffer?
-    private var inputRotation: VideoRotation = .noRotation
+    private var inputRotation: VideoRotation = .noRotation {
+        didSet {
+            textureVertices = textureCoordinates(for: inputRotation)
+        }
+    }
     private var inputSize: CGSize = .zero
 
-    private var squareVertices: [GLfloat] = [
-        -1, -1, // bottom left
-        1, -1, // bottom right
-        -1, 1, // top left
-        1, 1, // top right
-    ]
     private var program: ShaderProgramObject?
     private var positionSlot = GLuint()
     private var texturePositionSlot = GLuint()
     private var textureUniform = GLint()
+    private var squareVertices: [GLfloat] = [
+        -1, -1,
+        1, -1,
+        -1, 1,
+        1, 1
+    ]
+    private var textureVertices: [GLfloat] = [
+        0, 1,
+        1, 1,
+        0, 0,
+        1, 0
+    ]
 
     private var displayRenderBuffer: GLuint = 0
     private var displayFrameBuffer: GLuint = 0
@@ -143,7 +153,6 @@ class VideoView: UIView, VideoInput {
             glBindTexture(GLenum(GL_TEXTURE_2D), inputFrameBuffer.textureName)
             glUniform1i(textureUniform, 0)
             
-            var textureVertices = textureCoordinates(for: inputRotation)
             glEnableVertexAttribArray(positionSlot)
             glVertexAttribPointer(positionSlot,
                                   2,
@@ -281,7 +290,7 @@ class VideoView: UIView, VideoInput {
         }
     }
     
-    private func textureCoordinates(for rotation: VideoRotation) -> [Float] {
+    private func textureCoordinates(for rotation: VideoRotation) -> [GLfloat] {
         // vertical flip
         switch rotation {
         case .noRotation:

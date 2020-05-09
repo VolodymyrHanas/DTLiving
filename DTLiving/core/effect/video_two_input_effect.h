@@ -23,9 +23,12 @@ public:
 
 protected:
     virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
+    
     GLuint a_texcoord2_;
     GLint u_texture2_;
+    
     VideoFrame input_frame2_;
+    std::vector<GLfloat> texture_coordinates2_;
 };
 
 }

@@ -26,6 +26,8 @@
 #include "video_box_blur_effect.h"
 #include "video_sobel_edge_detection_effect.h"
 #include "video_two_input_effect.h"
+#include "video_alpha_blend_effect.h"
+#include "video_mask_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -75,6 +77,10 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
         isShaderFile = false;
     } else if (std::strcmp(name, kVideoAddBlendEffect) == 0) {
         effect = new VideoTwoInputEffect(name);
+    } else if (std::strcmp(name, kVideoAlphaBlendEffect) == 0) {
+        effect = new blend::VideoAlphaBlendEffect(name);
+    } else if (std::strcmp(name, kVideoMaskEffect) == 0) {
+        effect = new blend::VideoMaskEffect(name);
     } else {
         effect = new VideoEffect(name);
     }

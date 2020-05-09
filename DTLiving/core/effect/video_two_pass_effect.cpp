@@ -49,7 +49,7 @@ void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame,
 
     program_->Use();
         
-    BeforeDrawArrays(output_frame.height, output_frame.width, 0);
+    BeforeDrawArrays(output_frame.width, output_frame.height, 0);
     
     glClearColor(clear_color_red_, clear_color_green_, clear_color_blue_, clear_color_alpha_);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -88,7 +88,7 @@ void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame,
 
     program2_->Use();
         
-    BeforeDrawArrays(output_frame.height, output_frame.width, 1);
+    BeforeDrawArrays(output_frame.width, output_frame.height, 1);
     
     glClearColor(clear_color_red_, clear_color_green_, clear_color_blue_, clear_color_alpha_);
     glClear(GL_COLOR_BUFFER_BIT);

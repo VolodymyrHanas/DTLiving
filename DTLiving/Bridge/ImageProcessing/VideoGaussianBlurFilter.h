@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoGaussianBlurFilter : VideoFilter
 
-@property(nonatomic, assign) CGFloat blurRadiusInPixels;
+@property(nonatomic, assign) float blurRadiusInPixels;
 
 - (instancetype)init;
 

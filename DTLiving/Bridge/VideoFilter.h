@@ -69,10 +69,10 @@ BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation);
 @property (nonatomic, copy, readonly) NSDictionary<NSString*, NSArray<NSNumber*>*> *floatParams;
 @property (nonatomic, copy, readonly) NSArray<NSString*> *resources;
 @property (nonatomic, assign) BOOL ignoreAspectRatio;
-@property (nonatomic, assign) CGFloat backgroundColorRed;
-@property (nonatomic, assign) CGFloat backgroundColorGreen;
-@property (nonatomic, assign) CGFloat backgroundColorBlue;
-@property (nonatomic, assign) CGFloat backgroundColorAlpha;
+@property (nonatomic, assign) float backgroundColorRed;
+@property (nonatomic, assign) float backgroundColorGreen;
+@property (nonatomic, assign) float backgroundColorBlue;
+@property (nonatomic, assign) float backgroundColorAlpha;
 @property (nonatomic, assign) VideoRotation rotation;
 
 - (instancetype)initWithName:(const char *)name;

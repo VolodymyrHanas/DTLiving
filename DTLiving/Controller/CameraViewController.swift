@@ -185,7 +185,7 @@ class CameraViewController: UIViewController {
         settingsButton.setTitle("config settings", for: .normal)
         slider.minimumValue = 0.0
         slider.maximumValue = 1.0
-        slider.value = 0.25
+        slider.value = 1.0
         
         view.addSubview(recordButton)
         view.addSubview(liveButton)
@@ -231,8 +231,8 @@ class CameraViewController: UIViewController {
     }
     
     @objc private func sliderValueChanged(_ slider: UISlider) {
-        let filter = VideoSobelEdgeDetectionFilter()
-        filter.edgeStrength = CGFloat(slider.value)
+        let filter = VideoMaskFilter()
+        filter.colorRed = slider.value
         liveManager.updateFilter(filter)
     }
     

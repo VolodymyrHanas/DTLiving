@@ -59,3 +59,9 @@ const char *kVideoSobelEdgeDetectionEffect = "effect_sobel_edge_detection";
 const char *kVideoSobelEdgeDetectionEffectEdgeStrength = "u_edgeStrength";
 
 const char *kVideoAddBlendEffect = "effect_add_blend";
+
+const char *kVideoAlphaBlendEffect = "effect_alpha_blend";
+const char *kVideoAlphaBlendEffectMixturePercent = "u_mixturePercent";
+
+const char *kVideoMaskEffect = "effect_mask";
+const char *kVideoMaskEffectColor = "u_color";

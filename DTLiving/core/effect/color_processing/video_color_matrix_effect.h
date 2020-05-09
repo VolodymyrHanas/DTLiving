@@ -20,7 +20,7 @@ public:
     VideoColorMatrixEffect(std::string name);
 
 protected:
-    void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
+    virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
 };
 
 }
