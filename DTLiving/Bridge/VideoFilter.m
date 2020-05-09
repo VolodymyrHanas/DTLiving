@@ -13,6 +13,11 @@ VideoVec3 VideoVec3Make(float x, float y, float z) {
     return vec;
 }
 
+VideoMat3 VideoMat3Make(VideoVec3 x, VideoVec3 y, VideoVec3 z) {
+    VideoMat3 mat = { x, y, z };
+    return mat;
+}
+
 VideoVec4 VideoVec4Make(float x, float y, float z, float w) {
     VideoVec4 vec = { x, y, z, w };
     return vec;
@@ -84,12 +89,17 @@ BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation) {
     return @[@(vec.x), @(vec.y), @(vec.z)];
 }
 
+- (NSArray<NSNumber*> *)mat3ToArray:(VideoMat3)mat {
+    return @[@(mat.x.x), @(mat.x.y), @(mat.x.z),
+             @(mat.y.x), @(mat.y.y), @(mat.y.z),
+             @(mat.z.x), @(mat.z.y), @(mat.z.z)];
+}
+
 - (NSArray<NSNumber*> *)mat4ToArray:(VideoMat4)mat {
     return @[@(mat.x.x), @(mat.x.y), @(mat.x.z), @(mat.x.w),
              @(mat.y.x), @(mat.y.y), @(mat.y.z), @(mat.y.w),
              @(mat.z.x), @(mat.z.y), @(mat.z.z), @(mat.z.w),
              @(mat.w.x), @(mat.w.y), @(mat.w.z), @(mat.w.w)];
 }
-
 
 @end

@@ -16,6 +16,8 @@
 		400484442466987400BCFC36 /* VideoMaskFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 400484432466987400BCFC36 /* VideoMaskFilter.m */; };
 		4004844724669D8900BCFC36 /* video_mask_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4004844524669D8900BCFC36 /* video_mask_effect.cpp */; };
 		400484492466A32E00BCFC36 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 400484482466A32E00BCFC36 /* star.png */; };
+		4004844D2466AA2500BCFC36 /* video_3x3_convolution_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4004844B2466AA2500BCFC36 /* video_3x3_convolution_effect.cpp */; };
+		400484512466AF7100BCFC36 /* VideoEmbossFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 400484502466AF7100BCFC36 /* VideoEmbossFilter.m */; };
 		40076AD22416351F0052ED90 /* DebugHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40076AD12416351F0052ED90 /* DebugHelper.swift */; };
 		40076AD5241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40076AD4241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift */; };
 		40076AD724176A710052ED90 /* FrameBufferCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40076AD624176A710052ED90 /* FrameBufferCache.swift */; };
@@ -140,6 +142,10 @@
 		4004844524669D8900BCFC36 /* video_mask_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_mask_effect.cpp; sourceTree = "<group>"; };
 		4004844624669D8900BCFC36 /* video_mask_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_mask_effect.h; sourceTree = "<group>"; };
 		400484482466A32E00BCFC36 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		4004844B2466AA2500BCFC36 /* video_3x3_convolution_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_3x3_convolution_effect.cpp; sourceTree = "<group>"; };
+		4004844C2466AA2500BCFC36 /* video_3x3_convolution_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_3x3_convolution_effect.h; sourceTree = "<group>"; };
+		4004844F2466AF7100BCFC36 /* VideoEmbossFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoEmbossFilter.h; sourceTree = "<group>"; };
+		400484502466AF7100BCFC36 /* VideoEmbossFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoEmbossFilter.m; sourceTree = "<group>"; };
 		40076AD12416351F0052ED90 /* DebugHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugHelper.swift; sourceTree = "<group>"; };
 		40076AD4241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FourCharCode+StringLiteralConvertible.swift"; sourceTree = "<group>"; };
 		40076AD624176A710052ED90 /* FrameBufferCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameBufferCache.swift; sourceTree = "<group>"; };
@@ -331,6 +337,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4004844A2466A93C00BCFC36 /* effect */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = effect;
+			sourceTree = "<group>";
+		};
+		4004844E2466AF4F00BCFC36 /* Effect */ = {
+			isa = PBXGroup;
+			children = (
+				4004844F2466AF7100BCFC36 /* VideoEmbossFilter.h */,
+				400484502466AF7100BCFC36 /* VideoEmbossFilter.m */,
+			);
+			path = Effect;
+			sourceTree = "<group>";
+		};
 		40076AD02416351F0052ED90 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,6 +426,7 @@
 				40B1DF1024401767009B68C7 /* ColorProcessing */,
 				40361D68244407FE00DC254F /* ImageProcessing */,
 				402F20A224598519006B221C /* Blend */,
+				4004844E2466AF4F00BCFC36 /* Effect */,
 			);
 			path = Bridge;
 			sourceTree = "<group>";
@@ -433,12 +456,15 @@
 				4066424624519D75005C75EE /* video_3x3_texture_sampling_effect.cpp */,
 				402E20782456E6DD00951804 /* video_two_input_effect.h */,
 				402E20772456E6DD00951804 /* video_two_input_effect.cpp */,
+				4004844C2466AA2500BCFC36 /* video_3x3_convolution_effect.h */,
+				4004844B2466AA2500BCFC36 /* video_3x3_convolution_effect.cpp */,
 				403DEB8923E53ADD00685F6B /* effect_vertex.glsl */,
 				403DEB8723E53ADD00685F6B /* effect_fragment.glsl */,
 				402F20A0245983F0006B221C /* effect_two_input_vertex.glsl */,
 				40186220241F73FB0003AF6F /* color_processing */,
 				40361D62244404FD00DC254F /* image_processing */,
 				402E2508245981FC00951804 /* blend */,
+				4004844A2466A93C00BCFC36 /* effect */,
 			);
 			path = effect;
 			sourceTree = "<group>";
@@ -879,6 +905,7 @@
 			files = (
 				40AC66832409234700E281AC /* LiveManager.swift in Sources */,
 				402E24F624595C6C00951804 /* pngread.c in Sources */,
+				4004844D2466AA2500BCFC36 /* video_3x3_convolution_effect.cpp in Sources */,
 				40F3057B243C7B320022B263 /* VideoSaturationFilter.m in Sources */,
 				40B1DF0F244015B2009B68C7 /* VideoHueFilter.m in Sources */,
 				402E24EF24595C6C00951804 /* pngwrite.c in Sources */,
@@ -911,6 +938,7 @@
 				40F30580243C82650022B263 /* video_gamma_effect.cpp in Sources */,
 				40FCF56B24499D3A00A0A354 /* video_two_pass_texture_sampling_effect.cpp in Sources */,
 				40B1DF01243F1A07009B68C7 /* video_color_matrix_effect.cpp in Sources */,
+				400484512466AF7100BCFC36 /* VideoEmbossFilter.m in Sources */,
 				40501A182446DE64009DDBF6 /* VideoCropFilter.m in Sources */,
 				401862332420DD5A0003AF6F /* VideoBrightnessFilter.m in Sources */,
 				40664219244DA0DB005C75EE /* VideoGaussianBlurFilter.m in Sources */,

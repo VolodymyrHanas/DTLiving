@@ -19,6 +19,8 @@ VideoTransformEffect::VideoTransformEffect(std::string name)
 }
 
 void VideoTransformEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
+    VideoEffect::BeforeDrawArrays(width, height, program_index);
+    
     GLint location = program_->UniformLocation(kVideoTransformEffectTransformMatrix);
     auto uniform = uniforms_[std::string(kVideoTransformEffectTransformMatrix)];
     glUniformMatrix4fv(location, 1, false, uniform.u_float.data());

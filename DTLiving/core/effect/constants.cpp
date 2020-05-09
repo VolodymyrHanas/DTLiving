@@ -65,3 +65,7 @@ const char *kVideoAlphaBlendEffectMixturePercent = "u_mixturePercent";
 
 const char *kVideoMaskEffect = "effect_mask";
 const char *kVideoMaskEffectColor = "u_color";
+
+const char *kVideo3x3ConvolutionEffectConvolutionMatrix = "u_convolutionMatrix";
+
+const char *kVideoEmbossEffect = "effect_emboss";

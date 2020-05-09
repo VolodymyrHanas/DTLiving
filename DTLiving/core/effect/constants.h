@@ -69,4 +69,8 @@ extern const char *kVideoAlphaBlendEffectMixturePercent;
 extern const char *kVideoMaskEffect;
 extern const char *kVideoMaskEffectColor;
 
+extern const char *kVideo3x3ConvolutionEffectConvolutionMatrix;
+
+extern const char *kVideoEmbossEffect;
+
 #endif /* constants_h */

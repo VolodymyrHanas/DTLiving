@@ -32,8 +32,7 @@ class LiveManager {
         camera = VideoCamera(position: .back, presets: [.hd1280x720])
         
         filterProcessor = VideoFilterProcessor()
-        let filter = VideoMaskFilter()
-        filter.imageFile = "star.png"
+        let filter = VideoEmbossFilter()
         filterProcessor.addFilter(filter)
         
         preview = VideoView()

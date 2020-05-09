@@ -23,3 +23,4 @@
 #import "VideoAddBlendFilter.h"
 #import "VideoAlphaBlendFilter.h"
 #import "VideoMaskFilter.h"
+#import "VideoEmbossFilter.h"

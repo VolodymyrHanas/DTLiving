@@ -28,6 +28,7 @@
 #include "video_two_input_effect.h"
 #include "video_alpha_blend_effect.h"
 #include "video_mask_effect.h"
+#include "video_3x3_convolution_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -81,6 +82,9 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
         effect = new blend::VideoAlphaBlendEffect(name);
     } else if (std::strcmp(name, kVideoMaskEffect) == 0) {
         effect = new blend::VideoMaskEffect(name);
+    } else if (std::strcmp(name, kVideoEmbossEffect) == 0) {
+        effect = new Video3x3ConvolutionEffect(name);
+        isShaderFile = false;
     } else {
         effect = new VideoEffect(name);
     }

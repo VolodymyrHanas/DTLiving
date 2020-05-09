@@ -25,6 +25,15 @@ typedef struct VideoVec3 VideoVec3;
 
 VideoVec3 VideoVec3Make(float x, float y, float z);
 
+struct VideoMat3 {
+    VideoVec3 x;
+    VideoVec3 y;
+    VideoVec3 z;
+};
+typedef struct VideoMat3 VideoMat3;
+
+VideoMat3 VideoMat3Make(VideoVec3 x, VideoVec3 y, VideoVec3 z);
+
 struct VideoVec4 {
     float x;
     float y;
@@ -78,6 +87,7 @@ BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation);
 - (instancetype)initWithName:(const char *)name;
 
 - (NSArray<NSNumber*> *)vec3ToArray:(VideoVec3)vec;
+- (NSArray<NSNumber*> *)mat3ToArray:(VideoMat3)mat;
 - (NSArray<NSNumber*> *)mat4ToArray:(VideoMat4)mat;
 
 @end

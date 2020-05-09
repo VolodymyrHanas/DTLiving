@@ -17,7 +17,7 @@ namespace dtliving {
 namespace effect {
 namespace image_processing {
 
-class VideoSobelEdgeDetectionEffect: public VideoTwoPassTextureSamplingEffect {
+class VideoSobelEdgeDetectionEffect: public VideoTwoPassEffect {
 public:
     static std::string FragmentShader();
 

@@ -184,7 +184,7 @@ class CameraViewController: UIViewController {
         settingsButton.setTitleColor(UIColor.white, for: .normal)
         settingsButton.setTitle("config settings", for: .normal)
         slider.minimumValue = 0.0
-        slider.maximumValue = 1.0
+        slider.maximumValue = 4.0
         slider.value = 1.0
         
         view.addSubview(recordButton)
@@ -231,8 +231,8 @@ class CameraViewController: UIViewController {
     }
     
     @objc private func sliderValueChanged(_ slider: UISlider) {
-        let filter = VideoMaskFilter()
-        filter.colorRed = slider.value
+        let filter = VideoEmbossFilter()
+        filter.intensity = slider.value
         liveManager.updateFilter(filter)
     }
     

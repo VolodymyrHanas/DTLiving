@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) float colorAlpha;
 @property (nonatomic, copy) NSString *imageFile;
 
+- (instancetype)init;
+
 @end
 
 NS_ASSUME_NONNULL_END

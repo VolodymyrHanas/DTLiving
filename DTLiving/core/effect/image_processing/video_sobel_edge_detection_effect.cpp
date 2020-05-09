@@ -54,7 +54,7 @@ std::string VideoSobelEdgeDetectionEffect::FragmentShader() {
 }
 
 VideoSobelEdgeDetectionEffect::VideoSobelEdgeDetectionEffect(std::string name)
-: VideoTwoPassTextureSamplingEffect(name) {
+: VideoTwoPassEffect(name) {
 }
 
 void VideoSobelEdgeDetectionEffect::LoadShaderSource() {
@@ -67,7 +67,7 @@ void VideoSobelEdgeDetectionEffect::LoadShaderSource() {
 }
 
 void VideoSobelEdgeDetectionEffect::LoadUniform() {
-    VideoTwoPassTextureSamplingEffect::LoadUniform();
+    VideoTwoPassEffect::LoadUniform();
     
     u_texelWidth_ = program2_->UniformLocation("u_texelWidth");
     u_texelHeight_ = program2_->UniformLocation("u_texelHeight");
