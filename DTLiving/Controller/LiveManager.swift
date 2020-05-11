@@ -32,7 +32,8 @@ class LiveManager {
         camera = VideoCamera(position: .back, presets: [.hd1280x720])
         
         filterProcessor = VideoFilterProcessor()
-        let filter = VideoEmbossFilter()
+        let filter = VideoMosaicFilter()
+        filter.imageFile = "squares.png"
         filterProcessor.addFilter(filter)
         
         preview = VideoView()

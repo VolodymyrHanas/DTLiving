@@ -6,8 +6,9 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#include "constants.h"
 #include "video_alpha_blend_effect.h"
+
+#include "constants.h"
 
 namespace dtliving {
 namespace effect {

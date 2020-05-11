@@ -29,6 +29,9 @@
 #include "video_alpha_blend_effect.h"
 #include "video_mask_effect.h"
 #include "video_3x3_convolution_effect.h"
+#include "video_toon_effect.h"
+#include "video_sketch_effect.h"
+#include "video_mosaic_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -85,6 +88,14 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
     } else if (std::strcmp(name, kVideoEmbossEffect) == 0) {
         effect = new Video3x3ConvolutionEffect(name);
         isShaderFile = false;
+    } else if (std::strcmp(name, kVideoToonEffect) == 0) {
+        effect = new effect::VideoToonEffect(name);
+        isShaderFile = false;
+    } else if (std::strcmp(name, kVideoSketchEffect) == 0) {
+        effect = new effect::VideoSketchEffect(name);
+        isShaderFile = false;
+    } else if (std::strcmp(name, kVideoMosaicEffect) == 0) {
+        effect = new effect::VideoMosaicEffect(name);
     } else {
         effect = new VideoEffect(name);
     }

@@ -183,9 +183,9 @@ class CameraViewController: UIViewController {
         liveButton.setTitle("start living", for: .normal)
         settingsButton.setTitleColor(UIColor.white, for: .normal)
         settingsButton.setTitle("config settings", for: .normal)
-        slider.minimumValue = 0.0
-        slider.maximumValue = 4.0
-        slider.value = 1.0
+        slider.minimumValue = 0.002
+        slider.maximumValue = 0.05
+        slider.value = 0.025
         
         view.addSubview(recordButton)
         view.addSubview(liveButton)
@@ -231,8 +231,9 @@ class CameraViewController: UIViewController {
     }
     
     @objc private func sliderValueChanged(_ slider: UISlider) {
-        let filter = VideoEmbossFilter()
-        filter.intensity = slider.value
+        let filter = VideoMosaicFilter()
+        let size = CGFloat(slider.value)
+        filter.displayTileSize = CGSize(width: size, height: size)
         liveManager.updateFilter(filter)
     }
     

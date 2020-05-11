@@ -1,21 +1,23 @@
 //
-//  video_sobel_edge_detection_effect.cpp
+//  video_sketch_effect.cpp
 //  DTLiving
 //
-//  Created by Dan Jiang on 2020/4/23.
+//  Created by Dan Jiang on 2020/5/11.
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#include "constants.h"
-#include "video_sobel_edge_detection_effect.h"
-#include "video_3x3_texture_sampling_effect.h"
+#include "video_sketch_effect.h"
+
 #include <sstream>
+
+#include "constants.h"
+#include "video_3x3_texture_sampling_effect.h"
 
 namespace dtliving {
 namespace effect {
-namespace image_processing {
+namespace effect {
 
-std::string VideoSobelEdgeDetectionEffect::FragmentShader() {
+std::string VideoSketchEffect::FragmentShader() {
     std::stringstream os;
     os << "precision mediump float;\n";
     os << "\n";
@@ -47,39 +49,39 @@ std::string VideoSobelEdgeDetectionEffect::FragmentShader() {
     os << "\n";
     os << "float v = -topLeftIntensity - 2.0 * topIntensity - topRightIntensity + bottomLeftIntensity + 2.0 * bottomIntensity + bottomRightIntensity;\n";
     os << "float h = -bottomLeftIntensity - 2.0 * leftIntensity - topLeftIntensity + bottomRightIntensity + 2.0 * rightIntensity + topRightIntensity;\n";
-    os << "float mag = length(vec2(h, v)) * u_edgeStrength;\n";
-    os << "gl_FragColor = vec4(vec3(mag), 1.0);\n"; // edge is white
+    os << "float mag = 1.0 - (length(vec2(h, v)) * u_edgeStrength);\n"; // sobel edge detection with the colors inverted
+    os << "gl_FragColor = vec4(vec3(mag), 1.0);\n"; // edge is black
     os << "}\n";
     return os.str();
 }
 
-VideoSobelEdgeDetectionEffect::VideoSobelEdgeDetectionEffect(std::string name)
+VideoSketchEffect::VideoSketchEffect(std::string name)
 : VideoTwoPassEffect(name) {
 }
 
-void VideoSobelEdgeDetectionEffect::LoadShaderSource() {
+void VideoSketchEffect::LoadShaderSource() {
     auto vertex = VideoEffect::VertexShader();
     auto gray_scale_fragment = VideoEffect::GrayScaleFragmentShader();
     auto texture_sampling_vertex = Video3x3TextureSamplingEffect::VertexShader();
-    auto sobel_edge_detection_fragment = VideoSobelEdgeDetectionEffect::FragmentShader();
+    auto sketch_fragment = VideoSketchEffect::FragmentShader();
     VideoTwoPassEffect::LoadShaderSource(vertex, gray_scale_fragment,
-                                         texture_sampling_vertex, sobel_edge_detection_fragment);
+                                         texture_sampling_vertex, sketch_fragment);
 }
 
-void VideoSobelEdgeDetectionEffect::LoadUniform() {
+void VideoSketchEffect::LoadUniform() {
     VideoTwoPassEffect::LoadUniform();
     
     u_texelWidth_ = program2_->UniformLocation("u_texelWidth");
     u_texelHeight_ = program2_->UniformLocation("u_texelHeight");
 }
 
-void VideoSobelEdgeDetectionEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
+void VideoSketchEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
     if (program_index == 1) {
         glUniform1f(u_texelWidth_, 1.0 / width);
         glUniform1f(u_texelHeight_, 1.0 / height);
         
-        GLint location = program2_->UniformLocation(kVideoSobelEdgeDetectionEffectEdgeStrength);
-        auto uniform = uniforms_[std::string(kVideoSobelEdgeDetectionEffectEdgeStrength)];
+        GLint location = program2_->UniformLocation(kVideoSketchEffectEdgeStrength);
+        auto uniform = uniforms_[std::string(kVideoSketchEffectEdgeStrength)];
         glUniform1fv(location, 1, uniform.u_float.data());
     }
 }

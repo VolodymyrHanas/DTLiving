@@ -11,7 +11,7 @@
 #ifndef DTLIVING_EFFECT_IMAGE_PROCESSING_VIDEO_SOBEL_EDGE_DETECTION_EFFECT_H_
 #define DTLIVING_EFFECT_IMAGE_PROCESSING_VIDEO_SOBEL_EDGE_DETECTION_EFFECT_H_
 
-#include "video_two_pass_texture_sampling_effect.h"
+#include "video_two_pass_effect.h"
 
 namespace dtliving {
 namespace effect {

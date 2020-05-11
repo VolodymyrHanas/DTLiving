@@ -69,3 +69,16 @@ const char *kVideoMaskEffectColor = "u_color";
 const char *kVideo3x3ConvolutionEffectConvolutionMatrix = "u_convolutionMatrix";
 
 const char *kVideoEmbossEffect = "effect_emboss";
+
+const char *kVideoToonEffect = "effect_toon";
+const char *kVideoToonEffectThreshold = "u_threshold";
+const char *kVideoToonEffectQuantizationLevels = "u_quantizationLevels";
+
+const char *kVideoSketchEffect = "effect_sketch";
+const char *kVideoSketchEffectEdgeStrength = "u_edgeStrength";
+
+const char *kVideoMosaicEffect = "effect_mosaic";
+const char *kVideoMosaicEffectInputTileSize = "u_inputTileSize";
+const char *kVideoMosaicEffectDisplayTileSize = "u_displayTileSize";
+const char *kVideoMosaicEffectNumTiles = "u_numTiles";
+const char *kVideoMosaicEffectColorOn = "u_colorOn";

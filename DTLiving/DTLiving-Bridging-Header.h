@@ -24,3 +24,6 @@
 #import "VideoAlphaBlendFilter.h"
 #import "VideoMaskFilter.h"
 #import "VideoEmbossFilter.h"
+#import "VideoToonFilter.h"
+#import "VideoSketchFilter.h"
+#import "VideoMosaicFilter.h"

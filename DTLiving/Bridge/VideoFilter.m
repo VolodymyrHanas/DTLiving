@@ -85,6 +85,14 @@ BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation) {
     return nil;
 }
 
+- (NSArray<NSNumber*> *)sizeToArray:(CGSize)size {
+    return @[@(size.width), @(size.height)];
+}
+
+- (NSArray<NSNumber*> *)boolToArray:(BOOL)isYES {
+    return @[@(isYES ? 1 : 0)];
+}
+
 - (NSArray<NSNumber*> *)vec3ToArray:(VideoVec3)vec {
     return @[@(vec.x), @(vec.y), @(vec.z)];
 }

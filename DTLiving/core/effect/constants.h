@@ -73,4 +73,17 @@ extern const char *kVideo3x3ConvolutionEffectConvolutionMatrix;
 
 extern const char *kVideoEmbossEffect;
 
+extern const char *kVideoToonEffect;
+extern const char *kVideoToonEffectThreshold; // 0.0 ~ 1.0
+extern const char *kVideoToonEffectQuantizationLevels;
+
+extern const char *kVideoSketchEffect;
+extern const char *kVideoSketchEffectEdgeStrength;
+
+extern const char *kVideoMosaicEffect;
+extern const char *kVideoMosaicEffectInputTileSize;
+extern const char *kVideoMosaicEffectDisplayTileSize;
+extern const char *kVideoMosaicEffectNumTiles;
+extern const char *kVideoMosaicEffectColorOn;
+
 #endif /* constants_h */

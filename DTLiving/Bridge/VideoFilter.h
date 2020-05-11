@@ -86,6 +86,8 @@ BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation);
 
 - (instancetype)initWithName:(const char *)name;
 
+- (NSArray<NSNumber*> *)sizeToArray:(CGSize)size;
+- (NSArray<NSNumber*> *)boolToArray:(BOOL)isYES;
 - (NSArray<NSNumber*> *)vec3ToArray:(VideoVec3)vec;
 - (NSArray<NSNumber*> *)mat3ToArray:(VideoMat3)mat;
 - (NSArray<NSNumber*> *)mat4ToArray:(VideoMat4)mat;

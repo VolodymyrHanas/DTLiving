@@ -9,7 +9,6 @@
 #include "constants.h"
 #include "video_3x3_convolution_effect.h"
 #include <sstream>
-#include <iostream>
 
 namespace dtliving {
 namespace effect {
@@ -58,7 +57,6 @@ Video3x3ConvolutionEffect::Video3x3ConvolutionEffect(std::string name)
 
 void Video3x3ConvolutionEffect::LoadShaderSource() {
     auto convolution_fragment = FragmentShader();
-    std::cout << convolution_fragment << std::endl;
     Video3x3TextureSamplingEffect::LoadFragmentShaderSource(convolution_fragment);
 }
 
