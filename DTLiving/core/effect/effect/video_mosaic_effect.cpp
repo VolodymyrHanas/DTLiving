@@ -34,8 +34,8 @@ void VideoMosaicEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int prog
     glUniform1fv(location, 1, uniform.u_float.data());
 
     location = program_->UniformLocation(kVideoMosaicEffectColorOn);
-    uniform = uniforms_[std::string(kVideoMosaicEffectColorOn)];
-    glUniform1iv(location, 1, uniform.u_int.data());
+    auto uniformi = uniforms_[std::string(kVideoMosaicEffectColorOn)];
+    glUniform1iv(location, 1, uniformi.u_int.data());
 }
 
 }

@@ -21,7 +21,6 @@
 		400484542466C00E00BCFC36 /* video_toon_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 400484522466C00E00BCFC36 /* video_toon_effect.cpp */; };
 		400484572468F1AC00BCFC36 /* VideoToonFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 400484562468F1AC00BCFC36 /* VideoToonFilter.m */; };
 		40076AD22416351F0052ED90 /* DebugHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40076AD12416351F0052ED90 /* DebugHelper.swift */; };
-		40076AD5241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40076AD4241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift */; };
 		40076AD724176A710052ED90 /* FrameBufferCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40076AD624176A710052ED90 /* FrameBufferCache.swift */; };
 		400C40F224694D8800C4B366 /* video_sketch_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 400C40F024694D8800C4B366 /* video_sketch_effect.cpp */; };
 		400C40F52469513E00C4B366 /* VideoSketchFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 400C40F42469513E00C4B366 /* VideoSketchFilter.m */; };
@@ -29,6 +28,9 @@
 		400C40FA2469554700C4B366 /* video_mosaic_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 400C40F82469554700C4B366 /* video_mosaic_effect.cpp */; };
 		400C40FD2469579800C4B366 /* VideoMosaicFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 400C40FC2469579800C4B366 /* VideoMosaicFilter.m */; };
 		400C40FF24695A7000C4B366 /* squares.png in Resources */ = {isa = PBXBuildFile; fileRef = 400C40FE24695A7000C4B366 /* squares.png */; };
+		400C4103246A4C7D00C4B366 /* dotletterstiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 400C4102246A4C7D00C4B366 /* dotletterstiles.png */; };
+		400C4109246A8DB700C4B366 /* CGImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400C4107246A8DB700C4B366 /* CGImage+CVPixelBuffer.swift */; };
+		400C410A246A8DB700C4B366 /* FourCharCode+StringLiteralConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400C4108246A8DB700C4B366 /* FourCharCode+StringLiteralConvertible.swift */; };
 		401789DF240E517500B5A7B4 /* VideoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401789DE240E517500B5A7B4 /* VideoContext.swift */; };
 		40186225241F763A0003AF6F /* effect_brightness_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 40186224241F763A0003AF6F /* effect_brightness_fragment.glsl */; };
 		4018622A241F79AD0003AF6F /* effect_rgb_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 40186229241F79AD0003AF6F /* effect_rgb_fragment.glsl */; };
@@ -159,7 +161,6 @@
 		400484552468F1AC00BCFC36 /* VideoToonFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoToonFilter.h; sourceTree = "<group>"; };
 		400484562468F1AC00BCFC36 /* VideoToonFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoToonFilter.m; sourceTree = "<group>"; };
 		40076AD12416351F0052ED90 /* DebugHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugHelper.swift; sourceTree = "<group>"; };
-		40076AD4241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FourCharCode+StringLiteralConvertible.swift"; sourceTree = "<group>"; };
 		40076AD624176A710052ED90 /* FrameBufferCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameBufferCache.swift; sourceTree = "<group>"; };
 		400C40F024694D8800C4B366 /* video_sketch_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_sketch_effect.cpp; sourceTree = "<group>"; };
 		400C40F124694D8800C4B366 /* video_sketch_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_sketch_effect.h; sourceTree = "<group>"; };
@@ -171,6 +172,9 @@
 		400C40FB2469579800C4B366 /* VideoMosaicFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoMosaicFilter.h; sourceTree = "<group>"; };
 		400C40FC2469579800C4B366 /* VideoMosaicFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoMosaicFilter.m; sourceTree = "<group>"; };
 		400C40FE24695A7000C4B366 /* squares.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squares.png; sourceTree = "<group>"; };
+		400C4102246A4C7D00C4B366 /* dotletterstiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dotletterstiles.png; sourceTree = "<group>"; };
+		400C4107246A8DB700C4B366 /* CGImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
+		400C4108246A8DB700C4B366 /* FourCharCode+StringLiteralConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FourCharCode+StringLiteralConvertible.swift"; sourceTree = "<group>"; };
 		401789DE240E517500B5A7B4 /* VideoContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContext.swift; sourceTree = "<group>"; };
 		40186224241F763A0003AF6F /* effect_brightness_fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = effect_brightness_fragment.glsl; sourceTree = "<group>"; };
 		40186229241F79AD0003AF6F /* effect_rgb_fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = effect_rgb_fragment.glsl; sourceTree = "<group>"; };
@@ -396,10 +400,11 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		40076AD3241635970052ED90 /* Extension */ = {
+		400C4106246A8DB700C4B366 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				40076AD4241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift */,
+				400C4107246A8DB700C4B366 /* CGImage+CVPixelBuffer.swift */,
+				400C4108246A8DB700C4B366 /* FourCharCode+StringLiteralConvertible.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -615,6 +620,7 @@
 		402F20A624598A26006B221C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				400C4102246A4C7D00C4B366 /* dotletterstiles.png */,
 				400C40FE24695A7000C4B366 /* squares.png */,
 				400484482466A32E00BCFC36 /* star.png */,
 				4004843D246695BC00BCFC36 /* lighthouse.png */,
@@ -749,6 +755,8 @@
 			isa = PBXGroup;
 			children = (
 				402F20A624598A26006B221C /* Resources */,
+				40076AD02416351F0052ED90 /* Utils */,
+				400C4106246A8DB700C4B366 /* Extension */,
 				40AC667F2409211200E281AC /* Controller */,
 				403DEB8023E5377100685F6B /* OpenGL */,
 				40B2BFD523E429EA00F677CD /* Capture */,
@@ -756,8 +764,6 @@
 				403DEB7D23E536C500685F6B /* Preview */,
 				40AC66812409229C00E281AC /* Encode */,
 				40AC66802409228100E281AC /* Publish */,
-				40076AD3241635970052ED90 /* Extension */,
-				40076AD02416351F0052ED90 /* Utils */,
 				4018622C2420A3A10003AF6F /* Bridge */,
 				4018622B241F80990003AF6F /* core */,
 				4083143B241A2D9C00DC2BE9 /* DTLiving-Bridging-Header.h */,
@@ -887,6 +893,7 @@
 				40361D642444054D00DC254F /* effect_transform_vertex.glsl in Resources */,
 				400C40FF24695A7000C4B366 /* squares.png in Resources */,
 				4018622A241F79AD0003AF6F /* effect_rgb_fragment.glsl in Resources */,
+				400C4103246A4C7D00C4B366 /* dotletterstiles.png in Resources */,
 				40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */,
 				402F20A1245983F0006B221C /* effect_two_input_vertex.glsl in Resources */,
 			);
@@ -986,7 +993,7 @@
 				40AC6687240923B900E281AC /* VideoInput.swift in Sources */,
 				4037C6422411090A006C2FC7 /* VideoView.swift in Sources */,
 				40F30573243C6DA00022B263 /* VideoContrastFilter.m in Sources */,
-				40076AD5241635970052ED90 /* FourCharCode+StringLiteralConvertible.swift in Sources */,
+				400C4109246A8DB700C4B366 /* CGImage+CVPixelBuffer.swift in Sources */,
 				402E24F424595C6C00951804 /* example.c in Sources */,
 				4018623624222E080003AF6F /* video_texture.cpp in Sources */,
 				4004843A24668AAA00BCFC36 /* VideoAlphaBlendFilter.m in Sources */,
@@ -1016,6 +1023,7 @@
 				4066424B245289CB005C75EE /* VideoSobelEdgeDetectionFilter.m in Sources */,
 				402E250024595C6C00951804 /* pngset.c in Sources */,
 				402E24E924595C6C00951804 /* pngtrans.c in Sources */,
+				400C410A246A8DB700C4B366 /* FourCharCode+StringLiteralConvertible.swift in Sources */,
 				400484542466C00E00BCFC36 /* video_toon_effect.cpp in Sources */,
 				4018623924222E800003AF6F /* video_texture_cache.cpp in Sources */,
 				40831441241A2EEE00DC2BE9 /* video_effect.cpp in Sources */,

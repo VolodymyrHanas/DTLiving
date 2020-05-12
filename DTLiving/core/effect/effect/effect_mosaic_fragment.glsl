@@ -14,7 +14,7 @@ void main() {
     vec2 xy = v_texcoord;
     xy = xy - mod(xy, u_displayTileSize);
     
-    vec4 lumcoeff = vec4(0.299,0.587,0.114,0.0);
+    vec4 lumcoeff = vec4(0.299, 0.587, 0.114, 0.0);
     
     vec4 inputColor = texture2D(u_texture, xy);
     float lum = dot(inputColor, lumcoeff);

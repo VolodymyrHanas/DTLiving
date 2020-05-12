@@ -13,7 +13,10 @@ import CocoaLumberjack
 class DebugHelper: NSObject {
     
     static let shared = DebugHelper()
-
+    
+    private var maxCount = 0
+    private var count = 0
+    
     func debugResultCode(_ resultCode: CVReturn) {
         switch resultCode {
         // Common
@@ -72,6 +75,24 @@ class DebugHelper: NSObject {
         DDLogDebug("Bytes per Frame: \(asbd.mBytesPerFrame)")
         DDLogDebug("Frames per Packet: \(asbd.mFramesPerPacket)")
         DDLogDebug("Bytes per Packet: \(asbd.mBytesPerPacket)")
+    }
+    
+    func setMaxCount(_ maxCount: Int) {
+        self.maxCount = maxCount
+    }
+    
+    func clearCount() {
+        count = 0
+    }
+    
+    func savePixelBuffer(_ pixelBuffer: CVPixelBuffer) {
+        if count < maxCount {
+            count += 1
+            if let cgImage = CGImage.create(pixelBuffer: pixelBuffer) {
+                let image = UIImage(cgImage: cgImage)
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            }
+        }
     }
     
     private func getReadableFormatFlags(_ mFormatFlags: UInt32) -> String {
