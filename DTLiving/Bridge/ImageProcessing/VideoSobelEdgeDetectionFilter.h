@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoSobelEdgeDetectionFilter : VideoFilter
 
-@property(nonatomic, assign) float edgeStrength;
+@property (nonatomic, assign) float edgeStrength;
 
 - (instancetype)init;
 

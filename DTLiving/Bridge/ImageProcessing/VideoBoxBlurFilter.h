@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoBoxBlurFilter : VideoFilter
 
-@property(nonatomic, assign) float blurRadiusInPixels;
+@property (nonatomic, assign) float blurRadiusInPixels;
 
 - (instancetype)init;
 

@@ -147,7 +147,7 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, std::v
 
     program_->Use();
             
-    glClearColor(clear_color_red_, clear_color_green_, clear_color_blue_, clear_color_alpha_);
+    glClearColor(clear_color_.x, clear_color_.y, clear_color_.z, clear_color_.w);
     glClear(GL_COLOR_BUFFER_BIT);
     
     glActiveTexture(GL_TEXTURE0);

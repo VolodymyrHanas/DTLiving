@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoCropFilter : VideoFilter
 
-@property(nonatomic, assign) CGRect cropRegion;
+@property (nonatomic, assign) CGRect cropRegion; // origin at top left
 
 - (instancetype)init;
 

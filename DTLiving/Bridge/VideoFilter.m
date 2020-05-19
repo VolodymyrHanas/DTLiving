@@ -105,6 +105,10 @@ BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation) {
     return @[@(vec.x), @(vec.y), @(vec.z)];
 }
 
+- (NSArray<NSNumber*> *)vec4ToArray:(VideoVec4)vec {
+    return @[@(vec.x), @(vec.y), @(vec.z), @(vec.w)];
+}
+
 - (NSArray<NSNumber*> *)mat3ToArray:(VideoMat3)mat {
     return @[@(mat.x.x), @(mat.x.y), @(mat.x.z),
              @(mat.y.x), @(mat.y.y), @(mat.y.z),

@@ -13,10 +13,7 @@
 - (instancetype)init {
     self = [super initWithName:kVideoMaskEffect];
     if (self) {
-        _colorRed = 1;
-        _colorGreen = 1;
-        _colorBlue = 1;
-        _colorAlpha = 1;        
+        self.color = VideoVec4Make(1.0, 1.0, 1.0, 1.0);
     }
     return self;
 }
@@ -30,7 +27,7 @@
 }
 
 - (NSDictionary<NSString*, NSArray<NSNumber*>*> *)floatParams {
-    return @{[NSString stringWithUTF8String:kVideoMaskEffectColor]: @[@(self.colorRed), @(self.colorGreen), @(self.colorBlue), @(self.colorAlpha)]};
+    return @{[NSString stringWithUTF8String:kVideoMaskEffectColor]: [self vec4ToArray:self.color]};
 }
 
 - (NSArray<NSString*> *)resources {

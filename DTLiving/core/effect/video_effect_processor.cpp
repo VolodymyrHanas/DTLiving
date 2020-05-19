@@ -112,10 +112,10 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
     effects_.push_back(effect);
 }
 
-void VideoEffectProcessor::SetClearColor(const char *name, GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
+void VideoEffectProcessor::SetClearColor(const char *name, VideoVec4 clear_color) {
     for(VideoEffect *effect : effects_) {
         if (effect->get_name() == std::string(name)) {
-            effect->set_clear_color(red, green, blue, alpha);
+            effect->set_clear_color(clear_color);
         }
     }
 }

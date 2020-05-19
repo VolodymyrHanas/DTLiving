@@ -34,11 +34,13 @@
     self.processor->AddEffect([filter.name UTF8String],
                               [vertexShaderFile UTF8String],
                               [fragmentShaderFile UTF8String]);
-    self.processor->SetClearColor([filter.name UTF8String],
-                                  filter.backgroundColorRed,
-                                  filter.backgroundColorGreen,
-                                  filter.backgroundColorBlue,
-                                  filter.backgroundColorAlpha);
+    dtliving::effect::VideoVec4 clear_color {
+        filter.backgroundColor.x,
+        filter.backgroundColor.y,
+        filter.backgroundColor.z,
+        filter.backgroundColor.w
+    };
+    self.processor->SetClearColor([filter.name UTF8String], clear_color);
     if (filter.resources) {
         std::vector<std::string> resources;
         for (NSString *resource in filter.resources) {

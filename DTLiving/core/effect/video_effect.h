@@ -19,6 +19,13 @@
 namespace dtliving {
 namespace effect {
 
+struct VideoVec4 {
+    GLfloat x;
+    GLfloat y;
+    GLfloat z;
+    GLfloat w;
+};
+
 class VideoEffect {    
 public:
     static std::string VertexShader();
@@ -43,17 +50,11 @@ public:
     virtual void Render(VideoFrame input_frame, VideoFrame output_frame, std::vector<GLfloat> positions, std::vector<GLfloat> texture_coordinates);
 
     std::string get_name() { return name_; }
-    void set_clear_color(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) { // TODO: Rewrite
-        clear_color_red_ = red;
-        clear_color_green_ = green;
-        clear_color_blue_ = blue;
-        clear_color_alpha_ = alpha;
+    void set_clear_color(VideoVec4 clear_color) {
+        clear_color_ = clear_color;
     }
-    void get_clear_color(GLfloat *clear_color) {
-        *clear_color = clear_color_red_;
-        *(clear_color + 1) = clear_color_green_;
-        *(clear_color + 2) = clear_color_blue_;
-        *(clear_color + 3) = clear_color_alpha_;
+    VideoVec4 get_clear_color() {
+        return clear_color_;
     }
     
 protected:
@@ -61,10 +62,7 @@ protected:
     virtual void BeforeSetPositions(GLsizei width, GLsizei height, int program_index);
     virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
     
-    GLfloat clear_color_red_;
-    GLfloat clear_color_green_;
-    GLfloat clear_color_blue_;
-    GLfloat clear_color_alpha_;
+    VideoVec4 clear_color_;
 
     ShaderProgram *program_;
     GLuint a_position_;
