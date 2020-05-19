@@ -7,6 +7,7 @@
 //
 
 #include "video_two_pass_effect.h"
+
 #include "video_texture_cache.h"
 
 namespace dtliving {
@@ -33,6 +34,7 @@ void VideoTwoPassEffect::LoadUniform() {
 }
 
 void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame, std::vector<GLfloat> positions, std::vector<GLfloat> texture_coordinates) {
+    
     // first pass
     
     glBindTexture(GL_TEXTURE_2D, input_frame.texture_name);
@@ -48,9 +50,7 @@ void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame,
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture->get_texture_name(), 0);
 
     program_->Use();
-        
-    BeforeDrawArrays(output_frame.width, output_frame.height, 0);
-    
+            
     glClearColor(clear_color_red_, clear_color_green_, clear_color_blue_, clear_color_alpha_);
     glClear(GL_COLOR_BUFFER_BIT);
     
@@ -74,6 +74,8 @@ void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame,
                           0,
                           texture_coordinates.data());
     
+    BeforeDrawArrays(output_frame.width, output_frame.height, 0);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
     // second pass
@@ -87,9 +89,7 @@ void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame,
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, output_frame.texture_name, 0);
 
     program2_->Use();
-        
-    BeforeDrawArrays(output_frame.width, output_frame.height, 1);
-    
+            
     glClearColor(clear_color_red_, clear_color_green_, clear_color_blue_, clear_color_alpha_);
     glClear(GL_COLOR_BUFFER_BIT);
     
@@ -113,6 +113,8 @@ void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame,
                           0,
                           texture_coordinates.data());
     
+    BeforeDrawArrays(output_frame.width, output_frame.height, 1);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
     texture->UnLock();

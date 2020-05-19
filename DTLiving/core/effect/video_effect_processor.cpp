@@ -32,6 +32,7 @@
 #include "video_toon_effect.h"
 #include "video_sketch_effect.h"
 #include "video_mosaic_effect.h"
+#include "video_water_mask_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -96,6 +97,9 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
         isShaderFile = false;
     } else if (std::strcmp(name, kVideoMosaicEffect) == 0) {
         effect = new effect::VideoMosaicEffect(name);
+    } else if (std::strcmp(name, kVideoWaterMaskEffect) == 0) {
+        effect = new composition::VideoWaterMaskEffect(name);
+        isShaderFile = false;
     } else {
         effect = new VideoEffect(name);
     }
@@ -112,14 +116,6 @@ void VideoEffectProcessor::SetClearColor(const char *name, GLfloat red, GLfloat 
     for(VideoEffect *effect : effects_) {
         if (effect->get_name() == std::string(name)) {
             effect->set_clear_color(red, green, blue, alpha);
-        }
-    }
-}
-
-void VideoEffectProcessor::SetIgnoreAspectRatio(const char *name, bool ignore_aspect_ratio) {
-    for(VideoEffect *effect : effects_) {
-        if (effect->get_name() == std::string(name)) {
-            effect->set_ignore_aspect_ratio(ignore_aspect_ratio);
         }
     }
 }

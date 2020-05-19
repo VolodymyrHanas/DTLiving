@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoTransformFilter : VideoFilter
 
-@property(nonatomic, assign) CGAffineTransform affineTransform;
-@property(nonatomic, assign) CATransform3D transform3D;
+@property (nonatomic, assign) CGAffineTransform affineTransform;
+@property (nonatomic, assign) CATransform3D transform3D;
 
 - (instancetype)init;
 

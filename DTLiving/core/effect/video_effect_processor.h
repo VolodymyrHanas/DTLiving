@@ -25,7 +25,6 @@ public:
     void Init(const char *vertex_shader_file, const char *fragment_shader_file);
     void AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
     void SetClearColor(const char *name, GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
-    void SetIgnoreAspectRatio(const char *name, bool ignore_aspect_ratio);
     void LoadResources(const char *name, std::vector<std::string> resources);
     void SetPositions(const char *name, GLfloat *positions);
     void SetTextureCoordinates(const char *name, GLfloat *texture_coordinates);

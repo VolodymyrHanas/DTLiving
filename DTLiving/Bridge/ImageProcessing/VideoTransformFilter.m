@@ -14,7 +14,6 @@
     self = [super initWithName:kVideoTransformEffect];
     if (self) {
         self.transform3D = CATransform3DIdentity;
-        self.ignoreAspectRatio = false;
     }
     return self;
 }
@@ -37,7 +36,7 @@
 
 - (NSDictionary<NSString*, NSArray<NSNumber*>*> *)floatParams {
     NSArray<NSNumber*> *transformMatrix = [self convert3DTransformToArray:self.transform3D];
-    return @{[NSString stringWithUTF8String:kVideoTransformEffectTransformMatrix]: transformMatrix};
+    return @{[NSString stringWithUTF8String:kVideoTransformEffectModelMatrix]: transformMatrix};
 }
 
 - (NSArray<NSNumber*> *)convert3DTransformToArray:(CATransform3D)transform3D {
@@ -46,6 +45,5 @@
              @(transform3D.m31), @(transform3D.m32), @(transform3D.m33), @(transform3D.m34),
              @(transform3D.m41), @(transform3D.m42), @(transform3D.m43), @(transform3D.m44)];
 }
-
 
 @end

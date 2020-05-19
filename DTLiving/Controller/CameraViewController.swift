@@ -183,10 +183,10 @@ class CameraViewController: UIViewController {
         liveButton.setTitle("start living", for: .normal)
         settingsButton.setTitleColor(UIColor.white, for: .normal)
         settingsButton.setTitle("config settings", for: .normal)
-        slider.minimumValue = 0.002
-        slider.maximumValue = 0.05
-        slider.value = 0.025
-        
+        slider.minimumValue = 0
+        slider.maximumValue = 1
+        slider.value = 0
+
         view.addSubview(recordButton)
         view.addSubview(liveButton)
         view.addSubview(settingsButton)
@@ -231,10 +231,12 @@ class CameraViewController: UIViewController {
     }
     
     @objc private func sliderValueChanged(_ slider: UISlider) {
-        let filter = VideoMosaicFilter()
-        let size = CGFloat(slider.value)
-        filter.displayTileSize = CGSize(width: size, height: size)
-        liveManager.updateFilter(filter)
+        let index = 1
+        if let filter = liveManager.fetchFilter(at: index) as? VideoWaterMaskFilter {
+            let percent = CGFloat(slider.value)
+            filter.translate = .init(width: 360 * percent, height: 640 * percent)
+            liveManager.updateFilter(filter, at: index)
+        }
     }
     
     @objc private func showSettings() {

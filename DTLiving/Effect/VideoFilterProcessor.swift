@@ -9,13 +9,28 @@
 import CoreMedia
 
 class VideoFilterProcessor: VideoOutput, VideoInput {
-    
+        
     private var inputFrameBuffer: FrameBuffer?
-    private var inputRotation: VideoRotation = .noRotation
-    private var inputSize: CGSize = .zero
+    private var inputRotation: VideoRotation = .noRotation {
+        didSet {
+            for filter in filters where filter.isRotationAware {
+                filter.rotation = inputRotation
+                updateFilter(filter)
+            }
+        }
+    }
+    private var inputSize: CGSize = .zero {
+        didSet {
+            for filter in filters where filter.isSizeAware {
+                filter.size = inputSize
+                updateFilter(filter)
+            }
+        }
+    }
 
     private let processor = VideoEffectProcessorObject()
-    
+    private var filters: [VideoFilter] = []
+
     var nextAvailableTextureIndex: Int {
         return 0
     }
@@ -67,15 +82,29 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
     }
     
     func addFilter(_ filter: VideoFilter) {
-        VideoContext.sharedProcessingContext.sync {
+        if filter.isRotationAware {
             filter.rotation = inputRotation
+        }
+        if filter.isSizeAware {
+            filter.size = inputSize
+        }
+        filters.append(filter)
+        VideoContext.sharedProcessingContext.sync {
             processor.add(filter)
         }
     }
     
-    func updateFilter(_ filter: VideoFilter) {
+    func fetchFilter(at index: Int) -> VideoFilter {
+        return filters[index]
+    }
+    
+    func updateFilter(_ filter: VideoFilter, at index: Int) {
+        filters[index] = filter
+        updateFilter(filter)
+    }
+    
+    private func updateFilter(_ filter: VideoFilter) {
         VideoContext.sharedProcessingContext.sync {
-            filter.rotation = inputRotation
             processor.update(filter)
         }
     }

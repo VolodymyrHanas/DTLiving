@@ -48,7 +48,7 @@ extern const char *kVideoHueEffectHue; // 0.0 ~ 3.0
 extern const char *kVideoGrayScaleEffect;
 
 extern const char *kVideoTransformEffect;
-extern const char *kVideoTransformEffectTransformMatrix;
+extern const char *kVideoTransformEffectModelMatrix;
 
 extern const char *kVideoCropEffect;
 
@@ -85,5 +85,9 @@ extern const char *kVideoMosaicEffectInputTileSize;
 extern const char *kVideoMosaicEffectDisplayTileSize;
 extern const char *kVideoMosaicEffectNumTiles;
 extern const char *kVideoMosaicEffectColorOn;
+
+extern const char *kVideoCompositionEffectModelMatrix;
+
+extern const char *kVideoWaterMaskEffect;
 
 #endif /* constants_h */

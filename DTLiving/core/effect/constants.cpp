@@ -45,7 +45,7 @@ const char *kVideoHueEffectHue = "u_hueAdjust";
 const char *kVideoGrayScaleEffect = "effect_gray_scale";
 
 const char *kVideoTransformEffect = "effect_transform";
-const char *kVideoTransformEffectTransformMatrix = "u_transformMatrix";
+const char *kVideoTransformEffectModelMatrix = "u_modelMatrix";
 
 const char *kVideoCropEffect = "effect_crop";
 
@@ -82,3 +82,7 @@ const char *kVideoMosaicEffectInputTileSize = "u_inputTileSize";
 const char *kVideoMosaicEffectDisplayTileSize = "u_displayTileSize";
 const char *kVideoMosaicEffectNumTiles = "u_numTiles";
 const char *kVideoMosaicEffectColorOn = "u_colorOn";
+
+const char *kVideoCompositionEffectModelMatrix = "u_modelMatrix";
+
+const char *kVideoWaterMaskEffect = "effect_water_mask";

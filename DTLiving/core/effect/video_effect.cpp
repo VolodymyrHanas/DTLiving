@@ -7,6 +7,7 @@
 //
 
 #include "video_effect.h"
+
 #include <sstream>
 
 namespace dtliving {
@@ -54,12 +55,42 @@ std::string VideoEffect::GrayScaleFragmentShader() {
     return os.str();
 }
 
+std::vector<GLfloat> VideoEffect::CaculateOrthographicMatrix(GLfloat width, GLfloat height, bool ignore_aspect_ratio) {
+    GLfloat left = -1.0;
+    GLfloat right = 1.0;
+    GLfloat bottom = -1.0;
+    GLfloat top = 1.0;
+    GLfloat near = -1.0;
+    GLfloat far = 1.0;
+    
+    if (!ignore_aspect_ratio) {
+        bottom = -1.0 * height / width;
+        top = 1.0 * height / width;
+    }
+
+    GLfloat r_l = right - left;
+    GLfloat t_b = top - bottom;
+    GLfloat f_n = far - near;
+    GLfloat tx = - (right + left) / (right - left);
+    GLfloat ty = - (top + bottom) / (top - bottom);
+    GLfloat tz = - (far + near) / (far - near);
+    
+    GLfloat scale = 2.0;
+    
+    std::vector<GLfloat> matrix {
+        scale / r_l, 0.0, 0.0, tx,
+        0.0, scale / t_b, 0.0, ty,
+        0.0, 0.0, scale / f_n, tz,
+        0.0, 0.0, 0.0, 1.0
+    };
+    
+    return matrix;
+}
+
 VideoEffect::VideoEffect(std::string name)
 : name_(name)
 , positions_({ -1, -1, 1, -1, -1, 1, 1, 1 })
 , texture_coordinates_({ 0, 0, 1, 0, 0, 1, 1, 1 })
-, is_orthographic_(false)
-, ignore_aspect_ratio_(false)
 , png_decoder_(new decoder::image::PngDecoder()) {
 }
 
@@ -84,9 +115,6 @@ void VideoEffect::LoadUniform() {
     a_position_ = program_->AttributeLocation("a_position");
     a_texcoord_ = program_->AttributeLocation("a_texcoord");
     u_texture_ = program_->UniformLocation("u_texture");
-    if (is_orthographic_) {
-        u_orthographic_matrix_ = program_->UniformLocation("u_orthographicMatrix");
-    }
 }
 
 void VideoEffect::LoadResources(std::vector<std::string> resources) {    
@@ -118,16 +146,7 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, std::v
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, output_frame.texture_name, 0);
 
     program_->Use();
-    
-    if (is_orthographic_) {
-        // for right now, input frame size == output frame size == view port
-        GLfloat normalized_height = GLfloat(output_frame.height) / GLfloat(output_frame.width);
-        positions[1] = -normalized_height;
-        positions[3] = -normalized_height;
-        positions[5] = normalized_height;
-        positions[7] = normalized_height;
-    }
-        
+            
     glClearColor(clear_color_red_, clear_color_green_, clear_color_blue_, clear_color_alpha_);
     glClear(GL_COLOR_BUFFER_BIT);
     
@@ -135,6 +154,8 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, std::v
     glBindTexture(GL_TEXTURE_2D, input_frame.texture_name);
     glUniform1i(u_texture_, 0);
     
+    BeforeSetPositions(output_frame.width, output_frame.height, 0);
+        
     glEnableVertexAttribArray(a_position_);
     glVertexAttribPointer(a_position_,
                           2,
@@ -156,41 +177,10 @@ void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame, std::v
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-void VideoEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
-    if (is_orthographic_) {
-        caculateOrthographicMatrix(width, height);
-    }
+void VideoEffect::BeforeSetPositions(GLsizei width, GLsizei height, int program_index) {
 }
 
-void VideoEffect::caculateOrthographicMatrix(GLfloat width, GLfloat height) {
-    GLfloat left = -1.0;
-    GLfloat right = 1.0;
-    GLfloat bottom = -1.0;
-    GLfloat top = 1.0;
-    GLfloat near = -1.0;
-    GLfloat far = 1.0;
-    if (!ignore_aspect_ratio_) {
-        bottom = -1.0 * height / width;
-        top = 1.0 * height / width;
-    }
-
-    GLfloat r_l = right - left;
-    GLfloat t_b = top - bottom;
-    GLfloat f_n = far - near;
-    GLfloat tx = - (right + left) / (right - left);
-    GLfloat ty = - (top + bottom) / (top - bottom);
-    GLfloat tz = - (far + near) / (far - near);
-    
-    GLfloat scale = 2.0;
-    
-    GLfloat matrix[16] = {
-        scale / r_l, 0.0, 0.0, tx,
-        0.0, scale / t_b, 0.0, ty,
-        0.0, 0.0, scale / f_n, tz,
-        0.0, 0.0, 0.0, 1.0
-    };
-    
-    glUniformMatrix4fv(u_orthographic_matrix_, 1, false, matrix);
+void VideoEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
 }
 
 }

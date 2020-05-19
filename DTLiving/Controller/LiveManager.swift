@@ -32,8 +32,11 @@ class LiveManager {
         camera = VideoCamera(position: .back, presets: [.hd1280x720])
         
         filterProcessor = VideoFilterProcessor()
-        let filter = VideoMosaicFilter()
-        filter.imageFile = "squares.png"
+        filterProcessor.addFilter(VideoSepiaFilter())
+        let filter = VideoWaterMaskFilter()
+        filter.imageFile = "logo.png"
+        filter.rotate = .pi / 4
+        filter.scale = .init(width: 0.5, height: 0.5)
         filterProcessor.addFilter(filter)
         
         preview = VideoView()
@@ -62,8 +65,12 @@ class LiveManager {
         camera.rotateCamera()
     }
     
-    func updateFilter(_ filter: VideoFilter) {
-        filterProcessor.updateFilter(filter)
+    func fetchFilter(at index: Int) -> VideoFilter {
+        return filterProcessor.fetchFilter(at: index)
+    }
+    
+    func updateFilter(_ filter: VideoFilter, at index: Int) {
+        filterProcessor.updateFilter(filter, at: index)
     }
 
 }

@@ -27,3 +27,4 @@
 #import "VideoToonFilter.h"
 #import "VideoSketchFilter.h"
 #import "VideoMosaicFilter.h"
+#import "VideoWaterMaskFilter.h"

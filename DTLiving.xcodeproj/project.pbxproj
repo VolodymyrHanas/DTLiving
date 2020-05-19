@@ -31,6 +31,7 @@
 		400C4103246A4C7D00C4B366 /* dotletterstiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 400C4102246A4C7D00C4B366 /* dotletterstiles.png */; };
 		400C4109246A8DB700C4B366 /* CGImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400C4107246A8DB700C4B366 /* CGImage+CVPixelBuffer.swift */; };
 		400C410A246A8DB700C4B366 /* FourCharCode+StringLiteralConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400C4108246A8DB700C4B366 /* FourCharCode+StringLiteralConvertible.swift */; };
+		400C410D246AA8AF00C4B366 /* video_composition_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 400C410B246AA8AF00C4B366 /* video_composition_effect.cpp */; };
 		401789DF240E517500B5A7B4 /* VideoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401789DE240E517500B5A7B4 /* VideoContext.swift */; };
 		40186225241F763A0003AF6F /* effect_brightness_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 40186224241F763A0003AF6F /* effect_brightness_fragment.glsl */; };
 		4018622A241F79AD0003AF6F /* effect_rgb_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 40186229241F79AD0003AF6F /* effect_rgb_fragment.glsl */; };
@@ -87,6 +88,13 @@
 		4037C6422411090A006C2FC7 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037C6412411090A006C2FC7 /* VideoView.swift */; };
 		403DEB8B23E53ADD00685F6B /* effect_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8723E53ADD00685F6B /* effect_fragment.glsl */; };
 		403DEB8D23E53ADD00685F6B /* effect_vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 403DEB8923E53ADD00685F6B /* effect_vertex.glsl */; };
+		404507E324727DCD007E8B60 /* walk03.png in Resources */ = {isa = PBXBuildFile; fileRef = 404507DE24727DCD007E8B60 /* walk03.png */; };
+		404507E424727DCD007E8B60 /* walk04.png in Resources */ = {isa = PBXBuildFile; fileRef = 404507DF24727DCD007E8B60 /* walk04.png */; };
+		404507E524727DCD007E8B60 /* walk01.png in Resources */ = {isa = PBXBuildFile; fileRef = 404507E024727DCD007E8B60 /* walk01.png */; };
+		404507E624727DCD007E8B60 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 404507E124727DCD007E8B60 /* logo.png */; };
+		404507E724727DCD007E8B60 /* walk02.png in Resources */ = {isa = PBXBuildFile; fileRef = 404507E224727DCD007E8B60 /* walk02.png */; };
+		404507EA2472833D007E8B60 /* video_water_mask_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 404507E82472833D007E8B60 /* video_water_mask_effect.cpp */; };
+		404507EF2472890B007E8B60 /* VideoWaterMaskFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 404507EE2472890B007E8B60 /* VideoWaterMaskFilter.m */; };
 		40501A152445C5BC009DDBF6 /* constants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40501A142445C5BC009DDBF6 /* constants.cpp */; };
 		40501A182446DE64009DDBF6 /* VideoCropFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 40501A172446DE64009DDBF6 /* VideoCropFilter.m */; };
 		40501A1B24472F75009DDBF6 /* video_two_pass_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40501A1924472F75009DDBF6 /* video_two_pass_effect.cpp */; };
@@ -175,6 +183,8 @@
 		400C4102246A4C7D00C4B366 /* dotletterstiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dotletterstiles.png; sourceTree = "<group>"; };
 		400C4107246A8DB700C4B366 /* CGImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
 		400C4108246A8DB700C4B366 /* FourCharCode+StringLiteralConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FourCharCode+StringLiteralConvertible.swift"; sourceTree = "<group>"; };
+		400C410B246AA8AF00C4B366 /* video_composition_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_composition_effect.cpp; sourceTree = "<group>"; };
+		400C410C246AA8AF00C4B366 /* video_composition_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_composition_effect.h; sourceTree = "<group>"; };
 		401789DE240E517500B5A7B4 /* VideoContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContext.swift; sourceTree = "<group>"; };
 		40186224241F763A0003AF6F /* effect_brightness_fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = effect_brightness_fragment.glsl; sourceTree = "<group>"; };
 		40186229241F79AD0003AF6F /* effect_rgb_fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = effect_rgb_fragment.glsl; sourceTree = "<group>"; };
@@ -252,6 +262,15 @@
 		4037C6412411090A006C2FC7 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		403DEB8723E53ADD00685F6B /* effect_fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = effect_fragment.glsl; sourceTree = "<group>"; };
 		403DEB8923E53ADD00685F6B /* effect_vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = effect_vertex.glsl; sourceTree = "<group>"; };
+		404507DE24727DCD007E8B60 /* walk03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walk03.png; sourceTree = "<group>"; };
+		404507DF24727DCD007E8B60 /* walk04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walk04.png; sourceTree = "<group>"; };
+		404507E024727DCD007E8B60 /* walk01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walk01.png; sourceTree = "<group>"; };
+		404507E124727DCD007E8B60 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		404507E224727DCD007E8B60 /* walk02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walk02.png; sourceTree = "<group>"; };
+		404507E82472833D007E8B60 /* video_water_mask_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_water_mask_effect.cpp; sourceTree = "<group>"; };
+		404507E92472833D007E8B60 /* video_water_mask_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_water_mask_effect.h; sourceTree = "<group>"; };
+		404507ED2472890B007E8B60 /* VideoWaterMaskFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoWaterMaskFilter.h; sourceTree = "<group>"; };
+		404507EE2472890B007E8B60 /* VideoWaterMaskFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoWaterMaskFilter.m; sourceTree = "<group>"; };
 		40501A142445C5BC009DDBF6 /* constants.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = constants.cpp; sourceTree = "<group>"; };
 		40501A162446DE64009DDBF6 /* VideoCropFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCropFilter.h; sourceTree = "<group>"; };
 		40501A172446DE64009DDBF6 /* VideoCropFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCropFilter.m; sourceTree = "<group>"; };
@@ -467,6 +486,7 @@
 				40361D68244407FE00DC254F /* ImageProcessing */,
 				402F20A224598519006B221C /* Blend */,
 				4004844E2466AF4F00BCFC36 /* Effect */,
+				404507EC247288D5007E8B60 /* Composition */,
 			);
 			path = Bridge;
 			sourceTree = "<group>";
@@ -498,12 +518,15 @@
 				402E20772456E6DD00951804 /* video_two_input_effect.cpp */,
 				4004844C2466AA2500BCFC36 /* video_3x3_convolution_effect.h */,
 				4004844B2466AA2500BCFC36 /* video_3x3_convolution_effect.cpp */,
+				400C410C246AA8AF00C4B366 /* video_composition_effect.h */,
+				400C410B246AA8AF00C4B366 /* video_composition_effect.cpp */,
 				403DEB8923E53ADD00685F6B /* effect_vertex.glsl */,
 				403DEB8723E53ADD00685F6B /* effect_fragment.glsl */,
 				402F20A0245983F0006B221C /* effect_two_input_vertex.glsl */,
 				40186220241F73FB0003AF6F /* color_processing */,
 				40361D62244404FD00DC254F /* image_processing */,
 				402E2508245981FC00951804 /* blend */,
+				404507EB24728464007E8B60 /* composition */,
 				4004844A2466A93C00BCFC36 /* effect */,
 			);
 			path = effect;
@@ -620,6 +643,11 @@
 		402F20A624598A26006B221C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				404507E124727DCD007E8B60 /* logo.png */,
+				404507E024727DCD007E8B60 /* walk01.png */,
+				404507E224727DCD007E8B60 /* walk02.png */,
+				404507DE24727DCD007E8B60 /* walk03.png */,
+				404507DF24727DCD007E8B60 /* walk04.png */,
 				400C4102246A4C7D00C4B366 /* dotletterstiles.png */,
 				400C40FE24695A7000C4B366 /* squares.png */,
 				400484482466A32E00BCFC36 /* star.png */,
@@ -679,6 +707,24 @@
 				40076AD624176A710052ED90 /* FrameBufferCache.swift */,
 			);
 			path = OpenGL;
+			sourceTree = "<group>";
+		};
+		404507EB24728464007E8B60 /* composition */ = {
+			isa = PBXGroup;
+			children = (
+				404507E92472833D007E8B60 /* video_water_mask_effect.h */,
+				404507E82472833D007E8B60 /* video_water_mask_effect.cpp */,
+			);
+			path = composition;
+			sourceTree = "<group>";
+		};
+		404507EC247288D5007E8B60 /* Composition */ = {
+			isa = PBXGroup;
+			children = (
+				404507ED2472890B007E8B60 /* VideoWaterMaskFilter.h */,
+				404507EE2472890B007E8B60 /* VideoWaterMaskFilter.m */,
+			);
+			path = Composition;
 			sourceTree = "<group>";
 		};
 		40AC667F2409211200E281AC /* Controller */ = {
@@ -856,6 +902,8 @@
 				4004843E246695BC00BCFC36 /* lighthouse.png in Resources */,
 				402E250124595C6C00951804 /* png.5 in Resources */,
 				402E24F724595C6C00951804 /* libpng.3 in Resources */,
+				404507E424727DCD007E8B60 /* walk04.png in Resources */,
+				404507E624727DCD007E8B60 /* logo.png in Resources */,
 				402E24EC24595C6C00951804 /* CHANGES in Resources */,
 				402E24F924595C6C00951804 /* pngtest.png in Resources */,
 				403DEB8B23E53ADD00685F6B /* effect_fragment.glsl in Resources */,
@@ -865,6 +913,7 @@
 				402E24E324595C6C00951804 /* INSTALL in Resources */,
 				40B1DF0924400D48009B68C7 /* effect_hue_fragment.glsl in Resources */,
 				408E91E9246658AA00B3BFC8 /* blue.png in Resources */,
+				404507E724727DCD007E8B60 /* walk02.png in Resources */,
 				400C40F72469542600C4B366 /* effect_mosaic_fragment.glsl in Resources */,
 				402E24EA24595C6C00951804 /* configure in Resources */,
 				402E24EB24595C6C00951804 /* pngnow.png in Resources */,
@@ -880,6 +929,7 @@
 				403DEB8D23E53ADD00685F6B /* effect_vertex.glsl in Resources */,
 				40B1DF13244067AD009B68C7 /* effect_gray_scale_fragment.glsl in Resources */,
 				40F30585243C90600022B263 /* effect_levels_fragment.glsl in Resources */,
+				404507E324727DCD007E8B60 /* walk03.png in Resources */,
 				402E24F224595C6C00951804 /* TODO in Resources */,
 				40048441246697F700BCFC36 /* effect_mask_fragment.glsl in Resources */,
 				402E24E524595C6C00951804 /* CMakeLists.txt in Resources */,
@@ -892,6 +942,7 @@
 				400484492466A32E00BCFC36 /* star.png in Resources */,
 				40361D642444054D00DC254F /* effect_transform_vertex.glsl in Resources */,
 				400C40FF24695A7000C4B366 /* squares.png in Resources */,
+				404507E524727DCD007E8B60 /* walk01.png in Resources */,
 				4018622A241F79AD0003AF6F /* effect_rgb_fragment.glsl in Resources */,
 				400C4103246A4C7D00C4B366 /* dotletterstiles.png in Resources */,
 				40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */,
@@ -956,6 +1007,7 @@
 				402E24EF24595C6C00951804 /* pngwrite.c in Sources */,
 				400484442466987400BCFC36 /* VideoMaskFilter.m in Sources */,
 				40831444241A2F1300DC2BE9 /* shader_program.cpp in Sources */,
+				404507EA2472833D007E8B60 /* video_water_mask_effect.cpp in Sources */,
 				400C40FD2469579800C4B366 /* VideoMosaicFilter.m in Sources */,
 				40501A1B24472F75009DDBF6 /* video_two_pass_effect.cpp in Sources */,
 				402E24F324595C6C00951804 /* pngwtran.c in Sources */,
@@ -1016,6 +1068,7 @@
 				402E24FA24595C6C00951804 /* pngmem.c in Sources */,
 				40831449241A384C00DC2BE9 /* VideoEffectProcessorObject.mm in Sources */,
 				40B1DF04243F1CCE009B68C7 /* VideoColorMatrixFilter.m in Sources */,
+				400C410D246AA8AF00C4B366 /* video_composition_effect.cpp in Sources */,
 				4066424824519D75005C75EE /* video_3x3_texture_sampling_effect.cpp in Sources */,
 				40501A152445C5BC009DDBF6 /* constants.cpp in Sources */,
 				40076AD22416351F0052ED90 /* DebugHelper.swift in Sources */,
@@ -1026,6 +1079,7 @@
 				400C410A246A8DB700C4B366 /* FourCharCode+StringLiteralConvertible.swift in Sources */,
 				400484542466C00E00BCFC36 /* video_toon_effect.cpp in Sources */,
 				4018623924222E800003AF6F /* video_texture_cache.cpp in Sources */,
+				404507EF2472890B007E8B60 /* VideoWaterMaskFilter.m in Sources */,
 				40831441241A2EEE00DC2BE9 /* video_effect.cpp in Sources */,
 				40361D672444062B00DC254F /* video_transform_effect.cpp in Sources */,
 				400C40F52469513E00C4B366 /* VideoSketchFilter.m in Sources */,

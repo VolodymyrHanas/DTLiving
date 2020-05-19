@@ -39,8 +39,6 @@
                                   filter.backgroundColorGreen,
                                   filter.backgroundColorBlue,
                                   filter.backgroundColorAlpha);
-    self.processor->SetIgnoreAspectRatio([filter.name UTF8String],
-                                         filter.ignoreAspectRatio);
     if (filter.resources) {
         std::vector<std::string> resources;
         for (NSString *resource in filter.resources) {

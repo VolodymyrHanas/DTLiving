@@ -81,7 +81,8 @@ RawImageData PngDecoder::ReadImage(std::string file) {
     png_set_sig_bytes(png_ptr, number);
 
     // Xcode: Turn off settings in Compress PNG Files of Build Setings
-    // 读取图片信息 // TODO: Some PNG is not right
+    // 读取图片信息
+    // TODO: some PNG are not read correctly
     png_read_png(png_ptr, info_ptr, (PNG_TRANSFORM_SCALE_16 | PNG_TRANSFORM_PACKING | PNG_TRANSFORM_EXPAND | PNG_TRANSFORM_GRAY_TO_RGB), NULL);
         
     // 查询图片信息

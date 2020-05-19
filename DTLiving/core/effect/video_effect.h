@@ -24,6 +24,8 @@ public:
     static std::string VertexShader();
     static std::string FragmentShader();
     static std::string GrayScaleFragmentShader();
+    static std::vector<GLfloat> CaculateOrthographicMatrix(GLfloat width, GLfloat height,
+                                                           bool ignore_aspect_ratio = false);
 
     VideoEffect(std::string name);
     ~VideoEffect();
@@ -41,11 +43,7 @@ public:
     virtual void Render(VideoFrame input_frame, VideoFrame output_frame, std::vector<GLfloat> positions, std::vector<GLfloat> texture_coordinates);
 
     std::string get_name() { return name_; }
-    bool get_is_orthographic() { return is_orthographic_; }
-    void set_is_orthographic(bool is_orthographic) { is_orthographic_ = is_orthographic; }
-    bool get_ignore_aspect_ratio() { return ignore_aspect_ratio_; }
-    void set_ignore_aspect_ratio(bool ignore_aspect_ratio) { ignore_aspect_ratio_ = ignore_aspect_ratio; }
-    void set_clear_color(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
+    void set_clear_color(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) { // TODO: Rewrite
         clear_color_red_ = red;
         clear_color_green_ = green;
         clear_color_blue_ = blue;
@@ -60,6 +58,7 @@ public:
     
 protected:
     void LoadShaderSource(std::string vertex_shader_source, std::string fragment_shader_source);
+    virtual void BeforeSetPositions(GLsizei width, GLsizei height, int program_index);
     virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
     
     GLfloat clear_color_red_;
@@ -71,22 +70,15 @@ protected:
     GLuint a_position_;
     GLuint a_texcoord_;
     GLint u_texture_;
-    
+    std::vector<GLfloat> positions_;
+    std::vector<GLfloat> texture_coordinates_;
+
     std::map<std::string, VideoEffectUniform> uniforms_;
     
     decoder::image::PngDecoder *png_decoder_;
 
 private:
-    void caculateOrthographicMatrix(GLfloat width, GLfloat height);
-    
     std::string name_;
-    
-    std::vector<GLfloat> positions_;
-    std::vector<GLfloat> texture_coordinates_;
-            
-    GLint u_orthographic_matrix_;
-    bool is_orthographic_;
-    bool ignore_aspect_ratio_;
 };
 
 }

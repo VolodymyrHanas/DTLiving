@@ -21,7 +21,12 @@ public:
     VideoTransformEffect(std::string name);
 
 protected:
+    virtual void LoadUniform();
+    virtual void BeforeSetPositions(GLsizei width, GLsizei height, int program_index);
     virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
+    
+private:
+    GLint u_orthographic_matrix_;
 };
 
 }
