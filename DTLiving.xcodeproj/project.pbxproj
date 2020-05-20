@@ -95,6 +95,8 @@
 		404507E724727DCD007E8B60 /* walk02.png in Resources */ = {isa = PBXBuildFile; fileRef = 404507E224727DCD007E8B60 /* walk02.png */; };
 		404507EA2472833D007E8B60 /* video_water_mask_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 404507E82472833D007E8B60 /* video_water_mask_effect.cpp */; };
 		404507EF2472890B007E8B60 /* VideoWaterMaskFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 404507EE2472890B007E8B60 /* VideoWaterMaskFilter.m */; };
+		404507F32473EBCE007E8B60 /* video_animated_sticker_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 404507F12473EBCE007E8B60 /* video_animated_sticker_effect.cpp */; };
+		404507F6247517B4007E8B60 /* VideoAnimatedStickerFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 404507F5247517B4007E8B60 /* VideoAnimatedStickerFilter.m */; };
 		40501A152445C5BC009DDBF6 /* constants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40501A142445C5BC009DDBF6 /* constants.cpp */; };
 		40501A182446DE64009DDBF6 /* VideoCropFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 40501A172446DE64009DDBF6 /* VideoCropFilter.m */; };
 		40501A1B24472F75009DDBF6 /* video_two_pass_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40501A1924472F75009DDBF6 /* video_two_pass_effect.cpp */; };
@@ -271,6 +273,10 @@
 		404507E92472833D007E8B60 /* video_water_mask_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_water_mask_effect.h; sourceTree = "<group>"; };
 		404507ED2472890B007E8B60 /* VideoWaterMaskFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoWaterMaskFilter.h; sourceTree = "<group>"; };
 		404507EE2472890B007E8B60 /* VideoWaterMaskFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoWaterMaskFilter.m; sourceTree = "<group>"; };
+		404507F12473EBCE007E8B60 /* video_animated_sticker_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_animated_sticker_effect.cpp; sourceTree = "<group>"; };
+		404507F22473EBCE007E8B60 /* video_animated_sticker_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_animated_sticker_effect.h; sourceTree = "<group>"; };
+		404507F4247517B4007E8B60 /* VideoAnimatedStickerFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoAnimatedStickerFilter.h; sourceTree = "<group>"; };
+		404507F5247517B4007E8B60 /* VideoAnimatedStickerFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoAnimatedStickerFilter.m; sourceTree = "<group>"; };
 		40501A142445C5BC009DDBF6 /* constants.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = constants.cpp; sourceTree = "<group>"; };
 		40501A162446DE64009DDBF6 /* VideoCropFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCropFilter.h; sourceTree = "<group>"; };
 		40501A172446DE64009DDBF6 /* VideoCropFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCropFilter.m; sourceTree = "<group>"; };
@@ -714,6 +720,8 @@
 			children = (
 				404507E92472833D007E8B60 /* video_water_mask_effect.h */,
 				404507E82472833D007E8B60 /* video_water_mask_effect.cpp */,
+				404507F22473EBCE007E8B60 /* video_animated_sticker_effect.h */,
+				404507F12473EBCE007E8B60 /* video_animated_sticker_effect.cpp */,
 			);
 			path = composition;
 			sourceTree = "<group>";
@@ -723,6 +731,8 @@
 			children = (
 				404507ED2472890B007E8B60 /* VideoWaterMaskFilter.h */,
 				404507EE2472890B007E8B60 /* VideoWaterMaskFilter.m */,
+				404507F4247517B4007E8B60 /* VideoAnimatedStickerFilter.h */,
+				404507F5247517B4007E8B60 /* VideoAnimatedStickerFilter.m */,
 			);
 			path = Composition;
 			sourceTree = "<group>";
@@ -1060,6 +1070,7 @@
 				40664245245199BF005C75EE /* video_sobel_edge_detection_effect.cpp in Sources */,
 				402E24F524595C6C00951804 /* pngpread.c in Sources */,
 				401862302420DB810003AF6F /* VideoFilter.m in Sources */,
+				404507F6247517B4007E8B60 /* VideoAnimatedStickerFilter.m in Sources */,
 				40B1DF1624406A32009B68C7 /* VideoGrayScaleFilter.m in Sources */,
 				40F30578243C7A560022B263 /* video_saturation_effect.cpp in Sources */,
 				40664220244EFE09005C75EE /* video_box_blur_effect.cpp in Sources */,
@@ -1088,6 +1099,7 @@
 				40186248242382E80003AF6F /* video_rgb_effect.cpp in Sources */,
 				400484572468F1AC00BCFC36 /* VideoToonFilter.m in Sources */,
 				40186244242370770003AF6F /* video_brightness_effect.cpp in Sources */,
+				404507F32473EBCE007E8B60 /* video_animated_sticker_effect.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

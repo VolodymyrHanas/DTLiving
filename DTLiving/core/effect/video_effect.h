@@ -44,12 +44,18 @@ public:
     
     void SetPositions(std::vector<GLfloat> positions);
     void SetTextureCoordinates(std::vector<GLfloat> texture_coordinates);
-    void SetUniform(std::string name, VideoEffectUniform uniform);
+    void SetUniform(std::string name, VideoEffectUniform uniform);    
     
+    bool Update(double delta);
     void Render(VideoFrame input_frame, VideoFrame output_frame);
-    virtual void Render(VideoFrame input_frame, VideoFrame output_frame, std::vector<GLfloat> positions, std::vector<GLfloat> texture_coordinates);
 
     std::string get_name() { return name_; }
+    void set_duration(double duration) {
+        duration_ = duration;
+    }
+    double get_duration() {
+        return duration_;
+    }
     void set_clear_color(VideoVec4 clear_color) {
         clear_color_ = clear_color;
     }
@@ -57,13 +63,16 @@ public:
         return clear_color_;
     }
     
+    
 protected:
     void LoadShaderSource(std::string vertex_shader_source, std::string fragment_shader_source);
+    
+    virtual void Update();
+    virtual void Render(VideoFrame input_frame, VideoFrame output_frame, std::vector<GLfloat> positions, std::vector<GLfloat> texture_coordinates);
+
     virtual void BeforeSetPositions(GLsizei width, GLsizei height, int program_index);
     virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
     
-    VideoVec4 clear_color_;
-
     ShaderProgram *program_;
     GLuint a_position_;
     GLuint a_texcoord_;
@@ -75,8 +84,12 @@ protected:
     
     decoder::image::PngDecoder *png_decoder_;
 
+    double time_since_first_update_ = 0;
+
 private:
     std::string name_;
+    double duration_ = -1; // negative mean infinite
+    VideoVec4 clear_color_;
 };
 
 }

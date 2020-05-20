@@ -90,4 +90,7 @@ extern const char *kVideoCompositionEffectModelMatrix;
 
 extern const char *kVideoWaterMaskEffect;
 
+extern const char *kVideoAnimatedStickerEffect;
+extern const char *kVideoAnimatedStickerEffectInterval;
+
 #endif /* constants_h */

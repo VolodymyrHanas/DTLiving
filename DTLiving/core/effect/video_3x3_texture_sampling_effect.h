@@ -20,10 +20,11 @@ public:
 
     Video3x3TextureSamplingEffect(std::string name);
 
-    void LoadFragmentShaderSource(std::string fragment_shader_source);
     virtual void LoadUniform();
     
 protected:
+    void LoadFragmentShaderSource(std::string fragment_shader_source);
+
     virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
 
 private:

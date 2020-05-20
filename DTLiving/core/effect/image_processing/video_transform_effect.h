@@ -20,8 +20,9 @@ class VideoTransformEffect: public VideoEffect {
 public:
     VideoTransformEffect(std::string name);
 
-protected:
     virtual void LoadUniform();
+
+protected:
     virtual void BeforeSetPositions(GLsizei width, GLsizei height, int program_index);
     virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
     

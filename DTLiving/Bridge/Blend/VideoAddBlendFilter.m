@@ -26,7 +26,7 @@
 }
 
 - (NSArray<NSString*> *)resources {
-    return @[self.imageFile];
+    return @[self.imageName];
 }
 
 @end

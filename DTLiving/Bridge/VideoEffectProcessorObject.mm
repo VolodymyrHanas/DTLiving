@@ -28,31 +28,34 @@
     return self;
 }
 
-- (void)addFilter:(VideoFilter *)filter {    
+- (void)addFilter:(VideoFilter *)filter {
+    const char *name = [filter.name UTF8String];
     NSString *vertexShaderFile = [NSBundle.mainBundle pathForResource:[filter vertexShaderFile] ofType:@"glsl"];
     NSString *fragmentShaderFile = [NSBundle.mainBundle pathForResource:[filter fragmentShaderFile] ofType:@"glsl"];
-    self.processor->AddEffect([filter.name UTF8String],
-                              [vertexShaderFile UTF8String],
-                              [fragmentShaderFile UTF8String]);
+    self.processor->AddEffect(name, [vertexShaderFile UTF8String], [fragmentShaderFile UTF8String]);
+    if (filter.duration > 0) {
+        self.processor->SetDuration(name, filter.duration);
+    }
     dtliving::effect::VideoVec4 clear_color {
         filter.backgroundColor.x,
         filter.backgroundColor.y,
         filter.backgroundColor.z,
         filter.backgroundColor.w
     };
-    self.processor->SetClearColor([filter.name UTF8String], clear_color);
+    self.processor->SetClearColor(name, clear_color);
     if (filter.resources) {
         std::vector<std::string> resources;
         for (NSString *resource in filter.resources) {
-            NSString *imageFile = [NSBundle.mainBundle pathForResource:resource ofType:nil];
+            NSString *imageFile = [NSBundle.mainBundle pathForResource:resource ofType:@"png"];
             resources.push_back([imageFile UTF8String]);
         }
-        self.processor->LoadResources([filter.name UTF8String], resources);
+        self.processor->LoadResources(name, resources);
     }
     [self updateFilter:filter];
 }
 
 - (void)updateFilter:(VideoFilter *)filter {
+    const char *name = [filter.name UTF8String];
     NSDictionary<NSString*, NSArray<NSNumber*>*> *intParams = filter.intParams;
     if (intParams) {
         for (NSString *key in intParams) {
@@ -63,7 +66,7 @@
                 NSNumber *value = values[i];
                 ints[i] = value.intValue;
             }
-            self.processor->SetEffectParamInt([filter.name UTF8String],
+            self.processor->SetEffectParamInt(name,
                                               [key UTF8String],
                                               ints,
                                               count);
@@ -79,7 +82,7 @@
                 NSNumber *value = values[i];
                 floats[i] = value.floatValue;
             }
-            self.processor->SetEffectParamFloat([filter.name UTF8String],
+            self.processor->SetEffectParamFloat(name,
                                                 [key UTF8String],
                                                 floats,
                                                 count);
@@ -93,7 +96,7 @@
             NSNumber *value = positions[i];
             floats[i] = value.floatValue;
         }
-        self.processor->SetPositions([filter.name UTF8String], floats);
+        self.processor->SetPositions(name, floats);
     }
     NSArray<NSNumber*> *textureCoordinates = filter.textureCoordinates;
     if (textureCoordinates) {
@@ -103,14 +106,14 @@
             NSNumber *value = textureCoordinates[i];
             floats[i] = value.floatValue;
         }
-        self.processor->SetTextureCoordinates([filter.name UTF8String], floats);
+        self.processor->SetTextureCoordinates(name, floats);
     }
 }
 
-- (void)processs:(GLuint)inputTexture outputTexture:(GLuint)outputTexture size:(CGSize)size {
+- (void)processs:(GLuint)inputTexture outputTexture:(GLuint)outputTexture size:(CGSize)size delta:(double)delta {
     dtliving::effect::VideoFrame inputFrame { inputTexture, GLsizei(size.width), GLsizei(size.height) };
     dtliving::effect::VideoFrame outputFrame { outputTexture, GLsizei(size.width), GLsizei(size.height) };
-    self.processor->Process(inputFrame, outputFrame);
+    self.processor->Process(inputFrame, outputFrame, delta);
 }
 
 @end

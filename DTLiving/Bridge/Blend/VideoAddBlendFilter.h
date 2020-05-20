@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoAddBlendFilter : VideoFilter
 
-@property (nonatomic, copy) NSString *imageFile;
+@property (nonatomic, copy) NSString *imageName;
 
 - (instancetype)init;
 

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface VideoMaskFilter : VideoFilter
 
 @property (nonatomic, assign) VideoVec4 color;
-@property (nonatomic, copy) NSString *imageFile;
+@property (nonatomic, copy) NSString *imageName;
 
 - (instancetype)init;
 

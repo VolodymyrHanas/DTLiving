@@ -70,6 +70,7 @@ BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation);
 @interface VideoFilter : NSObject
 
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, assign) double duration;
 @property (nonatomic, copy, readonly) NSString *vertexShaderFile;
 @property (nonatomic, copy, readonly) NSString *fragmentShaderFile;
 @property (nonatomic, copy, readonly) NSArray<NSNumber*> *positions;

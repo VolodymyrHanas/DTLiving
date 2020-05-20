@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGSize displayTileSize;
 @property (nonatomic, assign) float numTiles;
 @property (nonatomic, assign) BOOL colorOn;
-@property (nonatomic, copy) NSString *imageFile;
+@property (nonatomic, copy) NSString *imageName;
 
 - (instancetype)init;
 

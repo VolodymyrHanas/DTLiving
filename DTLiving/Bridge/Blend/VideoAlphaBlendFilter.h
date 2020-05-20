@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoAlphaBlendFilter : VideoFilter
 
-@property (nonatomic, copy) NSString *imageFile;
+@property (nonatomic, copy) NSString *imageName;
 @property (nonatomic, assign) float mixturePercent;
 
 - (instancetype)init;

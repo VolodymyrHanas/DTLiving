@@ -132,6 +132,24 @@ void VideoEffect::SetUniform(std::string name, VideoEffectUniform uniform) {
     uniforms_[name] = uniform;
 }
 
+bool VideoEffect::Update(double delta) {
+    time_since_first_update_ += delta; // delta is zero for first time
+    if (duration_ < 0) {
+        Update();
+        return true;
+    } else {
+        if (time_since_first_update_ > duration_) {
+            return false;
+        }
+        
+        Update();
+        return true;
+    }
+}
+
+void VideoEffect::Update() {
+}
+
 void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame) {
     Render(input_frame, output_frame, positions_, texture_coordinates_);
 }

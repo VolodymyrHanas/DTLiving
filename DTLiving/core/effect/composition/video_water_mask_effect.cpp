@@ -23,11 +23,11 @@ void VideoWaterMaskEffect::LoadResources(std::vector<std::string> resources) {
     
     decoder::image::RawImageData image_data = png_decoder_->ReadImage(file);
     
-    input_frame2_.width = image_data.width;
-    input_frame2_.height = image_data.height;
+    image_frame_.width = image_data.width;
+    image_frame_.height = image_data.height;
 
-    glGenTextures(1, &input_frame2_.texture_name);
-    glBindTexture(GL_TEXTURE_2D, input_frame2_.texture_name);
+    glGenTextures(1, &image_frame_.texture_name);
+    glBindTexture(GL_TEXTURE_2D, image_frame_.texture_name);
     
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -42,12 +42,12 @@ void VideoWaterMaskEffect::LoadResources(std::vector<std::string> resources) {
 void VideoWaterMaskEffect::BeforeSetPositions(GLsizei width, GLsizei height, int program_index) {
     if (program_index == 1) {
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, input_frame2_.texture_name);
+        glBindTexture(GL_TEXTURE_2D, image_frame_.texture_name);
         glUniform1i(u_texture2_, 0);
         
         // layout image frame`s center at origin
-        GLfloat normalized_width = GLfloat(input_frame2_.width) / GLfloat(width);
-        GLfloat normalized_height = GLfloat(input_frame2_.height) / GLfloat(width);
+        GLfloat normalized_width = GLfloat(image_frame_.width) / GLfloat(width);
+        GLfloat normalized_height = GLfloat(image_frame_.height) / GLfloat(width);
         positions2_[0] = -normalized_width;
         positions2_[1] = -normalized_height;
         positions2_[2] = normalized_width;

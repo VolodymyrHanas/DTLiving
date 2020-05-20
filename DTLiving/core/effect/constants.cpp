@@ -86,3 +86,6 @@ const char *kVideoMosaicEffectColorOn = "u_colorOn";
 const char *kVideoCompositionEffectModelMatrix = "u_modelMatrix";
 
 const char *kVideoWaterMaskEffect = "effect_water_mask";
+
+const char *kVideoAnimatedStickerEffect = "effect_animated_sticker";
+const char *kVideoAnimatedStickerEffectInterval = "u_interval";

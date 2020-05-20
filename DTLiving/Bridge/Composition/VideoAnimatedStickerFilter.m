@@ -1,17 +1,17 @@
 //
-//  VideoWaterMaskFilter.m
+//  VideoAnimatedStickerFilter.m
 //  DTLiving
 //
-//  Created by Dan Jiang on 2020/5/18.
+//  Created by Dan Jiang on 2020/5/20.
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#import "VideoWaterMaskFilter.h"
+#import "VideoAnimatedStickerFilter.h"
 
-@implementation VideoWaterMaskFilter
+@implementation VideoAnimatedStickerFilter
 
 - (instancetype)init {
-    self = [super initWithName:kVideoWaterMaskEffect];
+    self = [super initWithName:kVideoAnimatedStickerEffect];
     if (self) {
         self.scale = CGSizeMake(1.0, 1.0);
         self.rotate = 0;
@@ -33,11 +33,18 @@
     transform = CGAffineTransformRotate(transform, self.rotate);
     CATransform3D transform3D = CATransform3DMakeAffineTransform(transform);
     NSArray<NSNumber*> *transformMatrix = [self convert3DTransformToArray:transform3D];
-    return @{[NSString stringWithUTF8String:kVideoCompositionEffectModelMatrix]: transformMatrix};
+    return @{[NSString stringWithUTF8String:kVideoCompositionEffectModelMatrix]: transformMatrix,
+             [NSString stringWithUTF8String:kVideoAnimatedStickerEffectInterval]: @[@(self.imageInterval)]};
 }
 
 - (NSArray<NSString*> *)resources {
-    return @[self.imageName];
+    NSMutableArray<NSString*> *imageNames = [NSMutableArray<NSString*> new];
+    int index = 0;
+    while (index < self.imageCount) {
+        [imageNames addObject:[NSString stringWithFormat:@"%@%02d", self.imageName, index + 1]];
+        index++;
+    }
+    return imageNames;
 }
 
 - (NSArray<NSNumber*> *)convert3DTransformToArray:(CATransform3D)transform3D {

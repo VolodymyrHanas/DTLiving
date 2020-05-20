@@ -22,10 +22,12 @@ public:
 
     virtual void LoadShaderSource();
     virtual void LoadUniform();
-    virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
-    virtual void Render(VideoFrame input_frame, VideoFrame output_frame, std::vector<GLfloat> positions, std::vector<GLfloat> texture_coordinates);
 
 protected:
+    virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
+    
+    virtual void Render(VideoFrame input_frame, VideoFrame output_frame, std::vector<GLfloat> positions, std::vector<GLfloat> texture_coordinates);
+
     ShaderProgram *program2_;
     GLuint a_position2_;
     GLuint a_texcoord2_;

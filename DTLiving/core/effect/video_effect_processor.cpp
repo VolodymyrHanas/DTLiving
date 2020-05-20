@@ -33,6 +33,7 @@
 #include "video_sketch_effect.h"
 #include "video_mosaic_effect.h"
 #include "video_water_mask_effect.h"
+#include "video_animated_sticker_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -100,6 +101,9 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
     } else if (std::strcmp(name, kVideoWaterMaskEffect) == 0) {
         effect = new composition::VideoWaterMaskEffect(name);
         isShaderFile = false;
+    } else if (std::strcmp(name, kVideoAnimatedStickerEffect) == 0) {
+        effect = new composition::VideoAnimatedStickerEffect(name);
+        isShaderFile = false;
     } else {
         effect = new VideoEffect(name);
     }
@@ -110,6 +114,14 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
     }
     effect->LoadUniform();
     effects_.push_back(effect);
+}
+
+void VideoEffectProcessor::SetDuration(const char *name, double duration) {
+    for(VideoEffect *effect : effects_) {
+        if (effect->get_name() == std::string(name)) {
+            effect->set_duration(duration);
+        }
+    }
 }
 
 void VideoEffectProcessor::SetClearColor(const char *name, VideoVec4 clear_color) {
@@ -164,35 +176,46 @@ void VideoEffectProcessor::SetEffectParamFloat(const char *name, const char *par
     }
 }
 
-void VideoEffectProcessor::Process(VideoFrame input_frame, VideoFrame output_frame) {
+void VideoEffectProcessor::Process(VideoFrame input_frame, VideoFrame output_frame, double delta) {
     if (effects_.empty()) {
-        no_effect_->Render(input_frame, output_frame);
+        no_effect_->Render(input_frame, output_frame); // TODO: size is not right
     } else {
         int count = 0;
         VideoFrame previous_frame = input_frame;
         VideoFrame current_frame;
         VideoTexture *previous_texture = nullptr;
+        std::vector<VideoEffect *> available_effects;
         for(VideoEffect *effect : effects_) {
-            current_frame = output_frame;
-            VideoTexture *current_texture = nullptr;
-            if (count < effects_.size() - 1) {
-                current_texture = VideoTextureCache::GetInstance()->FetchTexture(input_frame.width,
-                                                                                 input_frame.height);
-                current_texture->Lock();
-                current_frame = {
-                    current_texture->get_texture_name(),
-                    current_texture->get_width(),
-                    current_texture->get_height()
-                };
+            if (effect->Update(delta)) {
+                current_frame = output_frame;
+                VideoTexture *current_texture = nullptr;
+                if (count < effects_.size() - 1) {
+                    current_texture = VideoTextureCache::GetInstance()->FetchTexture(input_frame.width,
+                                                                                     input_frame.height);
+                    current_texture->Lock();
+                    current_frame = {
+                        current_texture->get_texture_name(),
+                        current_texture->get_width(),
+                        current_texture->get_height()
+                    };
+                }
+                effect->Render(previous_frame, current_frame);
+                previous_frame = current_frame;
+                if (previous_texture != nullptr) {
+                    previous_texture->UnLock();
+                }
+                previous_texture = current_texture;
+                count++;
+                available_effects.push_back(effect);
             }
-            effect->Render(previous_frame, current_frame);
-            previous_frame = current_frame;
-            if (previous_texture != nullptr) {
-                previous_texture->UnLock();
-            }
-            previous_texture = current_texture;
-            count++;
         }
+        if (previous_texture != nullptr) {
+            previous_texture->UnLock();
+        }
+        if (available_effects.empty()) {
+            no_effect_->Render(input_frame, output_frame);
+        }
+        effects_ = available_effects;
     }
 }
 

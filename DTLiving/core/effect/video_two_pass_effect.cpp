@@ -51,7 +51,8 @@ void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame,
 
     program_->Use();
             
-    glClearColor(clear_color_.x, clear_color_.y, clear_color_.z, clear_color_.w);
+    auto clear_color = get_clear_color();
+    glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
     glClear(GL_COLOR_BUFFER_BIT);
     
     glActiveTexture(GL_TEXTURE0);
@@ -90,7 +91,7 @@ void VideoTwoPassEffect::Render(VideoFrame input_frame, VideoFrame output_frame,
 
     program2_->Use();
             
-    glClearColor(clear_color_.x, clear_color_.y, clear_color_.z, clear_color_.w);
+    glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
     glClear(GL_COLOR_BUFFER_BIT);
     
     glActiveTexture(GL_TEXTURE0);

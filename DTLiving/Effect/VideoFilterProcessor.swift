@@ -30,6 +30,7 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
 
     private let processor = VideoEffectProcessorObject()
     private var filters: [VideoFilter] = []
+    private var previousTime: CMTime?
 
     var nextAvailableTextureIndex: Int {
         return 0
@@ -71,7 +72,13 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
         guard let inputTexture = inputFrameBuffer?.textureName,
             let outputTexture = outputFrameBuffer?.textureName else { return }
         
-        processor.processs(inputTexture, outputTexture: outputTexture, size: inputSize)
+        var delta: Double = 0
+        if let previousTime = previousTime {
+            delta = time.seconds - previousTime.seconds
+        }
+        previousTime = time
+        
+        processor.processs(inputTexture, outputTexture: outputTexture, size: inputSize, delta: delta)
                 
         inputFrameBuffer?.unlock()
         

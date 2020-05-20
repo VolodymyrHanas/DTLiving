@@ -23,14 +23,15 @@ public:
     ~VideoEffectProcessor();
     
     void Init(const char *vertex_shader_file, const char *fragment_shader_file);
-    void AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);    
+    void AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
+    void SetDuration(const char *name, double duration);
     void SetClearColor(const char *name, VideoVec4 clear_color);
     void LoadResources(const char *name, std::vector<std::string> resources);
     void SetPositions(const char *name, GLfloat *positions);
     void SetTextureCoordinates(const char *name, GLfloat *texture_coordinates);
     void SetEffectParamInt(const char *name, const char *param, GLint *value, int size);
     void SetEffectParamFloat(const char *name, const char *param, GLfloat *value, int size);
-    void Process(VideoFrame input_frame, VideoFrame output_frame);
+    void Process(VideoFrame input_frame, VideoFrame output_frame, double delta);
     // TODO: switch effect
 private:
     VideoEffect *no_effect_;
