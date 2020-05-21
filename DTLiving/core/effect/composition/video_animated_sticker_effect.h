@@ -9,6 +9,7 @@
 #ifndef DTLIVING_EFFECT_COMPOSITION_ANIMATED_STICKER_EFFECT_H_
 #define DTLIVING_EFFECT_COMPOSITION_ANIMATED_STICKER_EFFECT_H_
 
+#include "matrix.h"
 #include "video_composition_effect.h"
 
 namespace dtliving {
@@ -22,14 +23,16 @@ public:
     virtual void LoadResources(std::vector<std::string> resources);
 
 protected:
-    virtual void Update();
+    virtual void Update(GLsizei width, GLsizei height);
     
     virtual void BeforeSetPositions(GLsizei width, GLsizei height, int program_index);
+    virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
 
     std::vector<VideoFrame> image_frames_;
     
 private:
     std::vector<VideoFrame>::size_type image_index_;
+    mat4 model_matrix_;
 };
 
 }

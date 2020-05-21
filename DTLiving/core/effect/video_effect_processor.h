@@ -25,7 +25,7 @@ public:
     void Init(const char *vertex_shader_file, const char *fragment_shader_file);
     void AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
     void SetDuration(const char *name, double duration);
-    void SetClearColor(const char *name, VideoVec4 clear_color);
+    void SetClearColor(const char *name, vec4 clear_color);
     void LoadResources(const char *name, std::vector<std::string> resources);
     void SetPositions(const char *name, GLfloat *positions);
     void SetTextureCoordinates(const char *name, GLfloat *texture_coordinates);

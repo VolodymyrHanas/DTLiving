@@ -132,22 +132,22 @@ void VideoEffect::SetUniform(std::string name, VideoEffectUniform uniform) {
     uniforms_[name] = uniform;
 }
 
-bool VideoEffect::Update(double delta) {
+bool VideoEffect::Update(double delta, GLsizei width, GLsizei height) {
     time_since_first_update_ += delta; // delta is zero for first time
     if (duration_ < 0) {
-        Update();
+        Update(width, height);
         return true;
     } else {
         if (time_since_first_update_ > duration_) {
             return false;
         }
         
-        Update();
+        Update(width, height);
         return true;
     }
 }
 
-void VideoEffect::Update() {
+void VideoEffect::Update(GLsizei width, GLsizei height) {
 }
 
 void VideoEffect::Render(VideoFrame input_frame, VideoFrame output_frame) {

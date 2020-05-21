@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *imageName;
 @property (nonatomic, assign) CGSize scale;
-@property (nonatomic, assign) CGFloat rotate; // positive: clockwise, negative: counterclockwise
+@property (nonatomic, assign) CGFloat rotate; // unit: radian, positive: clockwise, negative: counterclockwise
 @property (nonatomic, assign) CGSize translate; // origin at bottom left
 
 - (instancetype)init;

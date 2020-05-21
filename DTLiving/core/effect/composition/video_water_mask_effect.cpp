@@ -59,6 +59,15 @@ void VideoWaterMaskEffect::BeforeSetPositions(GLsizei width, GLsizei height, int
     }
 }
 
+void VideoWaterMaskEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int program_index) {
+    VideoCompositionEffect::BeforeDrawArrays(width, height, program_index);
+    if (program_index == 1) {        
+        GLint location = program2_->UniformLocation(kVideoCompositionEffectModelMatrix);
+        auto uniform = uniforms_[std::string(kVideoCompositionEffectModelMatrix)];
+        glUniformMatrix4fv(location, 1, false, uniform.u_float.data());
+    }
+}
+
 }
 }
 }

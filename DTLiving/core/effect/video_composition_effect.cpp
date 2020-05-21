@@ -95,10 +95,6 @@ void VideoCompositionEffect::BeforeDrawArrays(GLsizei width, GLsizei height, int
     if (program_index == 1) {
         auto matrix = VideoEffect::CaculateOrthographicMatrix(width, height);
         glUniformMatrix4fv(u_orthographic_matrix2_, 1, false, matrix.data());
-        
-        GLint location = program2_->UniformLocation(kVideoCompositionEffectModelMatrix);
-        auto uniform = uniforms_[std::string(kVideoCompositionEffectModelMatrix)];
-        glUniformMatrix4fv(location, 1, false, uniform.u_float.data());
     }
 }
 

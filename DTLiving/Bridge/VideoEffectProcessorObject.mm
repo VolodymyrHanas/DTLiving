@@ -36,7 +36,8 @@
     if (filter.duration > 0) {
         self.processor->SetDuration(name, filter.duration);
     }
-    dtliving::effect::VideoVec4 clear_color {
+
+    dtliving::effect::vec4 clear_color {
         filter.backgroundColor.x,
         filter.backgroundColor.y,
         filter.backgroundColor.z,

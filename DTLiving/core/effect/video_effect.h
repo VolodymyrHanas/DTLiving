@@ -11,20 +11,14 @@
 
 #include <map>
 
+#include "png_decoder.h"
+#include "vector.h"
 #include "shader_program.h"
 #include "video_frame.h"
 #include "video_effect_uniform.h"
-#include "png_decoder.h"
 
 namespace dtliving {
 namespace effect {
-
-struct VideoVec4 {
-    GLfloat x;
-    GLfloat y;
-    GLfloat z;
-    GLfloat w;
-};
 
 class VideoEffect {    
 public:
@@ -46,7 +40,7 @@ public:
     void SetTextureCoordinates(std::vector<GLfloat> texture_coordinates);
     void SetUniform(std::string name, VideoEffectUniform uniform);    
     
-    bool Update(double delta);
+    bool Update(double delta, GLsizei width, GLsizei height);
     void Render(VideoFrame input_frame, VideoFrame output_frame);
 
     std::string get_name() { return name_; }
@@ -56,10 +50,10 @@ public:
     double get_duration() {
         return duration_;
     }
-    void set_clear_color(VideoVec4 clear_color) {
+    void set_clear_color(vec4 clear_color) {
         clear_color_ = clear_color;
     }
-    VideoVec4 get_clear_color() {
+    vec4 get_clear_color() {
         return clear_color_;
     }
     
@@ -67,7 +61,7 @@ public:
 protected:
     void LoadShaderSource(std::string vertex_shader_source, std::string fragment_shader_source);
     
-    virtual void Update();
+    virtual void Update(GLsizei width, GLsizei height);
     virtual void Render(VideoFrame input_frame, VideoFrame output_frame, std::vector<GLfloat> positions, std::vector<GLfloat> texture_coordinates);
 
     virtual void BeforeSetPositions(GLsizei width, GLsizei height, int program_index);
@@ -89,7 +83,7 @@ protected:
 private:
     std::string name_;
     double duration_ = -1; // negative mean infinite
-    VideoVec4 clear_color_;
+    vec4 clear_color_;
 };
 
 }

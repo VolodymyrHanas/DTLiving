@@ -8,6 +8,11 @@
 
 #import "VideoFilter.h"
 
+VideoVec2 VideoVec2Make(float x, float y) {
+    VideoVec2 vec = { x, y };
+    return vec;
+}
+
 VideoVec3 VideoVec3Make(float x, float y, float z) {
     VideoVec3 vec = { x, y, z };
     return vec;
@@ -99,6 +104,10 @@ BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation) {
 
 - (NSArray<NSNumber*> *)boolToArray:(BOOL)isYES {
     return @[@(isYES ? 1 : 0)];
+}
+
+- (NSArray<NSNumber*> *)vec2ToArray:(VideoVec2)vec {
+    return @[@(vec.x), @(vec.y)];
 }
 
 - (NSArray<NSNumber*> *)vec3ToArray:(VideoVec3)vec {

@@ -23,6 +23,7 @@ public:
 
 protected:
     virtual void BeforeSetPositions(GLsizei width, GLsizei height, int program_index);
+    virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
 
     VideoFrame image_frame_;
 };

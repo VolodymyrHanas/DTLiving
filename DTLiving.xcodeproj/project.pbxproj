@@ -277,6 +277,9 @@
 		404507F22473EBCE007E8B60 /* video_animated_sticker_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_animated_sticker_effect.h; sourceTree = "<group>"; };
 		404507F4247517B4007E8B60 /* VideoAnimatedStickerFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoAnimatedStickerFilter.h; sourceTree = "<group>"; };
 		404507F5247517B4007E8B60 /* VideoAnimatedStickerFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoAnimatedStickerFilter.m; sourceTree = "<group>"; };
+		404507F824753DA2007E8B60 /* vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; };
+		404507F924753E58007E8B60 /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
+		404507FA24753E59007E8B60 /* quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quaternion.h; sourceTree = "<group>"; };
 		40501A142445C5BC009DDBF6 /* constants.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = constants.cpp; sourceTree = "<group>"; };
 		40501A162446DE64009DDBF6 /* VideoCropFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCropFilter.h; sourceTree = "<group>"; };
 		40501A172446DE64009DDBF6 /* VideoCropFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCropFilter.m; sourceTree = "<group>"; };
@@ -502,6 +505,9 @@
 			children = (
 				40EFA3042437244800834400 /* constants.h */,
 				40501A142445C5BC009DDBF6 /* constants.cpp */,
+				404507F824753DA2007E8B60 /* vector.h */,
+				404507F924753E58007E8B60 /* matrix.h */,
+				404507FA24753E59007E8B60 /* quaternion.h */,
 				40831443241A2F1300DC2BE9 /* shader_program.h */,
 				40831442241A2F1300DC2BE9 /* shader_program.cpp */,
 				40BDE3A2241E32EC0063DF25 /* video_effect_processor.h */,

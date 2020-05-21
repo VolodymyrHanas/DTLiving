@@ -91,6 +91,13 @@ extern const char *kVideoCompositionEffectModelMatrix;
 extern const char *kVideoWaterMaskEffect;
 
 extern const char *kVideoAnimatedStickerEffect;
-extern const char *kVideoAnimatedStickerEffectInterval;
+extern const char *kVideoAnimatedStickerEffectImageInterval;
+extern const char *kVideoAnimatedStickerEffectAnimateDuration;
+extern const char *kVideoAnimatedStickerEffectStartScale;
+extern const char *kVideoAnimatedStickerEffectEndScale;
+extern const char *kVideoAnimatedStickerEffectStartRotate;
+extern const char *kVideoAnimatedStickerEffectEndRotate;
+extern const char *kVideoAnimatedStickerEffectStartTranslate;
+extern const char *kVideoAnimatedStickerEffectEndTranslate;
 
 #endif /* constants_h */

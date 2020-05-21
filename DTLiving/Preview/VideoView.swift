@@ -248,7 +248,6 @@ class VideoView: UIView, VideoInput {
     
     private func setDisplayFrameBuffer() {
         glBindFramebuffer(GLenum(GL_FRAMEBUFFER), displayFrameBuffer)
-        
         glViewport(0, 0, GLsizei(outputSize.width), GLsizei(outputSize.height))
     }
     

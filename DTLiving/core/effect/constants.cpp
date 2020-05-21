@@ -50,7 +50,7 @@ const char *kVideoTransformEffectModelMatrix = "u_modelMatrix";
 const char *kVideoCropEffect = "effect_crop";
 
 const char *kVideoGaussianBlurEffect = "effect_gaussian_blur";
-const char *kVideoGaussianBlurEffectBlurRadiusInPixels = "blur_radius_in_pixels_";
+const char *kVideoGaussianBlurEffectBlurRadiusInPixels = "blur_radius_in_pixels";
 
 const char *kVideoBoxBlurEffect = "effect_box_blur";
 const char *kVideoBoxBlurEffectBlurRadiusInPixels = "blur_radius_in_pixels_";
@@ -88,4 +88,11 @@ const char *kVideoCompositionEffectModelMatrix = "u_modelMatrix";
 const char *kVideoWaterMaskEffect = "effect_water_mask";
 
 const char *kVideoAnimatedStickerEffect = "effect_animated_sticker";
-const char *kVideoAnimatedStickerEffectInterval = "u_interval";
+const char *kVideoAnimatedStickerEffectImageInterval = "image_interval";
+const char *kVideoAnimatedStickerEffectAnimateDuration = "animate_duration";
+const char *kVideoAnimatedStickerEffectStartScale = "start_scale";
+const char *kVideoAnimatedStickerEffectEndScale = "end_scale";
+const char *kVideoAnimatedStickerEffectStartRotate = "start_rotate";
+const char *kVideoAnimatedStickerEffectEndRotate = "end_rotate";
+const char *kVideoAnimatedStickerEffectStartTranslate = "start_translate";
+const char *kVideoAnimatedStickerEffectEndTranslate = "end_translate";

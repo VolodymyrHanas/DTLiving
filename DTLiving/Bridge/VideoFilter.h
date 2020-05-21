@@ -16,6 +16,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+struct VideoVec2 {
+    float x;
+    float y;
+};
+typedef struct VideoVec2 VideoVec2;
+
+VideoVec2 VideoVec2Make(float x, float y);
+
 struct VideoVec3 {
     float x;
     float y;
@@ -88,6 +96,7 @@ BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation);
 
 - (NSArray<NSNumber*> *)sizeToArray:(CGSize)size;
 - (NSArray<NSNumber*> *)boolToArray:(BOOL)isYES;
+- (NSArray<NSNumber*> *)vec2ToArray:(VideoVec2)vec;
 - (NSArray<NSNumber*> *)vec3ToArray:(VideoVec3)vec;
 - (NSArray<NSNumber*> *)vec4ToArray:(VideoVec4)vec;
 - (NSArray<NSNumber*> *)mat3ToArray:(VideoMat3)mat;

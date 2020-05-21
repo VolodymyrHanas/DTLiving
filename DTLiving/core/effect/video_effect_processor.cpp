@@ -47,6 +47,7 @@ VideoEffectProcessor::~VideoEffectProcessor() {
 void VideoEffectProcessor::Init(const char *vertex_shader_file, const char *fragment_shader_file) {
     no_effect_ = new VideoEffect("no_effect");
     no_effect_->LoadShaderFile(vertex_shader_file, fragment_shader_file);
+    no_effect_->LoadUniform();
 }
 
 void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file) {
@@ -124,7 +125,7 @@ void VideoEffectProcessor::SetDuration(const char *name, double duration) {
     }
 }
 
-void VideoEffectProcessor::SetClearColor(const char *name, VideoVec4 clear_color) {
+void VideoEffectProcessor::SetClearColor(const char *name, vec4 clear_color) {
     for(VideoEffect *effect : effects_) {
         if (effect->get_name() == std::string(name)) {
             effect->set_clear_color(clear_color);
@@ -178,7 +179,7 @@ void VideoEffectProcessor::SetEffectParamFloat(const char *name, const char *par
 
 void VideoEffectProcessor::Process(VideoFrame input_frame, VideoFrame output_frame, double delta) {
     if (effects_.empty()) {
-        no_effect_->Render(input_frame, output_frame); // TODO: size is not right
+        no_effect_->Render(input_frame, output_frame);
     } else {
         int count = 0;
         VideoFrame previous_frame = input_frame;
@@ -186,7 +187,7 @@ void VideoEffectProcessor::Process(VideoFrame input_frame, VideoFrame output_fra
         VideoTexture *previous_texture = nullptr;
         std::vector<VideoEffect *> available_effects;
         for(VideoEffect *effect : effects_) {
-            if (effect->Update(delta)) {
+            if (effect->Update(delta, output_frame.width, output_frame.height)) {
                 current_frame = output_frame;
                 VideoTexture *current_texture = nullptr;
                 if (count < effects_.size() - 1) {
