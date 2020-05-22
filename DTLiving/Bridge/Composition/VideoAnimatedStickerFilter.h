@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) int imageCount;
 @property (nonatomic, assign) float imageInterval;
 @property (nonatomic, assign) float animateDuration;
-@property (nonatomic, assign) BOOL isRepeat; // TODO: Handle Repeat
+@property (nonatomic, assign) BOOL isRepeat;
 @property (nonatomic, assign) float startScale;
 @property (nonatomic, assign) float endScale;
 @property (nonatomic, assign) float startRotate; // unit: degree, positive: clockwise, negative: counterclockwise

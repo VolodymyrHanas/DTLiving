@@ -33,7 +33,7 @@ class LiveManager {
         
         filterProcessor = VideoFilterProcessor()
         let sepia = VideoSepiaFilter()
-        sepia.duration = 5.0
+        sepia.duration = 15.0
         filterProcessor.addFilter(sepia)
         let sticker = VideoAnimatedStickerFilter()
         sticker.duration = 10.0
@@ -41,8 +41,9 @@ class LiveManager {
         sticker.imageCount = 4
         sticker.imageInterval = 1.0 / 24 * 4
         sticker.animateDuration = 5.0
+        sticker.isRepeat = false
         sticker.startTranslate = .init(x: -360, y: 0)
-        sticker.endTranslate = .init(x: 360, y: 0)
+        sticker.endTranslate = .init(x: 180, y: 0)
         filterProcessor.addFilter(sticker)
         
         preview = VideoView()

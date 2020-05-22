@@ -93,6 +93,7 @@ extern const char *kVideoWaterMaskEffect;
 extern const char *kVideoAnimatedStickerEffect;
 extern const char *kVideoAnimatedStickerEffectImageInterval;
 extern const char *kVideoAnimatedStickerEffectAnimateDuration;
+extern const char *kVideoAnimatedStickerEffectIsRepeat;
 extern const char *kVideoAnimatedStickerEffectStartScale;
 extern const char *kVideoAnimatedStickerEffectEndScale;
 extern const char *kVideoAnimatedStickerEffectStartRotate;

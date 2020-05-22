@@ -35,6 +35,10 @@
              [NSString stringWithUTF8String:kVideoAnimatedStickerEffectEndTranslate]: [self vec2ToArray:self.endTranslate]};
 }
 
+- (NSDictionary<NSString*, NSArray<NSNumber*>*> *)intParams {
+    return @{[NSString stringWithUTF8String:kVideoAnimatedStickerEffectIsRepeat]: [self boolToArray:self.isRepeat]};
+}
+
 - (NSArray<NSString*> *)resources {
     NSMutableArray<NSString*> *imageNames = [NSMutableArray<NSString*> new];
     int index = 0;

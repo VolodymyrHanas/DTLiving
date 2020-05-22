@@ -55,10 +55,15 @@ void VideoAnimatedStickerEffect::Update(GLsizei width, GLsizei height) {
     image_index_ = remind / image_interval;
     
     // just linear interpolation
+    uniform = uniforms_[std::string(kVideoAnimatedStickerEffectIsRepeat)];
+    auto is_repeat = uniform.u_int.front();
     uniform = uniforms_[std::string(kVideoAnimatedStickerEffectAnimateDuration)];
     float animate_duration = uniform.u_float.front();
+    if (is_repeat == 0 && time > animate_duration) {
+        return;
+    }
     remind = std::fmod(time, animate_duration);
-    float progress = remind / animate_duration;
+    float progress = remind / animate_duration;    
     
     uniform = uniforms_[std::string(kVideoAnimatedStickerEffectStartScale)];
     float start_scale = uniform.u_float.front();

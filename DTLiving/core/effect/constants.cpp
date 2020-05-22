@@ -90,6 +90,7 @@ const char *kVideoWaterMaskEffect = "effect_water_mask";
 const char *kVideoAnimatedStickerEffect = "effect_animated_sticker";
 const char *kVideoAnimatedStickerEffectImageInterval = "image_interval";
 const char *kVideoAnimatedStickerEffectAnimateDuration = "animate_duration";
+const char *kVideoAnimatedStickerEffectIsRepeat = "is_repeat";
 const char *kVideoAnimatedStickerEffectStartScale = "start_scale";
 const char *kVideoAnimatedStickerEffectEndScale = "end_scale";
 const char *kVideoAnimatedStickerEffectStartRotate = "start_rotate";
