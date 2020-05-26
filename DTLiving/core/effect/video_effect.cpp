@@ -120,6 +120,9 @@ void VideoEffect::LoadUniform() {
 void VideoEffect::LoadResources(std::vector<std::string> resources) {    
 }
 
+void VideoEffect::SetTextures(std::vector<VideoFrame> textures) {    
+}
+
 void VideoEffect::SetPositions(std::vector<GLfloat> positions) {
     positions_ = positions;
 }

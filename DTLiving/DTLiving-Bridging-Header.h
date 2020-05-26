@@ -29,3 +29,4 @@
 #import "VideoMosaicFilter.h"
 #import "VideoWaterMaskFilter.h"
 #import "VideoAnimatedStickerFilter.h"
+#import "VideoTextFilter.h"

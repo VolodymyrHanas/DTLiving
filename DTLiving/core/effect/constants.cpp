@@ -97,3 +97,5 @@ const char *kVideoAnimatedStickerEffectStartRotate = "start_rotate";
 const char *kVideoAnimatedStickerEffectEndRotate = "end_rotate";
 const char *kVideoAnimatedStickerEffectStartTranslate = "start_translate";
 const char *kVideoAnimatedStickerEffectEndTranslate = "end_translate";
+
+const char *kVideoTextEffect = "effect_text";

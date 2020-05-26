@@ -34,6 +34,7 @@
 #include "video_mosaic_effect.h"
 #include "video_water_mask_effect.h"
 #include "video_animated_sticker_effect.h"
+#include "video_text_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -105,6 +106,9 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
     } else if (std::strcmp(name, kVideoAnimatedStickerEffect) == 0) {
         effect = new composition::VideoAnimatedStickerEffect(name);
         isShaderFile = false;
+    } else if (std::strcmp(name, kVideoTextEffect) == 0) {
+        effect = new composition::VideoTextEffect(name);
+        isShaderFile = false;
     } else {
         effect = new VideoEffect(name);
     }
@@ -137,6 +141,14 @@ void VideoEffectProcessor::LoadResources(const char *name, std::vector<std::stri
     for(VideoEffect *effect : effects_) {
         if (effect->get_name() == std::string(name)) {
             effect->LoadResources(resources);
+        }
+    }
+}
+
+void VideoEffectProcessor::SetTextures(const char *name, std::vector<VideoFrame> textures) {
+    for(VideoEffect *effect : effects_) {
+        if (effect->get_name() == std::string(name)) {
+            effect->SetTextures(textures);
         }
     }
 }

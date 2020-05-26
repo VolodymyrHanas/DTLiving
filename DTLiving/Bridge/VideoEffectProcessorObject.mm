@@ -52,6 +52,14 @@
         }
         self.processor->LoadResources(name, resources);
     }
+    if (filter.textures) {
+        std::vector<dtliving::effect::VideoFrame> textures;
+        for (GLKTextureInfo *info in filter.textures) {
+            dtliving::effect::VideoFrame texture { info.name, GLsizei(info.width), GLsizei(info.height) };
+            textures.push_back(texture);
+        }
+        self.processor->SetTextures(name, textures);
+    }
     [self updateFilter:filter];
 }
 

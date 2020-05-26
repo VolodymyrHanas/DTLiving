@@ -35,7 +35,8 @@ public:
     virtual void LoadShaderSource();
     virtual void LoadUniform();
     virtual void LoadResources(std::vector<std::string> resources);
-    
+    virtual void SetTextures(std::vector<VideoFrame> textures);
+
     void SetPositions(std::vector<GLfloat> positions);
     void SetTextureCoordinates(std::vector<GLfloat> texture_coordinates);
     void SetUniform(std::string name, VideoEffectUniform uniform);    

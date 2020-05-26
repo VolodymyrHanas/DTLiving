@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <GLKit/GLKit.h>
 
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
@@ -86,6 +87,7 @@ BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation);
 @property (nonatomic, copy, readonly) NSDictionary<NSString*, NSArray<NSNumber*>*> *intParams;
 @property (nonatomic, copy, readonly) NSDictionary<NSString*, NSArray<NSNumber*>*> *floatParams;
 @property (nonatomic, copy, readonly) NSArray<NSString*> *resources;
+@property (nonatomic, copy, readonly) NSArray<GLKTextureInfo*> *textures;
 @property (nonatomic, assign) VideoVec4 backgroundColor;
 @property (nonatomic, assign, readonly) BOOL isRotationAware;
 @property (nonatomic, assign) VideoRotation rotation;

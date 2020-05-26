@@ -35,16 +35,15 @@ class LiveManager {
         let sepia = VideoSepiaFilter()
         sepia.duration = 15.0
         filterProcessor.addFilter(sepia)
-        let sticker = VideoAnimatedStickerFilter()
-        sticker.duration = 10.0
-        sticker.imageName = "walk"
-        sticker.imageCount = 4
-        sticker.imageInterval = 1.0 / 24 * 4
-        sticker.animateDuration = 5.0
-        sticker.isRepeat = false
-        sticker.startTranslate = .init(x: -360, y: 0)
-        sticker.endTranslate = .init(x: 180, y: 0)
-        filterProcessor.addFilter(sticker)
+        let text = VideoTextFilter()
+        let attributedText = NSAttributedString(string: "大家好啊！大家好啊！大家好啊！大家好啊！大家好啊！大家好啊！大家好啊！",
+                                                attributes: [.font: UIFont.boldSystemFont(ofSize: 48),
+                                                             .foregroundColor: UIColor.green])
+        text.setText(attributedText, size: .init(width: 720, height: 1280))        
+        text.rotate = .pi / 4
+        text.scale = .init(width: 2.0, height: 2.0)
+        text.translate = .init(width: 0, height: -200)
+        filterProcessor.addFilter(text)
         
         preview = VideoView()
         

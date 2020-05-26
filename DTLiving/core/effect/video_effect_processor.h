@@ -27,6 +27,7 @@ public:
     void SetDuration(const char *name, double duration);
     void SetClearColor(const char *name, vec4 clear_color);
     void LoadResources(const char *name, std::vector<std::string> resources);
+    void SetTextures(const char *name, std::vector<VideoFrame> textures);
     void SetPositions(const char *name, GLfloat *positions);
     void SetTextureCoordinates(const char *name, GLfloat *texture_coordinates);
     void SetEffectParamInt(const char *name, const char *param, GLint *value, int size);

@@ -101,4 +101,6 @@ extern const char *kVideoAnimatedStickerEffectEndRotate;
 extern const char *kVideoAnimatedStickerEffectStartTranslate;
 extern const char *kVideoAnimatedStickerEffectEndTranslate;
 
+extern const char *kVideoTextEffect;
+
 #endif /* constants_h */

@@ -90,6 +90,10 @@ BOOL VideoRotationNeedSwapWidthAndHeight(VideoRotation rotation) {
     return nil;
 }
 
+- (NSArray<GLKTextureInfo*> *)textures {
+    return nil;
+}
+
 - (BOOL)isRotationAware {
     return NO;
 }
