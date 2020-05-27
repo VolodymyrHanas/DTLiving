@@ -99,3 +99,9 @@ const char *kVideoAnimatedStickerEffectStartTranslate = "start_translate";
 const char *kVideoAnimatedStickerEffectEndTranslate = "end_translate";
 
 const char *kVideoTextEffect = "effect_text";
+
+const char *kVideoSharpenEffect = "effect_sharpen";
+const char *kVideoSharpenEffectSharpness = "u_sharpness";
+
+const char *kVideoBilateralEffect = "effect_bilateral";
+const char *kVideoBilateralEffectDistanceNormalizationFactor = "u_distanceNormalizationFactor";

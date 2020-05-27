@@ -23,6 +23,10 @@ public:
 protected:
     virtual void BeforeDrawArrays(GLsizei width, GLsizei height, int program_index);
 
+    void set_texel_spacing_multiplier(GLfloat multiplier) {
+        vertical_texel_spacing_ = multiplier;
+        horizontal_texel_spacing_ = multiplier;
+    }
 private:
     GLint u_vertical_texelWidthOffset_;
     GLint u_vertical_texelHeightOffset_;

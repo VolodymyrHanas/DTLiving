@@ -103,4 +103,10 @@ extern const char *kVideoAnimatedStickerEffectEndTranslate;
 
 extern const char *kVideoTextEffect;
 
+extern const char *kVideoSharpenEffect;
+extern const char *kVideoSharpenEffectSharpness; // -4.0 ~ 4.0
+
+extern const char *kVideoBilateralEffect;
+extern const char *kVideoBilateralEffectDistanceNormalizationFactor; // 0.0 ~ 10.0
+
 #endif /* constants_h */

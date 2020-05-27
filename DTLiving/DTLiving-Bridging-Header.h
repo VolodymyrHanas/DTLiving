@@ -30,3 +30,5 @@
 #import "VideoWaterMaskFilter.h"
 #import "VideoAnimatedStickerFilter.h"
 #import "VideoTextFilter.h"
+#import "VideoSharpenFilter.h"
+#import "VideoBilateralFilter.h"

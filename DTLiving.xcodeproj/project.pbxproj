@@ -42,6 +42,10 @@
 		401862402423644F0003AF6F /* VideoRGBFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4018623F2423644F0003AF6F /* VideoRGBFilter.m */; };
 		40186244242370770003AF6F /* video_brightness_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40186242242370770003AF6F /* video_brightness_effect.cpp */; };
 		40186248242382E80003AF6F /* video_rgb_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40186246242382E80003AF6F /* video_rgb_effect.cpp */; };
+		401B390D247D0E5E00C5B36B /* video_sharpen_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 401B390B247D0E5E00C5B36B /* video_sharpen_effect.cpp */; };
+		401B390F247D0F6A00C5B36B /* effect_sharpen_vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 401B390E247D0F6A00C5B36B /* effect_sharpen_vertex.glsl */; };
+		401B3911247D0F7E00C5B36B /* effect_sharpen_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 401B3910247D0F7E00C5B36B /* effect_sharpen_fragment.glsl */; };
+		401B3914247D12C500C5B36B /* VideoSharpenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 401B3913247D12C500C5B36B /* VideoSharpenFilter.m */; };
 		402E20792456E6DD00951804 /* video_two_input_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 402E20772456E6DD00951804 /* video_two_input_effect.cpp */; };
 		402E24E024595C6C00951804 /* libpng-config.in in Resources */ = {isa = PBXBuildFile; fileRef = 402E24B824595C6C00951804 /* libpng-config.in */; };
 		402E24E124595C6C00951804 /* pngrio.c in Sources */ = {isa = PBXBuildFile; fileRef = 402E24B924595C6C00951804 /* pngrio.c */; };
@@ -129,6 +133,10 @@
 		40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40B2BFCA23E40D8800F677CD /* Assets.xcassets */; };
 		40B2BFCE23E40D8800F677CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40B2BFCC23E40D8800F677CD /* LaunchScreen.storyboard */; };
 		40BDE3A3241E32EC0063DF25 /* video_effect_processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40BDE3A1241E32EC0063DF25 /* video_effect_processor.cpp */; };
+		40DDD703247D241B007B7223 /* video_bilateral_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40DDD701247D241B007B7223 /* video_bilateral_effect.cpp */; };
+		40DDD705247D2544007B7223 /* effect_bilateral_vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 40DDD704247D2544007B7223 /* effect_bilateral_vertex.glsl */; };
+		40DDD707247D2656007B7223 /* effect_bilateral_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 40DDD706247D2656007B7223 /* effect_bilateral_fragment.glsl */; };
+		40DDD70A247E10EB007B7223 /* VideoBilateralFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DDD709247E10EB007B7223 /* VideoBilateralFilter.m */; };
 		40F1D2FD240D1B89008A8EC8 /* FrameBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F1D2FC240D1B89008A8EC8 /* FrameBuffer.swift */; };
 		40F29732241B7E4C00DD4FE8 /* ShaderProgramObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 40F29731241B7E4C00DD4FE8 /* ShaderProgramObject.mm */; };
 		40F30565243C2A5C0022B263 /* effect_exposure_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 40F30564243C2A5C0022B263 /* effect_exposure_fragment.glsl */; };
@@ -208,6 +216,12 @@
 		40186243242370770003AF6F /* video_brightness_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_brightness_effect.h; sourceTree = "<group>"; };
 		40186246242382E80003AF6F /* video_rgb_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_rgb_effect.cpp; sourceTree = "<group>"; };
 		40186247242382E80003AF6F /* video_rgb_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_rgb_effect.h; sourceTree = "<group>"; };
+		401B390B247D0E5E00C5B36B /* video_sharpen_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_sharpen_effect.cpp; sourceTree = "<group>"; };
+		401B390C247D0E5E00C5B36B /* video_sharpen_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_sharpen_effect.h; sourceTree = "<group>"; };
+		401B390E247D0F6A00C5B36B /* effect_sharpen_vertex.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = effect_sharpen_vertex.glsl; sourceTree = "<group>"; };
+		401B3910247D0F7E00C5B36B /* effect_sharpen_fragment.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = effect_sharpen_fragment.glsl; sourceTree = "<group>"; };
+		401B3912247D12C500C5B36B /* VideoSharpenFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoSharpenFilter.h; sourceTree = "<group>"; };
+		401B3913247D12C500C5B36B /* VideoSharpenFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoSharpenFilter.m; sourceTree = "<group>"; };
 		402E20772456E6DD00951804 /* video_two_input_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_two_input_effect.cpp; sourceTree = "<group>"; };
 		402E20782456E6DD00951804 /* video_two_input_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_two_input_effect.h; sourceTree = "<group>"; };
 		402E24B724595C6C00951804 /* pnginfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pnginfo.h; sourceTree = "<group>"; };
@@ -336,6 +350,12 @@
 		40B2BFCF23E40D8800F677CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40BDE3A1241E32EC0063DF25 /* video_effect_processor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_effect_processor.cpp; sourceTree = "<group>"; };
 		40BDE3A2241E32EC0063DF25 /* video_effect_processor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_effect_processor.h; sourceTree = "<group>"; };
+		40DDD701247D241B007B7223 /* video_bilateral_effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = video_bilateral_effect.cpp; sourceTree = "<group>"; };
+		40DDD702247D241B007B7223 /* video_bilateral_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_bilateral_effect.h; sourceTree = "<group>"; };
+		40DDD704247D2544007B7223 /* effect_bilateral_vertex.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = effect_bilateral_vertex.glsl; sourceTree = "<group>"; };
+		40DDD706247D2656007B7223 /* effect_bilateral_fragment.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = effect_bilateral_fragment.glsl; sourceTree = "<group>"; };
+		40DDD708247E10EB007B7223 /* VideoBilateralFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoBilateralFilter.h; sourceTree = "<group>"; };
+		40DDD709247E10EB007B7223 /* VideoBilateralFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoBilateralFilter.m; sourceTree = "<group>"; };
 		40EFA3042437244800834400 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		40F1D2FC240D1B89008A8EC8 /* FrameBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameBuffer.swift; sourceTree = "<group>"; };
 		40F29730241B7E4C00DD4FE8 /* ShaderProgramObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderProgramObject.h; sourceTree = "<group>"; };
@@ -687,6 +707,14 @@
 				4066421E244EFE09005C75EE /* video_box_blur_effect.cpp */,
 				40664244245199BF005C75EE /* video_sobel_edge_detection_effect.h */,
 				40664243245199BF005C75EE /* video_sobel_edge_detection_effect.cpp */,
+				401B390C247D0E5E00C5B36B /* video_sharpen_effect.h */,
+				401B390B247D0E5E00C5B36B /* video_sharpen_effect.cpp */,
+				401B390E247D0F6A00C5B36B /* effect_sharpen_vertex.glsl */,
+				401B3910247D0F7E00C5B36B /* effect_sharpen_fragment.glsl */,
+				40DDD702247D241B007B7223 /* video_bilateral_effect.h */,
+				40DDD701247D241B007B7223 /* video_bilateral_effect.cpp */,
+				40DDD704247D2544007B7223 /* effect_bilateral_vertex.glsl */,
+				40DDD706247D2656007B7223 /* effect_bilateral_fragment.glsl */,
 			);
 			path = image_processing;
 			sourceTree = "<group>";
@@ -704,6 +732,10 @@
 				40664234245049C8005C75EE /* VideoBoxBlurFilter.m */,
 				40664249245289CB005C75EE /* VideoSobelEdgeDetectionFilter.h */,
 				4066424A245289CB005C75EE /* VideoSobelEdgeDetectionFilter.m */,
+				401B3912247D12C500C5B36B /* VideoSharpenFilter.h */,
+				401B3913247D12C500C5B36B /* VideoSharpenFilter.m */,
+				40DDD708247E10EB007B7223 /* VideoBilateralFilter.h */,
+				40DDD709247E10EB007B7223 /* VideoBilateralFilter.m */,
 			);
 			path = ImageProcessing;
 			sourceTree = "<group>";
@@ -929,6 +961,7 @@
 				402E250124595C6C00951804 /* png.5 in Resources */,
 				402E24F724595C6C00951804 /* libpng.3 in Resources */,
 				404507E424727DCD007E8B60 /* walk04.png in Resources */,
+				401B390F247D0F6A00C5B36B /* effect_sharpen_vertex.glsl in Resources */,
 				404507E624727DCD007E8B60 /* logo.png in Resources */,
 				402E24EC24595C6C00951804 /* CHANGES in Resources */,
 				402E24F924595C6C00951804 /* pngtest.png in Resources */,
@@ -952,6 +985,7 @@
 				400484312466878F00BCFC36 /* effect_alpha_blend_fragment.glsl in Resources */,
 				402F209F2459835E006B221C /* effect_add_blend_fragment.glsl in Resources */,
 				40F3057D243C82040022B263 /* effect_gamma_fragment.glsl in Resources */,
+				401B3911247D0F7E00C5B36B /* effect_sharpen_fragment.glsl in Resources */,
 				403DEB8D23E53ADD00685F6B /* effect_vertex.glsl in Resources */,
 				40B1DF13244067AD009B68C7 /* effect_gray_scale_fragment.glsl in Resources */,
 				40F30585243C90600022B263 /* effect_levels_fragment.glsl in Resources */,
@@ -964,11 +998,13 @@
 				402E24ED24595C6C00951804 /* pngbar.jpg in Resources */,
 				402E24E724595C6C00951804 /* LICENSE in Resources */,
 				40F30565243C2A5C0022B263 /* effect_exposure_fragment.glsl in Resources */,
+				40DDD707247D2656007B7223 /* effect_bilateral_fragment.glsl in Resources */,
 				40B1DEFB243F1839009B68C7 /* effect_color_matrix_fragment.glsl in Resources */,
 				400484492466A32E00BCFC36 /* star.png in Resources */,
 				40361D642444054D00DC254F /* effect_transform_vertex.glsl in Resources */,
 				400C40FF24695A7000C4B366 /* squares.png in Resources */,
 				404507E524727DCD007E8B60 /* walk01.png in Resources */,
+				40DDD705247D2544007B7223 /* effect_bilateral_vertex.glsl in Resources */,
 				4018622A241F79AD0003AF6F /* effect_rgb_fragment.glsl in Resources */,
 				400C4103246A4C7D00C4B366 /* dotletterstiles.png in Resources */,
 				40B2BFCB23E40D8800F677CD /* Assets.xcassets in Resources */,
@@ -1039,6 +1075,7 @@
 				40501A1B24472F75009DDBF6 /* video_two_pass_effect.cpp in Sources */,
 				402E24F324595C6C00951804 /* pngwtran.c in Sources */,
 				401789DF240E517500B5A7B4 /* VideoContext.swift in Sources */,
+				401B390D247D0E5E00C5B36B /* video_sharpen_effect.cpp in Sources */,
 				40076AD724176A710052ED90 /* FrameBufferCache.swift in Sources */,
 				402E250624595F0F00951804 /* png_decoder.cpp in Sources */,
 				40F1D2FD240D1B89008A8EC8 /* FrameBuffer.swift in Sources */,
@@ -1058,6 +1095,7 @@
 				402E24E124595C6C00951804 /* pngrio.c in Sources */,
 				402E24FD24595C6C00951804 /* pngrtran.c in Sources */,
 				401862402423644F0003AF6F /* VideoRGBFilter.m in Sources */,
+				40DDD70A247E10EB007B7223 /* VideoBilateralFilter.m in Sources */,
 				4004844724669D8900BCFC36 /* video_mask_effect.cpp in Sources */,
 				40F3056B243C2DE60022B263 /* VideoExposureFilter.m in Sources */,
 				40AC6689240923E100E281AC /* VideoCamera.swift in Sources */,
@@ -1113,9 +1151,11 @@
 				40361D672444062B00DC254F /* video_transform_effect.cpp in Sources */,
 				400C40F52469513E00C4B366 /* VideoSketchFilter.m in Sources */,
 				40B1DF07243F2480009B68C7 /* VideoSepiaFilter.m in Sources */,
+				401B3914247D12C500C5B36B /* VideoSharpenFilter.m in Sources */,
 				40B1DEF9243EFD19009B68C7 /* VideoLevelsFilter.m in Sources */,
 				40186248242382E80003AF6F /* video_rgb_effect.cpp in Sources */,
 				400484572468F1AC00BCFC36 /* VideoToonFilter.m in Sources */,
+				40DDD703247D241B007B7223 /* video_bilateral_effect.cpp in Sources */,
 				40186244242370770003AF6F /* video_brightness_effect.cpp in Sources */,
 				404507F32473EBCE007E8B60 /* video_animated_sticker_effect.cpp in Sources */,
 			);

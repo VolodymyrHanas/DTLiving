@@ -32,18 +32,8 @@ class LiveManager {
         camera = VideoCamera(position: .back, presets: [.hd1280x720])
         
         filterProcessor = VideoFilterProcessor()
-        let sepia = VideoSepiaFilter()
-        sepia.duration = 15.0
-        filterProcessor.addFilter(sepia)
-        let text = VideoTextFilter()
-        let attributedText = NSAttributedString(string: "大家好啊！大家好啊！大家好啊！大家好啊！大家好啊！大家好啊！大家好啊！",
-                                                attributes: [.font: UIFont.boldSystemFont(ofSize: 48),
-                                                             .foregroundColor: UIColor.green])
-        text.setText(attributedText, size: .init(width: 720, height: 1280))        
-        text.rotate = .pi / 4
-        text.scale = .init(width: 2.0, height: 2.0)
-        text.translate = .init(width: 0, height: -200)
-        filterProcessor.addFilter(text)
+        let bilateral = VideoBilateralFilter()
+        filterProcessor.addFilter(bilateral)
         
         preview = VideoView()
         

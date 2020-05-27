@@ -15,7 +15,7 @@ class VideoContext {
         
     static let queueKey = DispatchSpecificKey<Int>()
 
-    let context: EAGLContext // TODO: EAGLContext 共享一个 EAGLSharegroup when send to video encoder
+    let context: EAGLContext
 
     private let tag: String
     private let contextQueue: DispatchQueue

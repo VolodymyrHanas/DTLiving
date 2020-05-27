@@ -33,7 +33,6 @@ public:
     void SetEffectParamInt(const char *name, const char *param, GLint *value, int size);
     void SetEffectParamFloat(const char *name, const char *param, GLfloat *value, int size);
     void Process(VideoFrame input_frame, VideoFrame output_frame, double delta);
-    // TODO: switch effect
 private:
     VideoEffect *no_effect_;
     std::vector<VideoEffect *> effects_ {};

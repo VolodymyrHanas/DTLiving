@@ -11,6 +11,8 @@
 //  In an image, intensity of a pixel is defined as the value of the pixel. For example in an 8 bit grayscale image there are 256 gray levels. Now any pixel in an image can have a value from 0 to 255 and that will be its intensity
 //
 //  And there is another term called contrast. It is the difference between maximum and minimum pixel intensities in an image. Consider two images A having pixel intensities between 30 to 200 and B having pixel intensities 70 to 130. Then A has more contrast than B. Again contrast is also relative.
+//
+//  音视频开发进阶指南：基于 Android 与 iOS 平台的实践 — 9.1.2 对比度调节
 
 #ifndef DTLIVING_EFFECT_COLOR_PROCESSING_VIDEO_CONTRAST_EFFECT_H_
 #define DTLIVING_EFFECT_COLOR_PROCESSING_VIDEO_CONTRAST_EFFECT_H_

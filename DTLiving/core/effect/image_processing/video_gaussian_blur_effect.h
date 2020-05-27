@@ -8,6 +8,7 @@
 //  http://www.sunsetlakesoftware.com/2013/10/21/optimizing-gaussian-blurs-mobile-gpu
 //  https://en.wikipedia.org/wiki/Gaussian_blur
 //  https://github.com/mattdesl/lwjgl-basics/wiki/ShaderLesson5
+//  音视频开发进阶指南：基于 Android 与 iOS 平台的实践 — 9.2.3 高斯模糊算法
 
 #ifndef DTLIVING_EFFECT_IMAGE_PROCESSING_VIDEO_GAUSSIAN_BLUR_EFFECT_H_
 #define DTLIVING_EFFECT_IMAGE_PROCESSING_VIDEO_GAUSSIAN_BLUR_EFFECT_H_

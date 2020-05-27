@@ -10,6 +10,8 @@
 //  https://photographylife.com/what-is-saturation-and-how-to-get-optimal-saturation
 //
 //  Luminance Weighting from "Graphics Shaders: Theory and Practice" by Bailey and Cunningham
+//
+//  音视频开发进阶指南：基于 Android 与 iOS 平台的实践 — 9.1.3 饱和度调节
 
 #ifndef DTLIVING_EFFECT_COLOR_PROCESSING_VIDEO_SATURATION_EFFECT_H_
 #define DTLIVING_EFFECT_COLOR_PROCESSING_VIDEO_SATURATION_EFFECT_H_

@@ -35,6 +35,8 @@
 #include "video_water_mask_effect.h"
 #include "video_animated_sticker_effect.h"
 #include "video_text_effect.h"
+#include "video_sharpen_effect.h"
+#include "video_bilateral_effect.h"
 
 namespace dtliving {
 namespace effect {
@@ -109,6 +111,10 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
     } else if (std::strcmp(name, kVideoTextEffect) == 0) {
         effect = new composition::VideoTextEffect(name);
         isShaderFile = false;
+    } else if (std::strcmp(name, kVideoSharpenEffect) == 0) {
+        effect = new image_processing::VideoSharpenEffect(name);
+    } else if (std::strcmp(name, kVideoBilateralEffect) == 0) {
+        effect = new image_processing::VideoBilateralEffect(name);
     } else {
         effect = new VideoEffect(name);
     }

@@ -7,6 +7,7 @@
 //
 //  https://medium.com/datadriveninvestor/understanding-edge-detection-sobel-operator-2aada303b900
 //  https://en.wikipedia.org/wiki/Sobel_operator
+//  音视频开发进阶指南：基于 Android 与 iOS 平台的实践 — 9.2.2 锐化效果器
 
 #ifndef DTLIVING_EFFECT_IMAGE_PROCESSING_VIDEO_SOBEL_EDGE_DETECTION_EFFECT_H_
 #define DTLIVING_EFFECT_IMAGE_PROCESSING_VIDEO_SOBEL_EDGE_DETECTION_EFFECT_H_

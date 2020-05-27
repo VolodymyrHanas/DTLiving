@@ -10,6 +10,8 @@
 //  In an image, intensity of a pixel is defined as the value of the pixel. For example in an 8 bit grayscale image there are 256 gray levels. Now any pixel in an image can have a value from 0 to 255 and that will be its intensity
 //
 //  Now coming to brightness, as already answered brightness is a relative term. Suppose A, B and C are three pixels having intensities 1, 30 and 250, then C is brighter and A & B are darker with repsect to C. In general you can say the higher the intensity the brighter is the pixel.
+//
+//  音视频开发进阶指南：基于 Android 与 iOS 平台的实践 — 9.1.1 亮度调节
 
 #ifndef DTLIVING_EFFECT_COLOR_PROCESSING_VIDEO_BRIGHTNESS_EFFECT_H_
 #define DTLIVING_EFFECT_COLOR_PROCESSING_VIDEO_BRIGHTNESS_EFFECT_H_

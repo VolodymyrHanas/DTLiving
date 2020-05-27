@@ -31,7 +31,7 @@ public:
     VideoEffect(std::string name);
     ~VideoEffect();
     
-    void LoadShaderFile(std::string vertex_shader_file, std::string fragment_shader_file);
+    virtual void LoadShaderFile(std::string vertex_shader_file, std::string fragment_shader_file);
     virtual void LoadShaderSource();
     virtual void LoadUniform();
     virtual void LoadResources(std::vector<std::string> resources);
@@ -57,7 +57,6 @@ public:
     vec4 get_clear_color() {
         return clear_color_;
     }
-    
     
 protected:
     void LoadShaderSource(std::string vertex_shader_source, std::string fragment_shader_source);

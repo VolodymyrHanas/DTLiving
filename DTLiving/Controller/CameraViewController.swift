@@ -184,8 +184,8 @@ class CameraViewController: UIViewController {
         settingsButton.setTitleColor(UIColor.white, for: .normal)
         settingsButton.setTitle("config settings", for: .normal)
         slider.minimumValue = 0
-        slider.maximumValue = 1
-        slider.value = 0
+        slider.maximumValue = 10
+        slider.value = 8
 
         view.addSubview(recordButton)
         view.addSubview(liveButton)
@@ -231,10 +231,9 @@ class CameraViewController: UIViewController {
     }
     
     @objc private func sliderValueChanged(_ slider: UISlider) {
-        let index = 1
-        if let filter = liveManager.fetchFilter(at: index) as? VideoWaterMaskFilter {
-            let percent = CGFloat(slider.value)
-            filter.translate = .init(width: 360 * percent, height: 640 * percent)
+        let index = 0
+        if let filter = liveManager.fetchFilter(at: index) as? VideoBilateralFilter {
+            filter.distanceNormalizationFactor = slider.value
             liveManager.updateFilter(filter, at: index)
         }
     }
