@@ -32,3 +32,8 @@
 #import "VideoTextFilter.h"
 #import "VideoSharpenFilter.h"
 #import "VideoBilateralFilter.h"
+#import "VideoMultiplyBlendFilter.h"
+#import "VideoScreenBlendFilter.h"
+#import "VideoOverlayBlendFilter.h"
+#import "VideoSoftLightFilter.h"
+#import "VideoHardLightFilter.h"

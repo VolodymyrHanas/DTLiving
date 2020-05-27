@@ -109,4 +109,14 @@ extern const char *kVideoSharpenEffectSharpness; // -4.0 ~ 4.0
 extern const char *kVideoBilateralEffect;
 extern const char *kVideoBilateralEffectDistanceNormalizationFactor; // 0.0 ~ 10.0
 
+extern const char *kVideoMultiplyBlendEffect;
+
+extern const char *kVideoScreenBlendEffect;
+
+extern const char *kVideoOverlayBlendEffect;
+
+extern const char *kVideoSoftLightBlendEffect;
+
+extern const char *kVideoHardLightBlendEffect;
+
 #endif /* constants_h */

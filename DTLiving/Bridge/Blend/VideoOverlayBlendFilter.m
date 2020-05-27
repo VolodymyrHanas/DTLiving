@@ -1,17 +1,17 @@
 //
-//  VideoAddBlendFilter.m
+//  VideoOverlayBlendFilter.m
 //  DTLiving
 //
-//  Created by Dan Jiang on 2020/4/29.
+//  Created by Dan Jiang on 2020/5/27.
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#import "VideoAddBlendFilter.h"
+#import "VideoOverlayBlendFilter.h"
 
-@implementation VideoAddBlendFilter
+@implementation VideoOverlayBlendFilter
 
 - (instancetype)init {
-    self = [super initWithName:kVideoAddBlendEffect];
+    self = [super initWithName:kVideoOverlayBlendEffect];
     if (self) {
     }
     return self;

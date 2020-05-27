@@ -85,7 +85,12 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
     } else if (std::strcmp(name, kVideoSobelEdgeDetectionEffect) == 0) {
         effect = new image_processing::VideoSobelEdgeDetectionEffect(name);
         isShaderFile = false;
-    } else if (std::strcmp(name, kVideoAddBlendEffect) == 0) {
+    } else if (std::strcmp(name, kVideoAddBlendEffect) == 0
+               || std::strcmp(name, kVideoMultiplyBlendEffect) == 0
+               || std::strcmp(name, kVideoScreenBlendEffect) == 0
+               || std::strcmp(name, kVideoOverlayBlendEffect) == 0
+               || std::strcmp(name, kVideoSoftLightBlendEffect) == 0
+               || std::strcmp(name, kVideoHardLightBlendEffect) == 0) {
         effect = new VideoTwoInputEffect(name);
     } else if (std::strcmp(name, kVideoAlphaBlendEffect) == 0) {
         effect = new blend::VideoAlphaBlendEffect(name);

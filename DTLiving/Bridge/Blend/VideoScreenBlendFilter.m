@@ -1,17 +1,17 @@
 //
-//  VideoAddBlendFilter.m
+//  VideoScreenBlendFilter.m
 //  DTLiving
 //
-//  Created by Dan Jiang on 2020/4/29.
+//  Created by Dan Jiang on 2020/5/27.
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#import "VideoAddBlendFilter.h"
+#import "VideoScreenBlendFilter.h"
 
-@implementation VideoAddBlendFilter
+@implementation VideoScreenBlendFilter
 
 - (instancetype)init {
-    self = [super initWithName:kVideoAddBlendEffect];
+    self = [super initWithName:kVideoScreenBlendEffect];
     if (self) {
     }
     return self;

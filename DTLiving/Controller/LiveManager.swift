@@ -32,8 +32,9 @@ class LiveManager {
         camera = VideoCamera(position: .back, presets: [.hd1280x720])
         
         filterProcessor = VideoFilterProcessor()
-        let bilateral = VideoBilateralFilter()
-        filterProcessor.addFilter(bilateral)
+        let blend = VideoHardLightFilter()
+        blend.imageName = "colors"
+        filterProcessor.addFilter(blend)
         
         preview = VideoView()
         

@@ -22,10 +22,6 @@
     return @"effect_two_input_vertex";
 }
 
-- (NSString *)fragmentShaderFile {
-    return [NSString stringWithFormat:@"%@_fragment", self.name];
-}
-
 - (NSDictionary<NSString*, NSArray<NSNumber*>*> *)floatParams {
     return @{[NSString stringWithUTF8String:kVideoAlphaBlendEffectMixturePercent]: @[@(self.mixturePercent)]};
 }

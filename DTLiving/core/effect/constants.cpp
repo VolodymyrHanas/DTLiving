@@ -105,3 +105,13 @@ const char *kVideoSharpenEffectSharpness = "u_sharpness";
 
 const char *kVideoBilateralEffect = "effect_bilateral";
 const char *kVideoBilateralEffectDistanceNormalizationFactor = "u_distanceNormalizationFactor";
+
+const char *kVideoMultiplyBlendEffect = "effect_multiply_blend";
+
+const char *kVideoScreenBlendEffect = "effect_screen_blend";
+
+const char *kVideoOverlayBlendEffect = "effect_overlay_blend";
+
+const char *kVideoSoftLightBlendEffect = "effect_soft_light_blend";
+
+const char *kVideoHardLightBlendEffect = "effect_hard_light_blend";
