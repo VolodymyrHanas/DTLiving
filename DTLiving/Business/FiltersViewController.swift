@@ -48,7 +48,15 @@ class FiltersViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let filter = liveManager.fetchFilter(at: indexPath.row)
-        if !(filter is VideoSepiaFilter || filter is VideoGrayScaleFilter) {
+        if !(filter is VideoSepiaFilter
+            || filter is VideoGrayScaleFilter
+            || filter is VideoAddBlendFilter
+            || filter is VideoMaskFilter
+            || filter is VideoMultiplyBlendFilter
+            || filter is VideoScreenBlendFilter
+            || filter is VideoOverlayBlendFilter
+            || filter is VideoSoftLightFilter
+            || filter is VideoHardLightFilter) {
             let updateFilterVC = UpdateFilterViewController(filter: filter, index: indexPath.row)
             updateFilterVC.delegate = self
             self.navigationController?.pushViewController(updateFilterVC, animated: true)

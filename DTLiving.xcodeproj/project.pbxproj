@@ -11,7 +11,6 @@
 		400484312466878F00BCFC36 /* effect_alpha_blend_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 400484302466878F00BCFC36 /* effect_alpha_blend_fragment.glsl */; };
 		40048434246688C900BCFC36 /* video_alpha_blend_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40048432246688C900BCFC36 /* video_alpha_blend_effect.cpp */; };
 		4004843A24668AAA00BCFC36 /* VideoAlphaBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4004843924668AAA00BCFC36 /* VideoAlphaBlendFilter.m */; };
-		4004843E246695BC00BCFC36 /* lighthouse.png in Resources */ = {isa = PBXBuildFile; fileRef = 4004843D246695BC00BCFC36 /* lighthouse.png */; };
 		40048441246697F700BCFC36 /* effect_mask_fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 40048440246697F700BCFC36 /* effect_mask_fragment.glsl */; };
 		400484442466987400BCFC36 /* VideoMaskFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 400484432466987400BCFC36 /* VideoMaskFilter.m */; };
 		4004844724669D8900BCFC36 /* video_mask_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4004844524669D8900BCFC36 /* video_mask_effect.cpp */; };
@@ -177,7 +176,6 @@
 		40048433246688C900BCFC36 /* video_alpha_blend_effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video_alpha_blend_effect.h; sourceTree = "<group>"; };
 		4004843824668AAA00BCFC36 /* VideoAlphaBlendFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoAlphaBlendFilter.h; sourceTree = "<group>"; };
 		4004843924668AAA00BCFC36 /* VideoAlphaBlendFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoAlphaBlendFilter.m; sourceTree = "<group>"; };
-		4004843D246695BC00BCFC36 /* lighthouse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lighthouse.png; sourceTree = "<group>"; };
 		40048440246697F700BCFC36 /* effect_mask_fragment.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = effect_mask_fragment.glsl; sourceTree = "<group>"; };
 		400484422466987400BCFC36 /* VideoMaskFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoMaskFilter.h; sourceTree = "<group>"; };
 		400484432466987400BCFC36 /* VideoMaskFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoMaskFilter.m; sourceTree = "<group>"; };
@@ -725,6 +723,7 @@
 			isa = PBXGroup;
 			children = (
 				40DDD710247E482C007B7223 /* colors.png */,
+				400484482466A32E00BCFC36 /* star.png */,
 				404507E124727DCD007E8B60 /* logo.png */,
 				404507E024727DCD007E8B60 /* walk01.png */,
 				404507E224727DCD007E8B60 /* walk02.png */,
@@ -732,8 +731,6 @@
 				404507DF24727DCD007E8B60 /* walk04.png */,
 				400C4102246A4C7D00C4B366 /* dotletterstiles.png */,
 				400C40FE24695A7000C4B366 /* squares.png */,
-				400484482466A32E00BCFC36 /* star.png */,
-				4004843D246695BC00BCFC36 /* lighthouse.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1001,7 +998,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4004843E246695BC00BCFC36 /* lighthouse.png in Resources */,
 				402E250124595C6C00951804 /* png.5 in Resources */,
 				402E24F724595C6C00951804 /* libpng.3 in Resources */,
 				40DDD711247E482C007B7223 /* colors.png in Resources */,

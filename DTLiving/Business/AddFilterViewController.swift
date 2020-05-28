@@ -49,8 +49,14 @@ class AddFilterViewController: UITableViewController {
             VideoSoftLightFilter(),
             VideoHardLightFilter()
         ],
-        [VideoWaterMaskFilter()],
-        [VideoEmbossFilter()]
+        [
+            VideoWaterMaskFilter()
+        ],
+        [
+            VideoEmbossFilter(),
+            VideoToonFilter(),
+            VideoSketchFilter()
+        ]
     ]
     
     override func viewDidLoad() {
@@ -101,6 +107,8 @@ class AddFilterViewController: UITableViewController {
             filter.imageName = "colors"
         } else if let filter = filter as? VideoHardLightFilter {
             filter.imageName = "colors"
+        } else if let filter = filter as? VideoWaterMaskFilter {
+            filter.imageName = "logo"
         }
         delegate?.addFilter(filter)
     }

@@ -53,7 +53,8 @@ class UpdateFilterViewController: UITableViewController {
             return 3
         } else if filter is VideoRGBFilter {
             return 3
-        } else if filter is VideoTransformFilter {
+        } else if filter is VideoTransformFilter
+            || filter is VideoWaterMaskFilter {
             return 5
         } else if filter is VideoCropFilter {
             return 4
@@ -96,7 +97,8 @@ class UpdateFilterViewController: UITableViewController {
             }
         } else if filter is VideoHueFilter {
             return "hue"
-        } else if filter is VideoTransformFilter {
+        } else if filter is VideoTransformFilter
+            || filter is VideoWaterMaskFilter {
             switch section {
             case 0:
                 return "rotationAngle"
@@ -122,13 +124,19 @@ class UpdateFilterViewController: UITableViewController {
             }
         } else if filter is VideoGaussianBlurFilter || filter is VideoBoxBlurFilter {
             return "blurRadiusInPixels"
-        } else if filter is VideoSobelEdgeDetectionFilter {
+        } else if filter is VideoSobelEdgeDetectionFilter || filter is VideoSketchFilter {
             return "edgeStrength"
         } else if filter is VideoSharpenFilter {
             return "sharpness"
         } else if filter is VideoBilateralFilter {
             return "distanceNormalizationFactor"
-        }        
+        } else if filter is VideoAlphaBlendFilter {
+            return "mixturePercent"
+        } else if filter is VideoEmbossFilter {
+            return "intensity"
+        } else if filter is VideoToonFilter {
+            return "threshold"
+        }
         return nil
     }
 
@@ -278,6 +286,54 @@ class UpdateFilterViewController: UITableViewController {
             cell.setValue(filter.distanceNormalizationFactor, min: 0.0, max: 10.0)
             cell.didChange = { value in
                 filter.distanceNormalizationFactor = value
+            }
+        } else if let filter = filter as? VideoAlphaBlendFilter {
+            cell.setValue(filter.mixturePercent, min: 0.0, max: 1.0)
+            cell.didChange = { value in
+                filter.mixturePercent = value
+            }
+        } else if let filter = filter as? VideoWaterMaskFilter {
+            switch indexPath.section {
+            case 0:
+                cell.setValue(Float(filter.rotate), min: 0.0, max: 2.0 * .pi)
+                cell.didChange = { value in
+                    filter.rotate = CGFloat(value)
+                }
+            case 1:
+                cell.setValue(Float(filter.scale.width), min: 0.0, max: 2.0)
+                cell.didChange = { value in
+                    filter.scale.width = CGFloat(value)
+                }
+            case 2:
+                cell.setValue(Float(filter.scale.height), min: 0.0, max: 2.0)
+                cell.didChange = { value in
+                    filter.scale.height = CGFloat(value)
+                }
+            case 3:
+                cell.setValue(Float(filter.translate.width), min: -360, max: 360)
+                cell.didChange = { value in
+                    filter.translate.width = CGFloat(value)
+                }
+            default:
+                cell.setValue(Float(filter.translate.height), min: -640, max: 640)
+                cell.didChange = { value in
+                    filter.translate.height = CGFloat(value)
+                }
+            }
+        } else if let filter = filter as? VideoEmbossFilter {
+            cell.setValue(filter.intensity, min: 0.0, max: 4.0)
+            cell.didChange = { value in
+                filter.intensity = value
+            }
+        } else if let filter = filter as? VideoToonFilter {
+            cell.setValue(filter.threshold, min: 0.0, max: 1.0)
+            cell.didChange = { value in
+                filter.threshold = value
+            }
+        } else if let filter = filter as? VideoSketchFilter {
+            cell.setValue(filter.edgeStrength, min: 0.0, max: 1.0)
+            cell.didChange = { value in
+                filter.edgeStrength = value
             }
         }
         return cell
