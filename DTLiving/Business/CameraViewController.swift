@@ -9,104 +9,6 @@
 import UIKit
 import SnapKit
 
-enum CameraPosition {
-    case front
-    case back
-    
-    var title: String {
-        switch self {
-        case .front:
-            return "Front"
-        case .back:
-            return "Back"
-        }
-    }
-    
-    static var all: [CameraPosition] {
-        return [.front, .back]
-    }
-}
-
-enum VideoRatio {
-    case r9to16
-    case r16to9
-    case r2p39to1
-    case r1to1
-    case circle
-    case r4to3
-    case r3to4
-
-    var title: String {
-        switch self {
-        case .r9to16:
-            return "9:16"
-        case .r16to9:
-            return "16:9"
-        case .r2p39to1:
-            return "2.39:1"
-        case .r1to1:
-            return "1:1"
-        case .circle:
-            return "Circle"
-        case .r4to3:
-            return "4:3"
-        case .r3to4:
-            return "3:4"
-        }
-    }
-    
-    var ratio: Float { // height : width
-        switch self {
-        case .r9to16:
-            return 16.0 / 9.0
-        case .r16to9:
-            return 9.0 / 16.0
-        case .r2p39to1:
-            return 1.0 / 2.39
-        case .r1to1:
-            return 1.0
-        case .circle:
-            return 1.0
-        case .r4to3:
-            return 3.0 / 4.0
-        case .r3to4:
-            return 4.0 / 3.0
-        }
-    }
-    
-    static var all: [VideoRatio] {
-        return [.r9to16, .r16to9, .r2p39to1, .r1to1, .circle, .r4to3, .r3to4]
-    }
-}
-
-struct MediaConfig {
-    var cameraPosition: CameraPosition
-    let formatName: String = "flv"
-    let videoCodecName: String = "h264"
-    let videoBitRate: Int = 1500000
-    var videoRatio: VideoRatio
-    let videoFrameRate: Int = 24
-    let audioCodecName: String = "libfdk_aac"
-    let audioSampleRate: Int = 44100
-    let audioBitRate: Int = 64000
-    let audioChannels: Int = 2
-    var isWatermark: Bool
-    var isFaceBeauty: Bool
-    var musicFileURL: String?
-
-    init(cameraPosition: CameraPosition = .back,
-         videoRatio: VideoRatio = .r9to16,
-         isWatermark: Bool = true,
-         isFaceBeauty: Bool = true,
-         musicFileURL: String? = nil) {
-        self.cameraPosition = cameraPosition
-        self.videoRatio = videoRatio
-        self.isWatermark = isWatermark
-        self.isFaceBeauty = isFaceBeauty
-        self.musicFileURL = musicFileURL
-    }
-}
-
 class CameraViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool { return true }
@@ -116,7 +18,6 @@ class CameraViewController: UIViewController {
     private let recordButton = UIButton()
     private let liveButton = UIButton()
     private let settingsButton = UIButton()
-    private let slider = UISlider()
 
     deinit {
         NotificationCenter.default.removeObserver(self,
@@ -131,8 +32,8 @@ class CameraViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(config: MediaConfig) {
-        liveManager = LiveManager(config: config)
+    init() {
+        liveManager = LiveManager(position: .back)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -183,17 +84,20 @@ class CameraViewController: UIViewController {
         liveButton.setTitle("start living", for: .normal)
         settingsButton.setTitleColor(UIColor.white, for: .normal)
         settingsButton.setTitle("config settings", for: .normal)
-        slider.minimumValue = 0
-        slider.maximumValue = 10
-        slider.value = 8
 
         view.addSubview(recordButton)
         view.addSubview(liveButton)
         view.addSubview(settingsButton)
-        view.addSubview(slider)
 
-        slider.snp.makeConstraints { make in
+        recordButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(10)
+            make.centerY.equalTo(settingsButton)
+        }
+        liveButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(settingsButton)
+        }
+        settingsButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-10)
             if #available(iOS 11, *) {
                 make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10)
@@ -201,20 +105,7 @@ class CameraViewController: UIViewController {
                 make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(-10)
             }
         }
-        recordButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(10)
-            make.bottom.equalTo(slider.snp.top).offset(-10)
-        }
-        liveButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(slider.snp.top).offset(-10)
-        }
-        settingsButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-10)
-            make.bottom.equalTo(slider.snp.top).offset(-10)
-        }
         
-        slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
         settingsButton.addTarget(self, action: #selector(showSettings), for: .touchUpInside)
     }
             
@@ -243,11 +134,9 @@ class CameraViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Camera Position", style: .default, handler: { [weak self] _ in
             self?.configCameraPosition()
         }))
-        alert.addAction(UIAlertAction(title: "Video Ratio", style: .default, handler: { [weak self] _ in
-            self?.configVideoRatio()
+        alert.addAction(UIAlertAction(title: "Config Filters", style: .default, handler: { [weak self] _ in
+            self?.configFilters()
         }))
-        alert.addAction(UIAlertAction(title: "Watermark", style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Face Beauty", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "Play Music", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
@@ -255,14 +144,14 @@ class CameraViewController: UIViewController {
     
     private func configCameraPosition() {
         let alert = UIAlertController(title: "Camera Position", message: nil, preferredStyle: .actionSheet)
-        for position in CameraPosition.all {
+        for position in VideoCamera.Position.all {
             var title = position.title
-            if position == liveManager.config.cameraPosition {
+            if position == liveManager.position {
                 title = "[ \(title) ]"
             }
             alert.addAction(UIAlertAction(title: title, style: .default, handler: { [weak self] _ in
                 guard let self = self else { return }
-                self.liveManager.config.cameraPosition = position
+                self.liveManager.position = position
                 self.liveManager.rotateCamera()
             }))
         }
@@ -270,20 +159,10 @@ class CameraViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    private func configVideoRatio() {
-        let alert = UIAlertController(title: "Video Ratio", message: nil, preferredStyle: .actionSheet)
-        for videoRatio in VideoRatio.all {
-            var title = videoRatio.title
-            if videoRatio == liveManager.config.videoRatio {
-                title = "[ \(title) ]"
-            }
-            alert.addAction(UIAlertAction(title: title, style: .default, handler: { [weak self] _ in
-                guard let self = self else { return }
-                self.liveManager.config.videoRatio = videoRatio
-            }))
-        }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
+    private func configFilters() {
+        let filtersVC = FiltersViewController(liveManager: liveManager)
+        let navVC = UINavigationController(rootViewController: filtersVC)
+        present(navVC, animated: true, completion: nil)
     }
 
 }

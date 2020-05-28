@@ -8,7 +8,6 @@
 
 #import "VideoFilter.h"
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoContrastFilter : VideoFilter

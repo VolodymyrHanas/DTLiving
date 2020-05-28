@@ -10,6 +10,17 @@
 
 @implementation VideoMosaicFilter
 
+- (instancetype)init {
+    self = [super initWithName:kVideoMosaicEffect];
+    if (self) {
+        self.inputTileSize = CGSizeMake(0.125, 0.125);
+        self.displayTileSize = CGSizeMake(0.025, 0.025);
+        self.numTiles = 64.0;
+        self.colorOn = YES;
+    }
+    return self;
+}
+
 - (void)setInputTileSize:(CGSize)inputTileSize {
     if (inputTileSize.width > 1.0) {
         _inputTileSize.width = 1.0;
@@ -42,18 +53,6 @@
     }
     
     _displayTileSize = displayTileSize;
-}
-
-
-- (instancetype)init {
-    self = [super initWithName:kVideoMosaicEffect];
-    if (self) {
-        self.inputTileSize = CGSizeMake(0.125, 0.125);
-        self.displayTileSize = CGSizeMake(0.025, 0.025);
-        self.numTiles = 64.0;
-        self.colorOn = YES;
-    }
-    return self;
 }
 
 - (NSDictionary<NSString*, NSArray<NSNumber*>*> *)floatParams {

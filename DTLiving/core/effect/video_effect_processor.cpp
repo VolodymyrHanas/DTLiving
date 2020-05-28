@@ -68,7 +68,7 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
         effect = new color_processing::VideoGammaEffect(name);
     } else if (std::strcmp(name, kVideoLevelsEffect) == 0) {
         effect = new color_processing::VideoLevelsEffect(name);
-    } else if (std::strcmp(name, kVideoColorMatrixEffect) == 0) {
+    } else if (std::strcmp(name, kVideoSepiaEffect) == 0) {
         effect = new color_processing::VideoColorMatrixEffect(name);
     } else if (std::strcmp(name, kVideoRGBEffect) == 0) {
         effect = new color_processing::VideoRGBEffect(name);
@@ -130,6 +130,10 @@ void VideoEffectProcessor::AddEffect(const char *name, const char *vertex_shader
     }
     effect->LoadUniform();
     effects_.push_back(effect);
+}
+
+void VideoEffectProcessor::ClearAllEffects() {
+    effects_.clear();
 }
 
 void VideoEffectProcessor::SetDuration(const char *name, double duration) {

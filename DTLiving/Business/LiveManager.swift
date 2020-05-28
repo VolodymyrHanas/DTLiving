@@ -11,9 +11,9 @@ import AVFoundation
 import CocoaLumberjack
 
 class LiveManager {
-    
-    var config: MediaConfig
-    
+        
+    var position: VideoCamera.Position
+
     private let camera: VideoCamera
     private let filterProcessor: VideoFilterProcessor
     private let preview: VideoView
@@ -26,15 +26,12 @@ class LiveManager {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(config: MediaConfig) {
-        self.config = config
+    init(position: VideoCamera.Position) {
+        self.position = position
         
-        camera = VideoCamera(position: .back, presets: [.hd1280x720])
+        camera = VideoCamera(position: position, presets: [.hd1280x720])
         
         filterProcessor = VideoFilterProcessor()
-        let blend = VideoHardLightFilter()
-        blend.imageName = "colors"
-        filterProcessor.addFilter(blend)
         
         preview = VideoView()
         
@@ -62,8 +59,20 @@ class LiveManager {
         camera.rotateCamera()
     }
     
+    func clearAllFilters() {
+        filterProcessor.clearAllFilters()
+    }
+    
+    var numberOfFilters: Int {
+        return filterProcessor.numberOfFilters
+    }
+    
     func fetchFilter(at index: Int) -> VideoFilter {
         return filterProcessor.fetchFilter(at: index)
+    }
+    
+    func addFilter(_ filter: VideoFilter) {
+        filterProcessor.addFilter(filter)
     }
     
     func updateFilter(_ filter: VideoFilter, at index: Int) {

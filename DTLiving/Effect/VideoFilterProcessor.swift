@@ -88,6 +88,21 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
     func endProcessing() {
     }
     
+    func clearAllFilters() {
+        filters.removeAll()
+        VideoContext.sharedProcessingContext.sync {
+            processor.clearAllFilters()
+        }
+    }
+    
+    var numberOfFilters: Int {
+        return filters.count
+    }
+    
+    func fetchFilter(at index: Int) -> VideoFilter {
+        return filters[index]
+    }
+
     func addFilter(_ filter: VideoFilter) {
         if filter.isRotationAware {
             filter.rotation = inputRotation
@@ -100,11 +115,7 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
             processor.add(filter)
         }
     }
-    
-    func fetchFilter(at index: Int) -> VideoFilter {
-        return filters[index]
-    }
-    
+        
     func updateFilter(_ filter: VideoFilter, at index: Int) {
         filters[index] = filter
         updateFilter(filter)

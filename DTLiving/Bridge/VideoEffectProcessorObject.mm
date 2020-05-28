@@ -125,4 +125,8 @@
     self.processor->Process(inputFrame, outputFrame, delta);
 }
 
+- (void)clearAllFilters {
+    self.processor->ClearAllEffects();
+}
+
 @end

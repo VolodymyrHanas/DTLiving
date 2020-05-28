@@ -33,9 +33,10 @@ extern const char *kVideoLevelsEffectLevelMaximum; // 0.0 ~ 1.0
 extern const char *kVideoLevelsEffectMinOutput; // 0.0 ~ 1.0
 extern const char *kVideoLevelsEffectMaxOutput; // 0.0 ~ 1.0
 
-extern const char *kVideoColorMatrixEffect;
 extern const char *kVideoColorMatrixEffectColorMatrix; // 4x4 matrix
 extern const char *kVideoColorMatrixEffectIntensity; // 0.0 ~ 1.0
+
+extern const char *kVideoSepiaEffect;
 
 extern const char *kVideoRGBEffect;
 extern const char *kVideoRGBEffectRed; // 0.0 ~ 1.0

@@ -24,6 +24,7 @@ public:
     
     void Init(const char *vertex_shader_file, const char *fragment_shader_file);
     void AddEffect(const char *name, const char *vertex_shader_file, const char *fragment_shader_file);
+    void ClearAllEffects();
     void SetDuration(const char *name, double duration);
     void SetClearColor(const char *name, vec4 clear_color);
     void LoadResources(const char *name, std::vector<std::string> resources);

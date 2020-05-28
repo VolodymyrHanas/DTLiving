@@ -30,9 +30,10 @@ const char *kVideoLevelsEffectLevelMaximum = "u_levelMaximum";
 const char *kVideoLevelsEffectMinOutput = "u_minOutput";
 const char *kVideoLevelsEffectMaxOutput = "u_maxOutput";
 
-const char *kVideoColorMatrixEffect = "effect_color_matrix";
 const char *kVideoColorMatrixEffectColorMatrix = "u_colorMatrix";
 const char *kVideoColorMatrixEffectIntensity = "u_intensity";
+
+const char *kVideoSepiaEffect = "effect_sepia";
 
 const char *kVideoRGBEffect = "effect_rgb";
 const char *kVideoRGBEffectRed = "u_redAdjustment";

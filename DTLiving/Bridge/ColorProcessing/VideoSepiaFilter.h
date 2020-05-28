@@ -6,11 +6,16 @@
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
 
-#import "VideoColorMatrixFilter.h"
+#import "VideoFilter.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VideoSepiaFilter : VideoColorMatrixFilter
+@interface VideoSepiaFilter : VideoFilter
+
+@property (nonatomic, assign) VideoMat4 colorMatrix;
+@property (nonatomic, assign) float intensity;
+
+- (instancetype)init;
 
 @end
 
