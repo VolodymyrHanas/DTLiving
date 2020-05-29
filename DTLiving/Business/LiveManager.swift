@@ -10,14 +10,23 @@ import UIKit
 import AVFoundation
 import CocoaLumberjack
 
+protocol LiveManagerDelegate: class {
+    func liveManagerRecorderDidFinishPreparing(_ manager: LiveManager)
+    func liveManagerRecorder(_ manager: LiveManager, didFailWithError error: Error?)
+    func liveManagerRecorderDidFinishRecording(_ manager: LiveManager)
+}
+
 class LiveManager {
         
+    weak var delegate: LiveManagerDelegate?
+
     var position: VideoCamera.Position
 
     private let camera: VideoCamera
     private let filterProcessor: VideoFilterProcessor
     private let preview: VideoView
-    
+    private var recorder: VideoRecorder?
+
     var previewView: VideoView {
         return preview
     }
@@ -34,7 +43,7 @@ class LiveManager {
         filterProcessor = VideoFilterProcessor()
         
         preview = VideoView()
-        
+                
         camera.addTarget(filterProcessor)
         filterProcessor.addTarget(preview)
     }
@@ -77,6 +86,38 @@ class LiveManager {
     
     func updateFilter(_ filter: VideoFilter, at index: Int) {
         filterProcessor.updateFilter(filter, at: index)
+    }
+    
+    func startRecording() {
+        if let videoFile = FileHelper.shared.getMediaFileURL(name: "video", ext: "mp4") {
+            let recorder = VideoRecorder(url: videoFile, fileType: .mp4, size: .init(width: 720, height: 1280),
+                                         delegate: self, callbackQueue: .main)
+            filterProcessor.addTarget(recorder)
+            recorder.prepareToRecord()
+            self.recorder = recorder
+        }
+    }
+    
+    func stopRecording() {
+        guard let recorder = recorder else { return }
+        recorder.finishRecording()
+        filterProcessor.removeTarget(recorder)
+    }
+
+}
+
+extension LiveManager: VideoRecorderDelegate {
+    
+    func videoRecorderDidFinishPreparing(_ recorder: VideoRecorder) {
+        delegate?.liveManagerRecorderDidFinishPreparing(self)
+    }
+    
+    func videoRecorder(_ recorder: VideoRecorder, didFailWithError error: Error?) {
+        delegate?.liveManagerRecorder(self, didFailWithError: error)
+    }
+    
+    func videoRecorderDidFinishRecording(_ recorder: VideoRecorder) {
+        delegate?.liveManagerRecorderDidFinishRecording(self)
     }
 
 }

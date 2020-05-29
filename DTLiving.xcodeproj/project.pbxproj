@@ -106,6 +106,8 @@
 		404774102480AD6E008B30C8 /* AddMosaicFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4047740F2480AD6E008B30C8 /* AddMosaicFilterViewController.swift */; };
 		404774122480B4A6008B30C8 /* AddTextFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404774112480B4A6008B30C8 /* AddTextFilterViewController.swift */; };
 		404774142480B93E008B30C8 /* AddAnimatedStickerFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404774132480B93E008B30C8 /* AddAnimatedStickerFilterViewController.swift */; };
+		404774192480EF9F008B30C8 /* VideoRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404774182480EF9F008B30C8 /* VideoRecorder.swift */; };
+		4047741D248143A6008B30C8 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4047741C248143A6008B30C8 /* FileHelper.swift */; };
 		40501A152445C5BC009DDBF6 /* constants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40501A142445C5BC009DDBF6 /* constants.cpp */; };
 		40501A182446DE64009DDBF6 /* VideoCropFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 40501A172446DE64009DDBF6 /* VideoCropFilter.m */; };
 		40501A1B24472F75009DDBF6 /* video_two_pass_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40501A1924472F75009DDBF6 /* video_two_pass_effect.cpp */; };
@@ -315,6 +317,8 @@
 		4047740F2480AD6E008B30C8 /* AddMosaicFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMosaicFilterViewController.swift; sourceTree = "<group>"; };
 		404774112480B4A6008B30C8 /* AddTextFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTextFilterViewController.swift; sourceTree = "<group>"; };
 		404774132480B93E008B30C8 /* AddAnimatedStickerFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAnimatedStickerFilterViewController.swift; sourceTree = "<group>"; };
+		404774182480EF9F008B30C8 /* VideoRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecorder.swift; sourceTree = "<group>"; };
+		4047741C248143A6008B30C8 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		40501A142445C5BC009DDBF6 /* constants.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = constants.cpp; sourceTree = "<group>"; };
 		40501A162446DE64009DDBF6 /* VideoCropFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCropFilter.h; sourceTree = "<group>"; };
 		40501A172446DE64009DDBF6 /* VideoCropFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCropFilter.m; sourceTree = "<group>"; };
@@ -482,6 +486,7 @@
 			isa = PBXGroup;
 			children = (
 				40076AD12416351F0052ED90 /* DebugHelper.swift */,
+				4047741C248143A6008B30C8 /* FileHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -831,6 +836,14 @@
 			path = Composition;
 			sourceTree = "<group>";
 		};
+		404774152480EEC6008B30C8 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				404774182480EF9F008B30C8 /* VideoRecorder.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
 		40AC667F2409211200E281AC /* Business */ = {
 			isa = PBXGroup;
 			children = (
@@ -918,6 +931,7 @@
 				403DEB7D23E536C500685F6B /* Preview */,
 				40AC66812409229C00E281AC /* Encode */,
 				40AC66802409228100E281AC /* Publish */,
+				404774152480EEC6008B30C8 /* Record */,
 				4018622C2420A3A10003AF6F /* Bridge */,
 				4018622B241F80990003AF6F /* core */,
 				4083143B241A2D9C00DC2BE9 /* DTLiving-Bridging-Header.h */,
@@ -1154,6 +1168,7 @@
 				402E24E124595C6C00951804 /* pngrio.c in Sources */,
 				402E24FD24595C6C00951804 /* pngrtran.c in Sources */,
 				401862402423644F0003AF6F /* VideoRGBFilter.m in Sources */,
+				4047741D248143A6008B30C8 /* FileHelper.swift in Sources */,
 				40DDD70A247E10EB007B7223 /* VideoBilateralFilter.m in Sources */,
 				4004844724669D8900BCFC36 /* video_mask_effect.cpp in Sources */,
 				40F3056B243C2DE60022B263 /* VideoExposureFilter.m in Sources */,
@@ -1222,6 +1237,7 @@
 				40DDD703247D241B007B7223 /* video_bilateral_effect.cpp in Sources */,
 				40186244242370770003AF6F /* video_brightness_effect.cpp in Sources */,
 				404507F32473EBCE007E8B60 /* video_animated_sticker_effect.cpp in Sources */,
+				404774192480EF9F008B30C8 /* VideoRecorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

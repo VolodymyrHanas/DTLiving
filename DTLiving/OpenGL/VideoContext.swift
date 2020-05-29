@@ -14,6 +14,56 @@ class VideoContext {
     static let sharedProcessingContext = VideoContext(tag: "video processing")
         
     static let queueKey = DispatchSpecificKey<Int>()
+    
+    static func textureCoordinates(for rotation: VideoRotation) -> [GLfloat] {
+        switch rotation {
+        case .noRotation:
+            return [0, 0,
+                    1, 0,
+                    0, 1,
+                    1, 1]
+        case .rotateLeft:
+            return [1, 0,
+                    1, 1,
+                    0, 0,
+                    0, 1]
+        case .rotateRight:
+            return [0, 1,
+                    0, 0,
+                    1, 1,
+                    1, 0]
+        case .flipVertical:
+            return [0, 1,
+                    1, 1,
+                    0, 0,
+                    1, 0]
+        case .flipHorizonal:
+            return [1, 0,
+                    0, 0,
+                    1, 1,
+                    0, 1]
+        case .rotateRightFlipVertical:
+            return [0, 0,
+                    0, 1,
+                    1, 0,
+                    1, 1]
+        case .rotateRightFlipHorizontal:
+            return [1, 1,
+                    1, 0,
+                    0, 1,
+                    0, 0]
+        case .rotate180:
+            return [1, 1,
+                    0, 1,
+                    1, 0,
+                    0, 0]
+        default:
+            return [0, 1,
+                    1, 1,
+                    0, 0,
+                    1, 0]
+        }
+    }
 
     let context: EAGLContext
 
@@ -24,13 +74,21 @@ class VideoContext {
     private var _textureCache: CVOpenGLESTextureCache?
     private var _frameBufferCache: FrameBufferCache?
     
-    init(tag: String) {
+    init(tag: String, sharegroup: EAGLSharegroup? = nil) {
         self.tag = "[\(tag)]"
-        guard let context = EAGLContext(api: .openGLES2) else {
-            DDLogError("\(tag) Could not initialize OpenGL context")
-            exit(1)
+        if let sharegroup = sharegroup {
+            guard let context = EAGLContext(api: .openGLES2, sharegroup: sharegroup) else {
+                DDLogError("\(tag) Could not initialize OpenGL context with share group")
+                exit(1)
+            }
+            self.context = context
+        } else {
+            guard let context = EAGLContext(api: .openGLES2) else {
+                DDLogError("\(tag) Could not initialize OpenGL context")
+                exit(1)
+            }
+            self.context = context
         }
-        self.context = context
         contextQueue = DispatchQueue(label: "\(tag) context queue", attributes: [], target: nil)
         contextQueue.setSpecific(key: VideoContext.queueKey, value: queueContext)
         

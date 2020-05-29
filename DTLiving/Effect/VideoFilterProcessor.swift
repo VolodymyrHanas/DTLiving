@@ -13,9 +13,11 @@ class VideoFilterProcessor: VideoOutput, VideoInput {
     private var inputFrameBuffer: FrameBuffer?
     private var inputRotation: VideoRotation = .noRotation {
         didSet {
-            for filter in filters where filter.isRotationAware {
-                filter.rotation = inputRotation
-                updateFilter(filter)
+            if inputRotation != oldValue {
+                for filter in filters where filter.isRotationAware {
+                    filter.rotation = inputRotation
+                    updateFilter(filter)
+                }
             }
         }
     }

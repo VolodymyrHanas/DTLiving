@@ -33,7 +33,13 @@ class AddMosaicFilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        title = "Mosaic"
+
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            view.backgroundColor = UIColor.white
+        }
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
         

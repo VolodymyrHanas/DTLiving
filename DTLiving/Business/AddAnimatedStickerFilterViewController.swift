@@ -44,7 +44,7 @@ class AddAnimatedStickerFilterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Add Animated Sticker Filter"
+        title = "Sticker"
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
                 

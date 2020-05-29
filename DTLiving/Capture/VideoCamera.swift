@@ -89,7 +89,7 @@ class VideoCamera: VideoOutput {
     // rotate byself
     private var internalRotation: VideoRotation = .noRotation {
         didSet {
-            textureVertices = textureCoordinates(for: internalRotation)
+            textureVertices = VideoContext.textureCoordinates(for: internalRotation)
         }
     }
     // rotate by next target
@@ -505,56 +505,6 @@ class VideoCamera: VideoOutput {
         updateTargetsWithTexture(bufferWidth: rotatedBufferWidth,
                                  bufferHeight: rotatedBufferHeight,
                                  currentTime: currentTime)
-    }
-
-    private func textureCoordinates(for rotation: VideoRotation) -> [GLfloat] {
-        switch rotation {
-        case .noRotation:
-            return [0, 0,
-                    1, 0,
-                    0, 1,
-                    1, 1]
-        case .rotateLeft:
-            return [1, 0,
-                    1, 1,
-                    0, 0,
-                    0, 1]
-        case .rotateRight:
-            return [0, 1,
-                    0, 0,
-                    1, 1,
-                    1, 0]
-        case .flipVertical:
-            return [0, 1,
-                    1, 1,
-                    0, 0,
-                    1, 0]
-        case .flipHorizonal:
-            return [1, 0,
-                    0, 0,
-                    1, 1,
-                    0, 1]
-        case .rotateRightFlipVertical:
-            return [0, 0,
-                    0, 1,
-                    1, 0,
-                    1, 1]
-        case .rotateRightFlipHorizontal:
-            return [1, 1,
-                    1, 0,
-                    0, 1,
-                    0, 0]
-        case .rotate180:
-            return [1, 1,
-                    0, 1,
-                    1, 0,
-                    0, 0]
-        default:
-            return [0, 1,
-                    1, 1,
-                    0, 0,
-                    1, 0]
-        }
     }
 
 }

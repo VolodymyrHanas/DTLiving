@@ -8,6 +8,4 @@ target 'DTLiving' do
   # Pods for DTLiving
   pod 'SnapKit'
   pod 'CocoaLumberjack/Swift'
-  pod 'DoraemonKit/Core', :configurations => ['Debug']
-  pod 'DoraemonKit/WithLogger', :configurations => ['Debug']
 end

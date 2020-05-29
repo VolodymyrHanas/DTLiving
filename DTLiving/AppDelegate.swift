@@ -8,7 +8,6 @@
 
 import UIKit
 import CocoaLumberjack
-import DoraemonKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,8 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fileLogger.logFileManager.maximumNumberOfLogFiles = 7
         DDLog.add(fileLogger)
         
-        DoraemonManager.shareInstance().install()
-
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = CameraViewController()
         window?.makeKeyAndVisible()
