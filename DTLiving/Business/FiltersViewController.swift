@@ -70,7 +70,24 @@ class FiltersViewController: UITableViewController {
     }
     
     @objc private func add() {
-        let addFilterVC = AddFilterViewController()
+        let alert = UIAlertController(title: "Filter Duration", message: "How long will it last?", preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.keyboardType = .decimalPad
+        }
+        alert.addAction(UIAlertAction(title: "Infinite", style: .default, handler: { [weak self] _ in
+            self?.showAddFilter(duration: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Finite", style: .default, handler: { [weak self] _ in
+            if let text = alert.textFields?.first?.text,
+                let duration = Double(text) {
+                self?.showAddFilter(duration: duration)
+            }
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func showAddFilter(duration: Double?) {
+        let addFilterVC = AddFilterViewController(duration: duration)
         addFilterVC.delegate = self
         self.navigationController?.pushViewController(addFilterVC, animated: true)
     }

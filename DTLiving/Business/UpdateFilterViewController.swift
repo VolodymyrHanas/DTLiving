@@ -499,7 +499,11 @@ class NumberCell: UITableViewCell {
         selectionStyle = .none
         
         textField.keyboardType = .decimalPad
-        textField.layer.borderColor = UIColor.black.cgColor
+        if #available(iOS 13.0, *) {
+            textField.layer.borderColor = UIColor.label.cgColor
+        } else {
+            textField.layer.borderColor = UIColor.black.cgColor
+        }
         textField.layer.borderWidth = 1
 
         contentView.addSubview(textField)

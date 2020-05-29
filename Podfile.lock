@@ -1,42 +1,22 @@
 PODS:
-  - BSBacktraceLogger (0.0.1)
-  - CocoaLumberjack (3.6.0):
-    - CocoaLumberjack/Core (= 3.6.0)
   - CocoaLumberjack/Core (3.6.0)
   - CocoaLumberjack/Swift (3.6.0):
     - CocoaLumberjack/Core
-  - DoraemonKit/Core (2.0.0):
-    - BSBacktraceLogger
-    - fishhook
-  - DoraemonKit/WithLogger (2.0.0):
-    - BSBacktraceLogger
-    - CocoaLumberjack
-    - DoraemonKit/Core
-    - fishhook
-  - fishhook (0.2)
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
   - CocoaLumberjack/Swift
-  - DoraemonKit/Core
-  - DoraemonKit/WithLogger
   - SnapKit
 
 SPEC REPOS:
   trunk:
-    - BSBacktraceLogger
     - CocoaLumberjack
-    - DoraemonKit
-    - fishhook
     - SnapKit
 
 SPEC CHECKSUMS:
-  BSBacktraceLogger: 06b983ee93a9f87d957960e9c73d660d5966b447
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
-  DoraemonKit: 9e923599e28d0b61f1c6de4aef2c2d669b30abb7
-  fishhook: ea19933abfe8f2f52c55fd8b6e2718467d3ebc89
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 2b213b5bf698de963e0b41e8b1667a46f2c2ebc9
+PODFILE CHECKSUM: e71a9d65c02392aadd86bb00e970f487b92fd4ba
 
 COCOAPODS: 1.8.4

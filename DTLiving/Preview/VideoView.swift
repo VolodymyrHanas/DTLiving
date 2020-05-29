@@ -31,7 +31,9 @@ class VideoView: UIView, VideoInput {
     private var inputFrameBuffer: FrameBuffer?
     private var inputRotation: VideoRotation = .noRotation {
         didSet {
-            textureVertices = textureCoordinates(for: inputRotation)
+            if inputRotation != oldValue {
+                textureVertices = textureCoordinates(for: inputRotation)
+            }
         }
     }
     private var inputSize: CGSize = .zero

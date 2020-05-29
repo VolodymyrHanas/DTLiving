@@ -13,11 +13,13 @@ class CameraViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool { return true }
 
-    private let liveManager: LiveManager
+    private var liveManager: LiveManager!
 
     private let recordButton = UIButton()
     private let liveButton = UIButton()
     private let settingsButton = UIButton()
+    
+    private var isRecording = false
 
     deinit {
         NotificationCenter.default.removeObserver(self,
@@ -33,15 +35,20 @@ class CameraViewController: UIViewController {
     }
     
     init() {
-        liveManager = LiveManager(position: .back)
         super.init(nibName: nil, bundle: nil)
+        liveManager = LiveManager(position: .back)
+        liveManager.delegate = self        
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .black
-        
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            view.backgroundColor = UIColor.black
+        }
+
         setupPreview()
         setupControls()
 
@@ -78,12 +85,18 @@ class CameraViewController: UIViewController {
     }
     
     private func setupControls() {
-        recordButton.setTitleColor(UIColor.white, for: .normal)
+        if #available(iOS 13.0, *) {
+            recordButton.setTitleColor(UIColor.label, for: .normal)
+            liveButton.setTitleColor(UIColor.label, for: .normal)
+            settingsButton.setTitleColor(UIColor.label, for: .normal)
+        } else {
+            recordButton.setTitleColor(UIColor.white, for: .normal)
+            liveButton.setTitleColor(UIColor.white, for: .normal)
+            settingsButton.setTitleColor(UIColor.white, for: .normal)
+        }
         recordButton.setTitle("start recording", for: .normal)
-        liveButton.setTitleColor(UIColor.white, for: .normal)
         liveButton.setTitle("start living", for: .normal)
-        settingsButton.setTitleColor(UIColor.white, for: .normal)
-        settingsButton.setTitle("config settings", for: .normal)
+        settingsButton.setTitle("more menus", for: .normal)
 
         view.addSubview(recordButton)
         view.addSubview(liveButton)
@@ -106,6 +119,7 @@ class CameraViewController: UIViewController {
             }
         }
         
+        recordButton.addTarget(self, action: #selector(record), for: .touchUpInside)
         settingsButton.addTarget(self, action: #selector(showSettings), for: .touchUpInside)
     }
             
@@ -121,14 +135,15 @@ class CameraViewController: UIViewController {
         }
     }
     
-    @objc private func sliderValueChanged(_ slider: UISlider) {
-        let index = 0
-        if let filter = liveManager.fetchFilter(at: index) as? VideoBilateralFilter {
-            filter.distanceNormalizationFactor = slider.value
-            liveManager.updateFilter(filter, at: index)
+    @objc private func record() {
+        recordButton.isEnabled = false
+        if isRecording {
+            liveManager.stopRecording()
+        } else {
+            liveManager.startRecording()
         }
     }
-    
+        
     @objc private func showSettings() {
         let alert = UIAlertController(title: "Settings", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera Position", style: .default, handler: { [weak self] _ in
@@ -138,6 +153,9 @@ class CameraViewController: UIViewController {
             self?.configFilters()
         }))
         alert.addAction(UIAlertAction(title: "Play Music", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Share Video", style: .default, handler: { [weak self] _ in
+            self?.shareVideo()
+        }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
@@ -164,5 +182,35 @@ class CameraViewController: UIViewController {
         let navVC = UINavigationController(rootViewController: filtersVC)
         present(navVC, animated: true, completion: nil)
     }
+    
+    private func shareVideo() {
+        if let videoFile = FileHelper.shared.getMediaFileURL(name: "video", ext: "mp4", needRemove: false) {
+            let activityVC = UIActivityViewController(activityItems: [videoFile], applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+        }
+    }
+    
+        
+}
 
+extension CameraViewController: LiveManagerDelegate {
+    
+    func liveManagerRecorderDidFinishPreparing(_ manager: LiveManager) {
+        isRecording = true
+        recordButton.setTitle("stop recording", for: .normal)
+        recordButton.isEnabled = true
+    }
+    
+    func liveManagerRecorder(_ manager: LiveManager, didFailWithError error: Error?) {
+        isRecording = false
+        recordButton.setTitle("start recording", for: .normal)
+        recordButton.isEnabled = true
+    }
+    
+    func liveManagerRecorderDidFinishRecording(_ manager: LiveManager) {
+        isRecording = false
+        recordButton.setTitle("start recording", for: .normal)
+        recordButton.isEnabled = true
+    }
+    
 }

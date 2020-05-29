@@ -34,7 +34,13 @@ class AddTextFilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        title = "Text"
+        
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            view.backgroundColor = UIColor.white
+        }
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
         
@@ -47,7 +53,11 @@ class AddTextFilterViewController: UIViewController {
         }
         
         textField.text = "Hello"
-        textField.layer.borderColor = UIColor.black.cgColor
+        if #available(iOS 13.0, *) {
+            textField.layer.borderColor = UIColor.label.cgColor
+        } else {
+            textField.layer.borderColor = UIColor.black.cgColor
+        }
         textField.layer.borderWidth = 1
         view.addSubview(textField)
         textField.snp.makeConstraints { make in
@@ -66,7 +76,11 @@ class AddTextFilterViewController: UIViewController {
         
         fontSizeTextField.text = "12"
         fontSizeTextField.keyboardType = .numberPad
-        fontSizeTextField.layer.borderColor = UIColor.black.cgColor
+        if #available(iOS 13.0, *) {
+            fontSizeTextField.layer.borderColor = UIColor.label.cgColor
+        } else {
+            fontSizeTextField.layer.borderColor = UIColor.black.cgColor
+        }
         fontSizeTextField.layer.borderWidth = 1
         view.addSubview(fontSizeTextField)
         fontSizeTextField.snp.makeConstraints { make in
