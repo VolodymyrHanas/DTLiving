@@ -103,6 +103,9 @@
 		40477406247F8E9C008B30C8 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40477405247F8E9C008B30C8 /* FiltersViewController.swift */; };
 		40477408247F9405008B30C8 /* AddFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40477407247F9405008B30C8 /* AddFilterViewController.swift */; };
 		4047740A247FA02B008B30C8 /* UpdateFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40477409247FA02B008B30C8 /* UpdateFilterViewController.swift */; };
+		404774102480AD6E008B30C8 /* AddMosaicFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4047740F2480AD6E008B30C8 /* AddMosaicFilterViewController.swift */; };
+		404774122480B4A6008B30C8 /* AddTextFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404774112480B4A6008B30C8 /* AddTextFilterViewController.swift */; };
+		404774142480B93E008B30C8 /* AddAnimatedStickerFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404774132480B93E008B30C8 /* AddAnimatedStickerFilterViewController.swift */; };
 		40501A152445C5BC009DDBF6 /* constants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40501A142445C5BC009DDBF6 /* constants.cpp */; };
 		40501A182446DE64009DDBF6 /* VideoCropFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 40501A172446DE64009DDBF6 /* VideoCropFilter.m */; };
 		40501A1B24472F75009DDBF6 /* video_two_pass_effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40501A1924472F75009DDBF6 /* video_two_pass_effect.cpp */; };
@@ -309,6 +312,9 @@
 		40477405247F8E9C008B30C8 /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		40477407247F9405008B30C8 /* AddFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilterViewController.swift; sourceTree = "<group>"; };
 		40477409247FA02B008B30C8 /* UpdateFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFilterViewController.swift; sourceTree = "<group>"; };
+		4047740F2480AD6E008B30C8 /* AddMosaicFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMosaicFilterViewController.swift; sourceTree = "<group>"; };
+		404774112480B4A6008B30C8 /* AddTextFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTextFilterViewController.swift; sourceTree = "<group>"; };
+		404774132480B93E008B30C8 /* AddAnimatedStickerFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAnimatedStickerFilterViewController.swift; sourceTree = "<group>"; };
 		40501A142445C5BC009DDBF6 /* constants.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = constants.cpp; sourceTree = "<group>"; };
 		40501A162446DE64009DDBF6 /* VideoCropFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCropFilter.h; sourceTree = "<group>"; };
 		40501A172446DE64009DDBF6 /* VideoCropFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCropFilter.m; sourceTree = "<group>"; };
@@ -832,6 +838,9 @@
 				40AC66822409234700E281AC /* LiveManager.swift */,
 				40477405247F8E9C008B30C8 /* FiltersViewController.swift */,
 				40477407247F9405008B30C8 /* AddFilterViewController.swift */,
+				404774132480B93E008B30C8 /* AddAnimatedStickerFilterViewController.swift */,
+				404774112480B4A6008B30C8 /* AddTextFilterViewController.swift */,
+				4047740F2480AD6E008B30C8 /* AddMosaicFilterViewController.swift */,
 				40477409247FA02B008B30C8 /* UpdateFilterViewController.swift */,
 			);
 			path = Business;
@@ -1155,6 +1164,7 @@
 				40B1DF01243F1A07009B68C7 /* video_color_matrix_effect.cpp in Sources */,
 				400484512466AF7100BCFC36 /* VideoEmbossFilter.m in Sources */,
 				40501A182446DE64009DDBF6 /* VideoCropFilter.m in Sources */,
+				404774122480B4A6008B30C8 /* AddTextFilterViewController.swift in Sources */,
 				401862332420DD5A0003AF6F /* VideoBrightnessFilter.m in Sources */,
 				40664219244DA0DB005C75EE /* VideoGaussianBlurFilter.m in Sources */,
 				40AC6687240923B900E281AC /* VideoInput.swift in Sources */,
@@ -1175,9 +1185,11 @@
 				40F30568243C2CC10022B263 /* video_exposure_effect.cpp in Sources */,
 				40664245245199BF005C75EE /* video_sobel_edge_detection_effect.cpp in Sources */,
 				402E24F524595C6C00951804 /* pngpread.c in Sources */,
+				404774142480B93E008B30C8 /* AddAnimatedStickerFilterViewController.swift in Sources */,
 				401862302420DB810003AF6F /* VideoFilter.m in Sources */,
 				404507F6247517B4007E8B60 /* VideoAnimatedStickerFilter.m in Sources */,
 				40477406247F8E9C008B30C8 /* FiltersViewController.swift in Sources */,
+				404774102480AD6E008B30C8 /* AddMosaicFilterViewController.swift in Sources */,
 				40B1DF1624406A32009B68C7 /* VideoGrayScaleFilter.m in Sources */,
 				40F30578243C7A560022B263 /* video_saturation_effect.cpp in Sources */,
 				40664220244EFE09005C75EE /* video_box_blur_effect.cpp in Sources */,

@@ -54,7 +54,8 @@ class UpdateFilterViewController: UITableViewController {
         } else if filter is VideoRGBFilter {
             return 3
         } else if filter is VideoTransformFilter
-            || filter is VideoWaterMaskFilter {
+            || filter is VideoWaterMaskFilter
+            || filter is VideoTextFilter {
             return 5
         } else if filter is VideoCropFilter {
             return 4
@@ -98,7 +99,8 @@ class UpdateFilterViewController: UITableViewController {
         } else if filter is VideoHueFilter {
             return "hue"
         } else if filter is VideoTransformFilter
-            || filter is VideoWaterMaskFilter {
+            || filter is VideoWaterMaskFilter
+            || filter is VideoTextFilter {
             switch section {
             case 0:
                 return "rotationAngle"
@@ -136,6 +138,8 @@ class UpdateFilterViewController: UITableViewController {
             return "intensity"
         } else if filter is VideoToonFilter {
             return "threshold"
+        } else if filter is VideoMosaicFilter {
+            return "displayTileSize"
         }
         return nil
     }
@@ -320,6 +324,34 @@ class UpdateFilterViewController: UITableViewController {
                     filter.translate.height = CGFloat(value)
                 }
             }
+        } else if let filter = filter as? VideoTextFilter {
+            switch indexPath.section {
+            case 0:
+                cell.setValue(Float(filter.rotate), min: 0.0, max: 2.0 * .pi)
+                cell.didChange = { value in
+                    filter.rotate = CGFloat(value)
+                }
+            case 1:
+                cell.setValue(Float(filter.scale.width), min: 0.0, max: 2.0)
+                cell.didChange = { value in
+                    filter.scale.width = CGFloat(value)
+                }
+            case 2:
+                cell.setValue(Float(filter.scale.height), min: 0.0, max: 2.0)
+                cell.didChange = { value in
+                    filter.scale.height = CGFloat(value)
+                }
+            case 3:
+                cell.setValue(Float(filter.translate.width), min: -360, max: 360)
+                cell.didChange = { value in
+                    filter.translate.width = CGFloat(value)
+                }
+            default:
+                cell.setValue(Float(filter.translate.height), min: -640, max: 640)
+                cell.didChange = { value in
+                    filter.translate.height = CGFloat(value)
+                }
+            }
         } else if let filter = filter as? VideoEmbossFilter {
             cell.setValue(filter.intensity, min: 0.0, max: 4.0)
             cell.didChange = { value in
@@ -334,6 +366,11 @@ class UpdateFilterViewController: UITableViewController {
             cell.setValue(filter.edgeStrength, min: 0.0, max: 1.0)
             cell.didChange = { value in
                 filter.edgeStrength = value
+            }
+        } else if let filter = filter as? VideoMosaicFilter {
+            cell.setValue(Float(filter.displayTileSize.width), min: 0.002, max: 0.05)
+            cell.didChange = { value in
+                filter.displayTileSize = CGSize(width: CGFloat(value), height: CGFloat(value))
             }
         }
         return cell
@@ -402,12 +439,92 @@ class SliderCell: UITableViewCell {
         slider.value = value
         minLabel.text = "\(min)"
         maxLabel.text = "\(max)"
-        valueLabel.text = String(format: "%.2f", value)
+        valueLabel.text = String(format: "%.3f", value)
     }
     
     @objc private func sliderValueChanged(_ slider: UISlider) {
-        valueLabel.text = String(format: "%.2f", slider.value)
+        valueLabel.text = String(format: "%.3f", slider.value)
         didChange?(slider.value)
+    }
+    
+}
+
+class SwitchCell: UITableViewCell {
+    
+    private let aSwitch = UISwitch()
+    
+    var didChange: ((Bool) -> ())?
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        selectionStyle = .none
+
+        contentView.addSubview(aSwitch)
+
+        aSwitch.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        aSwitch.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
+    }
+    
+    func setValue(_ isOn: Bool) {
+        aSwitch.isOn = isOn
+    }
+    
+    @objc private func valueChanged(_ aSwitch: UISwitch) {
+        didChange?(aSwitch.isOn)
+    }
+    
+}
+
+class NumberCell: UITableViewCell {
+    
+    private let textField = UITextField()
+    
+    var didChange: ((Float) -> ())?
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        selectionStyle = .none
+        
+        textField.keyboardType = .decimalPad
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderWidth = 1
+
+        contentView.addSubview(textField)
+
+        textField.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(12)
+            make.right.equalToSuperview().offset(-12)
+        }
+        
+        textField.delegate = self
+    }
+    
+    func setValue(_ value: Float) {
+        textField.text = String(format: "%.3f", value)
+    }
+    
+}
+
+extension NumberCell: UITextFieldDelegate {
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let text = textField.text, let value = Float(text) {
+            didChange?(value)
+        }
     }
     
 }

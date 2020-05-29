@@ -56,7 +56,8 @@ class FiltersViewController: UITableViewController {
             || filter is VideoScreenBlendFilter
             || filter is VideoOverlayBlendFilter
             || filter is VideoSoftLightFilter
-            || filter is VideoHardLightFilter) {
+            || filter is VideoHardLightFilter
+            || filter is VideoAnimatedStickerFilter) {
             let updateFilterVC = UpdateFilterViewController(filter: filter, index: indexPath.row)
             updateFilterVC.delegate = self
             self.navigationController?.pushViewController(updateFilterVC, animated: true)
@@ -79,13 +80,12 @@ class FiltersViewController: UITableViewController {
 extension FiltersViewController: AddFilterViewControllerDelegate {
     
     func addFilter(_ filter: VideoFilter) {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
         liveManager.addFilter(filter)
         tableView.reloadData()
     }
     
 }
-
 
 extension FiltersViewController: UpdateFilterViewControllerDelegate {
     

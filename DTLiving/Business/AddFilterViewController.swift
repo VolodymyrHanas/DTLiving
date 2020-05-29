@@ -50,12 +50,15 @@ class AddFilterViewController: UITableViewController {
             VideoHardLightFilter()
         ],
         [
-            VideoWaterMaskFilter()
+            VideoWaterMaskFilter(),
+            VideoAnimatedStickerFilter(),
+            VideoTextFilter()
         ],
         [
             VideoEmbossFilter(),
             VideoToonFilter(),
-            VideoSketchFilter()
+            VideoSketchFilter(),
+            VideoMosaicFilter()
         ]
     ]
     
@@ -90,7 +93,26 @@ class AddFilterViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
         let filter = filters[indexPath.section][indexPath.row]
+        
+        if let filter = filter as? VideoAnimatedStickerFilter {
+            let addAnimatedStickerFilterVC = AddAnimatedStickerFilterViewController(filter: filter)
+            addAnimatedStickerFilterVC.delegate = self
+            navigationController?.pushViewController(addAnimatedStickerFilterVC, animated: true)
+            return
+        } else if let filter = filter as? VideoTextFilter {
+            let addTextFilterVC = AddTextFilterViewController(filter: filter)
+            addTextFilterVC.delegate = self
+            navigationController?.pushViewController(addTextFilterVC, animated: true)
+            return
+        } else if let filter = filter as? VideoMosaicFilter {
+            let addMosaicFilterVC = AddMosaicFilterViewController(filter: filter)
+            addMosaicFilterVC.delegate = self
+            navigationController?.pushViewController(addMosaicFilterVC, animated: true)
+            return
+        }
+        
         if let filter = filter as? VideoAddBlendFilter {
             filter.imageName = "colors"
         } else if let filter = filter as? VideoAlphaBlendFilter {
@@ -113,4 +135,28 @@ class AddFilterViewController: UITableViewController {
         delegate?.addFilter(filter)
     }
 
+}
+
+extension AddFilterViewController: AddAnimatedStickerFilterViewControllerDelegate {
+
+    func addAnimatedStickerFilter(_ filter: VideoAnimatedStickerFilter) {
+        delegate?.addFilter(filter)
+    }
+
+}
+
+extension AddFilterViewController: AddTextFilterViewControllerDelegate {
+    
+    func addTextFilter(_ filter: VideoTextFilter) {
+        delegate?.addFilter(filter)
+    }    
+    
+}
+
+extension AddFilterViewController: AddMosaicFilterViewControllerDelegate {
+    
+    func addMosaicFilter(_ filter: VideoMosaicFilter) {
+        delegate?.addFilter(filter)
+    }
+    
 }
