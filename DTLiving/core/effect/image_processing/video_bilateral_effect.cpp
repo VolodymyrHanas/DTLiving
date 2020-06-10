@@ -5,7 +5,6 @@
 //  Created by Dan Jiang on 2020/5/26.
 //  Copyright © 2020 Dan Thought Studio. All rights reserved.
 //
-//  音视频开发进阶指南：基于 Android 与 iOS 平台的实践 — 9.2.4 双边滤波算法 / 9.4.3 美颜效果器
 
 #include "video_bilateral_effect.h"
 

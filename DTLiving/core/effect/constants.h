@@ -9,8 +9,6 @@
 #ifndef DTLIVING_EFFECT_CONSTANTS_H_
 #define DTLIVING_EFFECT_CONSTANTS_H_
 
-// TODO: Protocol Buffers to auto generate
-
 extern const char *kVideoBrightnessEffect;
 extern const char *kVideoBrightnessEffectBrightness; // -1.0 ~ 1.0
 
