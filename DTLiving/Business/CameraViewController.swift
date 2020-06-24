@@ -85,15 +85,9 @@ class CameraViewController: UIViewController {
     }
     
     private func setupControls() {
-        if #available(iOS 13.0, *) {
-            recordButton.setTitleColor(UIColor.label, for: .normal)
-            liveButton.setTitleColor(UIColor.label, for: .normal)
-            settingsButton.setTitleColor(UIColor.label, for: .normal)
-        } else {
-            recordButton.setTitleColor(UIColor.white, for: .normal)
-            liveButton.setTitleColor(UIColor.white, for: .normal)
-            settingsButton.setTitleColor(UIColor.white, for: .normal)
-        }
+        recordButton.setTitleColor(UIColor.white, for: .normal)
+        liveButton.setTitleColor(UIColor.white, for: .normal)
+        settingsButton.setTitleColor(UIColor.white, for: .normal)
         recordButton.setTitle("start recording", for: .normal)
         liveButton.setTitle("start living", for: .normal)
         settingsButton.setTitle("more menus", for: .normal)
